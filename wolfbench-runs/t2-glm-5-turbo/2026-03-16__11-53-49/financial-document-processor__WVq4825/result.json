@@ -1,0 +1,120 @@
+{
+    "id": "0bb96d24-3450-4390-8030-f4a44bc9b15b",
+    "task_name": "financial-document-processor",
+    "trial_name": "financial-document-processor__WVq4825",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/financial-document-processor__WVq4825",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "financial-document-processor"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "e8ee9e8948d949d0abe46d431736d1cf04e8aab76d98fc9c819fb26960ab1352",
+    "config": {
+        "task": {
+            "path": "financial-document-processor",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "financial-document-processor__WVq4825",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 103220,
+        "n_cache_tokens": 75010,
+        "n_output_tokens": 7027,
+        "cost_usd": 0.06396992,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                3504.94122505188,
+                3248.1040954589844,
+                3602.9820442199707,
+                3283.4365367889404,
+                10926.938772201538,
+                16437.442779541016,
+                2777.5421142578125,
+                14266.932964324951,
+                5967.087030410767,
+                4565.653324127197,
+                8984.907627105713
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T12:07:41.387645Z",
+    "finished_at": "2026-03-16T12:11:07.630177Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T12:07:41.403822Z",
+        "finished_at": "2026-03-16T12:07:42.544732Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T12:07:42.544746Z",
+        "finished_at": "2026-03-16T12:07:59.287483Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T12:07:59.287542Z",
+        "finished_at": "2026-03-16T12:10:57.039909Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:10:57.969581Z",
+        "finished_at": "2026-03-16T12:11:06.224703Z"
+    }
+}

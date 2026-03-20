@@ -1,0 +1,216 @@
+{
+    "id": "56515f3f-5de1-4b85-912f-6cad8cfc9906",
+    "task_name": "model-extraction-relu-logits",
+    "trial_name": "model-extraction-relu-logits__opQxVVb",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__20-17-29/model-extraction-relu-logits__opQxVVb",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "model-extraction-relu-logits"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "d0dd8f420350bee97f2d47a2b0c74996be0146aa7bd6f8a1871d9629200dc359",
+    "config": {
+        "task": {
+            "path": "model-extraction-relu-logits",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "model-extraction-relu-logits__opQxVVb",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__20-17-29",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "06ad6daf-7b1f-4fdc-85f5-1316860f4e6d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 8774884,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 126634,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 93,
+            "api_request_times_msec": [
+                254298.88725280762,
+                76968.7020778656,
+                54116.9912815094,
+                126155.85970878601,
+                108303.44367027283,
+                54768.44787597656,
+                74723.29235076904,
+                391106.77909851074,
+                122547.17874526978,
+                51806.1740398407,
+                60432.8715801239,
+                36186.34653091431,
+                15767.337560653687,
+                30212.355375289917,
+                30408.063173294067,
+                56747.31731414795,
+                5386.55948638916,
+                2326.3087272644043,
+                8835.0830078125,
+                31041.671752929688,
+                5020.067930221558,
+                33258.647441864014,
+                6926.518201828003,
+                31407.22346305847,
+                24192.00849533081,
+                28237.571477890015,
+                38984.6510887146,
+                35486.64093017578,
+                6770.970582962036,
+                36634.56201553345,
+                3889.7759914398193,
+                41443.864583969116,
+                39149.78313446045,
+                5436.54203414917,
+                10867.602586746216,
+                6224.86686706543,
+                7989.767789840698,
+                40520.71213722229,
+                5005.913019180298,
+                5231.497287750244,
+                27840.731382369995,
+                59155.49159049988,
+                7542.546987533569,
+                74044.80791091919,
+                3248.368978500366,
+                37345.43681144714,
+                50429.330348968506,
+                26722.200870513916,
+                3821.5019702911377,
+                26667.32668876648,
+                5450.690269470215,
+                6304.569244384766,
+                4502.7430057525635,
+                4792.533397674561,
+                11126.118183135986,
+                5078.56011390686,
+                6459.169387817383,
+                7921.221017837524,
+                6072.512626647949,
+                7778.134346008301,
+                5331.6650390625,
+                4455.9006690979,
+                7294.102430343628,
+                4477.928876876831,
+                6815.2031898498535,
+                9312.521934509277,
+                6768.617391586304,
+                5290.6951904296875,
+                4781.838417053223,
+                4623.360157012939,
+                5256.967306137085,
+                4421.056509017944,
+                5246.771812438965,
+                4940.912961959839,
+                6635.567903518677,
+                5084.02156829834,
+                4909.7900390625,
+                4459.6288204193115,
+                5168.673515319824,
+                5944.856643676758,
+                5370.808839797974,
+                5392.099618911743,
+                4316.086292266846,
+                5152.6031494140625,
+                4466.4130210876465,
+                4845.60489654541,
+                4553.749799728394,
+                6200.86932182312,
+                5409.6269607543945,
+                4519.010066986084,
+                5233.080148696899,
+                5240.490674972534,
+                5390.374422073364
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1580, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1397, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1228, in _execute_commands\n    return False, self._limit_output_length(await session.get_incremental_output())\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 675, in get_incremental_output\n    current_buffer = await self.capture_pane(capture_entire=True)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 644, in capture_pane\n    result = await self.environment.exec(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        self._tmux_capture_pane(capture_entire=capture_entire)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 1058, in exec\n    return await self._strategy.exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 255, in exec\n    return await self._env._sandbox_exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 939, in _sandbox_exec\n    result = await self._poll_response(session_id, response.cmd_id)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 886, in _poll_response\n    logs = await self._get_session_command_logs_with_retry(session_id, command_id)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 189, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 111, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 153, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/_utils.py\", line 99, in inner\n    return call(*args, **kwargs)\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/__init__.py\", line 400, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ~~~~~~~~~~~~~~~~~^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 114, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 869, in _get_session_command_logs_with_retry\n    return await self._sandbox.process.get_session_command_logs(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        session_id, command_id\n        ^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_utils/errors.py\", line 88, in async_wrapper\n    return await func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_async/process.py\", line 394, in get_session_command_logs\n    response.data = await response.content.read()\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/streams.py\", line 442, in read\n    block = await self.readany()\n            ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/streams.py\", line 464, in readany\n    await self._wait(\"readany\")\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/streams.py\", line 371, in _wait\n    await waiter\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 261, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 485, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 270, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-15T22:07:59.471374"
+    },
+    "started_at": "2026-03-15T21:07:42.625467Z",
+    "finished_at": "2026-03-15T22:12:56.823662Z",
+    "environment_setup": {
+        "started_at": "2026-03-15T21:07:42.627327Z",
+        "finished_at": "2026-03-15T21:07:44.750693Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-15T21:07:44.750707Z",
+        "finished_at": "2026-03-15T21:07:59.456459Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-15T21:07:59.456517Z",
+        "finished_at": "2026-03-15T22:07:59.465885Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-15T22:08:01.143469Z",
+        "finished_at": "2026-03-15T22:12:55.314632Z"
+    }
+}

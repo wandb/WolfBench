@@ -1,0 +1,141 @@
+{
+    "id": "7d793cf3-16ea-4302-b6d0-0cd68adac981",
+    "task_name": "compile-compcert",
+    "trial_name": "compile-compcert__mMUNqR6",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-custom-kimi/2026-03-10__06-25-26/compile-compcert__mMUNqR6",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "compile-compcert"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3c434d30e5ba4180232b09188d6f1e8e15a8e8e8f748fe479175757384a8d39e",
+    "config": {
+        "task": {
+            "path": "compile-compcert",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "compile-compcert__mMUNqR6",
+        "trials_dir": "jobs/t2-custom-kimi/2026-03-10__06-25-26",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/unknown",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "api_base": "http://k25-eagle3.cw4637-dev-us-e-01a.coreweave.app:30000/v1",
+                "llm_kwargs": {
+                    "api_key": "cwlfg"
+                },
+                "model_info": {
+                    "max_tokens": 262144,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8bbdd9a3-9b04-4114-8cfd-3a705365fed9"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "unknown",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 325208,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 5838,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 27,
+            "api_request_times_msec": [
+                1993.7338829040527,
+                1241.7845726013184,
+                1197.5624561309814,
+                1334.327220916748,
+                1184.2591762542725,
+                1251.1849403381348,
+                1548.9392280578613,
+                1349.8661518096924,
+                1011.6894245147705,
+                783.6358547210693,
+                1165.633201599121,
+                1158.5638523101807,
+                931.2002658843994,
+                1275.092601776123,
+                1491.4770126342773,
+                1060.6122016906738,
+                4068.7568187713623,
+                1690.3648376464844,
+                2345.7822799682617,
+                1258.9118480682373,
+                3439.664602279663,
+                3800.0998497009277,
+                1681.985855102539,
+                3792.8457260131836,
+                2561.015844345093,
+                2649.1217613220215,
+                3189.2313957214355
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-10T06:26:21.789922Z",
+    "finished_at": "2026-03-10T06:42:22.020243Z",
+    "environment_setup": {
+        "started_at": "2026-03-10T06:26:21.791941Z",
+        "finished_at": "2026-03-10T06:26:22.811194Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-10T06:26:22.811207Z",
+        "finished_at": "2026-03-10T06:26:46.431396Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-10T06:26:46.431461Z",
+        "finished_at": "2026-03-10T06:42:12.450783Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-10T06:42:13.337391Z",
+        "finished_at": "2026-03-10T06:42:20.628143Z"
+    }
+}

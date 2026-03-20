@@ -1,0 +1,128 @@
+{
+    "id": "3996df13-5a1c-4853-b04b-d507bb05964c",
+    "task_name": "mcmc-sampling-stan",
+    "trial_name": "mcmc-sampling-stan__QKhaYaV",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/mcmc-sampling-stan__QKhaYaV",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mcmc-sampling-stan"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a2c8524885b5ab2e9a3b8c6cd374001556f013e9009487963d3a04271130deed",
+    "config": {
+        "task": {
+            "path": "mcmc-sampling-stan",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mcmc-sampling-stan__QKhaYaV",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 239320,
+        "n_cache_tokens": 196732,
+        "n_output_tokens": 6351,
+        "cost_usd": 0.09898022399999999,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 19,
+            "api_request_times_msec": [
+                4629.483699798584,
+                6838.432550430298,
+                9415.156126022339,
+                4086.730480194092,
+                3926.880121231079,
+                2559.8320960998535,
+                2272.6314067840576,
+                3789.3543243408203,
+                6793.533563613892,
+                2747.907876968384,
+                6734.301328659058,
+                3821.237325668335,
+                3378.4797191619873,
+                8198.765277862549,
+                5764.188766479492,
+                3445.9915161132812,
+                5140.066862106323,
+                5687.808990478516,
+                8947.878122329712
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T12:08:08.644496Z",
+    "finished_at": "2026-03-16T12:24:15.038819Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T12:08:08.645327Z",
+        "finished_at": "2026-03-16T12:08:09.903805Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T12:08:09.903822Z",
+        "finished_at": "2026-03-16T12:08:21.501499Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T12:08:21.501577Z",
+        "finished_at": "2026-03-16T12:21:54.294058Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:21:55.859882Z",
+        "finished_at": "2026-03-16T12:24:13.575759Z"
+    }
+}

@@ -1,0 +1,184 @@
+{
+    "id": "e9aca422-17fb-4738-8322-4d002c79bdbd",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__ssthhy5",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__12-31-18/train-fasttext__ssthhy5",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__ssthhy5",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__12-31-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ba8dfe75-2fcf-4e08-a839-c50eab1ed943"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1587438,
+        "n_cache_tokens": 1428276,
+        "n_output_tokens": 9875,
+        "cost_usd": 0.19538165999999996,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 70,
+            "api_request_times_msec": [
+                7850.264310836792,
+                3453.9034366607666,
+                3946.0415840148926,
+                3268.584728240967,
+                7360.725402832031,
+                5543.85781288147,
+                4420.721054077148,
+                4810.044527053833,
+                1784.616470336914,
+                3961.148262023926,
+                2521.3334560394287,
+                3563.953161239624,
+                1771.8937397003174,
+                1977.4103164672852,
+                1887.2716426849365,
+                1761.4758014678955,
+                1459.0017795562744,
+                2224.7824668884277,
+                4955.279350280762,
+                5143.21231842041,
+                1640.6266689300537,
+                1664.5162105560303,
+                2508.1775188446045,
+                3154.4671058654785,
+                1688.6978149414062,
+                4005.402088165283,
+                3020.2035903930664,
+                4004.971742630005,
+                1751.478672027588,
+                8636.046648025513,
+                2152.204990386963,
+                3363.536596298218,
+                1969.2456722259521,
+                2596.8246459960938,
+                4912.233114242554,
+                1853.701114654541,
+                7713.101863861084,
+                5954.1215896606445,
+                1769.5622444152832,
+                2670.902729034424,
+                3560.270309448242,
+                1905.3833484649658,
+                2343.876600265503,
+                4616.978645324707,
+                6725.776672363281,
+                2459.4106674194336,
+                4126.039028167725,
+                1764.2476558685303,
+                2004.3675899505615,
+                3188.938617706299,
+                1884.7036361694336,
+                5979.008197784424,
+                1696.577787399292,
+                1756.7088603973389,
+                2263.1444931030273,
+                2069.629430770874,
+                1658.367395401001,
+                2637.1371746063232,
+                1551.6357421875,
+                2701.031446456909,
+                3490.8697605133057,
+                1646.1114883422852,
+                3390.6784057617188,
+                3763.087272644043,
+                1887.0294094085693,
+                6501.424312591553,
+                3175.227165222168,
+                2415.6904220581055,
+                1839.798927307129,
+                5423.439025878906
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1580, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1397, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1214, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 638, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 598, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 261, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 485, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 270, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-19T13:35:05.521395"
+    },
+    "started_at": "2026-03-19T12:34:54.733344Z",
+    "finished_at": "2026-03-19T13:35:37.411839Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T12:34:54.776823Z",
+        "finished_at": "2026-03-19T12:34:55.897953Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T12:34:55.897975Z",
+        "finished_at": "2026-03-19T12:35:05.513023Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T12:35:05.513068Z",
+        "finished_at": "2026-03-19T13:35:05.518838Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T13:35:07.380165Z",
+        "finished_at": "2026-03-19T13:35:35.882004Z"
+    }
+}

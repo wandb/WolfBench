@@ -1,0 +1,122 @@
+{
+    "id": "416c853e-8051-4b62-9371-bb1f4555990e",
+    "task_name": "sanitize-git-repo",
+    "trial_name": "sanitize-git-repo__FJJ3WrL",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10/sanitize-git-repo__FJJ3WrL",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sanitize-git-repo"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2193195d0a2d45451b0ff7b8bfe47677e11744f9528f54d6281d01bda76267cc",
+    "config": {
+        "task": {
+            "path": "sanitize-git-repo",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sanitize-git-repo__FJJ3WrL",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "df53d4f7-9fbf-4ff6-b33e-16bb40a46795"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 294868,
+        "n_cache_tokens": 255570,
+        "n_output_tokens": 15251,
+        "cost_usd": 0.7462025000000002,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 15,
+            "api_request_times_msec": [
+                7200.768709182739,
+                6825.345993041992,
+                5936.744213104248,
+                32709.32674407959,
+                70122.04599380493,
+                58079.052686691284,
+                6085.589408874512,
+                7691.4637088775635,
+                8102.734088897705,
+                15547.67107963562,
+                10307.63053894043,
+                7887.296438217163,
+                10788.748741149902,
+                6895.787000656128,
+                8736.554384231567
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T11:25:31.468464Z",
+    "finished_at": "2026-03-14T11:31:46.909063Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T11:25:31.471845Z",
+        "finished_at": "2026-03-14T11:25:34.839117Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T11:25:34.839147Z",
+        "finished_at": "2026-03-14T11:25:47.020806Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T11:25:47.020893Z",
+        "finished_at": "2026-03-14T11:31:37.332766Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T11:31:38.868198Z",
+        "finished_at": "2026-03-14T11:31:45.343457Z"
+    }
+}

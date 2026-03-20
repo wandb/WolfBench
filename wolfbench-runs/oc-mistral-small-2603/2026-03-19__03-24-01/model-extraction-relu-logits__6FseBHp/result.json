@@ -1,0 +1,103 @@
+{
+    "id": "fc101fbf-2454-4151-b4a1-459b95449a45",
+    "task_name": "model-extraction-relu-logits",
+    "trial_name": "model-extraction-relu-logits__6FseBHp",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-mistral-small-2603/2026-03-19__03-24-01/model-extraction-relu-logits__6FseBHp",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "model-extraction-relu-logits"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "d0dd8f420350bee97f2d47a2b0c74996be0146aa7bd6f8a1871d9629200dc359",
+    "config": {
+        "task": {
+            "path": "model-extraction-relu-logits",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "model-extraction-relu-logits__6FseBHp",
+        "trials_dir": "jobs/oc-mistral-small-2603/2026-03-19__03-24-01",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 256000,
+                "max_tokens": 32000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "5c7aa380-6ee3-47c5-944c-cbed9daaaf04"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 141377,
+        "n_cache_tokens": 355184,
+        "n_output_tokens": 8084,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T03:30:36.848949Z",
+    "finished_at": "2026-03-19T03:32:36.358260Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T03:30:36.849631Z",
+        "finished_at": "2026-03-19T03:30:38.543828Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T03:30:38.543843Z",
+        "finished_at": "2026-03-19T03:31:18.781994Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T03:31:18.782059Z",
+        "finished_at": "2026-03-19T03:32:26.521805Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T03:32:28.492568Z",
+        "finished_at": "2026-03-19T03:32:34.750205Z"
+    }
+}

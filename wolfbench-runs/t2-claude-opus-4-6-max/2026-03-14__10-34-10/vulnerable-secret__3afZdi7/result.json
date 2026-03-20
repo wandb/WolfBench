@@ -1,0 +1,121 @@
+{
+    "id": "6244b3cd-82d1-4f78-9ae8-34968707f495",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__3afZdi7",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10/vulnerable-secret__3afZdi7",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__3afZdi7",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "df53d4f7-9fbf-4ff6-b33e-16bb40a46795"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 85568,
+        "n_cache_tokens": 53510,
+        "n_output_tokens": 9164,
+        "cost_usd": 0.4349675,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 14,
+            "api_request_times_msec": [
+                5065.634250640869,
+                4568.096399307251,
+                5236.417770385742,
+                6055.699825286865,
+                6302.665948867798,
+                14894.236087799072,
+                12698.542594909668,
+                11843.347311019897,
+                6355.304956436157,
+                4424.883604049683,
+                49982.118368148804,
+                35322.68476486206,
+                7550.975561141968,
+                4433.681488037109
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T11:31:00.134159Z",
+    "finished_at": "2026-03-14T11:36:18.156766Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T11:31:00.137224Z",
+        "finished_at": "2026-03-14T11:31:02.083393Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T11:31:02.083422Z",
+        "finished_at": "2026-03-14T11:31:18.726004Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T11:31:18.726132Z",
+        "finished_at": "2026-03-14T11:35:43.795288Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T11:36:00.452516Z",
+        "finished_at": "2026-03-14T11:36:15.760686Z"
+    }
+}

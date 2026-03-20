@@ -1,0 +1,118 @@
+{
+    "id": "bc720a20-8826-4506-b83e-c852c6a5b8ee",
+    "task_name": "custom-memory-heap-crash",
+    "trial_name": "custom-memory-heap-crash__XTLEPxa",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10/custom-memory-heap-crash__XTLEPxa",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "custom-memory-heap-crash"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fba0e3be977223b1f8c182da8411663258f83b3563dd5dcd12beae87762ccabf",
+    "config": {
+        "task": {
+            "path": "custom-memory-heap-crash",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "custom-memory-heap-crash__XTLEPxa",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "df53d4f7-9fbf-4ff6-b33e-16bb40a46795"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 83775,
+        "n_cache_tokens": 61311,
+        "n_output_tokens": 13847,
+        "cost_usd": 0.5069505,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                5591.43328666687,
+                6891.207933425903,
+                3915.111541748047,
+                6120.140075683594,
+                5729.9370765686035,
+                4450.466871261597,
+                165507.09748268127,
+                19273.826837539673,
+                6108.16764831543,
+                7847.460985183716,
+                6204.753875732422
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T10:34:11.487033Z",
+    "finished_at": "2026-03-14T10:41:37.664758Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T10:34:11.488423Z",
+        "finished_at": "2026-03-14T10:34:13.828116Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T10:34:13.828133Z",
+        "finished_at": "2026-03-14T10:34:17.972462Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T10:34:17.972541Z",
+        "finished_at": "2026-03-14T10:41:17.749469Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T10:41:18.885614Z",
+        "finished_at": "2026-03-14T10:41:36.125864Z"
+    }
+}

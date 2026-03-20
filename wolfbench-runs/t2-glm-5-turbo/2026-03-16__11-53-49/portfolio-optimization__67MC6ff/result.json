@@ -1,0 +1,116 @@
+{
+    "id": "bc59524b-6842-4653-b65e-b674bd81f4e5",
+    "task_name": "portfolio-optimization",
+    "trial_name": "portfolio-optimization__67MC6ff",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/portfolio-optimization__67MC6ff",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "portfolio-optimization"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "da8a95d2c518a70ef66e47f3571fffd3f9172334c1c24e01d9ee232bdebd428c",
+    "config": {
+        "task": {
+            "path": "portfolio-optimization",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "portfolio-optimization__67MC6ff",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 33640,
+        "n_cache_tokens": 24758,
+        "n_output_tokens": 4035,
+        "cost_usd": 0.026192256000000004,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                3880.084753036499,
+                2922.886848449707,
+                17749.55439567566,
+                20748.099327087402,
+                4759.5977783203125,
+                5826.480150222778,
+                7243.500709533691
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T11:53:50.239568Z",
+    "finished_at": "2026-03-16T11:57:31.402778Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T11:53:50.240290Z",
+        "finished_at": "2026-03-16T11:53:51.887224Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T11:53:51.887235Z",
+        "finished_at": "2026-03-16T11:54:01.539669Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T11:54:01.539711Z",
+        "finished_at": "2026-03-16T11:56:19.608017Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T11:56:20.269987Z",
+        "finished_at": "2026-03-16T11:57:29.986778Z"
+    }
+}

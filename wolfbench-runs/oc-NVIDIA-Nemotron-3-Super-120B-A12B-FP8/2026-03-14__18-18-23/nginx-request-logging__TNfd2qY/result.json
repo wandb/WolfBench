@@ -1,0 +1,103 @@
+{
+    "id": "f91215e0-764d-43a0-ad6d-cd4d73f054a5",
+    "task_name": "nginx-request-logging",
+    "trial_name": "nginx-request-logging__TNfd2qY",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-NVIDIA-Nemotron-3-Super-120B-A12B-FP8/2026-03-14__18-18-23/nginx-request-logging__TNfd2qY",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "nginx-request-logging"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "86a8bd681301002456da831adfae62fa7a538e8187d654e11335e92b81b0c2b3",
+    "config": {
+        "task": {
+            "path": "nginx-request-logging",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "nginx-request-logging__TNfd2qY",
+        "trials_dir": "jobs/oc-NVIDIA-Nemotron-3-Super-120B-A12B-FP8/2026-03-14__18-18-23",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.1",
+                "context_window": 256000,
+                "max_tokens": 256000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "26d9847a-1d37-45bf-a141-a45699f027ce"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.1",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 473590,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 3126,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T18:38:20.849948Z",
+    "finished_at": "2026-03-14T18:42:12.831471Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T18:38:20.851280Z",
+        "finished_at": "2026-03-14T18:38:22.845670Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T18:38:22.845687Z",
+        "finished_at": "2026-03-14T18:38:58.760313Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T18:38:58.760509Z",
+        "finished_at": "2026-03-14T18:41:59.830694Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T18:42:01.921112Z",
+        "finished_at": "2026-03-14T18:42:11.042819Z"
+    }
+}

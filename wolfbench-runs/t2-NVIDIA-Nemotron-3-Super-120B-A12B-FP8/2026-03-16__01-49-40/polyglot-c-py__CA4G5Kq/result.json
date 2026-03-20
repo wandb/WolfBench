@@ -1,0 +1,122 @@
+{
+    "id": "3d774748-c7fd-4b9a-add2-210569cec57c",
+    "task_name": "polyglot-c-py",
+    "trial_name": "polyglot-c-py__CA4G5Kq",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-16__01-49-40/polyglot-c-py__CA4G5Kq",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "polyglot-c-py"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c900ff5db07ad231170f95c658891924a779b0866a4eabfeaa87c932bbce7d9f",
+    "config": {
+        "task": {
+            "path": "polyglot-c-py",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "polyglot-c-py__CA4G5Kq",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-16__01-49-40",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c3ccfe86-d972-40f6-ad7f-a586ff9c5dbd"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 9460,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 4138,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 4,
+            "api_request_times_msec": [
+                56651.89337730408,
+                10502.58493423462,
+                23023.62084388733,
+                7754.9450397491455
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T02:30:59.901381Z",
+    "finished_at": "2026-03-16T02:33:43.879136Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T02:30:59.902625Z",
+        "finished_at": "2026-03-16T02:31:02.131537Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T02:31:02.131558Z",
+        "finished_at": "2026-03-16T02:31:24.789662Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T02:31:24.789788Z",
+        "finished_at": "2026-03-16T02:33:26.727100Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T02:33:28.307873Z",
+        "finished_at": "2026-03-16T02:33:42.330980Z"
+    }
+}

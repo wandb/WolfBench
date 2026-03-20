@@ -1,0 +1,117 @@
+{
+    "id": "5bc61a6b-5752-471b-9ebd-3ae4893f40c1",
+    "task_name": "sqlite-with-gcov",
+    "trial_name": "sqlite-with-gcov__y8REUXp",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.5/2026-02-28__15-55-29/sqlite-with-gcov__y8REUXp",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-with-gcov"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5901f1d2fc3b9b97ab1b215461175a59f0568e224b67caa6f4cbbc38f6f33a04",
+    "config": {
+        "task": {
+            "path": "sqlite-with-gcov",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-with-gcov__y8REUXp",
+        "trials_dir": "jobs/t2-minimax-m2.5/2026-02-28__15-55-29",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3d269a56-a2af-4d72-bd5b-d98f6359e872"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 89488,
+        "n_cache_tokens": 8736,
+        "n_output_tokens": 2507,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 13,
+            "api_request_times_msec": [
+                20763.5977268219,
+                43777.522802352905,
+                10243.06583404541,
+                24917.93179512024,
+                49283.55407714844,
+                109631.40273094177,
+                28420.72558403015,
+                2556.859254837036,
+                91333.52947235107,
+                40612.32542991638,
+                81826.67469978333,
+                103678.72953414917,
+                50005.78498840332
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-02-28T16:54:38.891960Z",
+    "finished_at": "2026-02-28T17:10:23.349856Z",
+    "environment_setup": {
+        "started_at": "2026-02-28T16:54:39.005867Z",
+        "finished_at": "2026-02-28T16:54:40.115835Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-02-28T16:54:40.115858Z",
+        "finished_at": "2026-02-28T16:54:55.093158Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-02-28T16:54:55.093218Z",
+        "finished_at": "2026-02-28T17:10:13.009850Z"
+    },
+    "verifier": {
+        "started_at": "2026-02-28T17:10:13.678418Z",
+        "finished_at": "2026-02-28T17:10:21.976015Z"
+    }
+}

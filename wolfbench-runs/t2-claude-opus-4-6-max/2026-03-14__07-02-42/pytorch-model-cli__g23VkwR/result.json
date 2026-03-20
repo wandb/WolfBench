@@ -1,0 +1,119 @@
+{
+    "id": "2d8561d0-c3af-4994-a0e3-dd33cb190469",
+    "task_name": "pytorch-model-cli",
+    "trial_name": "pytorch-model-cli__g23VkwR",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42/pytorch-model-cli__g23VkwR",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "pytorch-model-cli"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3dc849266b8ddcd8463440e2bceeb2a603e583042fe5874ee82f6d85230601c7",
+    "config": {
+        "task": {
+            "path": "pytorch-model-cli",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "pytorch-model-cli__g23VkwR",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8c4ddc66-9fa0-4e30-baba-64f8ee8d1b99"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 74573,
+        "n_cache_tokens": 48878,
+        "n_output_tokens": 6171,
+        "cost_usd": 0.32295775000000004,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 12,
+            "api_request_times_msec": [
+                10204.294681549072,
+                10731.766939163208,
+                10618.641138076782,
+                2731.903076171875,
+                4211.430549621582,
+                5448.505401611328,
+                7059.711456298828,
+                26132.368087768555,
+                12516.310214996338,
+                4530.462026596069,
+                5386.787176132202,
+                4973.15239906311
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T07:02:43.953744Z",
+    "finished_at": "2026-03-14T07:08:28.374101Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T07:02:43.957378Z",
+        "finished_at": "2026-03-14T07:02:46.342194Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T07:02:46.342213Z",
+        "finished_at": "2026-03-14T07:02:58.385654Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T07:02:58.385757Z",
+        "finished_at": "2026-03-14T07:07:53.129112Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T07:07:54.271476Z",
+        "finished_at": "2026-03-14T07:08:26.884750Z"
+    }
+}

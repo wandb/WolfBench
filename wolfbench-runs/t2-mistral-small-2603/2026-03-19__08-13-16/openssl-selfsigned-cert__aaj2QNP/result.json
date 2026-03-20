@@ -1,0 +1,122 @@
+{
+    "id": "4c04f8a0-a7b3-4032-95ff-b617db695f58",
+    "task_name": "openssl-selfsigned-cert",
+    "trial_name": "openssl-selfsigned-cert__aaj2QNP",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__08-13-16/openssl-selfsigned-cert__aaj2QNP",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "openssl-selfsigned-cert"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "8c096d8af92f88d8f876e26efc7f495ff13f50586736e56f35140fbb080ff390",
+    "config": {
+        "task": {
+            "path": "openssl-selfsigned-cert",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "openssl-selfsigned-cert__aaj2QNP",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__08-13-16",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8ef5593c-2088-404d-b943-f4506d0be162"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 70296,
+        "n_cache_tokens": 42064,
+        "n_output_tokens": 4669,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 13,
+            "api_request_times_msec": [
+                2077.831506729126,
+                1611.75537109375,
+                2401.313543319702,
+                1492.1491146087646,
+                2000.3750324249268,
+                4430.7379722595215,
+                1704.233169555664,
+                3722.0211029052734,
+                1484.8952293395996,
+                3359.6761226654053,
+                2981.0879230499268,
+                2130.586624145508,
+                1768.4504985809326
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T08:26:06.866897Z",
+    "finished_at": "2026-03-19T08:27:20.192811Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T08:26:06.867828Z",
+        "finished_at": "2026-03-19T08:26:07.837384Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T08:26:07.837398Z",
+        "finished_at": "2026-03-19T08:26:17.621981Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T08:26:17.622059Z",
+        "finished_at": "2026-03-19T08:27:12.669758Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T08:27:13.454032Z",
+        "finished_at": "2026-03-19T08:27:18.734153Z"
+    }
+}

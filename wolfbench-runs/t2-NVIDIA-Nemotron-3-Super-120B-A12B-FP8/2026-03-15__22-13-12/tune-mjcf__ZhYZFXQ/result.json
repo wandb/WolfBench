@@ -1,0 +1,223 @@
+{
+    "id": "479449d9-f6d8-42e4-b2ee-63dcc51eae0f",
+    "task_name": "tune-mjcf",
+    "trial_name": "tune-mjcf__ZhYZFXQ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__22-13-12/tune-mjcf__ZhYZFXQ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "tune-mjcf"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0014600ed83c316bbc3b495879f147f234d06578281af02817c9955794d4ebef",
+    "config": {
+        "task": {
+            "path": "tune-mjcf",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "tune-mjcf__ZhYZFXQ",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__22-13-12",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "6d30ba75-920c-406b-a45f-aa76e4aa5407"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 7489918,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 101348,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 100,
+            "api_request_times_msec": [
+                6487.19334602356,
+                21324.037551879883,
+                7510.785102844238,
+                10788.678169250488,
+                4219.276666641235,
+                27815.576553344727,
+                29847.47838973999,
+                30933.86745452881,
+                6447.4036693573,
+                24111.433029174805,
+                29255.40256500244,
+                29706.954956054688,
+                35380.247354507446,
+                23428.198099136353,
+                57693.289279937744,
+                25683.10236930847,
+                27690.012454986572,
+                31531.090021133423,
+                42014.1921043396,
+                29599.595546722412,
+                22814.31555747986,
+                26519.018173217773,
+                22873.669147491455,
+                46442.782163619995,
+                43938.09175491333,
+                28084.98501777649,
+                58055.832386016846,
+                21127.415657043457,
+                29042.672872543335,
+                19593.905687332153,
+                2398.026943206787,
+                22509.926080703735,
+                24213.443994522095,
+                17745.712757110596,
+                19594.85125541687,
+                20819.740056991577,
+                3099.980354309082,
+                26068.91703605652,
+                18338.19890022278,
+                2688.9548301696777,
+                26989.530563354492,
+                4350.785732269287,
+                30106.534719467163,
+                14721.930503845215,
+                7391.237735748291,
+                4901.589632034302,
+                9580.676555633545,
+                27363.845825195312,
+                35368.314027786255,
+                11383.549928665161,
+                47875.20170211792,
+                38562.92533874512,
+                21719.81692314148,
+                6084.146976470947,
+                36472.7680683136,
+                11613.856077194214,
+                24373.522758483887,
+                34914.959192276,
+                28542.761087417603,
+                25312.191247940063,
+                4045.658826828003,
+                47435.06455421448,
+                37920.85576057434,
+                13822.829961776733,
+                46560.99605560303,
+                32536.1328125,
+                20117.577075958252,
+                32084.30027961731,
+                37649.95980262756,
+                25994.76146697998,
+                43746.220111846924,
+                23387.77470588684,
+                42587.6407623291,
+                69075.31929016113,
+                36238.425970077515,
+                35747.71285057068,
+                43281.82053565979,
+                69141.71409606934,
+                5387.255430221558,
+                37805.16767501831,
+                5435.782194137573,
+                48926.99098587036,
+                12538.307428359985,
+                15217.207670211792,
+                14746.213436126709,
+                22256.449699401855,
+                11704.355239868164,
+                17271.472692489624,
+                14089.576005935669,
+                10921.390056610107,
+                19172.348737716675,
+                10850.135564804077,
+                16175.549983978271,
+                32858.69598388672,
+                7756.835222244263,
+                40010.61534881592,
+                8034.749507904053,
+                32686.91635131836,
+                24517.386198043823,
+                22849.040508270264
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1580, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1397, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1214, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 638, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 598, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 261, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 485, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 270, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-15T23:23:18.079503"
+    },
+    "started_at": "2026-03-15T22:23:07.867011Z",
+    "finished_at": "2026-03-15T23:23:40.517641Z",
+    "environment_setup": {
+        "started_at": "2026-03-15T22:23:07.868423Z",
+        "finished_at": "2026-03-15T22:23:09.028754Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-15T22:23:09.028768Z",
+        "finished_at": "2026-03-15T22:23:18.069096Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-15T22:23:18.069156Z",
+        "finished_at": "2026-03-15T23:23:18.077242Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-15T23:23:19.045799Z",
+        "finished_at": "2026-03-15T23:23:39.128016Z"
+    }
+}

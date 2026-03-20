@@ -1,0 +1,132 @@
+{
+    "id": "f15f582f-ecae-425f-9bd6-5335391eb264",
+    "task_name": "video-processing",
+    "trial_name": "video-processing__EWmb3sx",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__10-50-41/video-processing__EWmb3sx",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "video-processing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b62eef3fb5c016796ec8b1eda72f2be68fcb44844d2dbe12776412e1580a33b3",
+    "config": {
+        "task": {
+            "path": "video-processing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "video-processing__EWmb3sx",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__10-50-41",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "013e7731-47ca-4e79-bb85-9739f9cff288"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 398420,
+        "n_cache_tokens": 358331,
+        "n_output_tokens": 22744,
+        "cost_usd": 0.06081936,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 23,
+            "api_request_times_msec": [
+                8390.395641326904,
+                10812.09945678711,
+                7402.227163314819,
+                18913.547039031982,
+                26106.131076812744,
+                33155.33971786499,
+                53321.86841964722,
+                4280.6665897369385,
+                3582.3092460632324,
+                2971.3170528411865,
+                34039.44635391235,
+                15848.186492919922,
+                32641.406297683716,
+                29020.882606506348,
+                28342.51117706299,
+                23687.334537506104,
+                28897.482872009277,
+                45198.33993911743,
+                33453.973054885864,
+                6815.395832061768,
+                3669.719457626343,
+                7484.282493591309,
+                7022.3071575164795
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T10:54:15.593354Z",
+    "finished_at": "2026-03-19T11:04:14.864237Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T10:54:15.608293Z",
+        "finished_at": "2026-03-19T10:54:17.511521Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T10:54:17.511555Z",
+        "finished_at": "2026-03-19T10:54:32.350522Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T10:54:32.350578Z",
+        "finished_at": "2026-03-19T11:04:00.828551Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T11:04:02.633725Z",
+        "finished_at": "2026-03-19T11:04:13.088401Z"
+    }
+}

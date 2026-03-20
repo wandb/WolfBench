@@ -1,0 +1,128 @@
+{
+    "id": "9b57864b-87e3-4652-9db7-b8d3cd677587",
+    "task_name": "sparql-university",
+    "trial_name": "sparql-university__vFSssJy",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/sparql-university__vFSssJy",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sparql-university"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5f84ab8191b8b921e3adeae2fa11f7a1f5fc2549627cce7218ae0046f66d450b",
+    "config": {
+        "task": {
+            "path": "sparql-university",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sparql-university__vFSssJy",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 331570,
+        "n_cache_tokens": 225424,
+        "n_output_tokens": 13724,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 19,
+            "api_request_times_msec": [
+                1783.8642597198486,
+                1642.0869827270508,
+                7173.58660697937,
+                4994.531154632568,
+                5736.563920974731,
+                5667.445659637451,
+                3368.0293560028076,
+                7262.085437774658,
+                6223.750829696655,
+                6297.972679138184,
+                6337.647199630737,
+                13572.247505187988,
+                2384.6232891082764,
+                5860.776901245117,
+                1998.6836910247803,
+                3048.0191707611084,
+                5824.742078781128,
+                2257.239818572998,
+                2318.389892578125
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T07:12:17.387548Z",
+    "finished_at": "2026-03-19T07:14:41.795957Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T07:12:17.388787Z",
+        "finished_at": "2026-03-19T07:12:18.546985Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:12:18.547005Z",
+        "finished_at": "2026-03-19T07:12:32.701196Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:12:32.701249Z",
+        "finished_at": "2026-03-19T07:14:29.926261Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:14:30.679078Z",
+        "finished_at": "2026-03-19T07:14:40.381525Z"
+    }
+}

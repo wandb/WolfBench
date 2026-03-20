@@ -1,0 +1,191 @@
+{
+    "id": "a6158742-becd-4087-ae58-ed8da788f0fb",
+    "task_name": "rstan-to-pystan",
+    "trial_name": "rstan-to-pystan__N6CjrGr",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__18-06-21/rstan-to-pystan__N6CjrGr",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "rstan-to-pystan"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1404a5a663c5ad348382a3374bf1ac11e28c2d10de5af6630ddd5ab69ff8f2e3",
+    "config": {
+        "task": {
+            "path": "rstan-to-pystan",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "rstan-to-pystan__N6CjrGr",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__18-06-21",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "97fa57ab-5274-4bbd-a35b-6940b00e7864"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 3589738,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 63343,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 68,
+            "api_request_times_msec": [
+                12632.065773010254,
+                17060.078382492065,
+                22765.899419784546,
+                6041.160583496094,
+                4078.854560852051,
+                35038.474559783936,
+                7158.463001251221,
+                2612.9701137542725,
+                6970.524787902832,
+                8335.288524627686,
+                5005.26237487793,
+                12061.500787734985,
+                3774.3685245513916,
+                4936.161994934082,
+                15576.415300369263,
+                11231.213331222534,
+                5044.022798538208,
+                7808.300971984863,
+                3804.849863052368,
+                3891.4828300476074,
+                6925.205230712891,
+                11378.174304962158,
+                6429.054975509644,
+                3914.7093296051025,
+                12752.071380615234,
+                7586.49206161499,
+                13318.713903427124,
+                48144.58131790161,
+                16599.167823791504,
+                7969.431161880493,
+                12404.512882232666,
+                29132.166385650635,
+                40788.66219520569,
+                53613.75451087952,
+                3106.6226959228516,
+                3173.8271713256836,
+                6571.103096008301,
+                3658.1499576568604,
+                2761.119842529297,
+                3068.4704780578613,
+                6374.572992324829,
+                31418.196201324463,
+                29258.74614715576,
+                3892.2715187072754,
+                3386.8350982666016,
+                5527.347803115845,
+                2750.7424354553223,
+                8627.603530883789,
+                37630.35273551941,
+                27479.703187942505,
+                2702.213764190674,
+                2498.866081237793,
+                2725.538492202759,
+                7065.239667892456,
+                33348.20795059204,
+                2971.097707748413,
+                2842.646360397339,
+                4534.350156784058,
+                12371.71983718872,
+                4774.900913238525,
+                4484.20524597168,
+                5585.610151290894,
+                48806.59985542297,
+                5273.167610168457,
+                5853.39093208313,
+                3224.595546722412,
+                2984.12823677063,
+                24367.124319076538
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1580, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1397, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1214, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 638, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 598, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 261, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 485, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 270, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-15T20:07:00.876891"
+    },
+    "started_at": "2026-03-15T19:06:49.129928Z",
+    "finished_at": "2026-03-15T20:07:13.051530Z",
+    "environment_setup": {
+        "started_at": "2026-03-15T19:06:49.131523Z",
+        "finished_at": "2026-03-15T19:06:50.310373Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-15T19:06:50.310384Z",
+        "finished_at": "2026-03-15T19:07:00.867730Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-15T19:07:00.867796Z",
+        "finished_at": "2026-03-15T20:07:00.874660Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-15T20:07:02.282641Z",
+        "finished_at": "2026-03-15T20:07:11.583041Z"
+    }
+}

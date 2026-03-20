@@ -1,0 +1,125 @@
+{
+    "id": "8ec99f03-f2ef-41f5-8150-fb403ab382c5",
+    "task_name": "raman-fitting",
+    "trial_name": "raman-fitting__nKtrDbC",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/raman-fitting__nKtrDbC",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "raman-fitting"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "732d69b125ace5638478701cfdfa709836b7f9e48b1d24f5ffdbdc19ea538c36",
+    "config": {
+        "task": {
+            "path": "raman-fitting",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "raman-fitting__nKtrDbC",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 320251,
+        "n_cache_tokens": 255381,
+        "n_output_tokens": 12948,
+        "cost_usd": 0.15274195200000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 16,
+            "api_request_times_msec": [
+                3103.4774780273438,
+                2550.720691680908,
+                8268.284797668457,
+                8601.552963256836,
+                11609.659194946289,
+                9508.958339691162,
+                11320.343255996704,
+                9736.1900806427,
+                9134.434700012207,
+                24091.12572669983,
+                2477.8401851654053,
+                3176.037549972534,
+                45405.35378456116,
+                7919.082880020142,
+                7292.600154876709,
+                11331.812381744385
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T12:03:49.043265Z",
+    "finished_at": "2026-03-16T12:08:08.639954Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T12:03:49.044270Z",
+        "finished_at": "2026-03-16T12:03:49.957435Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T12:03:49.957448Z",
+        "finished_at": "2026-03-16T12:03:59.140700Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T12:03:59.140759Z",
+        "finished_at": "2026-03-16T12:08:00.550536Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:08:01.380408Z",
+        "finished_at": "2026-03-16T12:08:07.250021Z"
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "id": "74b59e5e-6bbe-475e-b9b4-89915960d5d6",
+    "task_name": "count-dataset-tokens",
+    "trial_name": "count-dataset-tokens__eL9ojR7",
+    "trial_uri": "file:///root/harbor/jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__08-39-53/count-dataset-tokens__eL9ojR7",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "count-dataset-tokens"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1fa5f3961f0ad1c1748ebdaa39f27fd2bfd0f654cb728089365af6162b6d0ec7",
+    "config": {
+        "task": {
+            "path": "count-dataset-tokens",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "count-dataset-tokens__eL9ojR7",
+        "trials_dir": "jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__08-39-53",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "322688b3-be3b-4b36-89e5-8df2f4824350"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 138803,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 43652,
+        "cost_usd": 0.7728275000000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 10,
+            "api_request_times_msec": [
+                21300.4252910614,
+                48965.28482437134,
+                25857.885599136353,
+                20837.913751602173,
+                58659.045457839966,
+                263793.23625564575,
+                88604.64024543762,
+                109931.42938613892,
+                4217.794179916382,
+                3650.266408920288
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-12T08:53:32.799043Z",
+    "finished_at": "2026-03-12T09:08:29.191594Z",
+    "environment_setup": {
+        "started_at": "2026-03-12T08:53:32.801602Z",
+        "finished_at": "2026-03-12T08:53:34.883892Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-12T08:53:34.883915Z",
+        "finished_at": "2026-03-12T08:53:46.524486Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-12T08:53:46.524586Z",
+        "finished_at": "2026-03-12T09:08:19.305897Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-12T09:08:21.113942Z",
+        "finished_at": "2026-03-12T09:08:27.592585Z"
+    }
+}

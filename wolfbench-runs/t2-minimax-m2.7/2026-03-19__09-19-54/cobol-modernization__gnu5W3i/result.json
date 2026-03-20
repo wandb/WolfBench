@@ -1,0 +1,126 @@
+{
+    "id": "4be641cb-d276-43ba-befb-6826dc6837be",
+    "task_name": "cobol-modernization",
+    "trial_name": "cobol-modernization__gnu5W3i",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__09-19-54/cobol-modernization__gnu5W3i",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "cobol-modernization"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "f8220a33bf193106989df1a28e4806985b12e5f93dcf07efb86acd8dbbc44f6a",
+    "config": {
+        "task": {
+            "path": "cobol-modernization",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "cobol-modernization__gnu5W3i",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__09-19-54",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "77288fbb-f7f5-4769-a74c-037b18f10a22"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 162980,
+        "n_cache_tokens": 137174,
+        "n_output_tokens": 8918,
+        "cost_usd": 0.027991739999999994,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 17,
+            "api_request_times_msec": [
+                8985.330820083618,
+                4259.89556312561,
+                23679.5334815979,
+                5024.158000946045,
+                35272.65739440918,
+                4530.4412841796875,
+                19868.589401245117,
+                28571.22492790222,
+                37838.07563781738,
+                9097.771167755127,
+                8774.816036224365,
+                11712.779998779297,
+                14529.542684555054,
+                10338.841915130615,
+                10704.017162322998,
+                11289.518356323242,
+                11302.581071853638
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T09:19:55.042054Z",
+    "finished_at": "2026-03-19T09:25:12.907589Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T09:19:55.044582Z",
+        "finished_at": "2026-03-19T09:19:56.554453Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T09:19:56.554459Z",
+        "finished_at": "2026-03-19T09:20:05.932038Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T09:20:05.932079Z",
+        "finished_at": "2026-03-19T09:25:04.363167Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T09:25:05.121528Z",
+        "finished_at": "2026-03-19T09:25:11.273961Z"
+    }
+}

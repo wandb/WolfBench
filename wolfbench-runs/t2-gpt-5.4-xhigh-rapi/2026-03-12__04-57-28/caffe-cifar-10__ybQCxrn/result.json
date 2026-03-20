@@ -1,0 +1,123 @@
+{
+    "id": "5cfbaa5b-82d7-4ee7-8d2a-aa4aaadc9cfd",
+    "task_name": "caffe-cifar-10",
+    "trial_name": "caffe-cifar-10__ybQCxrn",
+    "trial_uri": "file:///root/harbor/jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__04-57-28/caffe-cifar-10__ybQCxrn",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "caffe-cifar-10"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "69e68a75ace210a7fdbce0d1605c0d530a7b5119791d91c6786f84313b30fc3a",
+    "config": {
+        "task": {
+            "path": "caffe-cifar-10",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "caffe-cifar-10__ybQCxrn",
+        "trials_dir": "jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__04-57-28",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "44ba632b-8331-4cc5-aa10-b8a1403741a7"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 271838,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 87085,
+        "cost_usd": 1.4490380000000003,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 16,
+            "api_request_times_msec": [
+                562829.2150497437,
+                6721.816301345825,
+                4851.415395736694,
+                21180.741548538208,
+                130360.38184165955,
+                6640.178680419922,
+                38443.464279174805,
+                44993.666648864746,
+                13112.980127334595,
+                44033.48183631897,
+                122219.37537193298,
+                35508.40902328491,
+                6519.534587860107,
+                67701.44462585449,
+                12452.452898025513,
+                37709.67483520508
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-12T04:57:29.853095Z",
+    "finished_at": "2026-03-12T05:21:59.063813Z",
+    "environment_setup": {
+        "started_at": "2026-03-12T04:57:29.854418Z",
+        "finished_at": "2026-03-12T04:57:31.973308Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-12T04:57:31.973331Z",
+        "finished_at": "2026-03-12T04:57:46.925484Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-12T04:57:46.925614Z",
+        "finished_at": "2026-03-12T05:19:34.828139Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-12T05:19:36.317422Z",
+        "finished_at": "2026-03-12T05:21:57.432856Z"
+    }
+}

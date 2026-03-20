@@ -1,0 +1,116 @@
+{
+    "id": "58b09791-90f6-4f16-80fd-391f98c7458a",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__LjneDHr",
+    "trial_uri": "file:///root/harbor/jobs/t2-gpt-5.3-codex/2026-03-09__11-33-11/llm-inference-batching-scheduler__LjneDHr",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__LjneDHr",
+        "trials_dir": "jobs/t2-gpt-5.3-codex/2026-03-09__11-33-11",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.3-codex",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "7f6cb49d-f256-47d5-b176-eaea52f98814"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.3-codex",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 128330,
+        "n_cache_tokens": 99712,
+        "n_output_tokens": 6274,
+        "cost_usd": 0.1553671,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 12,
+            "api_request_times_msec": [
+                8013.459205627441,
+                15337.975025177002,
+                6981.050729751587,
+                13154.223680496216,
+                6658.644437789917,
+                14803.170919418335,
+                2658.125162124634,
+                6696.445465087891,
+                5353.769302368164,
+                15415.724515914917,
+                3459.1329097747803,
+                1549.0291118621826
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-09T11:33:11.963465Z",
+    "finished_at": "2026-03-09T11:35:46.880146Z",
+    "environment_setup": {
+        "started_at": "2026-03-09T11:33:11.965133Z",
+        "finished_at": "2026-03-09T11:33:14.290616Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-09T11:33:14.290629Z",
+        "finished_at": "2026-03-09T11:33:27.414117Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-09T11:33:27.414244Z",
+        "finished_at": "2026-03-09T11:35:36.423460Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-09T11:35:37.902952Z",
+        "finished_at": "2026-03-09T11:35:45.328354Z"
+    }
+}

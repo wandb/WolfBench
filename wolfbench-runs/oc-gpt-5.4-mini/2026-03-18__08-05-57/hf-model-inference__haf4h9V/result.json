@@ -1,0 +1,103 @@
+{
+    "id": "b7cecd76-d8e9-4104-911e-b59f4f5107a6",
+    "task_name": "hf-model-inference",
+    "trial_name": "hf-model-inference__haf4h9V",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-gpt-5.4-mini/2026-03-18__08-05-57/hf-model-inference__haf4h9V",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "hf-model-inference"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b96307ee0e1a454b667fb19da4b08116252525a2897250a9d7f8825fa0b86088",
+    "config": {
+        "task": {
+            "path": "hf-model-inference",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "hf-model-inference__haf4h9V",
+        "trials_dir": "jobs/oc-gpt-5.4-mini/2026-03-18__08-05-57",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4-mini",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 409600,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "1949b431-fda3-42be-8b7e-022d0473dc8c"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "gpt-5.4-mini",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 7827,
+        "n_cache_tokens": 258560,
+        "n_output_tokens": 2129,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-18T08:06:50.371573Z",
+    "finished_at": "2026-03-18T08:08:26.757108Z",
+    "environment_setup": {
+        "started_at": "2026-03-18T08:06:50.372406Z",
+        "finished_at": "2026-03-18T08:06:52.018252Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-18T08:06:52.018271Z",
+        "finished_at": "2026-03-18T08:07:25.348144Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-18T08:07:25.348212Z",
+        "finished_at": "2026-03-18T08:08:15.030280Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-18T08:08:15.996297Z",
+        "finished_at": "2026-03-18T08:08:25.387780Z"
+    }
+}

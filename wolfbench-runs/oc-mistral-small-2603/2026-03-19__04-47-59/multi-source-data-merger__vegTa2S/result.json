@@ -1,0 +1,103 @@
+{
+    "id": "f28b4947-78df-499d-b0b0-3935879a37f6",
+    "task_name": "multi-source-data-merger",
+    "trial_name": "multi-source-data-merger__vegTa2S",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-mistral-small-2603/2026-03-19__04-47-59/multi-source-data-merger__vegTa2S",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "multi-source-data-merger"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0f86ced6d81948760d828ee03060c28c44eb7244e7ef72442c18dc1c71115280",
+    "config": {
+        "task": {
+            "path": "multi-source-data-merger",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "multi-source-data-merger__vegTa2S",
+        "trials_dir": "jobs/oc-mistral-small-2603/2026-03-19__04-47-59",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 256000,
+                "max_tokens": 32000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "cda7c553-7499-4b60-a29e-b38de83d2118"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 67925,
+        "n_cache_tokens": 81120,
+        "n_output_tokens": 4820,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T04:48:00.580044Z",
+    "finished_at": "2026-03-19T04:49:23.051594Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T04:48:00.581350Z",
+        "finished_at": "2026-03-19T04:48:02.131799Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T04:48:02.131809Z",
+        "finished_at": "2026-03-19T04:48:37.095119Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T04:48:37.095167Z",
+        "finished_at": "2026-03-19T04:49:14.760903Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T04:49:15.716934Z",
+        "finished_at": "2026-03-19T04:49:21.661813Z"
+    }
+}

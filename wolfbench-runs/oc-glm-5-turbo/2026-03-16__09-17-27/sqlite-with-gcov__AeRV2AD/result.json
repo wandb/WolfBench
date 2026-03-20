@@ -1,0 +1,103 @@
+{
+    "id": "6a6786e3-d897-489c-a8c4-fdf16645c90c",
+    "task_name": "sqlite-with-gcov",
+    "trial_name": "sqlite-with-gcov__AeRV2AD",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-glm-5-turbo/2026-03-16__09-17-27/sqlite-with-gcov__AeRV2AD",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-with-gcov"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5901f1d2fc3b9b97ab1b215461175a59f0568e224b67caa6f4cbbc38f6f33a04",
+    "config": {
+        "task": {
+            "path": "sqlite-with-gcov",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-with-gcov__AeRV2AD",
+        "trials_dir": "jobs/oc-glm-5-turbo/2026-03-16__09-17-27",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 200000,
+                "max_tokens": 128000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "447165b3-6446-44ad-a340-26d815888c7a"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 6343,
+        "n_cache_tokens": 239648,
+        "n_output_tokens": 1726,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T09:41:11.269361Z",
+    "finished_at": "2026-03-16T09:44:55.267118Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T09:41:11.343760Z",
+        "finished_at": "2026-03-16T09:41:13.281827Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T09:41:13.281847Z",
+        "finished_at": "2026-03-16T09:41:58.575673Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T09:41:58.575735Z",
+        "finished_at": "2026-03-16T09:44:42.267587Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T09:44:44.362720Z",
+        "finished_at": "2026-03-16T09:44:53.802460Z"
+    }
+}

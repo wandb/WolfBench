@@ -1,0 +1,82 @@
+{
+    "job_name": "2026-03-19__03-54-22",
+    "jobs_dir": "jobs/oc-gpt-5.4-nano",
+    "n_attempts": 1,
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "debug": false,
+    "orchestrator": {
+        "type": "local",
+        "n_concurrent_trials": 32,
+        "quiet": false,
+        "retry": {
+            "max_retries": 3,
+            "include_exceptions": null,
+            "exclude_exceptions": [
+                "VerifierOutputParseError",
+                "RewardFileEmptyError",
+                "RewardFileNotFoundError",
+                "AgentTimeoutError",
+                "VerifierTimeoutError"
+            ],
+            "wait_multiplier": 2.5,
+            "min_wait_sec": 60.0,
+            "max_wait_sec": 300.0
+        },
+        "kwargs": {}
+    },
+    "environment": {
+        "type": "daytona",
+        "import_path": null,
+        "force_build": false,
+        "delete": true,
+        "override_cpus": 4,
+        "override_memory_mb": 8192,
+        "override_storage_mb": null,
+        "override_gpus": null,
+        "suppress_override_warnings": true,
+        "kwargs": {}
+    },
+    "verifier": {
+        "override_timeout_sec": null,
+        "max_timeout_sec": null,
+        "disable": false
+    },
+    "metrics": [],
+    "agents": [
+        {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4-nano",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 409600,
+                "max_tokens": 131072
+            },
+            "env": {}
+        }
+    ],
+    "datasets": [
+        {
+            "task_names": null,
+            "exclude_task_names": null,
+            "n_tasks": null,
+            "registry": {
+                "name": null,
+                "url": "https://raw.githubusercontent.com/laude-institute/harbor/main/registry.json"
+            },
+            "name": "terminal-bench",
+            "version": "2.0",
+            "overwrite": false,
+            "download_dir": null
+        }
+    ],
+    "tasks": [],
+    "artifacts": []
+}

@@ -3,14 +3,11 @@
 
 Integrates with the WolfBench dashboard and chart workflow.
 
-Two-tier upload:
-  Tier 1: Evaluations from collected summary data (fast, no SSH)
-  Tier 2: Full agent traces from VMs (slow, requires SSH)
+Unified upload: evaluations with real per-task metrics and nested agent
+traces, all connected in the Weave evaluation hierarchy.
 
 Usage:
-    python wolfbench_weave.py tier1 -i harbor_results.json
-    python wolfbench_weave.py tier2 -i harbor_results.json
-    python wolfbench_weave.py both  -i harbor_results.json
+    python wolfbench_weave.py upload -i wolfbench_results.json
     python wolfbench_weave.py status
 """
 
@@ -20,8 +17,12 @@ import json
 import logging
 import os
 import sys
+import warnings
 from datetime import datetime
 from pathlib import Path
+
+# Suppress noisy dependency warnings (requests vs urllib3/chardet version mismatch)
+warnings.filterwarnings("ignore", message="urllib3.*doesn't match a supported version")
 
 # Suppress Weave's noisy version/progress warnings
 logging.getLogger("weave").setLevel(logging.ERROR)
@@ -44,6 +45,7 @@ _DEFAULT_RESULT = {
     "duration_sec": 0.0,
     "n_input_tokens": 0,
     "n_output_tokens": 0,
+    "n_cache_tokens": 0,
     "cost_usd": 0.0,
     "has_error": True,
 }
@@ -82,27 +84,73 @@ def save_manifest(manifest: dict, manifest_path: Path | None = None, project: st
 
 
 def manifest_key(agent: str, version: str, model_display: str,
-                 timeout_sec: float | None) -> str:
+                 timeout_sec: float | None, thinking: str = "-") -> str:
     """Build lookup key matching the chart grouping tuple."""
-    return f"{agent}|{version or 'unknown'}|{model_display}|{timeout_sec}"
+    return f"{agent}|{version or 'unknown'}|{model_display}|{timeout_sec}|{thinking}"
 
 
-def parse_manifest_key(key: str) -> tuple[str, str, str, float | None]:
-    """Parse a manifest key back into (agent, version, model_display, timeout)."""
-    parts = key.split("|", 3)
+def parse_manifest_key(key: str) -> tuple[str, str, str, float | None, str]:
+    """Parse a manifest key back into (agent, version, model_display, timeout, thinking)."""
+    parts = key.split("|", 4)
     timeout = float(parts[3]) if len(parts) > 3 and parts[3] != "None" else None
-    return parts[0], parts[1], parts[2], timeout
+    thinking = parts[4] if len(parts) > 4 else "-"
+    return parts[0], parts[1], parts[2], timeout, thinking
 
 
-def is_run_uploaded(manifest: dict, key: str, timestamp: str, tier: int) -> bool:
-    """Check if a run was already uploaded for the given tier."""
+def _resolve_display_name(r: dict) -> str:
+    """Return display name: model_display override if set, else auto-derive from model path."""
+    md = r.get("model_display") or ""
+    if md:
+        return md
+    model_full = r.get("model", "unknown")
+    parts = model_full.split("/")
+    if len(parts) >= 3:
+        return "/".join(parts[2:])
+    elif len(parts) == 2:
+        return parts[-1]
+    return model_full
+
+
+def _normalize_thinking(t) -> str:
+    """Normalize thinking/reasoning_effort to a display string."""
+    if t is None:
+        return "-"
+    if t is True or t == "enabled":
+        return "on"
+    if t is False or t == "disabled":
+        return "off"
+    return str(t)
+
+
+def _resolve_thinking(r: dict) -> str:
+    """Return thinking display: thinking_display override if set, else auto-normalize."""
+    td = r.get("thinking_display") or ""
+    if td:
+        return td
+    return _normalize_thinking(r.get("thinking"))
+
+
+def is_run_uploaded(manifest: dict, key: str, timestamp: str) -> bool:
+    """Check if a run was already uploaded."""
     eval_entry = manifest.get("evaluations", {}).get(key)
     if not eval_entry:
         return False
     run_entry = eval_entry.get("runs", {}).get(timestamp)
     if not run_entry:
         return False
-    return run_entry.get(f"tier{tier}_uploaded", False)
+    return run_entry.get("uploaded", False)
+
+
+def _resolve_local_run_dir(run: dict, local_runs_dir: Path | None) -> str | None:
+    """Resolve local run directory path for per-task result.json reading."""
+    if run.get("vm") == "local":
+        return run["run_dir"]
+    if local_runs_dir:
+        parts = run["run_dir"].rstrip("/").split("/")
+        local_path = Path(local_runs_dir) / parts[-2] / parts[-1]
+        if local_path.exists():
+            return str(local_path)
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -111,11 +159,12 @@ def is_run_uploaded(manifest: dict, key: str, timestamp: str, tier: int) -> bool
 
 
 def group_runs(runs: list[dict]) -> dict[str, list[dict]]:
-    """Group runs by (agent, version, model_display, timeout) manifest key."""
+    """Group runs by (agent, version, model_display, timeout, thinking) manifest key."""
     groups: dict[str, list[dict]] = {}
     for r in runs:
         ver = r.get("agent_version") or "unknown"
-        key = manifest_key(r["agent"], ver, r["model_display"], r.get("timeout_sec"))
+        thinking = _resolve_thinking(r)
+        key = manifest_key(r["agent"], ver, _resolve_display_name(r), r.get("timeout_sec"), thinking)
         groups.setdefault(key, []).append(r)
     return groups
 
@@ -132,11 +181,14 @@ def _fmt_timeout(sec: float | None) -> str:
     return f"{int(h)}h" if h == int(h) else f"{h:.1f}h"
 
 
-def _eval_label(agent: str, model_display: str, timeout_sec: float | None) -> str:
+def _eval_label(agent: str, model_display: str, timeout_sec: float | None,
+                thinking: str = "-") -> str:
     label = f"{agent}_{model_display}"
     t = _fmt_timeout(timeout_sec)
     if t:
         label += f"@{t}"
+    if thinking != "-":
+        label += f"_{thinking}"
     return label
 
 
@@ -152,10 +204,14 @@ def _get_scorer():
                 "success": output.get("success", False),
                 "reward": output.get("reward", 0.0),
                 "duration_sec": output.get("duration_sec", 0.0),
+                "n_input_tokens": output.get("n_input_tokens", 0),
+                "n_output_tokens": output.get("n_output_tokens", 0),
+                "n_cache_tokens": output.get("n_cache_tokens", 0),
                 "total_tokens": (
                     output.get("n_input_tokens", 0)
                     + output.get("n_output_tokens", 0)
                 ),
+                "cost_usd": output.get("cost_usd", 0.0),
                 "has_error": output.get("has_error", False),
             }
 
@@ -163,13 +219,33 @@ def _get_scorer():
     return _scorer
 
 
-def _create_run_model(run_label: str, results_map: dict[str, dict]):
-    """Create a @weave.op predictor that returns pre-computed results."""
+def _create_run_model(
+    run_label: str,
+    results_map: dict[str, dict],
+    trajectories: dict[str, dict] | None = None,
+    client=None,
+    run: dict | None = None,
+):
+    """Create a @weave.op predictor that returns pre-computed results.
+
+    If trajectories and client are provided, also creates nested trace
+    children inside predict() (unified upload: metrics + traces in one pass).
+    """
     import weave
 
     @weave.op(name=run_label)
     def predict(task_name: str) -> dict:
-        return results_map.get(task_name, _DEFAULT_RESULT)
+        result = results_map.get(task_name, _DEFAULT_RESULT)
+
+        # Create nested trace hierarchy if trajectory data is available
+        if trajectories and client and run:
+            traj = trajectories.get(task_name)
+            if traj:
+                _create_trace_children(
+                    traj, task_name, run_label, run, client, result
+                )
+
+        return result
 
     return predict
 
@@ -194,8 +270,60 @@ def _resolve_entity(entity: str | None) -> str:
 # ---------------------------------------------------------------------------
 
 
-def build_task_results(run: dict) -> dict[str, dict]:
-    """Convert a collected run's passed/failed task lists into per-task results."""
+def read_per_task_results(run_dir: str) -> dict[str, dict]:
+    """Read per-task result.json files and extract real metrics.
+
+    Returns {task_name: result_dict} with actual tokens, duration, cost.
+    Mirrors _aggregate_local_tokens() in wolfbench_collect.py but per-task.
+    """
+    run_path = Path(run_dir)
+    results = {}
+    for result_file in run_path.glob("*/result.json"):
+        if result_file.parent.name in (".", "__pycache__"):
+            continue
+        task_name = result_file.parent.name.split("__")[0]
+        try:
+            d = json.loads(result_file.read_text())
+            ar = d.get("agent_result") or {}
+            vr = d.get("verifier_result") or {}
+            reward = vr.get("rewards", {}).get("reward", 0.0)
+
+            # Duration from agent_execution timing
+            ae = d.get("agent_execution") or {}
+            duration = 0.0
+            if ae.get("started_at") and ae.get("finished_at"):
+                start = datetime.fromisoformat(ae["started_at"].replace("Z", "+00:00"))
+                end = datetime.fromisoformat(ae["finished_at"].replace("Z", "+00:00"))
+                duration = (end - start).total_seconds()
+
+            results[task_name] = {
+                "reward": reward,
+                "success": reward > 0,
+                "duration_sec": round(duration, 1),
+                "n_input_tokens": ar.get("n_input_tokens", 0) or 0,
+                "n_output_tokens": ar.get("n_output_tokens", 0) or 0,
+                "n_cache_tokens": ar.get("n_cache_tokens", 0) or 0,
+                "cost_usd": ar.get("cost_usd", 0) or 0,
+                "has_error": d.get("exception_info") is not None,
+            }
+        except (json.JSONDecodeError, OSError):
+            pass
+    return results
+
+
+def build_task_results(run: dict, run_dir: str | None = None) -> dict[str, dict]:
+    """Convert a run's data into per-task results.
+
+    If run_dir is provided and contains per-task result.json files,
+    uses real metrics. Otherwise falls back to passed/failed lists with zeros.
+    """
+    # Try real per-task metrics first
+    if run_dir:
+        real = read_per_task_results(run_dir)
+        if real:
+            return real
+
+    # Fallback: passed/failed lists with zero metrics
     results = {}
     for task in run.get("passed_tasks", []):
         results[task] = {
@@ -204,6 +332,7 @@ def build_task_results(run: dict) -> dict[str, dict]:
             "duration_sec": 0.0,
             "n_input_tokens": 0,
             "n_output_tokens": 0,
+            "n_cache_tokens": 0,
             "cost_usd": 0.0,
             "has_error": False,
         }
@@ -214,6 +343,7 @@ def build_task_results(run: dict) -> dict[str, dict]:
             "duration_sec": 0.0,
             "n_input_tokens": 0,
             "n_output_tokens": 0,
+            "n_cache_tokens": 0,
             "cost_usd": 0.0,
             "has_error": False,
         }
@@ -226,9 +356,14 @@ async def upload_evaluations(
     project: str = DEFAULT_PROJECT,
     entity: str | None = None,
     manifest_path: Path | None = None,
+    local_runs_dir: Path | None = None,
     progress_callback=None,
 ) -> dict[str, str]:
-    """Upload Tier 1 evaluations from collected summary data.
+    """Upload evaluations with real metrics and (optionally) nested traces.
+
+    Unified upload: reads per-task result.json for real metrics, and if
+    trajectory data is available, creates nested trace children inside
+    the Weave evaluation hierarchy.
 
     Returns {manifest_key: weave_evaluation_url}.
     """
@@ -243,27 +378,50 @@ async def upload_evaluations(
     manifest["entity"] = entity
 
     _init_path = f"{entity}/{project}" if entity and entity != "unknown" else project
-    _client = weave.init(_init_path)  # noqa: F841 — sets global context
+    client = weave.init(_init_path)
     scorer = _get_scorer()
 
     groups = group_runs(runs)
+    manifest_keys = set(manifest.get("evaluations", {}).keys())
+    group_keys = set(groups.keys())
+    print(f"Upload: {len(groups)} groups from runs, {len(manifest_keys)} entries in manifest")
+    _only_in_groups = group_keys - manifest_keys
+    _only_in_manifest = manifest_keys - group_keys
+    if _only_in_groups:
+        print(f"  Keys in runs but NOT in manifest: {_only_in_groups}")
+    if _only_in_manifest:
+        print(f"  Keys in manifest but NOT in runs: {_only_in_manifest}")
+
     results: dict[str, str] = {}
     n_uploaded = 0
     n_skipped = 0
 
     for key, group in sorted(groups.items()):
-        agent, version, model_display, timeout_sec = parse_manifest_key(key)
-        label = _eval_label(agent, model_display, timeout_sec)
+        agent, version, model_display, timeout_sec, thinking = parse_manifest_key(key)
+        label = _eval_label(agent, model_display, timeout_sec, thinking)
 
         # Check if ALL runs in this group are already uploaded
         new_runs = [
             r
             for r in group
-            if not is_run_uploaded(manifest, key, r["timestamp"], tier=1)
+            if not is_run_uploaded(manifest, key, r["timestamp"])
         ]
 
-        if not new_runs and key in manifest.get("evaluations", {}):
-            url = manifest["evaluations"][key].get("weave_url", "")
+        eval_entry = manifest.get("evaluations", {}).get(key, {})
+        has_eval_calls = bool(eval_entry.get("eval_call_ids"))
+
+        if new_runs or not has_eval_calls:
+            _reasons = []
+            if new_runs:
+                _reasons.append(f"{len(new_runs)} new runs: {[r['timestamp'] for r in new_runs]}")
+            if not has_eval_calls:
+                _reasons.append("no eval_call_ids")
+            if not eval_entry:
+                _reasons.append("key not in manifest")
+            print(f"  NOT skipping {label} [{key}]: {'; '.join(_reasons)}")
+
+        if not new_runs and has_eval_calls:
+            url = eval_entry.get("weave_url", "")
             results[key] = url
             n_skipped += len(group)
             msg = f"Skipped {label} ({len(group)} runs already uploaded)"
@@ -272,23 +430,58 @@ async def upload_evaluations(
                 progress_callback(msg)
             continue
 
+        _legacy_reupload = False
+        if not new_runs and not has_eval_calls:
+            # Legacy upload: runs marked uploaded but no eval calls exist.
+            # Re-process entire group to create proper Evaluation.evaluate calls.
+            # Skip traces — only need eval calls for Leaderboard URLs.
+            _legacy_reupload = True
+            new_runs = group
+            print(f"  Re-uploading {label} (legacy: no eval calls, {len(group)} runs, traces skipped)")
+
         print(f"  Uploading: {label} ({len(group)} runs)")
 
         # Build per-run predictor models
         models = []
         all_tasks: set[str] = set()
+        run_trace_counts: dict[str, int] = {}  # timestamp -> n_traces
 
         for i, r in enumerate(group, 1):
-            task_results = build_task_results(r)
-            all_tasks.update(task_results.keys())
-
             run_label = r["timestamp"].replace("/", "-").replace(" ", "_")
 
-            model = _create_run_model(run_label, task_results)
+            # Resolve local run dir for per-task result.json reading
+            local_dir = _resolve_local_run_dir(r, local_runs_dir)
+
+            # Real metrics from per-task result.json (falls back to zeros)
+            task_results = build_task_results(r, run_dir=local_dir)
+            all_tasks.update(task_results.keys())
+
+            # Load trajectories for nested trace creation (skip for legacy re-uploads)
+            if _legacy_reupload:
+                trajectories = {}
+            else:
+                trajectories = _load_trajectories_for_run(r, local_runs_dir)
+            run_trace_counts[r["timestamp"]] = len(trajectories)
+            if i == 1:  # debug: show trajectory loading for first run of each group
+                print(f"    [debug] vm={r.get('vm')!r} run_dir=...{r.get('run_dir','')[-50:]} "
+                      f"local_runs_dir={local_runs_dir!r} trajs={len(trajectories)} legacy={_legacy_reupload}")
+
+            model = _create_run_model(
+                run_label, task_results,
+                trajectories=trajectories or None,
+                client=client if trajectories else None,
+                run=r if trajectories else None,
+            )
             models.append((run_label, model))
 
             n_pass = sum(1 for v in task_results.values() if v["success"])
-            print(f"    {run_label}: {n_pass}/{len(task_results)}")
+            has_real = local_dir is not None
+            has_traces = bool(trajectories)
+            print(
+                f"    {run_label}: {n_pass}/{len(task_results)}"
+                f" (metrics: {'real' if has_real else 'stub'}"
+                f", traces: {len(trajectories) if has_traces else 'none'})"
+            )
 
         # Shared dataset (union of all task names in this group)
         dataset = weave.Dataset(
@@ -303,7 +496,7 @@ async def upload_evaluations(
             scorers=[scorer],
         )
 
-        # Evaluate each run
+        # Evaluate each run (predict() creates nested traces if available)
         for run_label, model in models:
             print(f"    Evaluating {run_label}...")
             await evaluation.evaluate(
@@ -311,45 +504,68 @@ async def upload_evaluations(
                 __weave={"display_name": f"{label} / {run_label}"},
             )
 
-        eval_ref = weave.publish(evaluation)
+        _ref = weave.publish(evaluation)
         n_uploaded += len(group)
 
-        # Direct URL to this specific evaluation object
-        from urllib.parse import quote
+        # Flush async queue BEFORE querying eval calls — otherwise the calls
+        # may still be in the async queue and get_calls() won't find them,
+        # resulting in empty eval_call_ids and duplicate uploads on next click.
+        client.flush()
+
+        # Object URL → Leaderboard view (the proper UI for comparing eval runs)
         url = (
-            f"https://wandb.ai/{eval_ref.entity}/{eval_ref.project}"
-            f"/weave/objects/{quote(eval_ref.name)}/versions/{eval_ref.digest}"
+            f"https://wandb.ai/{client.entity}/{client.project}"
+            f"/weave/objects/{_ref.name}/versions/{_ref.digest}"
         )
         results[key] = url
 
-        # Update manifest
+        # Capture evaluation call IDs for skip-logic (detect completed uploads)
+        from weave.trace.weave_client import CallsFilter as _CF
+        _eval_op = f"weave:///{client.entity}/{client.project}/op/Evaluation.evaluate:*"
+        _prefix = f"{label} / "
+        _total_runs = sum(len(g) for g in groups.values())
+        _eval_calls = list(client.get_calls(
+            filter=_CF(op_names=[_eval_op]),
+            sort_by=[{"field": "started_at", "direction": "desc"}],
+            limit=max(_total_runs * 2, 200),
+            columns=["id", "display_name"],
+        ))
+        _call_ids = [
+            c.id for c in _eval_calls
+            if (c.display_name or "").startswith(_prefix)
+        ][:len(models)]
+
+        # Update manifest (new unified format)
         manifest.setdefault("evaluations", {})[key] = {
             "eval_name": f"Terminal-Bench 2.0: {label}",
             "weave_url": url,
+            "eval_call_ids": _call_ids,
             "runs": {
                 r["timestamp"]: {
                     "vm": r["vm"],
                     "score": r["score"],
-                    "tier1_uploaded": True,
-                    "tier2_uploaded": False,
+                    "uploaded": True,
+                    "has_traces": run_trace_counts.get(r["timestamp"], 0) > 0,
+                    "n_traces": run_trace_counts.get(r["timestamp"], 0),
                 }
                 for r in group
             },
         }
         save_manifest(manifest, manifest_path)
 
-        msg = f"Uploaded {label} ({len(group)} runs, {len(all_tasks)} tasks)"
+        total_traces = sum(run_trace_counts.get(r["timestamp"], 0) for r in group)
+        msg = f"Uploaded {label} ({len(group)} runs, {len(all_tasks)} tasks, {total_traces} traces)"
         print(f"  {msg}")
         if progress_callback:
             progress_callback(msg)
 
-    _summary = f"Tier 1 done: {n_uploaded} runs uploaded, {n_skipped} skipped"
+    _summary = f"Done: {n_uploaded} runs uploaded, {n_skipped} skipped"
     print(f"\n{_summary}")
     return {"urls": results, "n_uploaded": n_uploaded, "n_skipped": n_skipped, "summary": _summary}
 
 
 # ---------------------------------------------------------------------------
-# Tier 2: Trace upload (SSH)
+# Trace helpers
 # ---------------------------------------------------------------------------
 
 
@@ -388,7 +604,6 @@ def _extract_observation(observation) -> str:
 def load_local_trajectories(local_run_dir: str) -> dict[str, dict]:
     """Load trajectory.json files from local storage.
 
-    Local equivalent of fetch_all_trajectories() — reads from disk.
     Returns {task_name: trajectory_dict}.
     """
     run_path = Path(local_run_dir)
@@ -446,263 +661,176 @@ def fetch_all_trajectories(vm: str, run_dir: str) -> dict[str, dict]:
         return {}
 
 
-def upload_traces_for_run(
-    run: dict, trajectories: dict[str, dict], client, run_label: str
-) -> int:
-    """Upload nested Weave trace hierarchy for one run. Returns count uploaded."""
-    count = 0
-    passed_set = set(run.get("passed_tasks") or [])
-    failed_set = set(run.get("failed_tasks") or [])
+def _load_trajectories_for_run(
+    run: dict, local_runs_dir: Path | None = None
+) -> dict[str, dict]:
+    """Load trajectory data for a run from local storage or SSH.
 
-    for task_name, traj in sorted(trajectories.items()):
-        steps = traj.get("steps", [])
-        if not steps:
-            continue
-
-        final_metrics = traj.get("final_metrics") or {}
-        session_id = traj.get("session_id")
-        traj_agent = traj.get("agent") or {}
-
-        # Task prompt from first user step
-        task_prompt = ""
-        for s in steps:
-            if s.get("source") == "user":
-                task_prompt = _extract_message(s.get("message"))
-                break
-
-        passed = task_name in passed_set
-        has_error = task_name not in passed_set and task_name not in failed_set
-
-        # Parent: agent_run
-        parent = client.create_call(
-            op="agent_run",
-            inputs={
-                "task_name": task_name,
-                "model": run.get("model_display", "unknown"),
-                "agent": run.get("agent", "unknown"),
-                "agent_version": (
-                    traj_agent.get("version") or run.get("agent_version")
-                ),
-                "run": run_label,
-                "total_steps": len(steps),
-                "session_id": session_id,
-                "task_prompt": task_prompt,
-            },
-            parent=None,
-            display_name=f"{task_name} [{run_label}]",
-            use_stack=False,
-        )
-
-        # Children: one per step
-        for step in steps:
-            source = step.get("source", "unknown")
-            step_id = step.get("step_id", 0)
-            timestamp = step.get("timestamp")
-            metrics = step.get("metrics") or {}
-            msg = _extract_message(step.get("message"))
-
-            if source == "user":
-                child = client.create_call(
-                    op="user_message",
-                    inputs={"step_id": step_id, "timestamp": timestamp},
-                    parent=parent,
-                    display_name=f"step {step_id}: user",
-                    use_stack=False,
-                )
-                client.finish_call(child, output={"message": msg})
-
-            elif source == "agent" and metrics:
-                child = client.create_call(
-                    op="llm_call",
-                    inputs={
-                        "step_id": step_id,
-                        "timestamp": timestamp,
-                        "model": (
-                            step.get("model_name") or run.get("model_display")
-                        ),
-                        "prompt_tokens": metrics.get("prompt_tokens", 0),
-                    },
-                    parent=parent,
-                    display_name=f"step {step_id}: llm",
-                    use_stack=False,
-                )
-                client.finish_call(
-                    child,
-                    output={
-                        "message": msg,
-                        "reasoning": step.get("reasoning_content") or "",
-                        "tool_calls": step.get("tool_calls") or [],
-                        "completion_tokens": metrics.get("completion_tokens", 0),
-                        "cached_tokens": metrics.get("cached_tokens", 0),
-                        "cost_usd": metrics.get("cost_usd"),
-                        "stop_reason": (step.get("extra") or {}).get(
-                            "stop_reason"
-                        ),
-                    },
-                )
-
-            elif source == "agent" and step.get("observation"):
-                obs = _extract_observation(step.get("observation"))
-                child = client.create_call(
-                    op="tool_result",
-                    inputs={"step_id": step_id, "timestamp": timestamp},
-                    parent=parent,
-                    display_name=f"step {step_id}: tool",
-                    use_stack=False,
-                )
-                client.finish_call(child, output={"output": obs})
-
-            elif source == "system":
-                child = client.create_call(
-                    op="system_message",
-                    inputs={"step_id": step_id, "timestamp": timestamp},
-                    parent=parent,
-                    display_name=f"step {step_id}: system",
-                    use_stack=False,
-                )
-                client.finish_call(child, output={"message": msg})
-
-            else:
-                child = client.create_call(
-                    op="agent_message",
-                    inputs={"step_id": step_id, "timestamp": timestamp},
-                    parent=parent,
-                    display_name=f"step {step_id}: agent",
-                    use_stack=False,
-                )
-                client.finish_call(child, output={"message": msg})
-
-        # Finish parent with final results
-        client.finish_call(
-            parent,
-            output={
-                "reward": 1.0 if passed else 0.0,
-                "success": passed,
-                "has_error": has_error,
-                "total_steps": final_metrics.get("total_steps", len(steps)),
-                "total_prompt_tokens": final_metrics.get(
-                    "total_prompt_tokens", 0
-                ),
-                "total_completion_tokens": final_metrics.get(
-                    "total_completion_tokens", 0
-                ),
-                "total_cached_tokens": final_metrics.get(
-                    "total_cached_tokens", 0
-                ),
-                "total_cost_usd": final_metrics.get("total_cost_usd"),
-            },
-        )
-        count += 1
-
-    return count
-
-
-async def upload_all_traces(
-    runs: list[dict],
-    project: str = DEFAULT_PROJECT,
-    entity: str | None = None,
-    manifest_path: Path | None = None,
-    local_runs_dir: Path | None = None,
-    progress_callback=None,
-) -> dict[str, int]:
-    """Upload Tier 2 traces for all runs. Returns {key: n_traces_uploaded}.
-
-    If local_runs_dir is provided, checks for locally-stored trajectories
-    before falling back to SSH fetching from the VM.
+    Checks local first, then falls back to SSH. Returns {task_name: trajectory}.
     """
-    import weave
+    trajectories = {}
 
-    if manifest_path is None:
-        manifest_path = Path(__file__).parent / _manifest_filename(project)
+    if run.get("vm") == "local":
+        trajectories = load_local_trajectories(run["run_dir"])
+    elif local_runs_dir:
+        parts = run["run_dir"].rstrip("/").split("/")
+        local_path = Path(local_runs_dir) / parts[-2] / parts[-1]
+        if local_path.exists():
+            trajectories = load_local_trajectories(str(local_path))
 
-    manifest = load_manifest(manifest_path, project=project)
-    entity = _resolve_entity(entity)
-    _init_path = f"{entity}/{project}" if entity and entity != "unknown" else project
-    client = weave.init(_init_path)
+    if not trajectories and run.get("vm") and run["vm"] != "local":
+        trajectories = fetch_all_trajectories(run["vm"], run["run_dir"])
 
-    groups = group_runs(runs)
-    results: dict[str, int] = {}
+    return trajectories
 
-    for key, group in sorted(groups.items()):
-        agent, _version, model_display, timeout_sec = parse_manifest_key(key)
-        label = _eval_label(agent, model_display, timeout_sec)
-        group_total = 0
 
-        for i, r in enumerate(group, 1):
-            if is_run_uploaded(manifest, key, r["timestamp"], tier=2):
-                msg = f"Skipped traces: {label} {r['timestamp']} (already uploaded)"
-                print(f"  {msg}")
-                if progress_callback:
-                    progress_callback(msg)
-                continue
+def _create_trace_children(
+    traj: dict,
+    task_name: str,
+    run_label: str,
+    run: dict,
+    client,
+    result: dict,
+) -> None:
+    """Create nested Weave trace calls for one task's trajectory.
 
-            run_label = r["timestamp"].replace("/", "-").replace(" ", "_")
+    Must be called from inside a @weave.op context (e.g., predict()).
+    Creates agent_run with use_stack=True so it auto-parents to the
+    calling op via Weave's ContextVar call stack.
+    """
+    steps = traj.get("steps", [])
+    if not steps:
+        return
 
-            # Try local storage first, then fall back to SSH
-            trajectories = {}
-            _source = "local"
+    final_metrics = traj.get("final_metrics") or {}
+    session_id = traj.get("session_id")
+    traj_agent = traj.get("agent") or {}
 
-            if r.get("vm") == "local":
-                # Run was scanned from local — run_dir IS the local path
-                trajectories = load_local_trajectories(r["run_dir"])
-            elif local_runs_dir:
-                # Run was scanned from VM, but check if a local copy exists
-                _parts = r["run_dir"].rstrip("/").split("/")
-                _local_path = Path(local_runs_dir) / _parts[-2] / _parts[-1]
-                if _local_path.exists():
-                    trajectories = load_local_trajectories(str(_local_path))
+    # Task prompt from first user step
+    task_prompt = ""
+    for s in steps:
+        if s.get("source") == "user":
+            task_prompt = _extract_message(s.get("message"))
+            break
 
-            if not trajectories:
-                # Fall back to SSH
-                _source = r["vm"]
-                msg = f"Fetching: {label} {run_label} from {r['vm']}..."
-                print(f"  {msg}")
-                if progress_callback:
-                    progress_callback(msg)
-                trajectories = fetch_all_trajectories(r["vm"], r["run_dir"])
+    # Parent: agent_run (auto-parents to predict via stack)
+    parent = client.create_call(
+        op="agent_run",
+        inputs={
+            "task_name": task_name,
+            "model": _resolve_display_name(run),
+            "agent": run.get("agent", "unknown"),
+            "agent_version": (
+                traj_agent.get("version") or run.get("agent_version")
+            ),
+            "run": run_label,
+            "total_steps": len(steps),
+            "session_id": session_id,
+            "task_prompt": task_prompt,
+        },
+        display_name=f"{task_name} [{run_label}]",
+        use_stack=True,
+    )
 
-            if not trajectories:
-                msg = f"No trajectories for {run_label} ({_source})"
-                print(f"  {msg}", file=sys.stderr)
-                if progress_callback:
-                    progress_callback(msg)
-                continue
-            else:
-                msg = f"Loaded {len(trajectories)} trajectories from {_source}: {run_label}"
-                print(f"  {msg}")
-                if progress_callback:
-                    progress_callback(msg)
+    # Children: one per step (explicit parent, no stack push)
+    for step in steps:
+        source = step.get("source", "unknown")
+        step_id = step.get("step_id", 0)
+        timestamp = step.get("timestamp")
+        metrics = step.get("metrics") or {}
+        msg = _extract_message(step.get("message"))
 
-            # Upload
-            msg = f"Uploading {len(trajectories)} traces: {label} {run_label}"
-            print(f"  {msg}")
-            if progress_callback:
-                progress_callback(msg)
+        if source == "user":
+            child = client.create_call(
+                op="user_message",
+                inputs={"step_id": step_id, "timestamp": timestamp},
+                parent=parent,
+                display_name=f"step {step_id}: user",
+                use_stack=False,
+            )
+            client.finish_call(child, output={"message": msg})
 
-            n = upload_traces_for_run(r, trajectories, client, run_label)
-            group_total += n
+        elif source == "agent" and metrics:
+            child = client.create_call(
+                op="llm_call",
+                inputs={
+                    "step_id": step_id,
+                    "timestamp": timestamp,
+                    "model": (
+                        step.get("model_name") or _resolve_display_name(run)
+                    ),
+                    "prompt_tokens": metrics.get("prompt_tokens", 0),
+                },
+                parent=parent,
+                display_name=f"step {step_id}: llm",
+                use_stack=False,
+            )
+            client.finish_call(
+                child,
+                output={
+                    "message": msg,
+                    "reasoning": step.get("reasoning_content") or "",
+                    "tool_calls": step.get("tool_calls") or [],
+                    "completion_tokens": metrics.get("completion_tokens", 0),
+                    "cached_tokens": metrics.get("cached_tokens", 0),
+                    "cost_usd": metrics.get("cost_usd"),
+                    "stop_reason": (step.get("extra") or {}).get(
+                        "stop_reason"
+                    ),
+                },
+            )
 
-            # Update manifest
-            eval_entry = manifest.get("evaluations", {}).get(key)
-            if eval_entry:
-                run_entry = eval_entry.get("runs", {}).get(r["timestamp"])
-                if run_entry:
-                    run_entry["tier2_uploaded"] = True
-                    run_entry["tier2_traces"] = n
+        elif source == "agent" and step.get("observation"):
+            obs = _extract_observation(step.get("observation"))
+            child = client.create_call(
+                op="tool_result",
+                inputs={"step_id": step_id, "timestamp": timestamp},
+                parent=parent,
+                display_name=f"step {step_id}: tool",
+                use_stack=False,
+            )
+            client.finish_call(child, output={"output": obs})
 
-            save_manifest(manifest, manifest_path)
+        elif source == "system":
+            child = client.create_call(
+                op="system_message",
+                inputs={"step_id": step_id, "timestamp": timestamp},
+                parent=parent,
+                display_name=f"step {step_id}: system",
+                use_stack=False,
+            )
+            client.finish_call(child, output={"message": msg})
 
-            msg = f"Uploaded {n} traces for {run_label}"
-            print(f"  {msg}")
-            if progress_callback:
-                progress_callback(msg)
+        else:
+            child = client.create_call(
+                op="agent_message",
+                inputs={"step_id": step_id, "timestamp": timestamp},
+                parent=parent,
+                display_name=f"step {step_id}: agent",
+                use_stack=False,
+            )
+            client.finish_call(child, output={"message": msg})
 
-        results[key] = group_total
-
-    total = sum(results.values())
-    _summary = f"Tier 2 done: {total} traces uploaded across {len(results)} evaluation(s)"
-    print(f"\n{_summary}")
-    return {"traces": results, "total": total, "summary": _summary}
+    # Finish agent_run (pops from stack)
+    client.finish_call(
+        parent,
+        output={
+            "reward": result.get("reward", 0.0),
+            "success": result.get("success", False),
+            "has_error": result.get("has_error", False),
+            "total_steps": final_metrics.get("total_steps", len(steps)),
+            "total_prompt_tokens": final_metrics.get(
+                "total_prompt_tokens", 0
+            ),
+            "total_completion_tokens": final_metrics.get(
+                "total_completion_tokens", 0
+            ),
+            "total_cached_tokens": final_metrics.get(
+                "total_cached_tokens", 0
+            ),
+            "total_cost_usd": final_metrics.get("total_cost_usd"),
+        },
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -724,10 +852,10 @@ def get_evaluation_urls(
 
     urls = {}
     for key, eval_data in manifest.get("evaluations", {}).items():
-        agent, version, model_display, timeout = parse_manifest_key(key)
+        agent, version, model_display, timeout, thinking = parse_manifest_key(key)
         url = eval_data.get("weave_url", "")
         if url:
-            urls[(agent, version, model_display, timeout)] = url
+            urls[(agent, version, model_display, timeout, thinking)] = url
     return urls
 
 
@@ -742,26 +870,14 @@ def main():
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # tier1
-    p1 = sub.add_parser("tier1", help="Upload evaluations (fast, no SSH)")
-    p1.add_argument(
+    # upload
+    pu = sub.add_parser("upload", help="Upload evaluations + traces")
+    pu.add_argument(
         "-i", "--input", type=Path, required=True,
-        help="Path to harbor_results.json",
+        help="Path to wolfbench_results.json",
     )
-    p1.add_argument("--project", default=DEFAULT_PROJECT)
-    p1.add_argument("--entity", default=None)
-
-    # tier2
-    p2 = sub.add_parser("tier2", help="Upload traces (slow, requires SSH)")
-    p2.add_argument("-i", "--input", type=Path, required=True)
-    p2.add_argument("--project", default=DEFAULT_PROJECT)
-    p2.add_argument("--entity", default=None)
-
-    # both
-    pb = sub.add_parser("both", help="Upload evaluations + traces")
-    pb.add_argument("-i", "--input", type=Path, required=True)
-    pb.add_argument("--project", default=DEFAULT_PROJECT)
-    pb.add_argument("--entity", default=None)
+    pu.add_argument("--project", default=DEFAULT_PROJECT)
+    pu.add_argument("--entity", default=None)
 
     # status
     sub.add_parser("status", help="Show manifest status")
@@ -780,13 +896,13 @@ def main():
         print()
         for key, ev in evals.items():
             runs = ev.get("runs", {})
-            t1 = sum(1 for r in runs.values() if r.get("tier1_uploaded"))
-            t2 = sum(1 for r in runs.values() if r.get("tier2_uploaded"))
+            n_uploaded = sum(1 for r in runs.values() if r.get("uploaded"))
+            n_traces = sum(1 for r in runs.values() if r.get("has_traces"))
             print(f"  {ev.get('eval_name', key)}")
             print(
                 f"    Runs: {len(runs)}, "
-                f"Tier1: {t1}/{len(runs)}, "
-                f"Tier2: {t2}/{len(runs)}"
+                f"Uploaded: {n_uploaded}/{len(runs)}, "
+                f"With traces: {n_traces}/{len(runs)}"
             )
             print(f"    URL:  {ev.get('weave_url', '-')}")
         return 0
@@ -799,27 +915,14 @@ def main():
 
     manifest_path = args.input.parent / _manifest_filename(args.project)
 
-    if args.command in ("tier1", "both"):
-        print("\n=== Tier 1: Uploading evaluations ===")
-        asyncio.run(
-            upload_evaluations(
-                runs,
-                project=args.project,
-                entity=args.entity,
-                manifest_path=manifest_path,
-            )
+    asyncio.run(
+        upload_evaluations(
+            runs,
+            project=args.project,
+            entity=args.entity,
+            manifest_path=manifest_path,
         )
-
-    if args.command in ("tier2", "both"):
-        print("\n=== Tier 2: Uploading traces ===")
-        asyncio.run(
-            upload_all_traces(
-                runs,
-                project=args.project,
-                entity=args.entity,
-                manifest_path=manifest_path,
-            )
-        )
+    )
 
     return 0
 

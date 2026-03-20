@@ -1,0 +1,115 @@
+{
+    "id": "6b392788-55c3-4051-b99e-c33a18036069",
+    "task_name": "gcode-to-text",
+    "trial_name": "gcode-to-text__iSTMmw5",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__08-13-16/gcode-to-text__iSTMmw5",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "gcode-to-text"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5531de29b9b445e4cd67b66231d34cb9e7bddcf15f4c2574b7376a19f0e4c339",
+    "config": {
+        "task": {
+            "path": "gcode-to-text",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "gcode-to-text__iSTMmw5",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__08-13-16",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8ef5593c-2088-404d-b943-f4506d0be162"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 12423,
+        "n_cache_tokens": 4448,
+        "n_output_tokens": 1103,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 6,
+            "api_request_times_msec": [
+                1626.542091369629,
+                970.1669216156006,
+                1993.894100189209,
+                1971.5166091918945,
+                1166.0699844360352,
+                1138.4320259094238
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T08:18:15.913820Z",
+    "finished_at": "2026-03-19T08:18:52.634995Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T08:18:15.919664Z",
+        "finished_at": "2026-03-19T08:18:17.076452Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T08:18:17.076477Z",
+        "finished_at": "2026-03-19T08:18:26.316740Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T08:18:26.316783Z",
+        "finished_at": "2026-03-19T08:18:43.073457Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T08:18:44.937249Z",
+        "finished_at": "2026-03-19T08:18:51.215178Z"
+    }
+}

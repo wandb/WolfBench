@@ -1,0 +1,129 @@
+{
+    "id": "ba5f2a92-77c8-4e3c-9712-28e92159dd3a",
+    "task_name": "model-extraction-relu-logits",
+    "trial_name": "model-extraction-relu-logits__GNwSoPs",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__08-13-16/model-extraction-relu-logits__GNwSoPs",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "model-extraction-relu-logits"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "d0dd8f420350bee97f2d47a2b0c74996be0146aa7bd6f8a1871d9629200dc359",
+    "config": {
+        "task": {
+            "path": "model-extraction-relu-logits",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "model-extraction-relu-logits__GNwSoPs",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__08-13-16",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8ef5593c-2088-404d-b943-f4506d0be162"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 423210,
+        "n_cache_tokens": 208992,
+        "n_output_tokens": 17081,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 20,
+            "api_request_times_msec": [
+                1751.6131401062012,
+                965.1498794555664,
+                2146.8849182128906,
+                6930.864095687866,
+                1618.8793182373047,
+                9613.431692123413,
+                28689.515590667725,
+                18926.332235336304,
+                7963.891267776489,
+                1773.5021114349365,
+                1607.6929569244385,
+                16144.418954849243,
+                6809.321880340576,
+                1707.7484130859375,
+                2122.3270893096924,
+                8683.305501937866,
+                1475.7707118988037,
+                3645.136594772339,
+                2977.9646396636963,
+                2775.0017642974854
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T08:24:41.340256Z",
+    "finished_at": "2026-03-19T08:28:18.800545Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T08:24:41.341674Z",
+        "finished_at": "2026-03-19T08:24:42.698422Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T08:24:42.698431Z",
+        "finished_at": "2026-03-19T08:24:53.396192Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T08:24:53.396325Z",
+        "finished_at": "2026-03-19T08:28:09.593835Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T08:28:10.519598Z",
+        "finished_at": "2026-03-19T08:28:17.431108Z"
+    }
+}

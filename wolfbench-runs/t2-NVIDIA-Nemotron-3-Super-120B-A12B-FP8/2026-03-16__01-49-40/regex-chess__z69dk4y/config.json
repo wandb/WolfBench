@@ -1,0 +1,60 @@
+{
+    "task": {
+        "path": "regex-chess",
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "overwrite": false,
+        "download_dir": null,
+        "source": "terminal-bench"
+    },
+    "trial_name": "regex-chess__z69dk4y",
+    "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-16__01-49-40",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+        "name": "terminus-2",
+        "import_path": null,
+        "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+        "override_timeout_sec": 3600.0,
+        "override_setup_timeout_sec": null,
+        "max_timeout_sec": null,
+        "kwargs": {
+            "temperature": 1.0,
+            "llm_kwargs": {
+                "top_p": 0.95,
+                "extra_body": {
+                    "chat_template_kwargs": {
+                        "force_nonempty_content": true
+                    }
+                }
+            },
+            "model_info": {
+                "max_input_tokens": 256000,
+                "max_output_tokens": 32000
+            }
+        },
+        "env": {}
+    },
+    "environment": {
+        "type": "daytona",
+        "import_path": null,
+        "force_build": false,
+        "delete": true,
+        "override_cpus": 4,
+        "override_memory_mb": 8192,
+        "override_storage_mb": null,
+        "override_gpus": null,
+        "suppress_override_warnings": true,
+        "kwargs": {}
+    },
+    "verifier": {
+        "override_timeout_sec": null,
+        "max_timeout_sec": null,
+        "disable": false
+    },
+    "artifacts": [],
+    "job_id": "c3ccfe86-d972-40f6-ad7f-a586ff9c5dbd"
+}

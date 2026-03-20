@@ -1,0 +1,103 @@
+{
+    "id": "c7c94c12-78c6-4de2-8b43-e352e3e73840",
+    "task_name": "make-doom-for-mips",
+    "trial_name": "make-doom-for-mips__QwxiYYd",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-minimax-m2.5/2026-02-25__03-01-07/make-doom-for-mips__QwxiYYd",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "make-doom-for-mips"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "48c24358a58435a97de86cc88255b6faf1cd3cb28bd27ff6a918e01655095981",
+    "config": {
+        "task": {
+            "path": "make-doom-for-mips",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "make-doom-for-mips__QwxiYYd",
+        "trials_dir": "jobs/oc-minimax-m2.5/2026-02-25__03-01-07",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandbqa/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.2.17",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "dedf29c0-fae0-40e3-bfe5-7f5d29367607"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.2.17",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandbqa"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1168826,
+        "n_cache_tokens": 147552,
+        "n_output_tokens": 4713,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-02-25T03:35:47.250033Z",
+    "finished_at": "2026-02-25T04:58:10.744766Z",
+    "environment_setup": {
+        "started_at": "2026-02-25T03:35:47.253795Z",
+        "finished_at": "2026-02-25T03:35:49.339875Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-02-25T03:35:49.339890Z",
+        "finished_at": "2026-02-25T03:36:19.352568Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-02-25T03:36:19.352777Z",
+        "finished_at": "2026-02-25T04:57:29.115140Z"
+    },
+    "verifier": {
+        "started_at": "2026-02-25T04:57:30.198066Z",
+        "finished_at": "2026-02-25T04:58:09.398360Z"
+    }
+}

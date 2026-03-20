@@ -1,0 +1,118 @@
+{
+    "id": "85c57f14-943c-4bf1-89f3-1167fc35f8d0",
+    "task_name": "chess-best-move",
+    "trial_name": "chess-best-move__nGDUvhz",
+    "trial_uri": "file:///root/harbor/jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__10-27-17/chess-best-move__nGDUvhz",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "chess-best-move"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a31d482d846322d57f0e3ee3c56d4ff2171fe39908dadd8092d036f17114fbef",
+    "config": {
+        "task": {
+            "path": "chess-best-move",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "chess-best-move__nGDUvhz",
+        "trials_dir": "jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__10-27-17",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f3b9b06b-aee9-41b2-93db-959566ca283a"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 235680,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 143945,
+        "cost_usd": 2.451447,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                238524.09768104553,
+                211438.55905532837,
+                156962.4273777008,
+                236792.33312606812,
+                502540.6415462494,
+                642257.5089931488,
+                421975.2998352051,
+                8089.540719985962,
+                33322.15237617493,
+                3541.4812564849854,
+                5915.185213088989
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-12T10:27:18.465702Z",
+    "finished_at": "2026-03-12T11:11:10.507114Z",
+    "environment_setup": {
+        "started_at": "2026-03-12T10:27:18.467423Z",
+        "finished_at": "2026-03-12T10:27:20.615848Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-12T10:27:20.615871Z",
+        "finished_at": "2026-03-12T10:27:33.623920Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-12T10:27:33.624032Z",
+        "finished_at": "2026-03-12T11:10:59.000240Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-12T11:11:00.520554Z",
+        "finished_at": "2026-03-12T11:11:08.933937Z"
+    }
+}

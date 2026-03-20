@@ -1,0 +1,116 @@
+{
+    "id": "6f9aa00c-4ff8-4ec4-9865-1adc409cd2cf",
+    "task_name": "sqlite-db-truncate",
+    "trial_name": "sqlite-db-truncate__9T7UDGJ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__12-31-18/sqlite-db-truncate__9T7UDGJ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-db-truncate"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2346f11dbe5b7bad30e9a9bcb27e5276a73f324d62c452d898e4ce0e472583b1",
+    "config": {
+        "task": {
+            "path": "sqlite-db-truncate",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-db-truncate__9T7UDGJ",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__12-31-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ba8dfe75-2fcf-4e08-a839-c50eab1ed943"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 33852,
+        "n_cache_tokens": 20206,
+        "n_output_tokens": 5425,
+        "cost_usd": 0.02241996,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                4555.00340461731,
+                3692.4705505371094,
+                18798.577308654785,
+                21739.93992805481,
+                18605.85331916809,
+                4839.448690414429,
+                5026.857376098633
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T12:58:47.592920Z",
+    "finished_at": "2026-03-19T13:00:52.019440Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T12:58:47.594373Z",
+        "finished_at": "2026-03-19T12:58:49.192903Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T12:58:49.192915Z",
+        "finished_at": "2026-03-19T12:59:01.916215Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T12:59:01.916366Z",
+        "finished_at": "2026-03-19T13:00:42.066953Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T13:00:43.106674Z",
+        "finished_at": "2026-03-19T13:00:50.211972Z"
+    }
+}

@@ -5,8 +5,8 @@ Scans all harbor-evals VMs via SSH, reads result.json + config.json
 from each run, and outputs structured JSON + summary table.
 
 Runs are split into two files:
-  - harbor_results.json          Valid runs (89 tasks, full Terminal-Bench 2.0)
-  - harbor_results_excluded.json Excluded runs (partials, tests, aborted, infra failures)
+  - wolfbench_results.json          Valid runs (89 tasks, full Terminal-Bench 2.0)
+  - wolfbench_results_excluded.json Excluded runs (partials, tests, aborted, infra failures)
 
 Each excluded run includes an "exclude_reason" field explaining why.
 
@@ -23,7 +23,6 @@ Requirements:
 
 import argparse
 import json
-import os
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -38,7 +37,7 @@ SSH_OPTS = [
 ]
 
 
-def ssh_run(vm: str, command: str, timeout: int = 30) -> tuple[str, str, int]:
+def ssh_run(vm: str, command: str, timeout: int = 60) -> tuple[str, str, int]:
     """Run a command on a VM via SSH. Returns (stdout, stderr, returncode)."""
     proc = subprocess.run(
         ["ssh", *SSH_OPTS, vm, command],
@@ -52,7 +51,7 @@ def discover_vms() -> list[str]:
     print("Discovering VMs from exe.dev...", file=sys.stderr)
     proc = subprocess.run(
         ["ssh", *SSH_OPTS, "exe.dev", "ls"],
-        capture_output=True, text=True, timeout=15,
+        capture_output=True, text=True, timeout=60,
     )
     if proc.returncode != 0:
         print(f"Error listing VMs: {proc.stderr}", file=sys.stderr)
@@ -82,7 +81,7 @@ def discover_hetzner_vms() -> list[dict]:
     try:
         proc = subprocess.run(
             ["hcloud", "server", "list", "-o", "json"],
-            capture_output=True, text=True, timeout=15,
+            capture_output=True, text=True, timeout=60,
         )
     except FileNotFoundError:
         print("Error: hcloud CLI not found", file=sys.stderr)
@@ -134,13 +133,13 @@ def read_run_data(vm: str, run_dir: str) -> dict | None:
         'for f in flist:\n'
         ' try:\n'
         '  d=json.load(open(f))\n'
-        '  ar=d.get("agent_result",{})\n'
+        '  ar=d.get("agent_result") or {}\n'
         '  tin+=ar.get("n_input_tokens",0) or 0\n'
         '  tout+=ar.get("n_output_tokens",0) or 0\n'
         '  tcache+=ar.get("n_cache_tokens",0) or 0\n'
         '  cost+=ar.get("cost_usd",0) or 0\n'
         '  if ver is None:\n'
-        '   ai=d.get("agent_info",{})\n'
+        '   ai=d.get("agent_info") or {}\n'
         '   v=ai.get("version","")\n'
         '   if v and v!="unknown": ver=v\n'
         '   elif ver is None:\n'
@@ -202,12 +201,9 @@ def extract_metrics(vm: str, run_dir: str, result: dict, config: dict,
     agent_timeout = agent_cfg.get("override_timeout_sec")
     agent_kwargs = agent_cfg.get("kwargs", {})
 
-    # Clean model name for display
-    model_display = model_name
-    if "/" in model_display:
-        # "openai/moonshotai/Kimi-K2.5" -> "Kimi-K2.5"
-        # "anthropic/claude-sonnet-4-6" -> "claude-sonnet-4-6"
-        model_display = model_display.split("/")[-1]
+    # User-defined display overrides (empty = use auto-derived values)
+    model_display = config.get("model_display", "")
+    thinking_display = config.get("thinking_display", "")
 
     # Orchestrator config
     orch = config.get("orchestrator", {})
@@ -266,6 +262,9 @@ def extract_metrics(vm: str, run_dir: str, result: dict, config: dict,
     # OpenClaw path
     if thinking is None and "thinking" in agent_kwargs:
         thinking = agent_kwargs["thinking"]
+    # OpenAI reasoning_effort path (e.g. GPT-5.4 xhigh)
+    if thinking is None and "reasoning_effort" in agent_kwargs:
+        thinking = agent_kwargs["reasoning_effort"]
     # Version: prefer config kwargs, fall back to per-task agent_info / logs
     agent_version = agent_kwargs.get("version")
     if (not agent_version or agent_version == "unknown") and tokens:
@@ -294,6 +293,7 @@ def extract_metrics(vm: str, run_dir: str, result: dict, config: dict,
         "timeout_multiplier": config.get("timeout_multiplier"),
         "temperature": temperature,
         "thinking": thinking,
+        "thinking_display": thinking_display,
         # Results
         "score": score,
         "n_trials": n_trials,
@@ -378,7 +378,7 @@ def deduplicate(results: list[dict]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Local storage — scan, read, and download runs to a local `runs/` directory
+# Local storage — scan, read, and download runs to a local `wolfbench-runs/` directory
 # ---------------------------------------------------------------------------
 
 import re as _re
@@ -428,13 +428,13 @@ def _aggregate_local_tokens(run_path) -> dict | None:
     for f in task_results:
         try:
             d = json.loads(f.read_text())
-            ar = d.get("agent_result", {})
+            ar = d.get("agent_result") or {}
             tin += ar.get("n_input_tokens", 0) or 0
             tout += ar.get("n_output_tokens", 0) or 0
             tcache += ar.get("n_cache_tokens", 0) or 0
             cost += ar.get("cost_usd", 0) or 0
             if ver is None:
-                ai = d.get("agent_info", {})
+                ai = d.get("agent_info") or {}
                 v = ai.get("version", "")
                 if v and v != "unknown":
                     ver = v
@@ -522,14 +522,11 @@ def download_run(
 
     # Already downloaded?
     if local_run.exists() and (local_run / "result.json").exists():
-        meta_path = local_run / "_meta.json"
-        if meta_path.exists():
-            try:
-                meta = json.loads(meta_path.read_text())
-                if meta.get("has_trajectories") or not include_trajectories:
-                    return {"local_path": str(local_run), "status": "skipped"}
-            except (json.JSONDecodeError, OSError):
-                pass
+        if not include_trajectories:
+            return {"local_path": str(local_run), "status": "skipped"}
+        # Only skip if trajectories are actually present on disk
+        if any(local_run.glob("*/agent/trajectory.json")):
+            return {"local_path": str(local_run), "status": "skipped"}
 
     # SSH tar+base64
     if include_trajectories:
@@ -566,7 +563,8 @@ def download_run(
         "source_vm": vm,
         "source_run_dir": run_dir,
         "downloaded_at": datetime.now().isoformat(),
-        "has_trajectories": include_trajectories,
+        "has_trajectories": bool(any(local_run.glob("*/agent/trajectory.json"))),
+        "download_mode": "full" if include_trajectories else "meta",
     }
     try:
         with open(local_run / "_meta.json", "w") as f:
@@ -739,8 +737,8 @@ def main():
     parser.add_argument(
         "-o", "--output",
         type=Path,
-        default=Path(__file__).parent / "harbor_results.json",
-        help="Output JSON file for valid runs (default: harbor_results.json)",
+        default=Path(__file__).parent / "wolfbench_results.json",
+        help="Output JSON file for valid runs (default: wolfbench_results.json)",
     )
     parser.add_argument(
         "--excluded-output",

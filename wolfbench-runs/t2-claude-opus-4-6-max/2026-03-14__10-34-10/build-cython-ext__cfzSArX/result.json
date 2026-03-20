@@ -1,0 +1,128 @@
+{
+    "id": "84d1edff-1480-40cd-a0fa-3f26d1c50b67",
+    "task_name": "build-cython-ext",
+    "trial_name": "build-cython-ext__cfzSArX",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10/build-cython-ext__cfzSArX",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "build-cython-ext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2ee06f290911251b296fa2e57db2da0c2c399e326585f3ed47531bb43887d4dd",
+    "config": {
+        "task": {
+            "path": "build-cython-ext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "build-cython-ext__cfzSArX",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "df53d4f7-9fbf-4ff6-b33e-16bb40a46795"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 415536,
+        "n_cache_tokens": 379975,
+        "n_output_tokens": 10239,
+        "cost_usd": 0.6640324999999998,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 21,
+            "api_request_times_msec": [
+                7461.032152175903,
+                6908.007621765137,
+                6684.401512145996,
+                5840.099096298218,
+                7418.462038040161,
+                9205.947160720825,
+                5568.027019500732,
+                9364.464282989502,
+                17476.80616378784,
+                7612.416744232178,
+                23557.965993881226,
+                5845.6361293792725,
+                8023.162603378296,
+                7493.146896362305,
+                5703.303575515747,
+                4551.6462326049805,
+                10719.853639602661,
+                11070.593357086182,
+                6779.596567153931,
+                7205.6028842926025,
+                5492.512941360474
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T11:13:43.909087Z",
+    "finished_at": "2026-03-14T11:25:31.461396Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T11:13:43.911244Z",
+        "finished_at": "2026-03-14T11:13:44.976672Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T11:13:44.976686Z",
+        "finished_at": "2026-03-14T11:13:56.665995Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T11:13:56.666149Z",
+        "finished_at": "2026-03-14T11:25:22.007430Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T11:25:23.583958Z",
+        "finished_at": "2026-03-14T11:25:29.887701Z"
+    }
+}

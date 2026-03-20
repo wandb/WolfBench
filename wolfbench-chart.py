@@ -2,7 +2,7 @@
 """WolfBench Chart — HTML/CSS Chart Generator.
 
 Generates a WolfBench chart as a standalone HTML file with metallic-gradient
-bars per model/agent, using the Four-Metric Framework.
+bars per model/agent, using the Five-Metric Framework.
 
 Usage:
     python wolfbench-chart.py                    # Generate wolfbench.html
@@ -63,6 +63,20 @@ AGENT_CONFIG = {
                         "0 0 8px rgba(250,219,216,0.2)"),
         },
     },
+    "cline-cli": {
+        "label": "Cl",
+        "name": "Cline CLI",
+        "gradient": {
+            "solid":   ("linear-gradient(135deg, #2d1054 0%, #4a1a8a 40%, #6c3483 70%, #8e44ad 100%)",
+                        "0 0 12px rgba(142,68,173,0.3)"),
+            "average": ("linear-gradient(135deg, #4a1a8a 0%, #8e44ad 40%, #a569bd 70%, #bb8fce 100%)",
+                        "0 0 12px rgba(165,105,189,0.3)"),
+            "best":    ("linear-gradient(135deg, #8e44ad 0%, #bb8fce 40%, #d2b4de 70%, #e8daef 100%)",
+                        "0 0 12px rgba(210,180,222,0.3)"),
+            "ceiling": ("linear-gradient(135deg, #bb8fce 0%, #e8daef 40%, #f4ecf7 70%, #faf5fc 100%)",
+                        "0 0 8px rgba(232,218,239,0.2)"),
+        },
+    },
 }
 
 MODEL_DISPLAY = {
@@ -73,11 +87,46 @@ MODEL_DISPLAY = {
     "GLM-5-FP8":         "GLM-5 FP8",
 }
 
+
+def _resolve_display_name(r: dict) -> str:
+    """Return display name: model_display override if set, else auto-derive from model path."""
+    md = r.get("model_display") or ""
+    if md:
+        return md
+    model_full = r.get("model", "unknown")
+    parts = model_full.split("/")
+    if len(parts) >= 3:
+        return "/".join(parts[2:])
+    elif len(parts) == 2:
+        return parts[-1]
+    return model_full
+
+
+def _normalize_thinking(t) -> str:
+    """Normalize thinking/reasoning_effort to a display string."""
+    if t is None:
+        return "-"
+    if t is True or t == "enabled":
+        return "on"
+    if t is False or t == "disabled":
+        return "off"
+    return str(t)
+
+
+def _resolve_thinking(r: dict) -> str:
+    """Return thinking display: thinking_display override if set, else auto-normalize."""
+    td = r.get("thinking_display") or ""
+    if td:
+        return td
+    return _normalize_thinking(r.get("thinking"))
+
+
 METRIC_LABELS = {
-    "solid":   ("■", "Solid",   "always solved"),
-    "average": ("∅", "Average", "mean score"),
-    "best":    ("★", "Best-of", "peak run"),
-    "ceiling": ("▲", "Ceiling", "ever solved"),
+    "worst":   ("▼", "Worst-of", "lowest run"),
+    "solid":   ("■", "Solid",    "always solved"),
+    "average": ("∅", "Average",  "mean score"),
+    "best":    ("▲", "Best-of",  "peak run"),
+    "ceiling": ("★", "Ceiling",  "ever solved"),
 }
 
 
@@ -101,10 +150,12 @@ def compute_metrics(runs: list[dict]) -> dict | None:
 
     return {
         "n_runs": n_runs,
+        "min": round(min(scores) * 100),
         "solid": round(solid / TOTAL_TASKS * 100),
         "average": round(sum(scores) / len(scores) * 100),
         "best": round(max(scores) * 100),
         "ceiling": round(ceiling / TOTAL_TASKS * 100),
+        "min_abs": round(min(scores) * TOTAL_TASKS),
         "solid_abs": solid,
         "avg_abs": round(sum(scores) / len(scores) * TOTAL_TASKS),
         "best_abs": round(max(scores) * TOTAL_TASKS),
@@ -164,7 +215,7 @@ def _bar_segments_html(metrics: dict, agent_cfg: dict) -> str:
     total_h_abs = _abs_px(metrics["ceiling_abs"])
 
     if metrics["n_runs"] == 1:
-        # Single run: all four metrics are identical — just show the value, no symbols
+        # Single run: all five metrics are identical — just show the value, no symbols
         val = metrics["ceiling"]
         abs_val = metrics["ceiling_abs"]
         bottom_px = val * PX_PER_PCT
@@ -177,11 +228,13 @@ def _bar_segments_html(metrics: dict, agent_cfg: dict) -> str:
             f'<span class="seg-pct" data-pct="{val}%" data-abs="{abs_val}">{val}%</span></span>'
         ]
     else:
-        _abs_key = {"solid": "solid_abs", "average": "avg_abs",
+        _val_key = {"worst": "min", "solid": "solid", "average": "average",
+                    "best": "best", "ceiling": "ceiling"}
+        _abs_key = {"worst": "min_abs", "solid": "solid_abs", "average": "avg_abs",
                     "best": "best_abs", "ceiling": "ceiling_abs"}
         labels = []
-        for key in ("solid", "average", "best", "ceiling"):
-            val = metrics[key]
+        for key in ("worst", "solid", "average", "best", "ceiling"):
+            val = metrics[_val_key[key]]
             abs_val = metrics[_abs_key[key]]
             sym, name, _ = METRIC_LABELS[key]
             labels.append((val, abs_val, sym, f"{val}%", str(abs_val), key))
@@ -235,15 +288,39 @@ def _bar_segments_html(metrics: dict, agent_cfg: dict) -> str:
     segments_html = "\n".join(parts)
     labels_html = "\n".join(label_parts)
 
+    # Worst-of spacer (hidden by default; shown when worst metric filter is active)
+    worst_px = metrics["min"] * PX_PER_PCT
+    worst_abs_px = _abs_px(metrics["min_abs"])
+    spacer_html = (
+        f'<div class="worst-spacer" data-h-pct="{worst_px:.1f}" data-h-abs="{worst_abs_px:.1f}"'
+        f' style="height: {worst_px}px;"></div>'
+        if metrics["n_runs"] > 1 else ""
+    )
+
+    # Range markers: dashed lines at worst-of and best-of heights (multi-run only)
+    range_html = ""
+    if metrics["n_runs"] > 1 and metrics["min"] < metrics["best"]:
+        best_px = metrics["best"] * PX_PER_PCT
+        best_abs_px = _abs_px(metrics["best_abs"])
+        range_html = f'''
+            <div class="range-line range-low"
+                 data-bottom-pct="{worst_px:.1f}" data-bottom-abs="{worst_abs_px:.1f}"
+                 style="bottom: {worst_px}px;"></div>
+            <div class="range-line range-high"
+                 data-bottom-pct="{best_px:.1f}" data-bottom-abs="{best_abs_px:.1f}"
+                 style="bottom: {best_px}px;"></div>'''
+
     return f'''
         <div class="bar-inner" style="height: {total_h}px;"
              data-h-pct="{total_h:.1f}" data-h-abs="{total_h_abs:.1f}"
+             data-h-worst="{worst_px:.1f}"
              data-h-solid="{metrics['solid'] * PX_PER_PCT:.1f}"
              data-h-average="{metrics['average'] * PX_PER_PCT:.1f}"
              data-h-best="{metrics['best'] * PX_PER_PCT:.1f}"
              data-h-ceiling="{total_h:.1f}">
-            <div class="bar-segments">{segments_html}</div>
+            <div class="bar-segments">{spacer_html}{segments_html}</div>
             <div class="bar-labels">{labels_html}</div>
+            {range_html}
         </div>'''
 
 
@@ -291,17 +368,9 @@ def _build_runs_table_html(runs: list[dict]) -> str:
             provider = "-"
             vendor = "-"
 
-        model = r.get("model_display", model_full)
+        model = _resolve_display_name(r)
 
-        t = r.get("thinking")
-        if t is None:
-            think = "-"
-        elif t is True or t == "enabled":
-            think = "on"
-        elif t is False or t == "disabled":
-            think = "off"
-        else:
-            think = str(t)
+        think = _resolve_thinking(r)
 
         score = f'{r["score"]:.1%}' if r.get("score") is not None else "?"
         n_p = r.get("n_passed", 0)
@@ -355,9 +424,27 @@ def _build_runs_table_html(runs: list[dict]) -> str:
             f"</tr>"
         )
 
+    # Compute aggregate task stats across all runs
+    _task_counts = Counter()
+    for _r in runs:
+        for _t in _r.get("passed_tasks", []):
+            _task_counts[_t] += 1
+    _n_total_runs = len(runs)
+    _solved_once = len(_task_counts)
+    _solved_always = sum(1 for _c in _task_counts.values() if _c == _n_total_runs) if _n_total_runs > 0 else 0
+    _never_solved = TOTAL_TASKS - _solved_once
+    _pct = lambda x: round(x / TOTAL_TASKS * 100)
+    _task_stats_html = (
+        f'<p class="task-stats">Across these runs, '
+        f'{_solved_once} ({_pct(_solved_once)}%) of the {TOTAL_TASKS} tasks were solved at least once, '
+        f'{_solved_always} ({_pct(_solved_always)}%) were solved every time, '
+        f'and {_never_solved} ({_pct(_never_solved)}%) were never solved.</p>'
+    )
+
     return (
         f'<details class="runs-details">\n'
         f'<summary>Run Details ({len(runs)} runs)</summary>\n'
+        f'{_task_stats_html}\n'
         f'<div class="runs-table-wrap">\n'
         f'<table class="runs-table">\n'
         f'<thead><tr>'
@@ -377,7 +464,7 @@ def _build_runs_table_html(runs: list[dict]) -> str:
 
 
 def generate_html(
-    groups: dict[tuple[str, str, str, float | None], dict],
+    groups: dict[tuple[str, str, str, float | None, str], dict],
     output_path: Path,
     min_runs: int = 1,
     agent_versions: dict[str, set[str]] | None = None,
@@ -395,10 +482,10 @@ def generate_html(
         print("No groups meet the minimum run threshold.")
         return None
 
-    # Organize by model — keyed by (agent, version, timeout) tuple
-    models_with_data: dict[str, dict[tuple[str, str, float | None], dict]] = defaultdict(dict)
-    for (agent, ver, model, timeout), metrics in groups.items():
-        models_with_data[model][(agent, ver, timeout)] = metrics
+    # Organize by model — keyed by (agent, version, timeout, thinking) tuple
+    models_with_data: dict[str, dict[tuple[str, str, float | None, str], dict]] = defaultdict(dict)
+    for (agent, ver, model, timeout, thinking), metrics in groups.items():
+        models_with_data[model][(agent, ver, timeout, thinking)] = metrics
 
     model_order = sorted(
         models_with_data.keys(),
@@ -406,32 +493,44 @@ def generate_html(
         reverse=True,
     )
 
-    # Ordered (agent, version, timeout) triples: AGENT_CONFIG order, then version asc, timeout asc
-    _seen_triples: set[tuple[str, str, float | None]] = set()
+    # Ordered (agent, version, timeout, thinking) quads: AGENT_CONFIG order, then version/timeout/thinking asc
+    _seen_quads: set[tuple[str, str, float | None, str]] = set()
     for m_data in models_with_data.values():
-        _seen_triples.update(m_data.keys())
-    agent_ver_order: list[tuple[str, str, float | None]] = []
+        _seen_quads.update(m_data.keys())
+    agent_ver_order: list[tuple[str, str, float | None, str]] = []
     for a in AGENT_CONFIG:
         matches = sorted(
-            ((ver, to) for (ag, ver, to) in _seen_triples if ag == a),
-            key=lambda x: (x[0], x[1] or 0),
+            ((ver, to, th) for (ag, ver, to, th) in _seen_quads if ag == a),
+            key=lambda x: (x[0], x[1] or 0, x[2]),
         )
-        for v, t in matches:
-            agent_ver_order.append((a, v, t))
+        for v, t, th in matches:
+            agent_ver_order.append((a, v, t, th))
     # Flat agent list (unique, preserving AGENT_CONFIG order) for legend/footer
     agent_order = [a for a in AGENT_CONFIG
-                   if any(ag == a for ag, _, _ in agent_ver_order)]
+                   if any(ag == a for ag, _, _, _ in agent_ver_order)]
 
     # Build model groups HTML
     model_groups_html = []
     model_group_widths = []
-    for model in model_order:
+    for _model_idx, model in enumerate(model_order):
         bars_html = []
         group_bar_widths = []
-        for agent, ver, timeout in agent_ver_order:
-            if (agent, ver, timeout) not in models_with_data[model]:
+        # Per-agent per-metric scores for JS re-sorting on agent/metric filter
+        _scores: dict[str, dict[str, float]] = {}
+        for _a in agent_order:
+            _am: dict[str, float] = {}
+            for (ag, ver_, to_, th_), v in models_with_data[model].items():
+                if ag == _a:
+                    for _mk in ("solid", "average", "best", "ceiling"):
+                        _am[_mk] = max(_am.get(_mk, 0.0), v[_mk])
+                    _am["worst"] = max(_am.get("worst", 0.0), v["min"])
+            if _am:
+                _scores[_a] = {k: round(v, 1) for k, v in _am.items()}
+        _scores_json = json.dumps(_scores, separators=(",", ":"))
+        for agent, ver, timeout, thinking in agent_ver_order:
+            if (agent, ver, timeout, thinking) not in models_with_data[model]:
                 continue
-            m = models_with_data[model][(agent, ver, timeout)]
+            m = models_with_data[model][(agent, ver, timeout, thinking)]
             cfg = AGENT_CONFIG[agent]
             segments = _bar_segments_html(m, cfg)
             n_runs = m["n_runs"]
@@ -439,12 +538,13 @@ def generate_html(
             group_bar_widths.append(bar_w)
             timeout_str = f"@{_fmt_timeout_h(m.get('timeout_sec'))}" if m.get("timeout_sec") else ""
             ver_display = ver if ver != "unknown" else "-"
-            _wurl = (weave_urls or {}).get((agent, ver, model, m.get("timeout_sec")))
+            thinking_line = f'<br><span class="thinking-label">\U0001f9e0 {thinking}</span>' if thinking != "-" else ""
+            _wurl = (weave_urls or {}).get((agent, ver, model, m.get("timeout_sec"), thinking))
             _wopen = f'<a href="{_html_escape(_wurl)}" target="_blank" class="bar-link" title="View on W&amp;B Weave">' if _wurl else ""
             _wclose = "</a>" if _wurl else ""
             bars_html.append(f'''
                 <div class="bar-wrapper" data-agent="{agent}" data-runs="{n_runs}">
-                    <div class="bar-top-label">{cfg["label"]}<br><span class="version-label">{ver_display}</span></div>
+                    <div class="bar-top-label">{cfg["label"]}<br><span class="version-label">{ver_display}</span>{thinking_line}</div>
                     {_wopen}<div class="bar" data-agent="{agent}" style="width: {bar_w}px;">
                         {segments}
                     </div>{_wclose}
@@ -452,12 +552,13 @@ def generate_html(
                 </div>''')
 
         group_w = (sum(group_bar_widths) + max(0, len(group_bar_widths) - 1) * 8) if group_bar_widths else 0
-        if group_bar_widths:
-            model_group_widths.append(group_w)
+        if not group_bar_widths:
+            continue  # Skip models with no bars (agent not in AGENT_CONFIG)
+        model_group_widths.append(group_w)
 
         display = MODEL_DISPLAY.get(model, model)
         model_groups_html.append(f'''
-            <div class="model-group" data-model="{_html_escape(model)}" data-width="{group_w}">
+            <div class="model-group" data-model="{_html_escape(model)}" data-width="{group_w}" data-orig-order="{_model_idx}" data-scores='{_scores_json}'>
                 <div class="model-label">{display}</div>
                 <div class="bars-row">
                     {"".join(bars_html)}
@@ -467,7 +568,7 @@ def generate_html(
     # Minimum chart width based on actual bar content
     n_groups = len(model_group_widths)
     chart_min_w = (
-        sum(model_group_widths) + max(0, n_groups - 1) * 48 + n_groups * 40
+        sum(model_group_widths) + max(0, n_groups - 1) * 68 + 2 * 48
     ) if n_groups else 400
 
     # Legend
@@ -480,7 +581,7 @@ def generate_html(
         )
 
     legend_metrics = []
-    for key in ("ceiling", "best", "average", "solid"):
+    for key in ("ceiling", "best", "average", "worst", "solid"):
         sym, name, desc = METRIC_LABELS[key]
         legend_metrics.append(
             f'<span class="legend-metric legend-metric-{key}" data-metric="{key}">'
@@ -489,10 +590,23 @@ def generate_html(
 
     # Model bar buttons (toggle visibility + drag to reorder)
     model_bar_buttons = []
-    for model in model_order:
+    for _btn_idx, model in enumerate(model_order):
         display = MODEL_DISPLAY.get(model, model)
+        _btn_scores: dict[str, dict[str, float]] = {}
+        for _a in agent_order:
+            _am: dict[str, float] = {}
+            for (ag, ver_, to_, th_), v in models_with_data[model].items():
+                if ag == _a:
+                    for _mk in ("solid", "average", "best", "ceiling"):
+                        _am[_mk] = max(_am.get(_mk, 0.0), v[_mk])
+                    _am["worst"] = max(_am.get("worst", 0.0), v["min"])
+            if _am:
+                _btn_scores[_a] = {k: round(v, 1) for k, v in _am.items()}
+        _btn_scores_json = json.dumps(_btn_scores, separators=(",", ":"))
+        if not _btn_scores:
+            continue  # Skip models with no bars
         model_bar_buttons.append(
-            f'<span class="model-btn" data-model="{_html_escape(model)}" draggable="true">'
+            f'<span class="model-btn" data-model="{_html_escape(model)}" data-orig-order="{_btn_idx}" data-scores=\'{_btn_scores_json}\' draggable="true">'
             f'{display}</span>'
         )
 
@@ -554,6 +668,29 @@ def generate_html(
                 f" inset 0 1px 0 rgba(255,255,255,0.15),"
                 f" inset 0 -1px 0 rgba(0,0,0,0.2); }}"
             )
+    # Worst-of filter: no segment exists — hide all segments, show spacer, use solid gradient
+    for _seg in _METRIC_ORDER:
+        _mf_parts.append(
+            f".chart-area.metric-filter-worst .segment-{_seg}"
+            f" {{ display: none !important; }}"
+        )
+    _mf_parts.append(
+        '.chart-area.metric-filter-worst .seg-label:not([data-metric="worst"])'
+        " { display: none !important; }"
+    )
+    _mf_parts.append(
+        ".chart-area.metric-filter-worst .worst-spacer"
+        " { display: block !important; border-radius: 8px; }"
+    )
+    for _agent, _cfg in AGENT_CONFIG.items():
+        _grad, _shad = _cfg["gradient"]["solid"]
+        _mf_parts.append(
+            f'.chart-area.metric-filter-worst .bar[data-agent="{_agent}"]'
+            f" .bar-segments {{ background: {_grad};"
+            f" box-shadow: {_shad},"
+            f" inset 0 1px 0 rgba(255,255,255,0.15),"
+            f" inset 0 -1px 0 rgba(0,0,0,0.2); }}"
+        )
     # Hide single-run bars when any metric filter is active (metrics are meaningless for 1R)
     _mf_parts.append(
         '.chart-area[class*="metric-filter"] .bar-wrapper[data-runs="1"]'
@@ -583,6 +720,12 @@ def generate_html(
     padding: 4px 0;
 }
 .runs-details summary:hover { opacity: 0.85; }
+.task-stats {
+    color: #8b949e;
+    font-size: 0.85rem;
+    margin: 8px 0 12px;
+    line-height: 1.5;
+}
 .runs-table-wrap {
     overflow-x: auto;
     margin-top: 16px;
@@ -649,13 +792,153 @@ def generate_html(
 
     agent_toggle_js = """(function() {
 AGENT_VERSIONS_PLACEHOLDER
-    var activeAgent = null;
     var agentLegends = document.querySelectorAll('.legend-agent');
     var barWrappers = document.querySelectorAll('.bar-wrapper');
     var modelGroups = document.querySelectorAll('.model-group');
     var modelsRow = document.querySelector('.models-row');
+    var modelBar = document.querySelector('.model-bar');
     var versionLine = document.getElementById('agentVersionLine');
     var versionLineDefault = versionLine ? versionLine.innerHTML : '';
+
+    // Shared filter state
+    window._filterAgents = {};
+    window._filterMetric = null;
+
+    // Highlight the metric labels used for sorting in golden
+    function highlightSortMetric(metric) {
+        var m = metric || 'average';
+        document.querySelectorAll('.seg-label').forEach(function(lbl) {
+            if (lbl.getAttribute('data-metric') === m) {
+                lbl.classList.add('seg-label-sort');
+            } else {
+                lbl.classList.remove('seg-label-sort');
+            }
+        });
+    }
+    // Apply on initial load
+    highlightSortMetric(null);
+
+    // Reorder models by score based on active agent/metric filters
+    window.reorderModels = function() {
+        if (!modelsRow) return;
+        var agentKeys = Object.keys(window._filterAgents);
+        var agent = agentKeys.length === 1 ? agentKeys[0] : null;
+        var metric = window._filterMetric;
+        var groups = Array.from(modelsRow.querySelectorAll('.model-group'));
+        if (agentKeys.length > 0 || metric) {
+            var m = metric || 'average';
+            groups.sort(function(a, b) {
+                var sa = -1, sb = -1;
+                try {
+                    var ja = JSON.parse(a.getAttribute('data-scores') || '{}');
+                    var jb = JSON.parse(b.getAttribute('data-scores') || '{}');
+                    if (agent) {
+                        sa = (ja[agent] && ja[agent][m]) || -1;
+                        sb = (jb[agent] && jb[agent][m]) || -1;
+                    } else if (agentKeys.length > 1) {
+                        agentKeys.forEach(function(ak) {
+                            if (ja[ak] && ja[ak][m] > sa) sa = ja[ak][m];
+                            if (jb[ak] && jb[ak][m] > sb) sb = jb[ak][m];
+                        });
+                    } else {
+                        for (var k in ja) { if (ja[k][m] > sa) sa = ja[k][m]; }
+                        for (var k in jb) { if (jb[k][m] > sb) sb = jb[k][m]; }
+                    }
+                } catch(e) {}
+                return sb - sa;
+            });
+        } else {
+            groups.sort(function(a, b) {
+                return parseInt(a.getAttribute('data-orig-order')) - parseInt(b.getAttribute('data-orig-order'));
+            });
+        }
+        groups.forEach(function(g) { modelsRow.appendChild(g); });
+        if (modelBar) {
+            var btnMap = {};
+            Array.from(modelBar.querySelectorAll('.model-btn')).forEach(function(b) {
+                btnMap[b.getAttribute('data-model')] = b;
+            });
+            groups.forEach(function(g) {
+                var btn = btnMap[g.getAttribute('data-model')];
+                if (btn) modelBar.appendChild(btn);
+            });
+        }
+        highlightSortMetric(window._filterMetric);
+    };
+
+    // Hidden agents (Ctrl/Shift+click toggle, like model buttons)
+    var hiddenAgents = {};
+
+    // Apply current agent filter state to DOM
+    function applyAgentFilter() {
+        var sel = window._filterAgents;
+        var nSel = Object.keys(sel).length;
+        var nHid = Object.keys(hiddenAgents).length;
+
+        // Reset
+        agentLegends.forEach(function(l) { l.classList.remove('dimmed'); });
+        barWrappers.forEach(function(b) { b.classList.remove('agent-hidden'); });
+        modelGroups.forEach(function(g) { g.classList.remove('model-hidden'); });
+        if (modelsRow) modelsRow.classList.remove('agent-filtered');
+
+        if (nSel > 0) {
+            // Exclusive select mode: show only selected agents
+            agentLegends.forEach(function(l) {
+                var match = false;
+                l.classList.forEach(function(cls) {
+                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
+                        if (sel[cls.replace('legend-agent-', '')]) match = true;
+                    }
+                });
+                l.classList.toggle('dimmed', !match);
+            });
+            barWrappers.forEach(function(b) {
+                b.classList.toggle('agent-hidden', !sel[b.getAttribute('data-agent')]);
+            });
+            modelGroups.forEach(function(g) {
+                var hasAgent = false;
+                for (var a in sel) {
+                    if (g.querySelector('.bar-wrapper[data-agent="' + a + '"]')) {
+                        hasAgent = true; break;
+                    }
+                }
+                g.classList.toggle('model-hidden', !hasAgent);
+            });
+            if (modelsRow) modelsRow.classList.add('agent-filtered');
+            if (nSel === 1 && versionLine) {
+                var singleAgent = Object.keys(sel)[0];
+                versionLine.innerHTML = agentVersions[singleAgent] || versionLineDefault;
+            } else if (versionLine) {
+                versionLine.innerHTML = versionLineDefault;
+            }
+        } else if (nHid > 0) {
+            // Hide-toggle mode: hide individually toggled agents
+            agentLegends.forEach(function(l) {
+                l.classList.forEach(function(cls) {
+                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
+                        if (hiddenAgents[cls.replace('legend-agent-', '')]) l.classList.add('dimmed');
+                    }
+                });
+            });
+            barWrappers.forEach(function(b) {
+                b.classList.toggle('agent-hidden', !!hiddenAgents[b.getAttribute('data-agent')]);
+            });
+            modelGroups.forEach(function(g) {
+                var allHidden = true;
+                g.querySelectorAll('.bar-wrapper').forEach(function(w) {
+                    if (!hiddenAgents[w.getAttribute('data-agent')]) allHidden = false;
+                });
+                g.classList.toggle('model-hidden', allHidden);
+            });
+            if (modelsRow) modelsRow.classList.add('agent-filtered');
+            if (versionLine) versionLine.innerHTML = versionLineDefault;
+        } else {
+            // No filter
+            if (versionLine) versionLine.innerHTML = versionLineDefault;
+        }
+        window.reorderModels();
+        if (window.updateChartWidth) window.updateChartWidth();
+    }
 
     agentLegends.forEach(function(el) {
         el.addEventListener('click', function(e) {
@@ -668,32 +951,44 @@ AGENT_VERSIONS_PLACEHOLDER
             });
             if (!agent) return;
 
-            if (activeAgent === agent) {
-                activeAgent = null;
-                agentLegends.forEach(function(l) { l.classList.remove('dimmed'); });
-                barWrappers.forEach(function(b) { b.classList.remove('agent-hidden'); });
-                modelGroups.forEach(function(g) { g.classList.remove('model-hidden'); });
-                if (modelsRow) modelsRow.classList.remove('agent-filtered');
-                if (versionLine) versionLine.innerHTML = versionLineDefault;
-                if (window.updateChartWidth) window.updateChartWidth();
-            } else {
-                activeAgent = agent;
-                agentLegends.forEach(function(l) {
-                    l.classList.toggle('dimmed', !l.classList.contains('legend-agent-' + agent));
-                });
-                barWrappers.forEach(function(b) {
-                    b.classList.toggle('agent-hidden', b.getAttribute('data-agent') !== agent);
-                });
-                modelGroups.forEach(function(g) {
-                    var hasAgent = g.querySelector('.bar-wrapper[data-agent="' + agent + '"]') !== null;
-                    g.classList.toggle('model-hidden', !hasAgent);
-                });
-                if (modelsRow) modelsRow.classList.add('agent-filtered');
-                if (versionLine && agentVersions[agent]) {
-                    versionLine.innerHTML = agentVersions[agent];
+            if (e.ctrlKey || e.metaKey || e.shiftKey) {
+                var nSel = Object.keys(window._filterAgents).length;
+                if (nSel > 0) {
+                    // Have exclusive selection: add/remove from it
+                    if (window._filterAgents[agent]) {
+                        delete window._filterAgents[agent];
+                        // Last one removed: convert to hide-toggle with all hidden
+                        if (Object.keys(window._filterAgents).length === 0) {
+                            agentLegends.forEach(function(l) {
+                                l.classList.forEach(function(cls) {
+                                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
+                                        hiddenAgents[cls.replace('legend-agent-', '')] = true;
+                                    }
+                                });
+                            });
+                        }
+                    } else {
+                        window._filterAgents[agent] = true;
+                    }
+                } else {
+                    // No selection: hide-toggle (like model buttons)
+                    if (hiddenAgents[agent]) {
+                        delete hiddenAgents[agent];
+                    } else {
+                        hiddenAgents[agent] = true;
+                    }
                 }
-                if (window.updateChartWidth) window.updateChartWidth();
+            } else {
+                // Normal click: exclusive single-select (or deselect)
+                hiddenAgents = {};
+                if (Object.keys(window._filterAgents).length === 1 && window._filterAgents[agent]) {
+                    window._filterAgents = {};
+                } else {
+                    window._filterAgents = {};
+                    window._filterAgents[agent] = true;
+                }
             }
+            applyAgentFilter();
         });
     });
 })();""".replace("AGENT_VERSIONS_PLACEHOLDER", _agent_versions_js)
@@ -738,6 +1033,18 @@ AGENT_VERSIONS_PLACEHOLDER
         });
     }
 
+    // Hide model groups where all bars are hidden (e.g. single-run models during metric filter)
+    function hideEmptyGroups(active) {
+        document.querySelectorAll('.model-group').forEach(function(g) {
+            if (active) {
+                var hasBars = g.querySelector('.bar-wrapper:not(.agent-hidden):not([data-runs="1"])') !== null;
+                g.classList.toggle('metric-hidden', !hasBars);
+            } else {
+                g.classList.remove('metric-hidden');
+            }
+        });
+    }
+
     metricLegends.forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -753,6 +1060,10 @@ AGENT_VERSIONS_PLACEHOLDER
                 });
                 adjustLabelPositions(null);
                 adjustTopLabels(null);
+                hideEmptyGroups(false);
+                window._filterMetric = null;
+                window.reorderModels();
+                if (window.updateChartWidth) window.updateChartWidth();
             } else {
                 activeMetric = metric;
                 chartArea.className = chartArea.className.replace(/metric-filter-\\w+/g, '').trim();
@@ -764,6 +1075,10 @@ AGENT_VERSIONS_PLACEHOLDER
                 });
                 adjustLabelPositions(metric);
                 adjustTopLabels(metric);
+                hideEmptyGroups(true);
+                window._filterMetric = metric;
+                window.reorderModels();
+                if (window.updateChartWidth) window.updateChartWidth();
             }
         });
     });
@@ -796,6 +1111,16 @@ AGENT_VERSIONS_PLACEHOLDER
         document.querySelectorAll('.seg-label').forEach(function(el) {
             var b = el.getAttribute('data-bottom-' + newMode);
             if (b) el.style.bottom = b + 'px';
+        });
+        // Swap range line positions
+        document.querySelectorAll('.range-line').forEach(function(el) {
+            var b = el.getAttribute('data-bottom-' + newMode);
+            if (b) el.style.bottom = b + 'px';
+        });
+        // Swap worst-spacer heights
+        document.querySelectorAll('.worst-spacer').forEach(function(el) {
+            var h = el.getAttribute(attr);
+            if (h) el.style.height = h + 'px';
         });
         // Swap y-axis ticks
         document.querySelectorAll('.y-tick').forEach(function(el) {
@@ -876,15 +1201,31 @@ AGENT_VERSIONS_PLACEHOLDER
     // Recalculate chart min-width based on visible model groups
     window.updateChartWidth = function() {
         if (!chartArea) return;
+        var filtered = modelsRow && modelsRow.classList.contains('agent-filtered');
         var totalW = 0, n = 0;
         modelGroups.forEach(function(g) {
-            if (!g.classList.contains('model-hidden') && !g.classList.contains('model-hidden-user')) {
+            if (g.classList.contains('model-hidden') || g.classList.contains('model-hidden-user') || g.classList.contains('metric-hidden')) return;
+            if (filtered) {
+                // Compute actual visible bar widths (agent-hidden bars are display:none)
+                var visibleBars = g.querySelectorAll('.bar-wrapper:not(.agent-hidden)');
+                if (visibleBars.length === 0) return;
+                var gw = 0;
+                visibleBars.forEach(function(bw) {
+                    var bar = bw.querySelector('.bar');
+                    if (bar) gw += parseInt(bar.style.width) || 0;
+                });
+                if (visibleBars.length > 1) gw += (visibleBars.length - 1) * 8;
+                totalW += gw;
+            } else {
                 totalW += parseInt(g.getAttribute('data-width')) || 0;
-                n++;
             }
+            n++;
         });
-        if (n > 0) totalW += (n - 1) * 48 + n * 40;
-        chartArea.style.minWidth = totalW + 'px';
+        if (n > 0) {
+            var gap = 68;
+            totalW += (n - 1) * gap + 2 * 48;
+        }
+        chartArea.style.minWidth = (n > 0 ? totalW : 0) + 'px';
     };
 
     // Toggle visibility
@@ -1041,7 +1382,7 @@ h1 {{
 
 /* Preview note */
 .preview-note {{
-    max-width: 680px;
+    max-width: 690px;
     margin: 0 auto 28px;
     padding: 14px 20px;
     background: rgba(46,51,56,0.4);
@@ -1059,7 +1400,7 @@ h1 {{
 /* Hook / intro */
 .hook {{
     text-align: center;
-    max-width: 680px;
+    max-width: 690px;
     margin: 0 auto 36px;
 }}
 .hook-headline {{
@@ -1111,6 +1452,7 @@ h1 {{
 .legend-agent-terminus-2  {{ background: rgba(39,174,96,0.2); color: #58d68d; border: 1px solid rgba(39,174,96,0.3); }}
 .legend-agent-openclaw    {{ background: rgba(231,76,60,0.2);  color: #f1948a; border: 1px solid rgba(231,76,60,0.3); }}
 .legend-agent-claude-code {{ background: rgba(230,126,34,0.2); color: #f0b27a; border: 1px solid rgba(230,126,34,0.3); }}
+.legend-agent-cline-cli  {{ background: rgba(142,68,173,0.2); color: #bb8fce; border: 1px solid rgba(142,68,173,0.3); }}
 
 .legend-toggle {{
     display: inline-flex;
@@ -1253,12 +1595,12 @@ h1 {{
     right: 0;
     height: {ch}px;
     display: flex;
-    justify-content: space-evenly;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: 68px;
+    padding: 0 48px;
 }}
 .models-row.agent-filtered {{
-    justify-content: center;
-    gap: 80px;
+    gap: 68px;
 }}
 
 .model-group {{
@@ -1267,7 +1609,7 @@ h1 {{
     align-items: center;
     position: relative;
 }}
-.model-group.model-hidden {{
+.model-group.model-hidden, .model-group.metric-hidden {{
     display: none;
 }}
 .model-group.model-hidden-user {{
@@ -1323,6 +1665,11 @@ h1 {{
     font-size: 0.75rem;
     font-weight: 500;
     color: #9BA1A6;
+}}
+.thinking-label {{
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f0c040;
 }}
 .bar-bottom-label {{
     position: absolute;
@@ -1433,6 +1780,25 @@ h1 {{
 }}
 .seg-pct {{
     text-align: right;
+}}
+.seg-label-sort {{
+    color: #FFCC33 !important;
+}}
+
+/* Worst-of spacer (visible only during worst metric filter) */
+.worst-spacer {{
+    display: none;
+}}
+
+/* Range markers: dashed lines at worst-of and best-of heights */
+.range-line {{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 1.5px dashed rgba(255, 255, 255, 0.45);
+    z-index: 3;
+    pointer-events: none;
 }}
 
 /* Footer */
@@ -1552,6 +1918,9 @@ h1 {{
 .chart-area[class*="metric-filter"] .segment-shine {{
     display: none !important;
 }}
+.chart-area[class*="metric-filter"] .range-line {{
+    display: none !important;
+}}
 {metric_filter_css}
 {runs_table_css}
 </style>
@@ -1562,11 +1931,11 @@ h1 {{
         <img class="header-logo" src="data:image/png;base64,{logo_b64}" alt="Weights &amp; Biases by CoreWeave" height="48">
         <h1>WolfBench ({chart_date or date.today().isoformat()})</h1>
     </div>
-    <p class="subtitle">Wolfram Ravenwolf&rsquo;s Four-Metric Framework &middot; based on Terminal-Bench 2.0{' &middot; min ' + str(min_runs) + ' runs' if min_runs > 1 else ''}</p>
+    <p class="subtitle">Wolfram Ravenwolf&rsquo;s Five-Metric Framework &middot; based on Terminal-Bench 2.0{' &middot; min ' + str(min_runs) + ' runs' if min_runs > 1 else ''}</p>
 
     <div class="hook">
         <div class="hook-headline">One score is not enough.<br>Because performance is a distribution, not a point.</div>
-        <p>Most benchmarks report just a single average. <strong>WolfBench</strong> shows four metrics: the <strong>rock-solid base</strong> you can always count on, the <strong>average</strong> you can expect, the <strong>best</strong> a single run achieved, and the <strong>ceiling</strong> of what&rsquo;s theoretically possible. The spread between them tells you how consistent &ndash; or how unpredictable &ndash; an AI agent really is.<br><a href="#about" style="color:#FFCC33; text-decoration:none; border-bottom:1px solid rgba(255,204,51,0.3);">Learn&nbsp;more&nbsp;&darr;</a></p>
+        <p>Most benchmarks report a single average. <strong>WolfBench</strong> shows five metrics that tell the full story&nbsp;&ndash; from the <strong>rock-solid base</strong> of tasks solved every time, through the <strong>average</strong>, up to the <strong>ceiling</strong> of everything ever solved&nbsp;&ndash; plus the <strong>best</strong> and <strong>worst</strong> single runs that frame the spread. Together, they reveal what no single number can: how consistent an AI agent truly is.<br><a href="#about" style="color:#FFCC33; text-decoration:none; border-bottom:1px solid rgba(255,204,51,0.3);">Learn&nbsp;more&nbsp;&darr;</a></p>
     </div>
 
     <div class="legend">
@@ -1604,16 +1973,16 @@ h1 {{
 
     <div class="about" id="about">
         <h2>About WolfBench</h2>
-        <p class="tagline"><a href="https://x.com/WolframRvnwlf"><img class="avatar" src="data:image/jpeg;base64,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" alt="Wolfram Ravenwolf"></a><span>by <a href="https://x.com/WolframRvnwlf">Wolfram Ravenwolf</a> &ndash; who evaluates models for breakfast, builds agents at night, and preaches AI usefulness all day long.</span></p>
+        <p class="tagline"><a href="https://x.com/WolframRvnwlf"><img class="avatar" src="data:image/jpeg;base64,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" alt="Wolfram Ravenwolf"></a><span>by <a href="https://x.com/WolframRvnwlf">Wolfram Ravenwolf</a>&nbsp;&ndash; who evaluates models for breakfast, builds agents at night, and preaches AI usefulness all day long.</span></p>
 
         <blockquote class="preview-note">
-            <strong>Welcome to WolfBench &ndash; we&rsquo;re just getting started.</strong> What you see here is an early preview with only a handful of models and agents tested so far. I&rsquo;m continuously expanding the lineup, running fresh evals, and sharing interesting findings and insights along the way. Watch this space.
+            <strong>Welcome to WolfBench&nbsp;&ndash; we&rsquo;re just getting started.</strong> What you see here is an early preview with only a handful of models and agents tested so far. We&rsquo;re continuously expanding the lineup, running fresh evals, and sharing interesting findings and insights along the way. Watch this space.
         </blockquote>
 
-        <p>AI agents are becoming essential tools. Every week, a new model comes out and claims to be &ldquo;the best at coding&rdquo; or &ldquo;SOTA on agentic tasks.&rdquo; But what does that actually mean for you &ndash; the person who&rsquo;s going to throw real work at these things?</p>
+        <p>AI agents are becoming essential tools. Every week, a new model comes out and claims to be &ldquo;the best at coding&rdquo; or &ldquo;SOTA on agentic tasks.&rdquo; But what does that actually mean for you&nbsp;&ndash; the person who&rsquo;s going to throw real work at these things?</p>
         <p><strong>A single score tells you almost nothing.</strong></p>
-        <p>Most benchmarks give you one number: &ldquo;Model X scored 42% on Benchmark Y.&rdquo; Great. But can you <em>rely</em> on it? Was that a lucky run? Would it score the same tomorrow? What&rsquo;s the floor &ndash; the tasks it <em>always</em> nails? What&rsquo;s the ceiling &ndash; what it <em>could</em> do if the stars align?</p>
-        <p><strong>WolfBench</strong> exists because I got tired of incomplete leaderboards. I wanted to know which model, which harness, and which settings actually deliver the best results on real agentic tasks &ndash; not just on paper, but in practice, consistently, across multiple runs.</p>
+        <p>Most benchmarks give you one number: &ldquo;Model X scored 42% on Benchmark Y.&rdquo; Great. But can you <em>rely</em> on it? Was that a lucky run? Would it score the same tomorrow? What&rsquo;s the floor&nbsp;&ndash; the tasks it <em>always</em> nails? What&rsquo;s the ceiling&nbsp;&ndash; what it <em>could</em> do if the stars align?</p>
+        <p><strong>WolfBench</strong> exists because we got tired of meaningless leaderboards. We wanted to know which model, which agent, and which settings actually deliver the best results on real agentic tasks&nbsp;&ndash; not just on paper, but in practice, consistently, across multiple runs.</p>
 
         <h3>What is it?</h3>
         <p><strong>WolfBench</strong> is an evaluation framework built on top of Terminal-Bench 2.0, a popular agentic benchmark consisting of 89 diverse real-world tasks. These aren&rsquo;t just coding puzzles. They span the kind of work you&rsquo;d actually ask an AI agent to do:</p>
@@ -1624,63 +1993,69 @@ h1 {{
             <li><strong>Data &amp; ML ops:</strong> financial document processing, HuggingFace model inference, scientific stack modernization</li>
             <li><strong>Problem solving:</strong> constraint scheduling, adaptive rejection sampling, concurrent task cancellation</li>
         </ul>
-        <p>The key word is <em>agentic</em>: these tasks require the model to plan, execute shell commands, inspect results, debug failures, and iterate &ndash; just like a human developer or sysadmin would. No multiple-choice shortcuts. No toy puzzles. Real work in real sandboxed environments.</p>
+        <p>The key word is <em>agentic</em>: these tasks require the model to plan, execute shell commands, inspect results, debug failures, and iterate&nbsp;&ndash; just like a human developer or sysadmin would. No multiple-choice shortcuts. No toy puzzles. Real work in real sandboxed environments.</p>
 
         <h3>Why WolfBench is different</h3>
         <ul>
-            <li><strong>Four-metric framework:</strong> Instead of a single average score, I report four complementary metrics that together paint a far more complete picture of what an AI agent can actually do.</li>
-            <li><strong>Uniform conditions:</strong> Instead of Terminal-Bench 2.0&rsquo;s default task-specific timeouts and varying sandbox resources, every task in a run gets the same timeout and identical sandbox resources. This ensures scores reflect model and agent capability &ndash; not whether an inference endpoint was temporarily overloaded or a sandbox ran out of memory.</li>
-            <li><strong>Multi-harness comparison:</strong> Same model, different agent harnesses. Same harness, different models. Different timeouts, concurrency levels, thinking modes. The goal is to understand <em>what matters</em> &ndash; not just <em>what scored highest in one particular instance</em>.</li>
-            <li><strong>Multi-run methodology:</strong> A single run is statistically meaningless &ndash; variance can swing results widely. I run 5+ replicates per configuration to get stable, trustworthy numbers.</li>
+            <li><strong>Five-metric framework:</strong> Instead of a single average score, we report five complementary metrics that together paint a far more complete picture of what an AI agent can actually do&nbsp;&ndash; from the worst-case floor to the theoretical ceiling.</li>
+            <li><strong>Uniform conditions:</strong> Instead of Terminal-Bench 2.0&rsquo;s default task-specific timeouts and varying sandbox resources, every task in a run gets the same timeout and identical sandbox resources. This ensures scores reflect model and agent capability&nbsp;&ndash; not whether an inference endpoint was temporarily overloaded or a sandbox ran out of memory.</li>
+            <li><strong>Multi-agent comparison:</strong> Same model, different agents. Same agent, different models. Different timeouts, concurrency levels, thinking modes. The goal is to understand <em>what matters</em>&nbsp;&ndash; not just <em>what scored highest in one particular instance</em>.</li>
+            <li><strong>Multi-run methodology:</strong> A single run is statistically meaningless&nbsp;&ndash; variance can swing results widely. We run multiple replicates per configuration to get stable, trustworthy numbers.</li>
             <li><strong>Transparency:</strong> Every run is collected, classified, and curated with full metadata: tokens consumed, cache hit rates, duration, timeout, concurrency, agent version, thinking mode, etc. Nothing is hidden.</li>
         </ul>
 
-        <h3>The Four-Metric Framework</h3>
-        <p><strong>Performance is a distribution, not a point.</strong> One number can&rsquo;t capture what an AI agent is truly capable of. Four numbers get a lot closer.</p>
+        <h3>The Five-Metric Framework</h3>
+        <p><strong>Performance is a distribution, not a point.</strong> One number can&rsquo;t capture what an AI agent is truly capable of. Five numbers get a lot closer.</p>
 
         <div class="metric-block">
-            <h3>&#9650; Ceiling: <em>What&rsquo;s theoretically possible?</em></h3>
+            <h3>&#9733; Ceiling: <em>What&rsquo;s theoretically possible?</em></h3>
             <p>The union of all tasks ever solved across all runs. If the model solved task A in run 3 and task B in run 5 (but never both in the same run), both count toward the ceiling.</p>
-            <p>It tells you the theoretical maximum performance this model is <em>capable of</em> within a given harness and settings &ndash; even if no single run achieves it. It reveals variance-limited tasks: solvable, but not reliably.</p>
+            <p>It tells you the theoretical maximum performance this model is <em>capable of</em> with a given agent&nbsp;&ndash; even if no single run achieves it. It reveals variance-limited tasks: solvable, but not reliably.</p>
         </div>
 
         <div class="metric-block">
-            <h3>&#9733; Best-of: <em>What&rsquo;s the peak in a single run?</em></h3>
+            <h3>&#9650; Best-of: <em>What&rsquo;s the peak in a single run?</em></h3>
             <p>The highest score from any individual run.</p>
-            <p>This is the &ldquo;marketing number&rdquo; &ndash; but with context. The closer the best-of is to the average, the more <em>consistent</em> the model performs. A large gap between best-of and average means you&rsquo;re rolling dice every time you run it.</p>
+            <p>This is the &ldquo;marketing number&rdquo;&nbsp;&ndash; but with context. The closer the best-of is to the average, the more <em>consistent</em> the model performs. A large gap between best-of and average means you&rsquo;re rolling dice every time you run it.</p>
         </div>
 
         <div class="metric-block">
             <h3>&empty; Average: <em>What can you normally expect?</em></h3>
-            <p>The mean score across all valid runs (e.g., 5 or more replicates).</p>
-            <p>This is the most commonly reported metric &ndash; and it <em>is</em> useful, but only with enough runs to be stable. With a single run? It&rsquo;s a coin flip.</p>
+            <p>The mean score across all valid runs.</p>
+            <p>This is the most commonly reported metric&nbsp;&ndash; and it <em>is</em> useful, but only with enough runs to be stable. With a single run? It&rsquo;s a coin flip.</p>
+        </div>
+
+        <div class="metric-block">
+            <h3>&#9660; Worst-of: <em>How bad can a single run get?</em></h3>
+            <p>The lowest score from any individual run.</p>
+            <p>This is the opposite of best-of&nbsp;&ndash; the floor, the worst case. The gap between worst-of and best-of defines the full <em>score range</em> across all runs. A narrow range means predictable performance; a wide range means you&rsquo;re rolling dice. Dashed lines on the chart mark this range visually, connecting the worst-of floor to the best-of peak.</p>
         </div>
 
         <div class="metric-block">
             <h3>&#9632; Solid: <em>What does it always get right?</em></h3>
-            <p>Tasks that the model solves across all runs &ndash; the rock-solid base with zero variance.</p>
-            <p>The higher the solid base, the more <em>dependable</em> the agent is. These are the tasks you can confidently delegate and expect success every time. A model with a high solid base and moderate average is often more reliable in practice than one with a high average but low solid base &ndash; because you know what you&rsquo;re getting.</p>
+            <p>Tasks that the model solves across all runs&nbsp;&ndash; the rock-solid base with zero variance.</p>
+            <p>The higher the solid base, the more <em>dependable</em> the agent is. These are the tasks you can confidently delegate and expect success every time. A model with a high solid base and moderate average is often more reliable in practice than one with a high average but low solid base&nbsp;&ndash; because you know what you&rsquo;re getting.</p>
         </div>
 
         <h3>Reading the Chart</h3>
-        <p>The four metrics stack vertically for each model/configuration. The <em>spread</em> between them tells you as much as the numbers themselves:</p>
+        <p>The five metrics are shown for each model/configuration: four stacked bar segments plus the worst-of marker with dashed range lines. The <em>spread</em> between them tells you as much as the numbers themselves:</p>
         <ul class="spread-list">
             <li><strong>Tight spread</strong> (metrics close together) = consistent, predictable AI agent</li>
             <li><strong>Wide spread</strong> (big gap between solid and ceiling) = high variance, unreliable</li>
-            <li><strong>High ceiling, low average</strong> = the model <em>can</em> do it, but usually doesn&rsquo;t &ndash; needs more runs or better settings</li>
+            <li><strong>High ceiling, low average</strong> = the model <em>can</em> do it, but usually doesn&rsquo;t&nbsp;&ndash; needs more runs or better settings</li>
             <li><strong>High solid, close to average</strong> = rock-solid workhorse you can count on</li>
         </ul>
 
         <h3>The Bottom Line</h3>
-        <p>Performance is more complex than a single average score &ndash; and the decisions you make based on benchmarks deserve better data than that. <strong>WolfBench</strong> gives you four angles on every model and configuration, so you can form a more complete and realistic judgement of what an AI agent will actually deliver when you put it to work.</p>
+        <p>Performance is more complex than a single average score&nbsp;&ndash; and the decisions you make based on benchmarks deserve better data than that. <strong>WolfBench</strong> gives you five angles on every model and configuration, so you can form a more complete and realistic judgement of what an AI agent will actually deliver when you put it to work.</p>
         <p>Because at the end of the day, you don&rsquo;t just want to know which model <em>scored</em> the highest. You want to know which one you can <em>trust</em>.</p>
 
         <h3>What&rsquo;s Next</h3>
-        <p>I will continuously add models and agents to the chart, publish the traces and evals on <a href="https://wandb.ai/">W&amp;B Weave</a>, and release regular blog posts detailing interesting and insightful findings.</p>
-        <p>This benchmark offers enormous potential for discovery. For instance: Why does Sonnet currently outperform Opus so significantly with OpenClaw? How does Claude Code fare when running a GPT or Gemini model compared to running directly with Opus or Sonnet &ndash; or Codex with Claude or Gemini? Is a &ldquo;cheap&rdquo; model actually cost-effective if it consumes far more tokens than a more expensive alternative? How does quantization affect performance of local models in agentic tasks?</p>
-        <p>So many possibilities for analysis &ndash; and for posting about it! <em>Stay tuned</em> &ndash; and if you want to be the first to know when new results come in, follow me on <a href="https://x.com/WolframRvnwlf">X</a> and <a href="https://www.linkedin.com/in/wolframravenwolf/">LinkedIn</a>.</p>
+        <p>We will continuously add models and agents to the chart, publish the traces and evals on <a href="https://wandb.ai/wolfram-evals/wolfbench">W&amp;B Weave</a>, and release regular blog posts detailing interesting and insightful findings.</p>
+        <p>This benchmark offers enormous potential for discovery. For instance: Why does xhigh reasoning improve GPT 5.4&rsquo;s performance while max effort degrades Opus 4.6&rsquo;s results? How does Claude Code fare when running a GPT or Gemini model compared to running directly with Opus or Sonnet&nbsp;&ndash; or Codex with Claude or Gemini? Is a &ldquo;cheap&rdquo; model actually cost-effective if it consumes far more tokens than a more expensive alternative? How does quantization affect performance of local models in agentic tasks?</p>
+        <p>So many possibilities for analysis&nbsp;&ndash; and for posting about it! <em>Stay tuned</em>&nbsp;&ndash; and if you want to be the first to know when new results come in, follow me on <a href="https://x.com/WolframRvnwlf">X</a> and <a href="https://www.linkedin.com/in/wolframravenwolf/">LinkedIn</a>.</p>
 
-        <p class="build-info">Inference sponsored by <a href="https://www.coreweave.com/">CoreWeave</a>: The Essential Cloud for AI.<br>Sandbox compute by <a href="https://www.daytona.io/">Daytona</a> &ndash; Secure Infrastructure for Running AI-Generated Code.<br>Built with <a href="https://harborframework.com/">Harbor</a> for orchestration, <a href="https://www.tbench.ai/">Terminal-Bench 2.0</a> for tasks, and <a href="https://wandb.ai/">W&amp;B Weave</a> for tracking.<br>Charts and dashboards generated with <a href="https://marimo.io/">marimo</a> notebooks.</p>
+        <p class="build-info">Inference sponsored by <a href="https://www.coreweave.com/">CoreWeave</a>: The Essential Cloud for AI.<br>Sandbox compute by <a href="https://www.daytona.io/">Daytona</a>&nbsp;&ndash; Secure Infrastructure for Running AI-Generated Code.<br>Built with <a href="https://harborframework.com/">Harbor</a> for orchestration, <a href="https://www.tbench.ai/">Terminal-Bench 2.0</a> for tasks, and <a href="https://wandb.ai/">W&amp;B Weave</a> for tracking.<br>Charts and dashboards generated with <a href="https://marimo.io/">marimo</a> notebooks.<br>Explore the complete data and tooling suite on our <a href="https://github.com/wandb/WolfBench">WolfBench GitHub</a>.</p>
     </div>
 </div>
 <script>
@@ -1701,7 +2076,7 @@ def main():
     )
     parser.add_argument(
         "-i", "--input", type=Path,
-        default=Path(__file__).parent / "harbor_results.json",
+        default=Path(__file__).parent / "wolfbench_results.json",
     )
     parser.add_argument(
         "-o", "--output", type=Path,
@@ -1723,22 +2098,24 @@ def main():
         data = json.load(f)
     print(f"Loaded {data['n_runs']} valid runs from {args.input}")
 
-    run_groups: dict[tuple[str, str, str, float | None], list[dict]] = defaultdict(list)
+    run_groups: dict[tuple[str, str, str, float | None, str], list[dict]] = defaultdict(list)
     agent_versions: dict[str, set[str]] = defaultdict(set)
     for r in data["runs"]:
         ver = r.get("agent_version") or "unknown"
-        run_groups[(r["agent"], ver, r["model_display"], r.get("timeout_sec"))].append(r)
+        thinking = _resolve_thinking(r)
+        run_groups[(r["agent"], ver, _resolve_display_name(r), r.get("timeout_sec"), thinking)].append(r)
         if ver != "unknown":
             agent_versions[r["agent"]].add(ver)
 
     metrics = {}
-    for key, runs in sorted(run_groups.items(), key=lambda x: (x[0][0], x[0][1], x[0][2], x[0][3] or 0)):
+    for key, runs in sorted(run_groups.items(), key=lambda x: (x[0][0], x[0][1], x[0][2], x[0][3] or 0, x[0][4])):
         m = compute_metrics(runs)
         if m:
             metrics[key] = m
-            agent, ver, model, _timeout = key
-            print(f"  {agent:>12} v{ver:<14} {model:>20}  {m['n_runs']}R  "
-                  f"solid={m['solid_abs']:>2}  avg={m['average']}%  "
+            agent, ver, model, _timeout, _thinking = key
+            thinking_tag = f" \U0001f9e0{_thinking}" if _thinking != "-" else ""
+            print(f"  {agent:>12} v{ver:<14} {model:>20}{thinking_tag}  {m['n_runs']}R  "
+                  f"worst={m['min']}%  solid={m['solid_abs']:>2}  avg={m['average']}%  "
                   f"best={m['best']}%  ceil={m['ceiling_abs']:>2}")
 
     weave_urls = None

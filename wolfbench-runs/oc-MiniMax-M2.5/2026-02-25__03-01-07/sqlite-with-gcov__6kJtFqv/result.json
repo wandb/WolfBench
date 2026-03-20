@@ -1,0 +1,103 @@
+{
+    "id": "44ef1694-f15c-4de7-b466-5b260b3e80be",
+    "task_name": "sqlite-with-gcov",
+    "trial_name": "sqlite-with-gcov__6kJtFqv",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-minimax-m2.5/2026-02-25__03-01-07/sqlite-with-gcov__6kJtFqv",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-with-gcov"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5901f1d2fc3b9b97ab1b215461175a59f0568e224b67caa6f4cbbc38f6f33a04",
+    "config": {
+        "task": {
+            "path": "sqlite-with-gcov",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-with-gcov__6kJtFqv",
+        "trials_dir": "jobs/oc-minimax-m2.5/2026-02-25__03-01-07",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandbqa/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.2.17",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "dedf29c0-fae0-40e3-bfe5-7f5d29367607"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.2.17",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandbqa"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 197745,
+        "n_cache_tokens": 96672,
+        "n_output_tokens": 1912,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-02-25T04:56:47.221407Z",
+    "finished_at": "2026-02-25T05:03:19.524730Z",
+    "environment_setup": {
+        "started_at": "2026-02-25T04:56:47.365067Z",
+        "finished_at": "2026-02-25T04:56:49.331046Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-02-25T04:56:49.331059Z",
+        "finished_at": "2026-02-25T04:57:25.417104Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-02-25T04:57:25.417157Z",
+        "finished_at": "2026-02-25T05:03:09.253553Z"
+    },
+    "verifier": {
+        "started_at": "2026-02-25T05:03:10.197146Z",
+        "finished_at": "2026-02-25T05:03:18.134284Z"
+    }
+}

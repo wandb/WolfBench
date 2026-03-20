@@ -1,0 +1,130 @@
+{
+    "id": "bfa402fd-cd16-4556-af36-1503db277089",
+    "task_name": "torch-pipeline-parallelism",
+    "trial_name": "torch-pipeline-parallelism__rrAVnWj",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42/torch-pipeline-parallelism__rrAVnWj",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "torch-pipeline-parallelism"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3d4bac3d36d63a48403936af61510e24cce92d6650ab4e4b9b21e1192b183646",
+    "config": {
+        "task": {
+            "path": "torch-pipeline-parallelism",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "torch-pipeline-parallelism__rrAVnWj",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8c4ddc66-9fa0-4e30-baba-64f8ee8d1b99"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 213974,
+        "n_cache_tokens": 158736,
+        "n_output_tokens": 44341,
+        "cost_usd": 1.50515925,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 23,
+            "api_request_times_msec": [
+                7857.918262481689,
+                5546.865940093994,
+                3117.0616149902344,
+                3215.5940532684326,
+                3074.0902423858643,
+                4289.391994476318,
+                2387.9358768463135,
+                2491.718530654907,
+                6861.945152282715,
+                4168.6413288116455,
+                2747.65682220459,
+                5921.626329421997,
+                84967.93818473816,
+                148541.06450080872,
+                343588.1955623627,
+                14879.008531570435,
+                3894.196033477783,
+                11092.13376045227,
+                6020.766735076904,
+                7571.679592132568,
+                18291.550159454346,
+                5750.082969665527,
+                4760.541200637817
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T07:09:34.270034Z",
+    "finished_at": "2026-03-14T07:31:26.934484Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T07:09:34.272235Z",
+        "finished_at": "2026-03-14T07:09:36.053884Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T07:09:36.053902Z",
+        "finished_at": "2026-03-14T07:09:55.958239Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T07:09:55.958389Z",
+        "finished_at": "2026-03-14T07:30:23.074377Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T07:30:24.389644Z",
+        "finished_at": "2026-03-14T07:31:25.295514Z"
+    }
+}

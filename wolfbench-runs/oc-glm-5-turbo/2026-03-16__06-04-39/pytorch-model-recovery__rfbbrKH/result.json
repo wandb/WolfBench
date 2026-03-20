@@ -1,0 +1,103 @@
+{
+    "id": "3975c78a-4ae3-4cd0-b7ab-a0dcb526e3de",
+    "task_name": "pytorch-model-recovery",
+    "trial_name": "pytorch-model-recovery__rfbbrKH",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-glm-5-turbo/2026-03-16__06-04-39/pytorch-model-recovery__rfbbrKH",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "pytorch-model-recovery"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "9def2a29a9f98ee4ae428cc23e473a889f9f4fd87a62ea685a04192a6aefe20f",
+    "config": {
+        "task": {
+            "path": "pytorch-model-recovery",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "pytorch-model-recovery__rfbbrKH",
+        "trials_dir": "jobs/oc-glm-5-turbo/2026-03-16__06-04-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 200000,
+                "max_tokens": 128000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "341d3174-ac9c-4b33-a500-67015c609e98"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 24127,
+        "n_cache_tokens": 218360,
+        "n_output_tokens": 5899,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T06:24:56.095799Z",
+    "finished_at": "2026-03-16T06:32:55.762003Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T06:24:56.149436Z",
+        "finished_at": "2026-03-16T06:24:57.057149Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T06:24:57.057173Z",
+        "finished_at": "2026-03-16T06:25:30.572980Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T06:25:30.573029Z",
+        "finished_at": "2026-03-16T06:32:27.466014Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T06:32:28.386765Z",
+        "finished_at": "2026-03-16T06:32:54.367949Z"
+    }
+}

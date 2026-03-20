@@ -1,0 +1,110 @@
+{
+    "id": "d1ff9ae2-5054-468c-8e7c-edb72ff44fa3",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__DcSZwrX",
+    "trial_uri": "file:///root/harbor/jobs/cc-gpt-5.4/2026-03-09__21-38-47/train-fasttext__DcSZwrX",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__DcSZwrX",
+        "trials_dir": "jobs/cc-gpt-5.4/2026-03-09__21-38-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "claude-code",
+            "import_path": null,
+            "model_name": "openrouter/openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2.1.63"
+            },
+            "env": {
+                "ANTHROPIC_API_KEY": "",
+                "ANTHROPIC_AUTH_TOKEN": "REDACTED",
+                "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+                "ANTHROPIC_MODEL": "openai/gpt-5.4",
+                "ANTHROPIC_DEFAULT_SONNET_MODEL": "openai/gpt-5.4",
+                "ANTHROPIC_DEFAULT_OPUS_MODEL": "openai/gpt-5.4",
+                "ANTHROPIC_DEFAULT_HAIKU_MODEL": "openai/gpt-5.4",
+                "CLAUDE_CODE_SUBAGENT_MODEL": "openai/gpt-5.4"
+            }
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ddb9310f-b5dd-482c-90ab-f38e4331a5d9"
+    },
+    "agent_info": {
+        "name": "claude-code",
+        "version": "2.1.63",
+        "model_info": {
+            "name": "openai/gpt-5.4",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-09T21:41:46.792801Z",
+    "finished_at": "2026-03-09T22:40:54.965918Z",
+    "environment_setup": {
+        "started_at": "2026-03-09T21:41:46.840753Z",
+        "finished_at": "2026-03-09T21:41:48.279554Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-09T21:41:48.279579Z",
+        "finished_at": "2026-03-09T21:42:02.320667Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-09T21:42:02.320768Z",
+        "finished_at": "2026-03-09T22:40:23.284451Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-09T22:40:32.739008Z",
+        "finished_at": "2026-03-09T22:40:52.738926Z"
+    }
+}

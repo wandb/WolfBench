@@ -1,0 +1,122 @@
+{
+    "id": "b1c29cd5-c263-4a25-8c9d-7337d0d62fce",
+    "task_name": "extract-elf",
+    "trial_name": "extract-elf__GfVh3ED",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__10-50-41/extract-elf__GfVh3ED",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "extract-elf"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "cd3887ff7e15541da700a00b6464b8dc3a54a140b9cddee7cd462ae18f3e8056",
+    "config": {
+        "task": {
+            "path": "extract-elf",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "extract-elf__GfVh3ED",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__10-50-41",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "013e7731-47ca-4e79-bb85-9739f9cff288"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 171363,
+        "n_cache_tokens": 144348,
+        "n_output_tokens": 8602,
+        "cost_usd": 0.027087780000000002,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 13,
+            "api_request_times_msec": [
+                9831.404685974121,
+                12132.455825805664,
+                12628.85069847107,
+                19597.649097442627,
+                12878.305196762085,
+                13988.018274307251,
+                25598.987817764282,
+                14672.779560089111,
+                19905.575037002563,
+                28002.201080322266,
+                9209.680795669556,
+                11492.687940597534,
+                9767.457246780396
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T11:01:31.019076Z",
+    "finished_at": "2026-03-19T11:05:49.244923Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T11:01:31.020585Z",
+        "finished_at": "2026-03-19T11:01:32.219321Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T11:01:32.219332Z",
+        "finished_at": "2026-03-19T11:01:44.168377Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T11:01:44.168489Z",
+        "finished_at": "2026-03-19T11:05:37.356661Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T11:05:38.201921Z",
+        "finished_at": "2026-03-19T11:05:47.795408Z"
+    }
+}

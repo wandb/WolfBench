@@ -85,20 +85,24 @@ def _(mo):
         label="W&B Entity",
         full_width=True,
     )
+    upload_target = mo.ui.text(
+        value=_os.environ.get("UPLOAD_TARGET", ""),
+        label="Upload target (user@server:path)",
+        full_width=True,
+    )
 
     mo.vstack([
-        mo.md("### W&B Weave Configuration"),
+        mo.md("### Configuration"),
         mo.hstack([weave_project, weave_entity], widths=[1, 1]),
-        weave_api_key,
+        mo.hstack([weave_api_key, upload_target], widths=[1, 1]),
         mo.md(
             '<span style="color:#9BA1A6;font-size:0.85rem;">'
-            "Pre-filled from WANDB_API_KEY / WANDB_PROJECT / WANDB_ENTITY env vars. "
-            "Entity = W&B team/org namespace (leave empty for default account). "
-            "Override here for testing."
+            "Fields pre-filled from WANDB_API_KEY / WANDB_PROJECT / WANDB_ENTITY / UPLOAD_TARGET env vars. "
+            "Entity = W&B team/org namespace (leave empty for default account)."
             "</span>"
         ),
     ])
-    return weave_api_key, weave_entity, weave_project
+    return upload_target, weave_api_key, weave_entity, weave_project
 
 
 @app.cell
@@ -112,9 +116,10 @@ def _(Path):
 
     hcr = _importlib.import_module("wolfbench_collect")
     _importlib.reload(hcr)
-    LOCAL_RUNS_DIR = Path(__file__).parent / "runs"
+    LOCAL_RUNS_DIR = Path(__file__).parent / "wolfbench-runs"
+    OVERRIDES_FILE = Path(__file__).parent / "wolfbench-overrides.json"
     None
-    return LOCAL_RUNS_DIR, hcr
+    return LOCAL_RUNS_DIR, OVERRIDES_FILE, hcr
 
 
 @app.cell
@@ -136,7 +141,15 @@ def _(mo):
 def _(mo):
     get_exe_vms, set_exe_vms = mo.state([])
     get_hz_vms, set_hz_vms = mo.state([])
-    return get_exe_vms, get_hz_vms, set_exe_vms, set_hz_vms
+    # Track download/upload completion: "" = not done, "meta" / "full" for downloads
+    get_dl_done, set_dl_done = mo.state("")
+    get_dl_msg, set_dl_msg = mo.state(None)  # Persisted download status message
+    get_upload_done, set_upload_done = mo.state(False)
+    get_upload_msg, set_upload_msg = mo.state(None)  # Persisted upload status message
+    return (
+        get_dl_done, get_dl_msg, get_exe_vms, get_hz_vms, get_upload_done, get_upload_msg,
+        set_dl_done, set_dl_msg, set_exe_vms, set_hz_vms, set_upload_done, set_upload_msg,
+    )
 
 
 @app.cell
@@ -438,7 +451,9 @@ def _(all_vms, hcr, mo, raw_results, scan_completed):
                 "provider": _provider,
                 "vendor": _vendor,
                 "model": _model_name,
+                "model_display": _run.get("model_display") or "",
                 "thinking": _thinking,
+                "thinking_display": _run.get("thinking_display") or "",
                 "score": _score_str,
                 "pass": _run.get("n_passed", 0),
                 "fail": _run.get("n_failed", 0),
@@ -488,7 +503,7 @@ def _(all_table_rows, mo, scan_completed):
         )
         row_filter_apply = mo.ui.run_button(label="Apply")
         valid_condition = mo.ui.text(
-            value="timeout=3600s,tasks=89,errors<3",
+            value="agent!=cline-cli,score!=0.0%,tasks=89,timeout=*s,errors<10",
             label="Valid condition (col op val, comma-separated — same col = OR):",
             full_width=True,
         )
@@ -709,7 +724,7 @@ def _(filtered_table_rows, mo, scan_completed, selection_preset, valid_indices):
 def _(hcr, mo, raw_results, results_table, scan_completed):
     if scan_completed and results_table is not None and results_table.value:
         _selected_indices = {row["idx"] for row in results_table.value}
-        final_valid = [
+        selected_runs = [
             raw_results[i]
             for i in range(len(raw_results))
             if i in _selected_indices
@@ -720,41 +735,253 @@ def _(hcr, mo, raw_results, results_table, scan_completed):
             if i not in _selected_indices
         ]
         _msg = mo.md(
-            f"**Selection:** {len(final_valid)} valid, "
+            f"**Selection:** {len(selected_runs)} valid, "
             f"{len(final_excluded)} excluded"
         )
     else:
-        final_valid = []
+        selected_runs = []
         final_excluded = []
         _msg = mo.md("")
     _msg
-    return final_excluded, final_valid
+    return final_excluded, selected_runs
 
 
 @app.cell
-def _(LOCAL_RUNS_DIR, final_valid, mo):
+def _(OVERRIDES_FILE, json, mo):
+    _initial = {}
+    if OVERRIDES_FILE.exists():
+        try:
+            _initial = json.loads(OVERRIDES_FILE.read_text())
+        except (json.JSONDecodeError, OSError):
+            pass
+    get_overrides, set_overrides = mo.state(_initial)
+    return get_overrides, set_overrides
+
+
+@app.cell
+def _(get_overrides, mo, selected_runs):
+    # Build one row per unique (job, agent, version, model, thinking).
+    # Two editable fields: model display + thinking display.
+    display_name_inputs = {}
+    thinking_inputs = {}
+
+    def _norm_thinking(t):
+        if t is None: return "-"
+        if t is True or t == "enabled": return "on"
+        if t is False or t == "disabled": return "off"
+        return str(t)
+
+    _stored = get_overrides()
+    if selected_runs:
+        _seen = {}
+        for _r in selected_runs:
+            _agent = _r.get("agent", "?")
+            _model = _r.get("model", "unknown")
+            _version = _r.get("agent_version") or "-"
+            _thinking = _norm_thinking(_r.get("thinking"))
+            _run_dir = _r.get("run_dir", "")
+            _job = _run_dir.split("/")[-2] if "/" in _run_dir else "-"
+            _key = f"{_job}|{_agent}|{_version}|{_model}|{_thinking}"
+            if _key not in _seen:
+                _se = _stored.get(_key, {})
+                _existing_model = _se.get("model_display", "")
+                _existing_thinking = _se.get("thinking_display", "")
+                _short = _model.split("/")[-1] if "/" in _model else _model
+                _parts = _model.split("/")
+                _provider = _parts[0] if len(_parts) >= 2 else "-"
+                _vendor = _parts[1] if len(_parts) >= 3 else _provider
+                _seen[_key] = {
+                    "job": _job, "agent": _agent, "model": _short,
+                    "existing_model": _existing_model,
+                    "existing_thinking": _existing_thinking,
+                    "provider": _provider, "vendor": _vendor,
+                    "version": _version, "thinking": _thinking,
+                }
+        # Header row
+        _header = mo.hstack([
+            mo.md("**job**"),
+            mo.md("**agent**"),
+            mo.md("**version**"),
+            mo.md("**provider**"),
+            mo.md("**vendor**"),
+            mo.md("**model display**"),
+            mo.md("**thinking**"),
+        ], widths=[1.2, 1, 1, 1, 1, 2, 1], gap=0.5)
+        _rows = [_header]
+        for _key, _info in sorted(_seen.items()):
+            _model_input = mo.ui.text(
+                value=_info["existing_model"],
+                placeholder=_info["model"],
+                full_width=True,
+            )
+            _thinking_input = mo.ui.text(
+                value=_info["existing_thinking"],
+                placeholder=_info["thinking"],
+                full_width=True,
+            )
+            display_name_inputs[_key] = _model_input
+            thinking_inputs[_key] = _thinking_input
+            _rows.append(
+                mo.hstack([
+                    mo.md(_info["job"]),
+                    mo.md(_info["agent"]),
+                    mo.md(_info["version"]),
+                    mo.md(_info["provider"]),
+                    mo.md(_info["vendor"]),
+                    _model_input,
+                    _thinking_input,
+                ], widths=[1.2, 1, 1, 1, 1, 2, 1], gap=0.5, align="center")
+            )
+        _apply_btn = mo.ui.run_button(label="Apply Overrides")
+        _output = mo.vstack([
+            mo.md("### Edit Display Names"),
+            mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Leave empty to use auto-detected values. Click Apply after editing.</span>'),
+            *_rows,
+            _apply_btn,
+        ])
+        apply_names_btn = _apply_btn
+    else:
+        apply_names_btn = None
+        thinking_inputs = {}
+        _output = mo.md("")
+    _output
+    return apply_names_btn, display_name_inputs, thinking_inputs
+
+
+@app.cell
+def _(OVERRIDES_FILE, apply_names_btn, display_name_inputs, json, set_overrides, thinking_inputs):
+    # Collect widget values on Apply and merge into persistent session store.
+    # Also writes to overrides.json for cross-session persistence (survives reload).
+    # Uses set_overrides (NOT get_overrides) to avoid reactive cycle;
+    # reads existing overrides from file instead of state for the merge.
+    if (
+        apply_names_btn is not None
+        and apply_names_btn.value
+        and display_name_inputs
+    ):
+        _new = {}
+        for _key in display_name_inputs:
+            _md = display_name_inputs[_key].value.strip()
+            _td = thinking_inputs[_key].value.strip() if _key in thinking_inputs else ""
+            _entry = {}
+            if _md:
+                _entry["model_display"] = _md
+            if _td:
+                _entry["thinking_display"] = _td
+            if _entry:
+                _new[_key] = _entry
+        # Merge with existing file (reads file, not mo.state, to avoid cycle)
+        _existing = {}
+        if OVERRIDES_FILE.exists():
+            try:
+                _existing = json.loads(OVERRIDES_FILE.read_text())
+            except (json.JSONDecodeError, OSError):
+                pass
+        _merged = {**_existing, **_new}
+        # Remove keys that were explicitly cleared (visible but empty)
+        for _key in display_name_inputs:
+            if _key not in _new and _key in _merged:
+                del _merged[_key]
+        if _merged:
+            OVERRIDES_FILE.write_text(json.dumps(_merged, indent=2) + "\n")
+        elif OVERRIDES_FILE.exists():
+            OVERRIDES_FILE.unlink()
+        # Update session state
+        set_overrides(lambda _old: {**{k: v for k, v in _old.items() if k not in display_name_inputs}, **_new})
+    return ()
+
+
+@app.cell
+def _(get_overrides, selected_runs):
+    # Apply stored overrides to selected_runs. Runs on every change to
+    # the override store or selection — overrides survive filter changes.
+
+    def _norm_thinking(t):
+        if t is None: return "-"
+        if t is True or t == "enabled": return "on"
+        if t is False or t == "disabled": return "off"
+        return str(t)
+
+    _stored = get_overrides()
+    final_valid = []
+    if selected_runs:
+        for _r in selected_runs:
+            _rd = _r.get("run_dir", "")
+            _job = _rd.split("/")[-2] if "/" in _rd else "-"
+            _key = (
+                f"{_job}|{_r.get('agent', '?')}|{_r.get('agent_version') or '-'}"
+                f"|{_r.get('model', 'unknown')}|{_norm_thinking(_r.get('thinking'))}"
+            )
+            if _key in _stored:
+                _s = _stored[_key]
+                _patch = {
+                    "model_display": _s.get("model_display", ""),
+                    "thinking_display": _s.get("thinking_display", ""),
+                }
+            else:
+                # No active override — clear any stale display values
+                # that were previously baked into config.json
+                _patch = {"model_display": "", "thinking_display": ""}
+            final_valid.append({**_r, **_patch})
+    return (final_valid,)
+
+
+@app.cell
+def _(LOCAL_RUNS_DIR, Path, final_valid, get_dl_done, json, mo):
+    _dl_done = get_dl_done()
     _vm_only = [r for r in final_valid if r.get("vm") != "local"]
-    _n_vm = len(_vm_only)
+    # Local runs without trajectories — can upgrade via Full download,
+    # but only if a full download wasn't already attempted (source has none).
+    _needs_traj = []
+    for _r in final_valid:
+        if _r.get("vm") != "local":
+            continue
+        if any(Path(_r["run_dir"]).glob("**/agent/trajectory.json")):
+            continue
+        # Check if we already tried a full download — source simply has no trajectories
+        _mp = Path(_r["run_dir"]) / "_meta.json"
+        if _mp.exists():
+            try:
+                _m = json.loads(_mp.read_text())
+                if _m.get("download_mode") == "full":
+                    continue  # Already tried full download, nothing to get
+            except (json.JSONDecodeError, OSError):
+                pass
+        _needs_traj.append(_r)
+    _n_meta = len(_vm_only)
+    _n_full = len(_vm_only) + len(_needs_traj)
+    # Disable based on completion state: full covers meta
+    _meta_disabled = _n_meta == 0 or _dl_done in ("meta", "full")
+    _full_disabled = _n_full == 0 or _dl_done == "full"
     download_meta_btn = mo.ui.run_button(
-        label=f"Download Metadata ({_n_vm} runs)",
-        disabled=_n_vm == 0,
+        label=(
+            f"Download Metadata — done ✓" if _dl_done in ("meta", "full")
+            else f"Download Metadata ({_n_meta} runs)"
+        ),
+        disabled=_meta_disabled,
     )
     download_full_btn = mo.ui.run_button(
-        label=f"Download Full + Trajectories ({_n_vm} runs)",
-        disabled=_n_vm == 0,
+        label=(
+            f"Download Full + Trajectories — done ✓" if _dl_done == "full"
+            else f"Download Full + Trajectories ({_n_full} runs)"
+        ),
+        disabled=_full_disabled,
     )
-    _hint = (
-        mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: all runs already local</span>')
-        if _n_vm == 0 and len(final_valid) > 0
-        else mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: no runs selected</span>')
-        if len(final_valid) == 0
-        else mo.md(
-            '<span style="color:#9BA1A6;font-size:0.85rem;">'
+    if len(final_valid) == 0:
+        _hint = mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: no runs selected</span>')
+    elif _dl_done:
+        _hint = mo.md(f'<span style="color:#9BA1A6;font-size:0.85rem;">Download complete ({_dl_done}). Re-scan to reset.</span>')
+    elif _n_full == 0 and _n_meta == 0:
+        _hint = mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: all runs already local (with trajectories)</span>')
+    else:
+        _parts = []
+        if _needs_traj:
+            _parts.append(f"{len(_needs_traj)} local run(s) missing trajectories")
+        _parts.append(
             "Metadata = result.json + config.json (~fast). "
-            "Full = includes trajectory.json files (~slow, needed for Tier 2 Weave upload)."
-            "</span>"
+            "Full = includes trajectory.json files (~slow, needed for Weave trace upload)."
         )
-    )
+        _hint = mo.md(f'<span style="color:#9BA1A6;font-size:0.85rem;">{" · ".join(_parts)}</span>')
     mo.vstack([
         mo.md(f"### Step 3: Download to Local Storage\n\n`{LOCAL_RUNS_DIR}`"),
         mo.hstack([download_meta_btn, download_full_btn], justify="start", gap=1),
@@ -764,21 +991,42 @@ def _(LOCAL_RUNS_DIR, final_valid, mo):
 
 
 @app.cell
-def _(LOCAL_RUNS_DIR, download_full_btn, download_meta_btn, final_valid, hcr, mo):
-    download_status = False
-    _dl_msg = mo.md("")
-
+def _(LOCAL_RUNS_DIR, Path, download_full_btn, download_meta_btn, final_valid, hcr, json, mo, set_dl_done, set_dl_msg):
     _do_meta = download_meta_btn.value
     _do_full = download_full_btn.value
 
     if (_do_meta or _do_full) and final_valid:
         _vm_only = [r for r in final_valid if r.get("vm") != "local"]
-        if _vm_only:
+
+        # For Full downloads, also include local runs missing trajectories
+        _to_download = list(_vm_only)
+        if _do_full:
+            for _r in final_valid:
+                if _r.get("vm") != "local":
+                    continue
+                if any(Path(_r["run_dir"]).glob("**/agent/trajectory.json")):
+                    continue
+                _meta_path = Path(_r["run_dir"]) / "_meta.json"
+                if not _meta_path.exists():
+                    continue
+                try:
+                    _meta = json.loads(_meta_path.read_text())
+                except (json.JSONDecodeError, OSError):
+                    continue
+                # Skip if we already tried a full download — source has no trajectories
+                if _meta.get("download_mode") == "full":
+                    continue
+                _src_vm = _meta.get("source_vm")
+                _src_dir = _meta.get("source_run_dir")
+                if _src_vm and _src_dir:
+                    _to_download.append({**_r, "vm": _src_vm, "run_dir": _src_dir})
+
+        if _to_download:
             _include_traj = bool(_do_full)
             _mode = "full + trajectories" if _include_traj else "metadata"
-            with mo.status.spinner(f"Downloading {len(_vm_only)} runs ({_mode})..."):
+            with mo.status.spinner(f"Downloading {len(_to_download)} runs ({_mode})..."):
                 _results = hcr.download_runs(
-                    _vm_only,
+                    _to_download,
                     LOCAL_RUNS_DIR,
                     include_trajectories=_include_traj,
                     max_workers=4,
@@ -786,18 +1034,214 @@ def _(LOCAL_RUNS_DIR, download_full_btn, download_meta_btn, final_valid, hcr, mo
             _ok = sum(1 for r in _results if r["status"] == "ok")
             _skip = sum(1 for r in _results if r["status"] == "skipped")
             _err = sum(1 for r in _results if r["status"] == "error")
-            download_status = True
-            _dl_msg = mo.callout(
-                mo.md(
-                    f"Downloaded **{_ok}**, skipped **{_skip}** (already local), "
-                    f"**{_err}** errors.\n\n"
-                    f"Re-scan to see local copies in the table."
+            if _err == 0:
+                set_dl_done("full" if _do_full else "meta")
+            set_dl_msg({
+                "text": (
+                    f"Downloaded **{_ok}**, skipped **{_skip}** (already complete), "
+                    f"**{_err}** errors. Re-scan to see local copies in the table."
                 ),
-                kind="success" if _err == 0 else "warn",
-            )
+                "kind": "success" if _err == 0 else "warn",
+            })
+        else:
+            set_dl_msg({
+                "text": "Nothing to download — no source VMs available for trajectory retrieval.",
+                "kind": "info",
+            })
+    return
 
-    _dl_msg
-    return (download_status,)
+
+@app.cell
+def _(get_dl_msg, mo):
+    _msg = get_dl_msg()
+    mo.output.replace(_msg and mo.callout(mo.md(_msg["text"]), kind=_msg["kind"]) or mo.md(""))
+    return
+
+
+@app.cell
+def _(Path):
+    import importlib as _imp
+    import sys as _sys
+
+    _sd = str(Path(__file__).parent)
+    if _sd not in _sys.path:
+        _sys.path.insert(0, _sd)
+    ww = _imp.import_module("wolfbench_weave")
+    _imp.reload(ww)
+    None
+    return (ww,)
+
+
+@app.cell
+def _(Path, final_valid, get_upload_done, mo, weave_api_key, weave_project, ww):
+    import os as _os
+
+    _has_key = bool(weave_api_key.value.strip() or _os.environ.get("WANDB_API_KEY"))
+    _has_runs = len(final_valid) > 0
+    _can_upload = _has_key and _has_runs
+
+    # Always-visible status summary from manifest
+    _proj = weave_project.value.strip() or "wolfbench"
+    _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
+    _manifest = ww.load_manifest(_manifest_path, project=_proj)
+    _evals = _manifest.get("evaluations", {})
+
+    # Count from final_valid (current runs), cross-reference manifest for upload status.
+    # This way new scanned/downloaded runs increase the denominator immediately.
+    _current_groups = ww.group_runs(final_valid) if _has_runs else {}
+    _n_configs = len(_current_groups)
+    _total_runs = sum(len(g) for g in _current_groups.values())
+    _total_uploaded = 0
+    _total_traces = 0
+    for _key, _group in _current_groups.items():
+        _eval_entry = _evals.get(_key, {})
+        _manifest_runs = _eval_entry.get("runs", {})
+        for _r in _group:
+            _mr = _manifest_runs.get(_r["timestamp"], {})
+            if _mr.get("uploaded"):
+                _total_uploaded += 1
+            if _mr.get("has_traces"):
+                _total_traces += 1
+
+    # "Done" = every run in final_valid is uploaded (manifest cross-reference).
+    # Uses the same counts as the status line — no separate logic to drift out of sync.
+    _all_current_done = _total_runs > 0 and _total_uploaded == _total_runs
+
+    # Button is done if: just clicked upload this session, OR all current runs are uploaded
+    _upload_done = get_upload_done() or _all_current_done
+
+    weave_upload_btn = mo.ui.run_button(
+        label="Upload to Weave — done ✓" if get_upload_done() else "Upload to Weave",
+        disabled=not _can_upload or _upload_done,
+    )
+    weave_details_btn = mo.ui.run_button(label="Show Details")
+
+    _reasons = []
+    if not _has_key:
+        _reasons.append("API key not set")
+    if not _has_runs:
+        _reasons.append("no runs selected")
+    _hint = (
+        mo.md(f'<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: {", ".join(_reasons)}</span>')
+        if _reasons else mo.md("")
+    )
+
+    if _total_runs > 0:
+        _status_line = mo.md(
+            f'<span style="color:#9BA1A6;font-size:0.85rem;">'
+            f'{_n_configs} config(s), {_total_uploaded}/{_total_runs} runs uploaded, '
+            f'{_total_traces} with traces</span>'
+        )
+    else:
+        _status_line = mo.md(
+            '<span style="color:#9BA1A6;font-size:0.85rem;">No uploads yet</span>'
+        )
+
+    mo.vstack([
+        mo.md("### Step 4: Upload to W&B Weave"),
+        mo.hstack(
+            [weave_upload_btn, weave_details_btn],
+            justify="start",
+            gap=1,
+        ),
+        _hint,
+        _status_line,
+    ])
+    return weave_details_btn, weave_upload_btn
+
+
+@app.cell
+async def _(LOCAL_RUNS_DIR, Path, final_valid, mo, set_upload_done, set_upload_msg, weave_api_key, weave_entity, weave_project, weave_upload_btn, ww):
+    import os as _os
+
+    if weave_upload_btn.value and final_valid:
+        _key = weave_api_key.value.strip()
+        _proj = weave_project.value.strip() or "wolfbench"
+        _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
+        _ent = weave_entity.value.strip() or None
+        if _key:
+            _os.environ["WANDB_API_KEY"] = _key
+        if not _os.environ.get("WANDB_API_KEY"):
+            set_upload_msg({
+                "text": "**WANDB_API_KEY** is not set. Enter it above or export it before launching.",
+                "kind": "warn",
+            })
+        else:
+            try:
+                with mo.status.spinner(
+                    f"Uploading evaluations + traces to W&B Weave ({_proj})..."
+                ):
+                    _result = await ww.upload_evaluations(
+                        runs=final_valid,
+                        project=_proj,
+                        entity=_ent,
+                        manifest_path=_manifest_path,
+                        local_runs_dir=LOCAL_RUNS_DIR,
+                    )
+                set_upload_done(True)
+                set_upload_msg({
+                    "text": _result.get("summary", "Done."),
+                    "kind": "success",
+                })
+            except ImportError as _e:
+                set_upload_msg({
+                    "text": (
+                        f"**Missing dependency:** {_e}\n\n"
+                        f"Install with: `uv pip install weave wandb`"
+                    ),
+                    "kind": "danger",
+                })
+            except Exception as _e:
+                set_upload_msg({
+                    "text": f"**Upload failed:** {_e}",
+                    "kind": "danger",
+                })
+    return
+
+
+@app.cell
+def _(get_upload_msg, mo):
+    _msg = get_upload_msg()
+    mo.output.replace(_msg and mo.callout(mo.md(_msg["text"]), kind=_msg["kind"]) or mo.md(""))
+    return
+
+
+@app.cell
+def _(Path, mo, weave_details_btn, weave_project, ww):
+    _msg = mo.md("")
+
+    if weave_details_btn.value:
+        _proj = weave_project.value.strip() or "wolfbench"
+        _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
+        _manifest = ww.load_manifest(_manifest_path, project=_proj)
+        _evals = _manifest.get("evaluations", {})
+
+        if not _evals:
+            _msg = mo.callout(mo.md("No uploads yet."), kind="info")
+        else:
+            _rows = []
+            for _key, _ev in _evals.items():
+                _runs = _ev.get("runs", {})
+                _n_up = sum(1 for _r in _runs.values() if _r.get("uploaded"))
+                _n_tr = sum(1 for _r in _runs.values() if _r.get("has_traces"))
+                _rows.append({
+                    "evaluation": _ev.get("eval_name", _key),
+                    "runs": len(_runs),
+                    "uploaded": f"{_n_up}/{len(_runs)}",
+                    "with_traces": f"{_n_tr}/{len(_runs)}",
+                    "url": _ev.get("weave_url", "-"),
+                })
+            _msg = mo.vstack([
+                mo.md(
+                    f"**Project:** {_manifest.get('project', '?')} · "
+                    f"**Entity:** {_manifest.get('entity', '?')} · "
+                    f"**Updated:** {_manifest.get('last_updated', '?')}"
+                ),
+                mo.ui.table(data=_rows, selection=None),
+            ])
+
+    _msg
+    return
 
 
 @app.cell
@@ -810,13 +1254,14 @@ def _(final_valid, mo):
         mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: no runs selected</span>')
         if len(final_valid) == 0 else mo.md("")
     )
-    mo.vstack([mo.md("### Step 4: Save Results"), save_button, _hint])
+    mo.vstack([mo.md("### Step 5: Save Results"), save_button, _hint])
     return (save_button,)
 
 
 @app.cell
 def _(Path, datetime, final_excluded, final_valid, json, mo, save_button):
     save_status = False
+    save_ts = ""
     _save_msg = mo.md("")
 
     if save_button.value and final_valid:
@@ -836,244 +1281,70 @@ def _(Path, datetime, final_excluded, final_valid, json, mo, save_button):
             "runs": final_excluded,
         }
 
-        _ts = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-        _valid_path = _dir / f"harbor_results_{_ts}.json"
-        _excluded_path = _dir / f"harbor_results_excluded_{_ts}.json"
+        save_ts = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+        _valid_path = _dir / f"wolfbench_results_{save_ts}.json"
+        _excluded_path = _dir / f"wolfbench_results_excluded_{save_ts}.json"
 
         with open(_valid_path, "w") as _f:
             json.dump(_valid_data, _f, indent=2)
         with open(_excluded_path, "w") as _f:
             json.dump(_excluded_data, _f, indent=2)
 
-        # Also write the canonical files for wolfbench-chart.py
-        with open(_dir / "harbor_results.json", "w") as _f:
-            json.dump(_valid_data, _f, indent=2)
-        with open(_dir / "harbor_results_excluded.json", "w") as _f:
-            json.dump(_excluded_data, _f, indent=2)
+        # Persist display overrides (model_display, thinking_display) to local config.json
+        _n_overrides = 0
+        for _r in final_valid:
+            _md = _r.get("model_display") or ""
+            _td = _r.get("thinking_display") or ""
+            _rd = _r.get("run_dir", "")
+            if not _rd:
+                continue
+            _cfg_path = Path(_rd) / "config.json"
+            if not _cfg_path.exists():
+                continue
+            try:
+                _cfg = json.loads(_cfg_path.read_text())
+                _changed = False
+                for _field, _val in [("model_display", _md), ("thinking_display", _td)]:
+                    _old = _cfg.get(_field, "")
+                    if _val != _old:
+                        if _val:
+                            _cfg[_field] = _val
+                        elif _field in _cfg:
+                            del _cfg[_field]
+                        _changed = True
+                if _changed:
+                    _cfg_path.write_text(json.dumps(_cfg, indent=2) + "\n")
+                    _n_overrides += 1
+            except (json.JSONDecodeError, OSError):
+                pass
 
+        _override_note = f"\n\nWrote **{_n_overrides}** display override(s) to config.json" if _n_overrides else ""
         save_status = True
         _save_msg = mo.callout(
             mo.md(
                 f"Saved **{len(final_valid)}** valid runs to "
                 f"`{_valid_path.name}`\n\n"
                 f"Saved **{len(final_excluded)}** excluded runs to "
-                f"`{_excluded_path.name}`\n\n"
-                f"Also updated `harbor_results.json` / "
-                f"`harbor_results_excluded.json`"
+                f"`{_excluded_path.name}`{_override_note}"
             ),
             kind="success",
         )
 
     _save_msg
-    return (save_status,)
+    return save_status, save_ts
 
 
 @app.cell
-def _(Path):
-    import importlib as _imp
-    import sys as _sys
-
-    _sd = str(Path(__file__).parent)
-    if _sd not in _sys.path:
-        _sys.path.insert(0, _sd)
-    ww = _imp.import_module("wolfbench_weave")
-    _imp.reload(ww)
-    None
-    return (ww,)
-
-
-@app.cell
-def _(final_valid, mo, weave_api_key):
-    import os as _os
-
-    _has_key = bool(weave_api_key.value.strip() or _os.environ.get("WANDB_API_KEY"))
-    _has_runs = len(final_valid) > 0
-    _can_upload = _has_key and _has_runs
-
-    weave_tier1_btn = mo.ui.run_button(
-        label="Upload Evaluations (Tier 1)",
-        disabled=not _can_upload,
-    )
-    weave_tier2_btn = mo.ui.run_button(
-        label="Upload Traces (Tier 2)",
-        disabled=not _can_upload,
-    )
-    weave_status_btn = mo.ui.run_button(label="Show Upload Status")
-
-    _reasons = []
-    if not _has_key:
-        _reasons.append("API key not set")
-    if not _has_runs:
-        _reasons.append("no runs selected")
-    _hint = (
-        mo.md(f'<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: {", ".join(_reasons)}</span>')
-        if _reasons else mo.md("")
-    )
-
-    mo.vstack([
-        mo.md("### Step 5: Upload to W&B Weave"),
-        mo.hstack(
-            [weave_tier1_btn, weave_tier2_btn, weave_status_btn],
-            justify="start",
-            gap=1,
-        ),
-        _hint,
-    ])
-    return weave_status_btn, weave_tier1_btn, weave_tier2_btn
-
-
-@app.cell
-async def _(Path, final_valid, mo, weave_api_key, weave_entity, weave_project, weave_tier1_btn, ww):
-    import os as _os
-
-    weave_tier1_result = {}
-    _msg = mo.md("")
-
-    if weave_tier1_btn.value and final_valid:
-        _key = weave_api_key.value.strip()
-        _proj = weave_project.value.strip() or "wolfbench"
-        _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
-        _ent = weave_entity.value.strip() or None
-        if _key:
-            _os.environ["WANDB_API_KEY"] = _key
-        if not _os.environ.get("WANDB_API_KEY"):
-            _msg = mo.callout(
-                mo.md("**WANDB_API_KEY** is not set. Enter it above or export it before launching."),
-                kind="warn",
-            )
-        else:
-            try:
-                with mo.status.spinner(f"Uploading evaluations to W&B Weave ({_proj})..."):
-                    weave_tier1_result = await ww.upload_evaluations(
-                        runs=final_valid,
-                        project=_proj,
-                        entity=_ent,
-                        manifest_path=_manifest_path,
-                    )
-                _msg = mo.callout(
-                    mo.md(weave_tier1_result.get("summary", "Done.")),
-                    kind="success",
-                )
-            except ImportError as _e:
-                _msg = mo.callout(
-                    mo.md(
-                        f"**Missing dependency:** {_e}\n\n"
-                        f"Install with: `uv pip install weave wandb`"
-                    ),
-                    kind="danger",
-                )
-            except Exception as _e:
-                _msg = mo.callout(
-                    mo.md(f"**Upload failed:** {_e}"),
-                    kind="danger",
-                )
-
-    _msg
-    return (weave_tier1_result,)
-
-
-@app.cell
-async def _(LOCAL_RUNS_DIR, Path, final_valid, mo, weave_api_key, weave_entity, weave_project, weave_tier2_btn, ww):
-    import os as _os
-
-    _msg = mo.md("")
-
-    if weave_tier2_btn.value and final_valid:
-        _key = weave_api_key.value.strip()
-        _proj = weave_project.value.strip() or "wolfbench"
-        _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
-        _ent = weave_entity.value.strip() or None
-        if _key:
-            _os.environ["WANDB_API_KEY"] = _key
-        if not _os.environ.get("WANDB_API_KEY"):
-            _msg = mo.callout(
-                mo.md("**WANDB_API_KEY** is not set. Enter it above or export it before launching."),
-                kind="warn",
-            )
-        else:
-            try:
-                with mo.status.spinner(
-                    f"Loading trajectories & uploading traces ({_proj})..."
-                ):
-                    _t2_result = await ww.upload_all_traces(
-                        runs=final_valid,
-                        project=_proj,
-                        entity=_ent,
-                        manifest_path=_manifest_path,
-                        local_runs_dir=LOCAL_RUNS_DIR,
-                    )
-                _msg = mo.callout(
-                    mo.md(_t2_result.get("summary", "Done.")),
-                    kind="success",
-                )
-            except ImportError as _e:
-                _msg = mo.callout(
-                    mo.md(
-                        f"**Missing dependency:** {_e}\n\n"
-                        f"Install with: `uv pip install weave wandb`"
-                    ),
-                    kind="danger",
-                )
-            except Exception as _e:
-                _msg = mo.callout(
-                    mo.md(f"**Trace upload failed:** {_e}"),
-                    kind="danger",
-                )
-
-    _msg
-    return
-
-
-@app.cell
-def _(Path, mo, weave_project, weave_status_btn, ww):
-    _msg = mo.md("")
-
-    if weave_status_btn.value:
-        _proj = weave_project.value.strip() or "wolfbench"
-        _manifest_path = Path(__file__).parent / f"{_proj}-manifest.json"
-        _manifest = ww.load_manifest(_manifest_path, project=_proj)
-        _evals = _manifest.get("evaluations", {})
-
-        if not _evals:
-            _msg = mo.callout(mo.md("No uploads yet."), kind="info")
-        else:
-            _rows = []
-            for _key, _ev in _evals.items():
-                _runs = _ev.get("runs", {})
-                _t1 = sum(1 for _r in _runs.values() if _r.get("tier1_uploaded"))
-                _t2 = sum(1 for _r in _runs.values() if _r.get("tier2_uploaded"))
-                _rows.append({
-                    "evaluation": _ev.get("eval_name", _key),
-                    "runs": len(_runs),
-                    "tier1": f"{_t1}/{len(_runs)}",
-                    "tier2": f"{_t2}/{len(_runs)}",
-                    "url": _ev.get("weave_url", "-"),
-                })
-            _msg = mo.vstack([
-                mo.md(
-                    f"**Project:** {_manifest.get('project', '?')} · "
-                    f"**Entity:** {_manifest.get('entity', '?')} · "
-                    f"**Updated:** {_manifest.get('last_updated', '?')}"
-                ),
-                mo.ui.table(data=_rows, selection=None),
-            ])
-
-    _msg
-    return
-
-
-@app.cell
-def _(Path, date, mo, save_status):
+def _(date, mo, save_ts):
     chart_date_picker = mo.ui.date(value=date.today())
-    _has_saved = save_status or (Path(__file__).parent / "harbor_results.json").exists()
     chart_button = mo.ui.run_button(
         label="Generate Chart",
-        disabled=not _has_saved,
+        disabled=not save_ts,
     )
 
     _hint = (
-        mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: no saved harbor_results.json (save results first)</span>')
-        if not _has_saved else mo.md("")
+        mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: save results first (Step 5)</span>')
+        if not save_ts else mo.md("")
     )
 
     mo.vstack([
@@ -1089,20 +1360,21 @@ def _(Path, date, mo, save_status):
 
 
 @app.cell
-def _(Path, chart_button, chart_date_picker, mo, subprocess, weave_project, webbrowser):
+def _(Path, chart_button, chart_date_picker, mo, save_ts, subprocess, weave_project, webbrowser):
     _chart_msg = mo.md("")
+    chart_html = ""
 
     if chart_button.value:
         _dir = Path(__file__).parent
-        _input_path = _dir / "harbor_results.json"
+        _input_path = _dir / f"wolfbench_results_{save_ts}.json"
         _date_str = str(chart_date_picker.value)
-        _output_base = _dir / f"wolfbench_{_date_str}"
+        _output_base = _dir / f"wolfbench_{save_ts}"
 
         if not _input_path.exists():
             _chart_msg = mo.callout(
                 mo.md(
-                    "**harbor_results.json not found.** "
-                    "Save results first (Step 3) before generating the chart."
+                    f"**{_input_path.name} not found.** "
+                    f"Save results first (Step 5) before generating the chart."
                 ),
                 kind="danger",
             )
@@ -1126,6 +1398,7 @@ def _(Path, chart_button, chart_date_picker, mo, subprocess, weave_project, webb
                 _r = subprocess.run(_cmd, capture_output=True, text=True)
             if _r.returncode == 0:
                 _out_file = _output_base.with_suffix(".html")
+                chart_html = str(_out_file)
                 webbrowser.open(_out_file.as_uri())
                 _chart_msg = mo.callout(
                     mo.md(
@@ -1144,6 +1417,104 @@ def _(Path, chart_button, chart_date_picker, mo, subprocess, weave_project, webb
                 )
 
     _chart_msg
+    return (chart_html,)
+
+
+@app.cell
+def _(chart_html, mo, upload_target):
+    _has_target = bool(upload_target.value.strip())
+
+    _can_upload = _has_target and chart_html
+
+    upload_button = mo.ui.run_button(
+        label="Upload Chart",
+        disabled=not _can_upload,
+    )
+    symlink_checkbox = mo.ui.checkbox(
+        label="Also symlink to index.html",
+        value=False,
+        disabled=not _has_target,
+    )
+
+    if not _has_target:
+        _hint = mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: set upload target in Configuration above</span>')
+    elif not chart_html:
+        _hint = mo.md('<span style="color:#9BA1A6;font-size:0.85rem;">Disabled: generate a chart first (Step 6)</span>')
+    else:
+        _hint = mo.md("")
+
+    mo.vstack([
+        mo.md("### Step 7: Upload Chart"),
+        mo.hstack([upload_button, symlink_checkbox], justify="start", gap=1),
+        _hint,
+    ])
+    return symlink_checkbox, upload_button
+
+
+@app.cell
+def _(Path, chart_html, mo, subprocess, symlink_checkbox, upload_button, upload_target):
+    _upload_msg = mo.md("")
+
+    if upload_button is not None and upload_button.value and chart_html:
+        _target = upload_target.value.strip()
+        if not _target:
+            _upload_msg = mo.callout(
+                mo.md("**Upload target not set.** Configure it at the top of the dashboard."),
+                kind="danger",
+            )
+        else:
+            _html_path = Path(chart_html)
+            _filename = _html_path.name
+
+            # scp the HTML file
+            with mo.status.spinner(f"Uploading `{_filename}` to `{_target}`..."):
+                _r = subprocess.run(
+                    ["scp", str(_html_path), _target],
+                    capture_output=True, text=True,
+                )
+
+            if _r.returncode != 0:
+                _upload_msg = mo.callout(
+                    mo.md(
+                        f"**Upload failed.**\n\n"
+                        f"```\n{(_r.stdout + _r.stderr).strip()}\n```"
+                    ),
+                    kind="danger",
+                )
+            else:
+                _parts = [f"Uploaded `{_filename}` to `{_target}`"]
+
+                # Optionally symlink to index.html
+                if symlink_checkbox.value:
+                    # Parse host and remote dir from "user@server:path" or "server:path"
+                    _host, _remote_dir = _target.split(":", 1)
+                    # Ensure remote dir exists and is a directory
+                    _check = subprocess.run(
+                        ["ssh", _host, f"mkdir -p {_remote_dir} && test -d {_remote_dir}"],
+                        capture_output=True, text=True,
+                    )
+                    if _check.returncode != 0:
+                        _parts.append(
+                            f"**Symlink failed:** `{_remote_dir}` is not a directory on `{_host}`"
+                        )
+                    else:
+                        _r2 = subprocess.run(
+                            ["ssh", _host, f"cd {_remote_dir} && ln -sf {_filename} index.html"],
+                            capture_output=True, text=True,
+                        )
+                        if _r2.returncode == 0:
+                            _parts.append(f"Symlinked `index.html` → `{_filename}`")
+                        else:
+                            _parts.append(
+                                f"**Symlink failed:**\n```\n{(_r2.stdout + _r2.stderr).strip()}\n```"
+                            )
+
+                _upload_msg = mo.callout(
+                    mo.md("\n\n".join(_parts)),
+                    kind="success",
+                )
+
+    _upload_msg
     return
 
 

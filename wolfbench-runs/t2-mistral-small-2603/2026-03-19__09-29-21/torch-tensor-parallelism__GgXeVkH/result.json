@@ -1,0 +1,117 @@
+{
+    "id": "10d066da-f1b3-458f-9883-c7fbd86c27ef",
+    "task_name": "torch-tensor-parallelism",
+    "trial_name": "torch-tensor-parallelism__GgXeVkH",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__09-29-21/torch-tensor-parallelism__GgXeVkH",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "torch-tensor-parallelism"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2637b586b22a779d1a4f01508f5f2caeea21d0b126b53d938e06ae8e717b8d19",
+    "config": {
+        "task": {
+            "path": "torch-tensor-parallelism",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "torch-tensor-parallelism__GgXeVkH",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__09-29-21",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "045f757e-8452-4be0-acc2-6f17d8d9eb16"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 85877,
+        "n_cache_tokens": 14272,
+        "n_output_tokens": 7352,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                11225.715160369873,
+                11208.359956741333,
+                13890.618801116943,
+                3002.532482147217,
+                2599.9090671539307,
+                3019.2923545837402,
+                2762.803316116333,
+                2943.186044692993
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T09:29:22.224879Z",
+    "finished_at": "2026-03-19T09:31:31.220543Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T09:29:22.225948Z",
+        "finished_at": "2026-03-19T09:29:23.545205Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T09:29:23.545245Z",
+        "finished_at": "2026-03-19T09:29:37.812653Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T09:29:37.812698Z",
+        "finished_at": "2026-03-19T09:30:42.627238Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T09:30:43.397975Z",
+        "finished_at": "2026-03-19T09:31:29.794286Z"
+    }
+}

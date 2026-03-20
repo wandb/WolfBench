@@ -1,0 +1,169 @@
+{
+    "id": "34a0640e-fc32-4d38-b013-71109dd9f4ed",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__W6Ddtwx",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__20-17-29/llm-inference-batching-scheduler__W6Ddtwx",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__W6Ddtwx",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__20-17-29",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "06ad6daf-7b1f-4fdc-85f5-1316860f4e6d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 2931735,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 91830,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 51,
+            "api_request_times_msec": [
+                6885.693311691284,
+                10765.668630599976,
+                17458.954334259033,
+                14778.421878814697,
+                10720.131635665894,
+                18111.124515533447,
+                67231.01115226746,
+                38091.079235076904,
+                61921.46706581116,
+                3785.1197719573975,
+                81339.80798721313,
+                2773.365259170532,
+                38734.14349555969,
+                47691.524267196655,
+                104687.08229064941,
+                87548.76065254211,
+                3009.49764251709,
+                71498.65889549255,
+                5095.151901245117,
+                5315.2430057525635,
+                102655.51996231079,
+                7957.428455352783,
+                68555.4473400116,
+                3124.8257160186768,
+                64387.25233078003,
+                91395.29657363892,
+                4523.726940155029,
+                113957.26227760315,
+                3338.102340698242,
+                169459.25283432007,
+                2744.805335998535,
+                3383.9948177337646,
+                3615.981101989746,
+                5628.4499168396,
+                29536.879539489746,
+                6912.339448928833,
+                10467.684268951416,
+                5576.711893081665,
+                6433.351039886475,
+                6343.100786209106,
+                7578.6261558532715,
+                5074.150800704956,
+                7357.736110687256,
+                324801.4612197876,
+                66620.18585205078,
+                122618.59321594238,
+                87567.1010017395,
+                81283.55073928833,
+                100040.61579704285,
+                22626.370906829834,
+                7904.136180877686
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-15T20:17:30.762846Z",
+    "finished_at": "2026-03-15T21:00:51.463313Z",
+    "environment_setup": {
+        "started_at": "2026-03-15T20:17:30.769300Z",
+        "finished_at": "2026-03-15T20:17:32.525230Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-15T20:17:32.525246Z",
+        "finished_at": "2026-03-15T20:17:41.051400Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-15T20:17:41.051461Z",
+        "finished_at": "2026-03-15T21:00:42.317463Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-15T21:00:43.980149Z",
+        "finished_at": "2026-03-15T21:00:50.082851Z"
+    }
+}

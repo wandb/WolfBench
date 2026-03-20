@@ -1,0 +1,103 @@
+{
+    "id": "d653c86b-418c-49a2-a57a-32ebfcacae68",
+    "task_name": "tune-mjcf",
+    "trial_name": "tune-mjcf__b5RcLpf",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-kimi-k2.5/2026-03-01__13-43-51/tune-mjcf__b5RcLpf",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "tune-mjcf"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0014600ed83c316bbc3b495879f147f234d06578281af02817c9955794d4ebef",
+    "config": {
+        "task": {
+            "path": "tune-mjcf",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "tune-mjcf__b5RcLpf",
+        "trials_dir": "jobs/oc-kimi-k2.5/2026-03-01__13-43-51",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/moonshotai/Kimi-K2.5",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.2.17",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "bbe6d505-c3b6-485c-a44b-58cdeca5169e"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.2.17",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 34852,
+        "n_cache_tokens": 556672,
+        "n_output_tokens": 15371,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-01T13:51:38.008736Z",
+    "finished_at": "2026-03-01T14:05:39.775909Z",
+    "environment_setup": {
+        "started_at": "2026-03-01T13:51:38.009603Z",
+        "finished_at": "2026-03-01T13:51:39.047710Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-01T13:51:39.047726Z",
+        "finished_at": "2026-03-01T13:52:09.866934Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-01T13:52:09.867023Z",
+        "finished_at": "2026-03-01T14:05:15.717237Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-01T14:05:16.687708Z",
+        "finished_at": "2026-03-01T14:05:38.385844Z"
+    }
+}

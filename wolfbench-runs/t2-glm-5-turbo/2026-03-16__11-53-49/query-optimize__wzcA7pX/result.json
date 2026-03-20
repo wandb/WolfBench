@@ -1,0 +1,118 @@
+{
+    "id": "9a32ccf8-a822-405b-8606-0a6ae435661e",
+    "task_name": "query-optimize",
+    "trial_name": "query-optimize__wzcA7pX",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/query-optimize__wzcA7pX",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "query-optimize"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7f8deb25dce590b8d6b811bd0fc20ce5c815b109da44ec027a48065df6a81dec",
+    "config": {
+        "task": {
+            "path": "query-optimize",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "query-optimize__wzcA7pX",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 35770,
+        "n_cache_tokens": 23726,
+        "n_output_tokens": 3751,
+        "cost_usd": 0.028120832000000002,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                2987.6487255096436,
+                11149.494409561157,
+                2153.2580852508545,
+                1616.2185668945312,
+                7545.943975448608,
+                8182.533264160156,
+                4947.860479354858,
+                5112.4207973480225,
+                3935.114622116089
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T12:03:53.740134Z",
+    "finished_at": "2026-03-16T12:15:12.369370Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T12:03:53.740897Z",
+        "finished_at": "2026-03-16T12:03:55.173048Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T12:03:55.173061Z",
+        "finished_at": "2026-03-16T12:04:09.007888Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T12:04:09.007993Z",
+        "finished_at": "2026-03-16T12:06:17.219932Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:06:17.868989Z",
+        "finished_at": "2026-03-16T12:15:10.942456Z"
+    }
+}

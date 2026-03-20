@@ -1,0 +1,132 @@
+{
+    "id": "d0bf076d-5503-4a24-8a89-735051b6834b",
+    "task_name": "filter-js-from-html",
+    "trial_name": "filter-js-from-html__74mFoqD",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__22-13-12/filter-js-from-html__74mFoqD",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "filter-js-from-html"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "885bb73e2797a54d5de860c25f481b5a60e2b91c0de30acaca9560603e9e1ff8",
+    "config": {
+        "task": {
+            "path": "filter-js-from-html",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "filter-js-from-html__74mFoqD",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__22-13-12",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "6d30ba75-920c-406b-a45f-aa76e4aa5407"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 142179,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 27526,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 14,
+            "api_request_times_msec": [
+                141903.97834777832,
+                8966.156721115112,
+                16841.681957244873,
+                59882.115840911865,
+                76141.27230644226,
+                8131.408452987671,
+                17918.766260147095,
+                26289.43681716919,
+                76562.45851516724,
+                48290.59648513794,
+                53231.273889541626,
+                41475.34489631653,
+                11223.209381103516,
+                4430.8271408081055
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-15T22:45:46.108117Z",
+    "finished_at": "2026-03-15T22:59:26.225085Z",
+    "environment_setup": {
+        "started_at": "2026-03-15T22:45:46.108853Z",
+        "finished_at": "2026-03-15T22:45:47.191115Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-15T22:45:47.191127Z",
+        "finished_at": "2026-03-15T22:45:55.844612Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-15T22:45:55.844676Z",
+        "finished_at": "2026-03-15T22:56:30.892747Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-15T22:56:31.662844Z",
+        "finished_at": "2026-03-15T22:59:24.834198Z"
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "id": "68df8de2-6fea-4eb5-9f46-1be4f2b43799",
+    "task_name": "fix-git",
+    "trial_name": "fix-git__3X4i5AN",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__12-31-18/fix-git__3X4i5AN",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-git"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7fa0a681f751d73f290d862522a82a5e448fa529834987ee1b80e5665c51aa7e",
+    "config": {
+        "task": {
+            "path": "fix-git",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-git__3X4i5AN",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__12-31-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ba8dfe75-2fcf-4e08-a839-c50eab1ed943"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 19195,
+        "n_cache_tokens": 14056,
+        "n_output_tokens": 2075,
+        "cost_usd": 0.00890676,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                3584.188461303711,
+                6093.102693557739,
+                4360.260963439941,
+                5122.741460800171,
+                5615.699291229248,
+                3034.3868732452393,
+                3717.194080352783,
+                3125.3249645233154
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T12:33:04.311327Z",
+    "finished_at": "2026-03-19T12:34:25.443992Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T12:33:04.312648Z",
+        "finished_at": "2026-03-19T12:33:06.317776Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T12:33:06.317793Z",
+        "finished_at": "2026-03-19T12:33:20.001706Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T12:33:20.001810Z",
+        "finished_at": "2026-03-19T12:34:16.519094Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T12:34:17.577958Z",
+        "finished_at": "2026-03-19T12:34:23.996621Z"
+    }
+}

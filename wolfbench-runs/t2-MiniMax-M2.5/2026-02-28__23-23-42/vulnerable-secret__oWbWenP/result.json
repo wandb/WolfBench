@@ -1,0 +1,114 @@
+{
+    "id": "f0e070b4-ef7d-45f0-8a24-b60be4975851",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__oWbWenP",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.5/2026-02-28__23-23-42/vulnerable-secret__oWbWenP",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__oWbWenP",
+        "trials_dir": "jobs/t2-minimax-m2.5/2026-02-28__23-23-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "84733e1a-eacb-48a2-94a7-326906fc05ff"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 44975,
+        "n_cache_tokens": 8256,
+        "n_output_tokens": 2987,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 10,
+            "api_request_times_msec": [
+                85690.86122512817,
+                93691.37692451477,
+                92075.32000541687,
+                124256.75678253174,
+                24194.011688232422,
+                9826.860189437866,
+                79454.65731620789,
+                33454.206466674805,
+                39904.60419654846,
+                43520.79081535339
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-01T00:28:42.312204Z",
+    "finished_at": "2026-03-01T00:39:35.978852Z",
+    "environment_setup": {
+        "started_at": "2026-03-01T00:28:42.314076Z",
+        "finished_at": "2026-03-01T00:28:43.363020Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-01T00:28:43.363065Z",
+        "finished_at": "2026-03-01T00:28:52.690792Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-01T00:28:52.690890Z",
+        "finished_at": "2026-03-01T00:39:28.390942Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-01T00:39:29.011682Z",
+        "finished_at": "2026-03-01T00:39:34.634746Z"
+    }
+}

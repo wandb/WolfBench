@@ -1,0 +1,118 @@
+{
+    "id": "9297475c-966e-4feb-97e9-1b1081aecc92",
+    "task_name": "pytorch-model-recovery",
+    "trial_name": "pytorch-model-recovery__8QARLRZ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__10-50-41/pytorch-model-recovery__8QARLRZ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "pytorch-model-recovery"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "9def2a29a9f98ee4ae428cc23e473a889f9f4fd87a62ea685a04192a6aefe20f",
+    "config": {
+        "task": {
+            "path": "pytorch-model-recovery",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "pytorch-model-recovery__8QARLRZ",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__10-50-41",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "013e7731-47ca-4e79-bb85-9739f9cff288"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 72995,
+        "n_cache_tokens": 51694,
+        "n_output_tokens": 6085,
+        "cost_usd": 0.01815234,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                7583.30225944519,
+                20778.635263442993,
+                29384.013652801514,
+                23954.322576522827,
+                7216.027021408081,
+                10060.214281082153,
+                11233.49380493164,
+                12643.99003982544,
+                7837.468147277832
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T11:11:41.466824Z",
+    "finished_at": "2026-03-19T11:17:01.930888Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T11:11:41.574266Z",
+        "finished_at": "2026-03-19T11:11:42.902633Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T11:11:42.902662Z",
+        "finished_at": "2026-03-19T11:11:54.155222Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T11:11:54.155278Z",
+        "finished_at": "2026-03-19T11:16:30.729490Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T11:16:31.608952Z",
+        "finished_at": "2026-03-19T11:17:00.349404Z"
+    }
+}

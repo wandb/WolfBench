@@ -1,0 +1,172 @@
+{
+    "id": "f1751493-9182-470e-9d49-4de9a8c73f75",
+    "task_name": "bn-fit-modify",
+    "trial_name": "bn-fit-modify__XPMPQh9",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__23-55-18/bn-fit-modify__XPMPQh9",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "bn-fit-modify"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2758dba68c97cbf8fff87af7e955ac424bfe84ff053e20f160f713d3eee2358f",
+    "config": {
+        "task": {
+            "path": "bn-fit-modify",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "bn-fit-modify__XPMPQh9",
+        "trials_dir": "jobs/t2-NVIDIA-Nemotron-3-Super-120B-A12B-FP8-opt/2026-03-15__23-55-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1.0,
+                "llm_kwargs": {
+                    "top_p": 0.95,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "force_nonempty_content": true
+                        }
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "eb8e3ad2-afee-4719-aaa1-f8a035ee064b"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 2212915,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 47817,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 54,
+            "api_request_times_msec": [
+                11987.695932388306,
+                28198.846101760864,
+                20191.839933395386,
+                1195.0836181640625,
+                4851.109981536865,
+                2038.3505821228027,
+                8481.712818145752,
+                5359.217166900635,
+                3549.330949783325,
+                24655.458688735962,
+                12233.617305755615,
+                18918.21551322937,
+                9771.793842315674,
+                5844.0868854522705,
+                6424.4420528411865,
+                121259.54604148865,
+                37667.8409576416,
+                4375.358104705811,
+                8928.140640258789,
+                33163.575410842896,
+                19341.907024383545,
+                66626.7580986023,
+                3913.635730743408,
+                41553.23100090027,
+                18011.327505111694,
+                50505.25236129761,
+                6203.6638259887695,
+                27496.621131896973,
+                21800.769805908203,
+                5094.238519668579,
+                40885.947704315186,
+                2831.343650817871,
+                55199.05161857605,
+                3851.3925075531006,
+                30010.0576877594,
+                6097.760200500488,
+                3953.186511993408,
+                15845.773220062256,
+                30852.97727584839,
+                24341.46237373352,
+                118592.53478050232,
+                8247.736692428589,
+                15814.356565475464,
+                15029.181003570557,
+                45255.0311088562,
+                6011.612415313721,
+                11598.34361076355,
+                7786.930084228516,
+                29494.977951049805,
+                4791.176795959473,
+                25321.621894836426,
+                13641.290664672852,
+                8578.8094997406,
+                7635.364532470703
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T00:32:46.946830Z",
+    "finished_at": "2026-03-16T01:03:42.679637Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T00:32:46.948726Z",
+        "finished_at": "2026-03-16T00:32:48.181506Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T00:32:48.181537Z",
+        "finished_at": "2026-03-16T00:32:59.799026Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T00:32:59.799091Z",
+        "finished_at": "2026-03-16T01:03:28.644432Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T01:03:29.600595Z",
+        "finished_at": "2026-03-16T01:03:41.279668Z"
+    }
+}

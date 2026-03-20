@@ -1,0 +1,117 @@
+{
+    "id": "6b3b95d3-2c3f-43e5-bc00-a0dec59825f1",
+    "task_name": "model-extraction-relu-logits",
+    "trial_name": "model-extraction-relu-logits__EY5WTad",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10/model-extraction-relu-logits__EY5WTad",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "model-extraction-relu-logits"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "d0dd8f420350bee97f2d47a2b0c74996be0146aa7bd6f8a1871d9629200dc359",
+    "config": {
+        "task": {
+            "path": "model-extraction-relu-logits",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "model-extraction-relu-logits__EY5WTad",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__10-34-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "df53d4f7-9fbf-4ff6-b33e-16bb40a46795"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 91195,
+        "n_cache_tokens": 73407,
+        "n_output_tokens": 56629,
+        "cost_usd": 1.5604422500000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 10,
+            "api_request_times_msec": [
+                6371.0432052612305,
+                507199.7754573822,
+                86161.05771064758,
+                17086.652517318726,
+                205149.5852470398,
+                11021.591424942017,
+                9570.010900497437,
+                4578.510284423828,
+                5140.084505081177,
+                3283.529758453369
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T11:15:20.881655Z",
+    "finished_at": "2026-03-14T11:32:51.765213Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T11:15:20.883504Z",
+        "finished_at": "2026-03-14T11:15:22.176196Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T11:15:22.176221Z",
+        "finished_at": "2026-03-14T11:15:34.391067Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T11:15:34.391164Z",
+        "finished_at": "2026-03-14T11:32:40.707648Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T11:32:41.866347Z",
+        "finished_at": "2026-03-14T11:32:50.248555Z"
+    }
+}

@@ -1,0 +1,118 @@
+{
+    "id": "b29d33fe-b831-450e-9c46-cef9a636085d",
+    "task_name": "headless-terminal",
+    "trial_name": "headless-terminal__dSFALoM",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42/headless-terminal__dSFALoM",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "headless-terminal"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0f08b1ccc560ac08b8420b4a493a3b4c5354e2ace9f0cbe63a44e861e46c780d",
+    "config": {
+        "task": {
+            "path": "headless-terminal",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "headless-terminal__dSFALoM",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8c4ddc66-9fa0-4e30-baba-64f8ee8d1b99"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 84349,
+        "n_cache_tokens": 62890,
+        "n_output_tokens": 11120,
+        "cost_usd": 0.43614499999999995,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                5373.673439025879,
+                3149.129867553711,
+                75465.40260314941,
+                21604.90107536316,
+                3522.0587253570557,
+                8854.367017745972,
+                15861.16886138916,
+                5669.320106506348,
+                8992.279529571533,
+                6416.2445068359375,
+                4537.739276885986
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T07:04:52.883233Z",
+    "finished_at": "2026-03-14T07:08:53.806606Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T07:04:52.885472Z",
+        "finished_at": "2026-03-14T07:04:54.076790Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T07:04:54.076820Z",
+        "finished_at": "2026-03-14T07:05:05.230692Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T07:05:05.230794Z",
+        "finished_at": "2026-03-14T07:08:32.612820Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T07:08:33.799320Z",
+        "finished_at": "2026-03-14T07:08:52.279902Z"
+    }
+}

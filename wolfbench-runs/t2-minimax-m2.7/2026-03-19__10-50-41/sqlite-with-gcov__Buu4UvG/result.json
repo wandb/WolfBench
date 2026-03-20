@@ -1,0 +1,118 @@
+{
+    "id": "8d6e1b19-0267-4a59-ae2a-42f6afc41825",
+    "task_name": "sqlite-with-gcov",
+    "trial_name": "sqlite-with-gcov__Buu4UvG",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-19__10-50-41/sqlite-with-gcov__Buu4UvG",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-with-gcov"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5901f1d2fc3b9b97ab1b215461175a59f0568e224b67caa6f4cbbc38f6f33a04",
+    "config": {
+        "task": {
+            "path": "sqlite-with-gcov",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-with-gcov__Buu4UvG",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-19__10-50-41",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "013e7731-47ca-4e79-bb85-9739f9cff288"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 54238,
+        "n_cache_tokens": 39144,
+        "n_output_tokens": 2049,
+        "cost_usd": 0.009335640000000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                6737.329721450806,
+                6578.637361526489,
+                8333.370208740234,
+                3210.63232421875,
+                8371.846914291382,
+                10762.239933013916,
+                9913.09642791748,
+                6979.167222976685,
+                5073.263645172119
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T11:26:27.170627Z",
+    "finished_at": "2026-03-19T11:29:42.684940Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T11:26:27.236635Z",
+        "finished_at": "2026-03-19T11:26:28.140979Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T11:26:28.140994Z",
+        "finished_at": "2026-03-19T11:26:42.667919Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T11:26:42.667969Z",
+        "finished_at": "2026-03-19T11:29:31.218744Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T11:29:32.015021Z",
+        "finished_at": "2026-03-19T11:29:41.303458Z"
+    }
+}

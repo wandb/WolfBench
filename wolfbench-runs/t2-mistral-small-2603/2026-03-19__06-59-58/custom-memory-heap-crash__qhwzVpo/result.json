@@ -1,0 +1,174 @@
+{
+    "id": "422212ee-5b79-4d93-8d97-d7e8b5c23881",
+    "task_name": "custom-memory-heap-crash",
+    "trial_name": "custom-memory-heap-crash__qhwzVpo",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/custom-memory-heap-crash__qhwzVpo",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "custom-memory-heap-crash"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fba0e3be977223b1f8c182da8411663258f83b3563dd5dcd12beae87762ccabf",
+    "config": {
+        "task": {
+            "path": "custom-memory-heap-crash",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "custom-memory-heap-crash__qhwzVpo",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1706799,
+        "n_cache_tokens": 1443440,
+        "n_output_tokens": 22721,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 65,
+            "api_request_times_msec": [
+                2478.574275970459,
+                2157.4814319610596,
+                1407.3102474212646,
+                1641.122579574585,
+                2733.8380813598633,
+                3424.0899085998535,
+                1598.6642837524414,
+                2403.480052947998,
+                1212.1703624725342,
+                3794.1250801086426,
+                1615.9124374389648,
+                2086.7319107055664,
+                1299.677848815918,
+                2044.1241264343262,
+                1292.6583290100098,
+                2455.5816650390625,
+                1277.6999473571777,
+                3747.1885681152344,
+                5126.588582992554,
+                4143.671751022339,
+                3130.915641784668,
+                3158.433198928833,
+                1447.2970962524414,
+                5771.074533462524,
+                3676.0940551757812,
+                3332.2134017944336,
+                1442.0912265777588,
+                1411.635398864746,
+                4717.446565628052,
+                1490.8690452575684,
+                5082.528591156006,
+                1819.2994594573975,
+                4519.143104553223,
+                2058.2783222198486,
+                2477.6878356933594,
+                2891.054391860962,
+                4903.306245803833,
+                1517.6482200622559,
+                4561.612367630005,
+                1663.475751876831,
+                3676.8245697021484,
+                2024.0063667297363,
+                4828.014373779297,
+                1582.4604034423828,
+                2969.0287113189697,
+                1501.1823177337646,
+                2818.6705112457275,
+                2605.6127548217773,
+                3130.9266090393066,
+                1882.0769786834717,
+                4110.904932022095,
+                1635.392427444458,
+                2405.2462577819824,
+                2025.7174968719482,
+                3875.6091594696045,
+                26557.369709014893,
+                2743.3509826660156,
+                1502.0966529846191,
+                15619.038343429565,
+                5727.626323699951,
+                1730.2744388580322,
+                6504.299640655518,
+                7027.800798416138,
+                2698.1430053710938,
+                2226.2661457061768
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T06:59:59.857013Z",
+    "finished_at": "2026-03-19T07:08:00.121823Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T06:59:59.858812Z",
+        "finished_at": "2026-03-19T07:00:01.907452Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:00:01.907462Z",
+        "finished_at": "2026-03-19T07:00:05.264613Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:00:05.264676Z",
+        "finished_at": "2026-03-19T07:07:41.668016Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:07:42.689291Z",
+        "finished_at": "2026-03-19T07:07:58.597570Z"
+    }
+}

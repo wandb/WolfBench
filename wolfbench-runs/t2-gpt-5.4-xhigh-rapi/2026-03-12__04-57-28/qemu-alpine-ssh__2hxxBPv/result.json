@@ -1,0 +1,119 @@
+{
+    "id": "c6f0e614-277c-42b1-8e40-81d6aceb3377",
+    "task_name": "qemu-alpine-ssh",
+    "trial_name": "qemu-alpine-ssh__2hxxBPv",
+    "trial_uri": "file:///root/harbor/jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__04-57-28/qemu-alpine-ssh__2hxxBPv",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-alpine-ssh"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a6cd0bf0752902f3e284a6a9672d801de83fb9d0cf769c95f09fed2fd213548c",
+    "config": {
+        "task": {
+            "path": "qemu-alpine-ssh",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-alpine-ssh__2hxxBPv",
+        "trials_dir": "jobs/t2-GPT-5.4-xhigh-rapi/2026-03-12__04-57-28",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "44ba632b-8331-4cc5-aa10-b8a1403741a7"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 123636,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 117739,
+        "cost_usd": 1.877607,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 12,
+            "api_request_times_msec": [
+                69419.46578025818,
+                181345.19338607788,
+                247587.05878257751,
+                6875.0159740448,
+                84366.89901351929,
+                440502.81405448914,
+                97815.52910804749,
+                242308.56728553772,
+                87754.43530082703,
+                348711.6403579712,
+                11550.901889801025,
+                6094.141244888306
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-12T05:05:50.239752Z",
+    "finished_at": "2026-03-12T05:40:00.650816Z",
+    "environment_setup": {
+        "started_at": "2026-03-12T05:05:50.241540Z",
+        "finished_at": "2026-03-12T05:05:51.590402Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-12T05:05:51.590423Z",
+        "finished_at": "2026-03-12T05:05:55.548487Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-12T05:05:55.548551Z",
+        "finished_at": "2026-03-12T05:39:51.075644Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-12T05:39:52.331956Z",
+        "finished_at": "2026-03-12T05:39:59.163836Z"
+    }
+}

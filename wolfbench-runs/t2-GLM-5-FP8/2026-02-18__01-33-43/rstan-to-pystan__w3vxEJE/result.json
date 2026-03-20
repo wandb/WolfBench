@@ -1,0 +1,143 @@
+{
+    "id": "bf5eb571-a24a-4dc5-b082-5c44a79eeef4",
+    "task_name": "rstan-to-pystan",
+    "trial_name": "rstan-to-pystan__w3vxEJE",
+    "trial_uri": "file:///home/exedev/harbor-evals/jobs-glm-5-fp8/2026-02-18__01-33-43/rstan-to-pystan__w3vxEJE",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "rstan-to-pystan"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1404a5a663c5ad348382a3374bf1ac11e28c2d10de5af6630ddd5ab69ff8f2e3",
+    "config": {
+        "task": {
+            "path": "rstan-to-pystan",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "rstan-to-pystan__w3vxEJE",
+        "trials_dir": "jobs-glm-5-fp8/2026-02-18__01-33-43",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 7200.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "api_base": "https://api.inference.wandb.ai/v1",
+                "temperature": 0.7,
+                "llm_kwargs": {
+                    "top_p": 1.0,
+                    "extra_body": {
+                        "chat_template_kwargs": {
+                            "enable_thinking": false
+                        }
+                    },
+                    "extra_headers": {
+                        "OpenAI-Project": "wandb/inference-test"
+                    }
+                },
+                "model_info": {
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 8192
+                }
+            }
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "job_id": "5e07621b-7551-42b0-9b3d-047fee43370e"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 565397,
+        "n_cache_tokens": 538304,
+        "n_output_tokens": 11884,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 27,
+            "api_request_times_msec": [
+                9731.808185577393,
+                13682.318687438965,
+                10419.424533843994,
+                8615.667819976807,
+                6186.378240585327,
+                8477.594137191772,
+                99886.93141937256,
+                4592.608451843262,
+                5861.61470413208,
+                3679.9087524414062,
+                6927.141904830933,
+                3978.187322616577,
+                4862.363338470459,
+                4897.9315757751465,
+                94527.74977684021,
+                5018.924236297607,
+                90302.6442527771,
+                4434.7333908081055,
+                3726.619243621826,
+                3822.254180908203,
+                90671.43034934998,
+                4030.6546688079834,
+                3504.6825408935547,
+                3883.88729095459,
+                11300.86064338684,
+                11980.808973312378,
+                13566.895484924316
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-02-18T04:47:51.835757Z",
+    "finished_at": "2026-02-18T05:13:27.122628Z",
+    "environment_setup": {
+        "started_at": "2026-02-18T04:47:51.837999Z",
+        "finished_at": "2026-02-18T04:47:56.693346Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-02-18T04:47:56.693359Z",
+        "finished_at": "2026-02-18T04:48:10.171788Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-02-18T04:48:10.171860Z",
+        "finished_at": "2026-02-18T05:13:14.301906Z"
+    },
+    "verifier": {
+        "started_at": "2026-02-18T05:13:15.579055Z",
+        "finished_at": "2026-02-18T05:13:26.874870Z"
+    }
+}

@@ -1,0 +1,121 @@
+{
+    "id": "d9411ecc-7615-45c9-a3e9-2c306855366a",
+    "task_name": "count-dataset-tokens",
+    "trial_name": "count-dataset-tokens__UoFvXBd",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/count-dataset-tokens__UoFvXBd",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "count-dataset-tokens"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1fa5f3961f0ad1c1748ebdaa39f27fd2bfd0f654cb728089365af6162b6d0ec7",
+    "config": {
+        "task": {
+            "path": "count-dataset-tokens",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "count-dataset-tokens__UoFvXBd",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 89532,
+        "n_cache_tokens": 77531,
+        "n_output_tokens": 3788,
+        "cost_usd": 0.038528512,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 12,
+            "api_request_times_msec": [
+                4537.06431388855,
+                5692.9802894592285,
+                4586.029529571533,
+                4599.515438079834,
+                3380.516290664673,
+                7257.534503936768,
+                2776.7200469970703,
+                6047.435998916626,
+                6156.985521316528,
+                3148.9927768707275,
+                4327.6636600494385,
+                8670.300483703613
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T11:59:41.907457Z",
+    "finished_at": "2026-03-16T12:04:43.765884Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T11:59:41.908052Z",
+        "finished_at": "2026-03-16T11:59:42.776518Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T11:59:42.776532Z",
+        "finished_at": "2026-03-16T11:59:51.595443Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T11:59:51.595551Z",
+        "finished_at": "2026-03-16T12:04:37.038936Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:04:37.684415Z",
+        "finished_at": "2026-03-16T12:04:42.426324Z"
+    }
+}

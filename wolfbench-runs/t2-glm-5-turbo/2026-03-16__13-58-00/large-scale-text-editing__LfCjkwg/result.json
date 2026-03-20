@@ -1,0 +1,117 @@
+{
+    "id": "ebcd6e15-79f3-4ac7-a1ad-a0c177b3d21f",
+    "task_name": "large-scale-text-editing",
+    "trial_name": "large-scale-text-editing__LfCjkwg",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__13-58-00/large-scale-text-editing__LfCjkwg",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "large-scale-text-editing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c7e5e082f251c7c83d53f7b645d97ab3152cc5fffe42d88ff9cce5c62c35ce16",
+    "config": {
+        "task": {
+            "path": "large-scale-text-editing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "large-scale-text-editing__LfCjkwg",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__13-58-00",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c2ba30f2-f9db-4775-b47e-57c804e25ad3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 19290,
+        "n_cache_tokens": 14030,
+        "n_output_tokens": 3453,
+        "cost_usd": 0.01879296,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                4873.848915100098,
+                26866.09721183777,
+                3683.851718902588,
+                4078.786611557007,
+                4882.518768310547,
+                2849.9319553375244,
+                6192.549467086792,
+                3942.406177520752
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T14:21:00.267650Z",
+    "finished_at": "2026-03-16T14:24:26.973775Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T14:21:00.269696Z",
+        "finished_at": "2026-03-16T14:21:02.262713Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T14:21:02.262724Z",
+        "finished_at": "2026-03-16T14:21:17.168137Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T14:21:17.168201Z",
+        "finished_at": "2026-03-16T14:23:42.365884Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T14:23:43.837038Z",
+        "finished_at": "2026-03-16T14:24:25.341847Z"
+    }
+}

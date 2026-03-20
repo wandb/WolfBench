@@ -1,0 +1,118 @@
+{
+    "id": "a9234253-28da-4d7c-8034-a15b87b45b42",
+    "task_name": "modernize-scientific-stack",
+    "trial_name": "modernize-scientific-stack__ogs55fx",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/modernize-scientific-stack__ogs55fx",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "modernize-scientific-stack"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7adc1cfbf5f90a260af478606d0286ccc9ca975fed4b14aee0c8c1d86cb7185e",
+    "config": {
+        "task": {
+            "path": "modernize-scientific-stack",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "modernize-scientific-stack__ogs55fx",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 40354,
+        "n_cache_tokens": 19664,
+        "n_output_tokens": 2668,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                1667.8199768066406,
+                1383.6288452148438,
+                1609.7779273986816,
+                4665.547132492065,
+                2838.05513381958,
+                1330.8310508728027,
+                1565.2997493743896,
+                1865.0522232055664,
+                2193.1867599487305
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T06:59:59.809099Z",
+    "finished_at": "2026-03-19T07:00:54.478133Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T06:59:59.811092Z",
+        "finished_at": "2026-03-19T07:00:01.680950Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:00:01.680961Z",
+        "finished_at": "2026-03-19T07:00:10.928418Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:00:10.928460Z",
+        "finished_at": "2026-03-19T07:00:45.352947Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:00:45.953117Z",
+        "finished_at": "2026-03-19T07:00:53.066378Z"
+    }
+}

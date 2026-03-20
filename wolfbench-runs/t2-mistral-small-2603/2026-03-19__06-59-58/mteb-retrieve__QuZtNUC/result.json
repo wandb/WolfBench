@@ -1,0 +1,116 @@
+{
+    "id": "81f81619-bad9-4e20-8fdf-abc14f30df9d",
+    "task_name": "mteb-retrieve",
+    "trial_name": "mteb-retrieve__QuZtNUC",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/mteb-retrieve__QuZtNUC",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mteb-retrieve"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c9b88a67c599defd76f11c87dc596dbfd16e2e3ea1e40d1abec4033db888473f",
+    "config": {
+        "task": {
+            "path": "mteb-retrieve",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mteb-retrieve__QuZtNUC",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 23395,
+        "n_cache_tokens": 12528,
+        "n_output_tokens": 2399,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                2144.4101333618164,
+                1992.8667545318604,
+                5716.673135757446,
+                1675.6234169006348,
+                1300.9448051452637,
+                3160.1405143737793,
+                1350.9409427642822
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T06:59:59.847792Z",
+    "finished_at": "2026-03-19T07:02:12.036813Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T06:59:59.848984Z",
+        "finished_at": "2026-03-19T07:00:04.803333Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:00:04.803345Z",
+        "finished_at": "2026-03-19T07:00:07.560906Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:00:07.560959Z",
+        "finished_at": "2026-03-19T07:01:32.037050Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:01:32.631346Z",
+        "finished_at": "2026-03-19T07:02:10.588930Z"
+    }
+}

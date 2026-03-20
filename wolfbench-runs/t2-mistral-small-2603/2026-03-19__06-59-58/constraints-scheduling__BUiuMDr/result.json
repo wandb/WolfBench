@@ -1,0 +1,117 @@
+{
+    "id": "1f5e0908-1b45-4691-9a6f-a56a8b8b455b",
+    "task_name": "constraints-scheduling",
+    "trial_name": "constraints-scheduling__BUiuMDr",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/constraints-scheduling__BUiuMDr",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "constraints-scheduling"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c69027b9099bb7ac63a753b310e31cfef9cc20dce2d1c6c88956c8a854d7ac16",
+    "config": {
+        "task": {
+            "path": "constraints-scheduling",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "constraints-scheduling__BUiuMDr",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 38361,
+        "n_cache_tokens": 13808,
+        "n_output_tokens": 3316,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                2053.377866744995,
+                1609.2586517333984,
+                1350.4321575164795,
+                6504.398822784424,
+                1124.436616897583,
+                2618.968725204468,
+                2895.4977989196777,
+                2733.856439590454
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T07:13:59.061230Z",
+    "finished_at": "2026-03-19T07:14:51.743583Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T07:13:59.062767Z",
+        "finished_at": "2026-03-19T07:14:00.035091Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:14:00.035105Z",
+        "finished_at": "2026-03-19T07:14:10.595197Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:14:10.595237Z",
+        "finished_at": "2026-03-19T07:14:40.182129Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:14:40.777243Z",
+        "finished_at": "2026-03-19T07:14:50.159476Z"
+    }
+}

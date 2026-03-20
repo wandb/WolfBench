@@ -1,0 +1,174 @@
+{
+    "id": "b5fca8c8-1d97-4c41-aae6-823622ee8fd9",
+    "task_name": "qemu-startup",
+    "trial_name": "qemu-startup__P8dUppV",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-mistral-small-2603/2026-03-19__06-59-58/qemu-startup__P8dUppV",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-startup"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0f33bbc23fc771ea1ee1cadd076a439733e19bf3ef15bbf2d728bfe948ea44dd",
+    "config": {
+        "task": {
+            "path": "qemu-startup",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-startup__P8dUppV",
+        "trials_dir": "jobs/t2-mistral-small-2603/2026-03-19__06-59-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "mistral/mistral-small-2603",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 32000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "04c0bafa-9ccd-4132-a3b3-7c5f30bd9885"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "mistral-small-2603",
+            "provider": "mistral"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 865174,
+        "n_cache_tokens": 648944,
+        "n_output_tokens": 11954,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 65,
+            "api_request_times_msec": [
+                2837.3003005981445,
+                2075.038433074951,
+                1728.5826206207275,
+                1823.470115661621,
+                1360.992431640625,
+                1403.8560390472412,
+                1682.9676628112793,
+                2110.6181144714355,
+                1278.6037921905518,
+                3550.9047508239746,
+                1515.8507823944092,
+                1285.5958938598633,
+                1931.0758113861084,
+                1551.8250465393066,
+                1533.933162689209,
+                1401.618242263794,
+                1432.976245880127,
+                1901.1178016662598,
+                2596.760034561157,
+                2152.780294418335,
+                25992.09713935852,
+                1392.3215866088867,
+                1717.695713043213,
+                2142.4806118011475,
+                1466.4483070373535,
+                1739.2058372497559,
+                1673.809289932251,
+                1607.4895858764648,
+                910.9129905700684,
+                957.5965404510498,
+                982.3944568634033,
+                5132.483005523682,
+                1732.9697608947754,
+                2423.194169998169,
+                2168.644428253174,
+                1432.3062896728516,
+                2386.6171836853027,
+                1800.7605075836182,
+                1126.3842582702637,
+                975.8448600769043,
+                949.3184089660645,
+                1147.5493907928467,
+                999.8490810394287,
+                1145.2362537384033,
+                1081.2153816223145,
+                1046.0546016693115,
+                1392.3084735870361,
+                4837.48197555542,
+                2058.2926273345947,
+                1324.2688179016113,
+                1168.3626174926758,
+                1292.4644947052002,
+                1735.2194786071777,
+                1038.393259048462,
+                1342.8750038146973,
+                1529.3071269989014,
+                1785.637617111206,
+                908.5042476654053,
+                838.909387588501,
+                1178.3602237701416,
+                1059.7648620605469,
+                1650.1550674438477,
+                2889.967203140259,
+                3026.4832973480225,
+                2725.5215644836426
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-19T07:02:12.040576Z",
+    "finished_at": "2026-03-19T07:23:32.379230Z",
+    "environment_setup": {
+        "started_at": "2026-03-19T07:02:12.041680Z",
+        "finished_at": "2026-03-19T07:02:14.029606Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-19T07:02:14.029620Z",
+        "finished_at": "2026-03-19T07:02:19.650895Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-19T07:02:19.650969Z",
+        "finished_at": "2026-03-19T07:22:53.633151Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-19T07:22:55.273023Z",
+        "finished_at": "2026-03-19T07:23:30.546260Z"
+    }
+}

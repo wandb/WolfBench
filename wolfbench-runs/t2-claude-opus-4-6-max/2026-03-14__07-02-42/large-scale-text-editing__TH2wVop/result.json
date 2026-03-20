@@ -1,0 +1,114 @@
+{
+    "id": "bc48266c-53fa-4af9-8aa3-9312bb05524c",
+    "task_name": "large-scale-text-editing",
+    "trial_name": "large-scale-text-editing__TH2wVop",
+    "trial_uri": "file:///root/harbor/jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42/large-scale-text-editing__TH2wVop",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "large-scale-text-editing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c7e5e082f251c7c83d53f7b645d97ab3152cc5fffe42d88ff9cce5c62c35ce16",
+    "config": {
+        "task": {
+            "path": "large-scale-text-editing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "large-scale-text-editing__TH2wVop",
+        "trials_dir": "jobs/t2-claude-opus-4-6-max/2026-03-14__07-02-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "max",
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8c4ddc66-9fa0-4e30-baba-64f8ee8d1b99"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-opus-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 22840,
+        "n_cache_tokens": 8727,
+        "n_output_tokens": 47704,
+        "cost_usd": 1.2735585000000003,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                5149.086713790894,
+                481238.70968818665,
+                211261.75594329834,
+                16209.336519241333,
+                3522.5491523742676,
+                5477.988243103027,
+                5583.976268768311
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-14T07:39:11.912209Z",
+    "finished_at": "2026-03-14T07:54:17.084487Z",
+    "environment_setup": {
+        "started_at": "2026-03-14T07:39:11.914481Z",
+        "finished_at": "2026-03-14T07:39:13.960359Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-14T07:39:13.960389Z",
+        "finished_at": "2026-03-14T07:39:31.022842Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-14T07:39:31.022940Z",
+        "finished_at": "2026-03-14T07:53:34.170465Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-14T07:53:36.214596Z",
+        "finished_at": "2026-03-14T07:54:15.271447Z"
+    }
+}

@@ -1,0 +1,146 @@
+{
+    "id": "8d11f835-8a51-4176-93fb-f55deeb8e7fb",
+    "task_name": "code-from-image",
+    "trial_name": "code-from-image__SLqDsGC",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-turbo/2026-03-16__11-53-49/code-from-image__SLqDsGC",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "code-from-image"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "179258dd4d90a45c225beff94152358b15906668f95bde3330a7d3c755dcf387",
+    "config": {
+        "task": {
+            "path": "code-from-image",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "code-from-image__SLqDsGC",
+        "trials_dir": "jobs/t2-glm-5-turbo/2026-03-16__11-53-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/z-ai/glm-5-turbo",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 200000,
+                    "max_output_tokens": 128000
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "580feb38-a65d-44b4-acdb-884a2c21a84d"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "z-ai/glm-5-turbo",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 624972,
+        "n_cache_tokens": 562576,
+        "n_output_tokens": 20307,
+        "cost_usd": 0.232897152,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 37,
+            "api_request_times_msec": [
+                3122.230052947998,
+                2473.923444747925,
+                2583.375930786133,
+                2941.277265548706,
+                10826.815128326416,
+                8108.774900436401,
+                8181.98561668396,
+                6698.97198677063,
+                4037.393569946289,
+                14349.36237335205,
+                11669.360160827637,
+                3522.7303504943848,
+                7577.56781578064,
+                8061.002492904663,
+                6310.930252075195,
+                11287.845611572266,
+                14175.833940505981,
+                13652.251243591309,
+                6980.580806732178,
+                3950.0045776367188,
+                7153.903007507324,
+                12933.375835418701,
+                10188.539266586304,
+                11765.55323600769,
+                13988.965034484863,
+                10091.097593307495,
+                6286.460876464844,
+                14051.91421508789,
+                6255.927562713623,
+                3284.4302654266357,
+                16400.035619735718,
+                5994.309186935425,
+                12956.269979476929,
+                25151.488304138184,
+                11007.784128189087,
+                5478.931427001953,
+                7264.026165008545
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-16T12:05:17.412415Z",
+    "finished_at": "2026-03-16T12:19:10.599736Z",
+    "environment_setup": {
+        "started_at": "2026-03-16T12:05:17.413583Z",
+        "finished_at": "2026-03-16T12:05:18.585375Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-16T12:05:18.585392Z",
+        "finished_at": "2026-03-16T12:05:29.514032Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-16T12:05:29.514155Z",
+        "finished_at": "2026-03-16T12:19:03.465772Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-16T12:19:04.212115Z",
+        "finished_at": "2026-03-16T12:19:09.113679Z"
+    }
+}
