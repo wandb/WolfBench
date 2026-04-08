@@ -42,9 +42,12 @@ WOLFBENCH_DIR = Path(__file__).parent
 DEFAULT_JOBS_BASE = WOLFBENCH_DIR / "wolfbench-runs"
 DEFAULT_API_BASE = "http://localhost:11434/v1"
 SMOKE_DATASET = "terminal-bench-sample@2.0"
+SANDBOX_CHOICES = ("docker", "daytona")
 
 # Tracks the active harbor subprocess so signal handlers can terminate it cleanly.
 _harbor_proc: subprocess.Popen | None = None
+_sandbox_type: str = "docker"
+_model_jobs_dir: Path | None = None
 
 
 def _daytona_cmd() -> list[str] | None:
@@ -58,8 +61,35 @@ def _daytona_cmd() -> list[str] | None:
     return [daytona] if daytona else None
 
 
-def _cleanup_sandboxes() -> None:
-    """Kill the active harbor process and delete all Daytona sandboxes."""
+def _cleanup_docker_containers(jobs_dir: Path) -> None:
+    """Remove Docker compose projects for harbor trials under jobs_dir."""
+    try:
+        result = subprocess.run(
+            ["docker", "compose", "ls", "--all", "--format", "json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            return
+        projects = json.loads(result.stdout)
+        jobs_str = str(jobs_dir.resolve())
+        removed = 0
+        for proj in projects:
+            if jobs_str in proj.get("ConfigFiles", ""):
+                name = proj.get("Name", "")
+                if name:
+                    subprocess.run(
+                        ["docker", "compose", "-p", name, "down", "--remove-orphans"],
+                        capture_output=True, check=False, timeout=30,
+                    )
+                    removed += 1
+        if removed:
+            typer.echo(f"  Removed {removed} Docker container(s).", err=True)
+    except Exception as e:
+        typer.echo(f"  Warning: Docker cleanup failed: {e}", err=True)
+
+
+def _cleanup_sandboxes(sandbox_type: str = "daytona") -> None:
+    """Kill the active harbor process and clean up sandboxes."""
     global _harbor_proc
     if _harbor_proc and _harbor_proc.poll() is None:
         typer.echo("\nTerminating harbor...", err=True)
@@ -69,6 +99,11 @@ def _cleanup_sandboxes() -> None:
         except subprocess.TimeoutExpired:
             _harbor_proc.kill()
         _harbor_proc = None
+
+    if sandbox_type == "docker":
+        if _model_jobs_dir:
+            _cleanup_docker_containers(_model_jobs_dir)
+        return
 
     daytona = _daytona_cmd()
     if daytona:
@@ -84,7 +119,7 @@ def _cleanup_sandboxes() -> None:
 
 def _signal_handler(sig: int, frame: object) -> None:
     typer.echo(f"\nCaught signal {sig} — cleaning up.", err=True)
-    _cleanup_sandboxes()
+    _cleanup_sandboxes(_sandbox_type)
     sys.exit(1)
 
 
@@ -110,6 +145,23 @@ def _host_ip() -> str:
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.connect(("8.8.8.8", 80))
         return s.getsockname()[0]
+
+
+def _rewrite_api_base_for_docker(api_base: str) -> str:
+    """Rewrite localhost URLs to host.docker.internal for Docker sandbox access."""
+    from urllib.parse import urlparse, urlunparse
+    parsed = urlparse(api_base)
+    host = parsed.hostname or ""
+    if host in ("localhost", "127.0.0.1", "::1"):
+        new_host = "host.docker.internal"
+        if parsed.port:
+            new_netloc = f"{new_host}:{parsed.port}"
+        else:
+            new_netloc = new_host
+        rewritten = urlunparse(parsed._replace(netloc=new_netloc))
+        typer.echo(f"  [INFO] Rewrote api_base for Docker: {api_base} → {rewritten}")
+        return rewritten
+    return api_base
 
 
 @contextlib.contextmanager
@@ -165,7 +217,7 @@ def _litellm_model_patch(model: str, context_window: int):
         os.environ.pop("LITELLM_LOCAL_MODEL_COST_MAP", None)
 
 
-def _preflight(model: str, api_base: str) -> None:
+def _preflight(model: str, api_base: str, sandbox_type: str = "docker") -> None:
     """Check Ollama reachability and model availability. Abort on fatal issues."""
     typer.echo("\n--- Preflight checks ---")
 
@@ -174,14 +226,21 @@ def _preflight(model: str, api_base: str) -> None:
     parsed = urlparse(api_base)
     host = parsed.hostname or ""
     if host in ("localhost", "127.0.0.1", "::1"):
-        host_ip = _host_ip()
-        typer.echo(
-            f"  [WARN] api_base uses '{host}' — Daytona sandbox VMs cannot reach this.\n"
-            f"         Ollama must bind to 0.0.0.0 and you should use:\n"
-            f"         --api-base http://{host_ip}:{parsed.port or 11434}/v1\n"
-            f"         To rebind Ollama: OLLAMA_HOST=0.0.0.0 ollama serve",
-            err=True,
-        )
+        if sandbox_type == "docker":
+            typer.echo(
+                f"  [INFO] api_base uses '{host}' — Docker containers will use host networking.\n"
+                f"         Ensure Ollama is bound to 0.0.0.0: OLLAMA_HOST=0.0.0.0 ollama serve",
+                err=True,
+            )
+        else:
+            host_ip = _host_ip()
+            typer.echo(
+                f"  [WARN] api_base uses '{host}' — Daytona sandbox VMs cannot reach this.\n"
+                f"         Ollama must bind to 0.0.0.0 and you should use:\n"
+                f"         --api-base http://{host_ip}:{parsed.port or 11434}/v1\n"
+                f"         To rebind Ollama: OLLAMA_HOST=0.0.0.0 ollama serve",
+                err=True,
+            )
 
     # 2. Ollama reachability — always test via local http regardless of api_base scheme/host
     # (api_base may be an ngrok/tunnel URL; we verify Ollama itself is up on the host)
@@ -227,14 +286,16 @@ def _preflight(model: str, api_base: str) -> None:
             continue
         local_host = local_addr.rsplit(":", 1)[0]
         if local_host in ("127.0.0.1", "::1"):
-            host_ip = _host_ip()
-            typer.echo(
-                f"  [WARN] Ollama is bound to {local_host}:{ollama_port} only.\n"
-                f"         Daytona cloud sandboxes CANNOT connect to it.\n"
-                f"         Expose Ollama publicly via ngrok/cloudflare tunnel, then\n"
-                f"         re-run with: --api-base https://<tunnel-url>/v1",
-                err=True,
-            )
+            if sandbox_type == "docker":
+                typer.echo(f"  [OK]   Ollama bound to {local_host}:{ollama_port} (Docker uses host networking)")
+            else:
+                typer.echo(
+                    f"  [WARN] Ollama is bound to {local_host}:{ollama_port} only.\n"
+                    f"         Daytona cloud sandboxes CANNOT connect to it.\n"
+                    f"         Expose Ollama publicly via ngrok/cloudflare tunnel, then\n"
+                    f"         re-run with: --api-base https://<tunnel-url>/v1",
+                    err=True,
+                )
         else:
             typer.echo(f"  [OK]   Ollama bound to {local_host}:{ollama_port} (all interfaces)")
         break
@@ -249,8 +310,16 @@ def _harbor_config(
     concurrent: int,
     api_base: str,
     memory_mb: int,
+    sandbox_type: str = "docker",
 ) -> dict:
     """Build Harbor YAML config for terminus-2 targeting Ollama."""
+    environment: dict = {
+        "type": sandbox_type,
+        "override_cpus": 4,
+        "override_memory_mb": memory_mb,
+        "suppress_override_warnings": True,
+    }
+
     return {
         "jobs_dir": str(jobs_dir),
         "n_concurrent_trials": concurrent,
@@ -260,12 +329,7 @@ def _harbor_config(
             "min_wait_sec": 60,
             "max_wait_sec": 300,
         },
-        "environment": {
-            "type": "daytona",
-            "override_cpus": 4,
-            "override_memory_mb": memory_mb,
-            "suppress_override_warnings": True,
-        },
+        "environment": environment,
         "agents": [
             {
                 "name": "terminus-2",
@@ -471,7 +535,7 @@ def main(
         min=1,
     )] = 1,
     concurrent: Annotated[int, typer.Option(
-        help="Concurrent Daytona sandboxes (default: 4; free tier: keep concurrent × memory_mb ≤ 10240)",
+        help="Concurrent sandboxes (default: 4; Daytona free tier: concurrent × memory_mb ≤ 10240)",
         min=1,
     )] = 4,
     timeout: Annotated[int | None, typer.Option(
@@ -479,7 +543,7 @@ def main(
     )] = None,  # None = auto
     memory: Annotated[int, typer.Option(
         "--memory",
-        help="Daytona sandbox memory in MB (default: 8192; free tier total ≤ 10240 MB)",
+        help="Sandbox memory in MB (default: 8192; Daytona free tier total ≤ 10240 MB)",
         min=512,
     )] = 8192,
     wandb_project: Annotated[str, typer.Option(
@@ -508,13 +572,26 @@ def main(
         "--context-window",
         help="Model context window in tokens (registers with LiteLLM for unmapped models, e.g. 262144)",
     )] = None,
+    sandbox: Annotated[str, typer.Option(
+        "--sandbox",
+        help="Sandbox type: 'docker' runs locally in Docker containers, 'daytona' uses cloud VMs (default: docker)",
+    )] = "docker",
 ) -> None:
     """Run WolfBench against a local Ollama model via Terminal-Bench 2.0."""
+    global _sandbox_type, _model_jobs_dir
+
+    # Validate sandbox choice
+    if sandbox not in SANDBOX_CHOICES:
+        typer.echo(f"Invalid --sandbox '{sandbox}'. Choose from: {', '.join(SANDBOX_CHOICES)}", err=True)
+        raise typer.Exit(1)
+    _sandbox_type = sandbox
+
     # Resolve timeout
     effective_timeout = timeout if timeout is not None else (600 if smoke else 3600)
 
     safe = _safe_name(model)
     model_jobs_dir = jobs_base / f"t2-ollama-{safe}"
+    _model_jobs_dir = model_jobs_dir
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     results_path = WOLFBENCH_DIR / f"wolfbench_results_{safe}_{ts}.json"
     excluded_path = WOLFBENCH_DIR / f"wolfbench_results_{safe}_{ts}_excluded.json"
@@ -524,6 +601,7 @@ def main(
     typer.echo(f"Model:    {model} (via {api_base})")
     typer.echo(f"Mode:     {'smoke (1 task)' if smoke else f'{runs} full run(s) × 89 tasks'}")
     typer.echo(f"Timeout:  {effective_timeout}s per task")
+    typer.echo(f"Sandbox:  {sandbox}")
     typer.echo(f"Sandboxes: {concurrent} concurrent × {memory} MB = {concurrent * memory} MB total")
     typer.echo(f"Jobs dir: {model_jobs_dir}")
     typer.echo(f"Env file: {env_file}")
@@ -534,22 +612,28 @@ def main(
 
     # Verify .env exists and has required keys
     dotenv = _load_dotenv(env_file)
-    missing = [k for k in ("WANDB_API_KEY", "DAYTONA_API_KEY") if k not in dotenv]
+    required_keys = ["WANDB_API_KEY"]
+    if sandbox == "daytona":
+        required_keys.append("DAYTONA_API_KEY")
+    missing = [k for k in required_keys if k not in dotenv]
     if missing:
         typer.echo(f"Warning: missing from {env_file}: {', '.join(missing)}", err=True)
 
     # Preflight: verify Ollama is reachable, model exists, and bind-address is suitable
-    _preflight(model, api_base)
+    _preflight(model, api_base, sandbox)
+
+    # For Docker sandbox, rewrite localhost URLs so containers can reach the host
+    effective_api_base = _rewrite_api_base_for_docker(api_base) if sandbox == "docker" else api_base
 
     # LiteLLM needs OPENAI_API_KEY set (any non-empty value) for openai/ prefix
     extra_env = {
         "OPENAI_API_KEY": "ollama",
-        "OPENAI_API_BASE": api_base,
+        "OPENAI_API_BASE": effective_api_base,
     }
 
 
     # Write Harbor config to a temp file
-    config = _harbor_config(model, model_jobs_dir, effective_timeout, concurrent, api_base, memory)
+    config = _harbor_config(model, model_jobs_dir, effective_timeout, concurrent, effective_api_base, memory, sandbox)
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".yaml", delete=False, dir=WOLFBENCH_DIR, prefix="harbor-ollama-"
     ) as f:
