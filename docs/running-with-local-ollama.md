@@ -140,8 +140,9 @@ For `qwen3.5:122b` the context window is **262144** (256k tokens).
 ```bash
 uv run wolfbench-ollama.py qwen3.5:122b \
   --no-smoke \
-  --concurrent 1 \
+  --concurrent 4 \
   --memory 8192 \
+  --runs 5 \
   --api-base https://<your-tunnel-url>/v1 \
   --context-window 262144
 ```
@@ -161,7 +162,7 @@ uv run wolfbench-ollama.py qwen3.5:122b \
 
 ### Free tier sandbox limits
 
-With `--concurrent 1 --memory 8192` you use 8 GiB of the 10 GiB free tier total — safe headroom for one sandbox at a time.
+With `--concurrent 4 --memory 8192` you use max free tier for one sandbox at a time.
 
 The sandbox memory is for the benchmark agent and test environment. The model runs on your host machine, so sandbox memory does **not** affect inference quality or speed.
 
@@ -194,7 +195,7 @@ The script runs automatic checks before starting Harbor and will abort on fatal 
 --- Preflight complete ---
 ```
 
-If the `--context-window` registration line is missing, the agent falls back to a large internal default (1M tokens), which is safe but may not reflect the model's true limit.
+If the `--context-window` registration line is missing, the agent falls back to an internal default (10k tokens), which may not reflect the model's true limit and may break something ... 
 
 ---
 
