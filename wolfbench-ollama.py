@@ -19,7 +19,6 @@ Usage:
 """
 
 import asyncio
-import contextlib
 import json
 import os
 import shutil
@@ -164,59 +163,6 @@ def _rewrite_api_base_for_docker(api_base: str) -> str:
     return api_base
 
 
-@contextlib.contextmanager
-def _litellm_model_patch(model: str, context_window: int):
-    """Temporarily register a model in litellm's backup JSON so get_model_info() works.
-
-    Sets LITELLM_LOCAL_MODEL_COST_MAP=True in the environment to force litellm
-    to read from its local backup file (which we patch) instead of fetching remotely.
-    Restores the original file on exit.
-    """
-    # Locate litellm backup JSON — search uv tools dir and common install paths
-    search_roots = []
-    uv_tools = Path.home() / ".local/share/uv/tools/harbor"
-    if uv_tools.exists():
-        search_roots.append(uv_tools)
-    harbor_bin = shutil.which("harbor")
-    if harbor_bin:
-        search_roots.append(Path(harbor_bin).parent.parent)
-
-    backup_jsons = []
-    for root in search_roots:
-        backup_jsons = list(root.glob("lib/*/site-packages/litellm/model_prices_and_context_window_backup.json"))
-        if backup_jsons:
-            break
-    if not backup_jsons:
-        typer.echo("  [WARN] Could not locate litellm backup JSON — context window registration skipped.", err=True)
-        yield
-        return
-
-    backup_path = backup_jsons[0]
-    original = backup_path.read_text()
-    cost_map = json.loads(original)
-
-    litellm_key = f"openai/{model}"
-    cost_map[litellm_key] = {
-        "max_tokens": context_window,
-        "max_input_tokens": context_window,
-        "max_output_tokens": context_window,
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "litellm_provider": "openai",
-        "mode": "chat",
-    }
-    backup_path.write_text(json.dumps(cost_map))
-    typer.echo(f"  [OK]   Registered '{litellm_key}' with {context_window:,} token context window")
-
-    try:
-        # LITELLM_LOCAL_MODEL_COST_MAP=true forces litellm to use the backup file
-        os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "true"
-        yield
-    finally:
-        backup_path.write_text(original)
-        os.environ.pop("LITELLM_LOCAL_MODEL_COST_MAP", None)
-
-
 def _preflight(model: str, api_base: str, sandbox_type: str = "docker") -> None:
     """Check Ollama reachability and model availability. Abort on fatal issues."""
     typer.echo("\n--- Preflight checks ---")
@@ -311,6 +257,7 @@ def _harbor_config(
     api_base: str,
     memory_mb: int,
     sandbox_type: str = "docker",
+    context_window: int | None = None,
 ) -> dict:
     """Build Harbor YAML config for terminus-2 targeting Ollama."""
     environment: dict = {
@@ -319,6 +266,20 @@ def _harbor_config(
         "override_memory_mb": memory_mb,
         "suppress_override_warnings": True,
     }
+
+    agent_kwargs: dict = {"api_base": api_base}
+    if context_window is not None:
+        # Pass model_info directly — harbor's LiteLLM calls litellm.register_model()
+        # with this dict, which is more reliable than patching the backup JSON on disk.
+        agent_kwargs["model_info"] = {
+            "max_tokens": context_window,
+            "max_input_tokens": context_window,
+            "max_output_tokens": context_window,
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "litellm_provider": "openai",
+            "mode": "chat",
+        }
 
     return {
         "jobs_dir": str(jobs_dir),
@@ -336,9 +297,7 @@ def _harbor_config(
                 # LiteLLM openai/ prefix + api_base routes to any OpenAI-compatible endpoint
                 "model_name": f"openai/{model}",
                 "override_timeout_sec": timeout_sec,
-                "kwargs": {
-                    "api_base": api_base,
-                },
+                "kwargs": agent_kwargs,
             }
         ],
         "datasets": [
@@ -633,7 +592,9 @@ def main(
 
 
     # Write Harbor config to a temp file
-    config = _harbor_config(model, model_jobs_dir, effective_timeout, concurrent, effective_api_base, memory, sandbox)
+    config = _harbor_config(model, model_jobs_dir, effective_timeout, concurrent, effective_api_base, memory, sandbox, context_window)
+    if context_window:
+        typer.echo(f"  [OK]   Registered 'openai/{model}' with {context_window:,} token context window")
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".yaml", delete=False, dir=WOLFBENCH_DIR, prefix="harbor-ollama-"
     ) as f:
@@ -643,17 +604,15 @@ def main(
     n_runs = 1 if smoke else runs
     success_count = 0
 
-    ctx = _litellm_model_patch(model, context_window) if context_window else contextlib.nullcontext()
     try:
-        with ctx:
-            for i in range(1, n_runs + 1):
-                label = "smoke" if smoke else f"run {i}/{n_runs}"
-                ok = _run_harbor(config_path, env_file, extra_env, smoke, label)
-                _report_run_errors(model_jobs_dir)
-                if ok:
-                    success_count += 1
-                else:
-                    typer.echo(f"[{label}] harbor exited with an error", err=True)
+        for i in range(1, n_runs + 1):
+            label = "smoke" if smoke else f"run {i}/{n_runs}"
+            ok = _run_harbor(config_path, env_file, extra_env, smoke, label)
+            _report_run_errors(model_jobs_dir)
+            if ok:
+                success_count += 1
+            else:
+                typer.echo(f"[{label}] harbor exited with an error", err=True)
     finally:
         config_path.unlink(missing_ok=True)
 
