@@ -286,6 +286,66 @@ def _harbor_config(
     }
 
 
+def _report_run_errors(jobs_dir: Path) -> None:
+    """Scan the latest run directory for sandbox/trial errors and print a summary."""
+    if not jobs_dir.exists():
+        return
+
+    # Find the most recently modified run directory (timestamp-named subdirs)
+    run_dirs = sorted(
+        (d for d in jobs_dir.iterdir() if d.is_dir()),
+        key=lambda d: d.stat().st_mtime,
+        reverse=True,
+    )
+    if not run_dirs:
+        return
+
+    latest = run_dirs[0]
+    result_file = latest / "result.json"
+    if not result_file.exists():
+        return
+
+    try:
+        result = json.loads(result_file.read_text())
+    except (json.JSONDecodeError, OSError):
+        return
+
+    stats = result.get("stats", {})
+    n_trials = stats.get("n_trials", 0)
+    n_errors = stats.get("n_errors", 0)
+    if n_errors == 0:
+        return
+
+    typer.echo(f"\n--- Error summary ({n_errors}/{n_trials} trials failed) ---")
+
+    # Collect exception types and affected tasks from result.json
+    for eval_data in stats.get("evals", {}).values():
+        for exc_type, tasks in eval_data.get("exception_stats", {}).items():
+            if not tasks:
+                continue
+            typer.echo(f"  {exc_type}: {len(tasks)} task(s)")
+
+            # Show the actual error message from the first task's exception.txt
+            sample_task = tasks[0]
+            exc_file = latest / sample_task / "exception.txt"
+            if exc_file.exists():
+                lines = exc_file.read_text().strip().splitlines()
+                # Print only the last line (the actual error message)
+                if lines:
+                    typer.echo(f"    → {lines[-1]}")
+
+            # List affected task names (truncated if many)
+            if len(tasks) <= 5:
+                for t in tasks:
+                    typer.echo(f"    - {t}")
+            else:
+                for t in tasks[:3]:
+                    typer.echo(f"    - {t}")
+                typer.echo(f"    ... and {len(tasks) - 3} more")
+
+    typer.echo("--- End error summary ---\n")
+
+
 def _run_harbor(
     config_path: Path,
     env_file: Path,
@@ -505,6 +565,7 @@ def main(
             for i in range(1, n_runs + 1):
                 label = "smoke" if smoke else f"run {i}/{n_runs}"
                 ok = _run_harbor(config_path, env_file, extra_env, smoke, label)
+                _report_run_errors(model_jobs_dir)
                 if ok:
                     success_count += 1
                 else:
