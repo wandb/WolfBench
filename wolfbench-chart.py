@@ -472,9 +472,12 @@ def generate_html(
     runs: list[dict] | None = None,
     weave_urls: dict[tuple, str] | None = None,
 ) -> Path:
-    # Embed logo as base64
+    # Embed logo as base64 (optional — skip gracefully if file is absent)
     _logo_path = Path(__file__).parent / "Endorsed_secondary_goldwhite.png"
-    logo_b64 = base64.b64encode(_logo_path.read_bytes()).decode("ascii")
+    logo_b64 = (
+        base64.b64encode(_logo_path.read_bytes()).decode("ascii")
+        if _logo_path.exists() else ""
+    )
 
     # Filter
     groups = {k: v for k, v in groups.items() if v["n_runs"] >= min_runs}
@@ -1929,7 +1932,7 @@ h1 {{
 <body>
 <div class="container">
     <div class="header">
-        <img class="header-logo" src="data:image/png;base64,{logo_b64}" alt="Weights &amp; Biases by CoreWeave" height="48">
+        {f'<img class="header-logo" src="data:image/png;base64,{logo_b64}" alt="Weights &amp; Biases by CoreWeave" height="48">' if logo_b64 else ''}
         <h1>WolfBench ({chart_date or date.today().isoformat()})</h1>
     </div>
     <p class="subtitle">Wolfram Ravenwolf&rsquo;s Five-Metric Framework &middot; based on Terminal-Bench 2.0{' &middot; min ' + str(min_runs) + ' runs' if min_runs > 1 else ''}</p>
