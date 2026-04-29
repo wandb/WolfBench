@@ -1,0 +1,119 @@
+{
+    "id": "3b74db28-9d0c-451b-b8dc-52f33da8df3c",
+    "task_name": "protein-assembly",
+    "trial_name": "protein-assembly__eGaHKhb",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06/protein-assembly__eGaHKhb",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "protein-assembly"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b8df06c6c42605ec37afb3b9c6e2f4feb1be9663380bd7129fcbaa9559253a60",
+    "config": {
+        "task": {
+            "path": "protein-assembly",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "protein-assembly__eGaHKhb",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c67c2b61-2539-411e-9c5a-0292708eacf3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 180349,
+        "n_cache_tokens": 63328,
+        "n_output_tokens": 13021,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 15,
+            "api_request_times_msec": [
+                11366.528511047363,
+                8911.070108413696,
+                14872.153759002686,
+                11968.037366867065,
+                7716.136932373047,
+                27290.013790130615,
+                18062.013149261475,
+                18295.58777809143,
+                15324.584007263184,
+                32918.707609176636,
+                20255.824089050293,
+                21781.143188476562,
+                65986.94729804993,
+                6621.361970901489,
+                10766.230583190918
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T11:16:34.077473Z",
+    "finished_at": "2026-04-09T11:23:21.018579Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T11:16:34.078360Z",
+        "finished_at": "2026-04-09T11:16:36.105415Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T11:16:36.105429Z",
+        "finished_at": "2026-04-09T11:16:51.194439Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T11:16:51.194489Z",
+        "finished_at": "2026-04-09T11:23:10.005232Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T11:23:11.586041Z",
+        "finished_at": "2026-04-09T11:23:20.677435Z"
+    }
+}

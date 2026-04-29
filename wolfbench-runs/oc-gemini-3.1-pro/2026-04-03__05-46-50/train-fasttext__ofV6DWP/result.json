@@ -1,0 +1,101 @@
+{
+    "id": "ab630388-19c1-4496-9c8a-879200130d73",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__ofV6DWP",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-gemini-3.1-pro/2026-04-03__05-46-50/train-fasttext__ofV6DWP",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__ofV6DWP",
+        "trials_dir": "jobs/oc-gemini-3.1-pro/2026-04-03__05-46-50",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "google/gemini-3.1-pro-preview",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "fe7dc614-dedc-4fff-90a9-57421fe4a00d"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "gemini-3.1-pro-preview",
+            "provider": "google"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 812587,
+        "n_cache_tokens": 668507,
+        "n_output_tokens": 4695,
+        "cost_usd": 1.8152153999999998,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-03T05:48:22.039791Z",
+    "finished_at": "2026-04-03T05:52:24.416362Z",
+    "environment_setup": {
+        "started_at": "2026-04-03T05:48:22.098508Z",
+        "finished_at": "2026-04-03T05:48:23.251901Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-03T05:48:23.251915Z",
+        "finished_at": "2026-04-03T05:48:57.290275Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-03T05:48:57.290344Z",
+        "finished_at": "2026-04-03T05:52:13.050735Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-03T05:52:14.070992Z",
+        "finished_at": "2026-04-03T05:52:24.114852Z"
+    }
+}

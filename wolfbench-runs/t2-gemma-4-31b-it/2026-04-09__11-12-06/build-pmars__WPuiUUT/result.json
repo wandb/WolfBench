@@ -1,0 +1,118 @@
+{
+    "id": "14048a31-23b7-4633-ad1a-0914cbc5c98c",
+    "task_name": "build-pmars",
+    "trial_name": "build-pmars__WPuiUUT",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06/build-pmars__WPuiUUT",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "build-pmars"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "55f554b8d07c2ec69aa88e385675925e684eb09c256610e0abca10375efc3876",
+    "config": {
+        "task": {
+            "path": "build-pmars",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "build-pmars__WPuiUUT",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c67c2b61-2539-411e-9c5a-0292708eacf3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 164377,
+        "n_cache_tokens": 99232,
+        "n_output_tokens": 4002,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 14,
+            "api_request_times_msec": [
+                16518.290519714355,
+                5966.498851776123,
+                8724.116563796997,
+                5025.620937347412,
+                7858.354330062866,
+                11697.223424911499,
+                8959.095478057861,
+                5887.5157833099365,
+                6359.062433242798,
+                7359.9607944488525,
+                14193.639755249023,
+                5219.25163269043,
+                7678.129196166992,
+                2948.0412006378174
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T11:23:21.022624Z",
+    "finished_at": "2026-04-09T11:26:27.688082Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T11:23:21.023565Z",
+        "finished_at": "2026-04-09T11:23:22.566006Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T11:23:22.566026Z",
+        "finished_at": "2026-04-09T11:23:25.682080Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T11:23:25.682147Z",
+        "finished_at": "2026-04-09T11:26:20.035444Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T11:26:20.957338Z",
+        "finished_at": "2026-04-09T11:26:27.368183Z"
+    }
+}

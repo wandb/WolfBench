@@ -1,0 +1,142 @@
+{
+    "id": "fa07eafe-e2ea-4d61-a159-5a15aa588a84",
+    "task_name": "chess-best-move",
+    "trial_name": "chess-best-move__pxkxeTZ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-kimi-k2.6/2026-04-21__11-47-19/chess-best-move__pxkxeTZ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "chess-best-move"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a31d482d846322d57f0e3ee3c56d4ff2171fe39908dadd8092d036f17114fbef",
+    "config": {
+        "task": {
+            "path": "chess-best-move",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "chess-best-move__pxkxeTZ",
+        "trials_dir": "jobs/t2-kimi-k2.6/2026-04-21__11-47-19",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "2316f716-7ea3-420b-93b2-ba70cfa968a0"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/kimi-k2.6",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 611471,
+        "n_cache_tokens": 565504,
+        "n_output_tokens": 120297,
+        "cost_usd": 0.6091839171,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 33,
+            "api_request_times_msec": [
+                45934.096336364746,
+                11873.909711837769,
+                40289.27946090698,
+                96298.4414100647,
+                16294.488668441772,
+                23901.56602859497,
+                16898.256540298462,
+                75260.4489326477,
+                29885.167598724365,
+                26638.110160827637,
+                18320.615530014038,
+                159515.6171321869,
+                4700.510501861572,
+                5923.400402069092,
+                124313.53831291199,
+                37320.79076766968,
+                54611.2744808197,
+                137992.0618534088,
+                65967.49496459961,
+                546204.8373222351,
+                151526.47471427917,
+                198677.58178710938,
+                27453.39012145996,
+                482538.4509563446,
+                61454.51545715332,
+                11266.260623931885,
+                30950.284957885742,
+                60233.31880569458,
+                49556.71405792236,
+                351852.5516986847,
+                99304.36849594116,
+                237431.1556816101,
+                59875.49042701721
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1504, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1325, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1142, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 563, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 523, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 259, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 483, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-04-21T12:47:35.383368"
+    },
+    "started_at": "2026-04-21T11:47:20.128310Z",
+    "finished_at": "2026-04-21T12:47:44.226705Z",
+    "environment_setup": {
+        "started_at": "2026-04-21T11:47:20.128610Z",
+        "finished_at": "2026-04-21T11:47:24.479690Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-21T11:47:24.479707Z",
+        "finished_at": "2026-04-21T11:47:35.378439Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-21T11:47:35.378485Z",
+        "finished_at": "2026-04-21T12:47:35.382088Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-21T12:47:36.236078Z",
+        "finished_at": "2026-04-21T12:47:43.969219Z"
+    }
+}

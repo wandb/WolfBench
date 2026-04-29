@@ -1,0 +1,108 @@
+{
+    "id": "7ad7b962-8620-4964-82f8-a24483bc7464",
+    "task_name": "extract-elf",
+    "trial_name": "extract-elf__qq3cfz6",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__01-45-47/extract-elf__qq3cfz6",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "extract-elf"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "cd3887ff7e15541da700a00b6464b8dc3a54a140b9cddee7cd462ae18f3e8056",
+    "config": {
+        "task": {
+            "path": "extract-elf",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "extract-elf__qq3cfz6",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__01-45-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "09a4d278-ed10-42c8-9734-19dbdb3faf4f"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         file /app/a.out && ls -la /app/a.out  0.8s [exit 127]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/a.out && xxd /app/a.out | head -20  0.2s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      node -e \"const fs=require('fs'); const b=fs.readFileSync('/app/a.out'); console.log('length:', b.length); console.log(b.slice(0,16).toString('hex')); console.log(b.slice(0,4).toString('hex'));\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         node -e \"const fs=require('fs'); const b=fs.readFileSync('/app/a.out'); console.log('length:', b.length); console.log(b.slice(0,16).toString('hex')); console.log(b.slice(0,4).toString('hex'));\"  59.4s [exit -1]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/  0.2s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/hi.c  0.9s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: sc ... [truncated]\nStderr:\nbash: line 1:  4056 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      4057 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         file /app/a.out && ls -la /app/a.out  0.8s [exit 127]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/a.out && xxd /app/a.out | head -20  0.2s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      node -e \"const fs=require('fs'); const b=fs.readFileSync('/app/a.out'); console.log('length:', b.length); console.log(b.slice(0,16).toString('hex')); console.log(b.slice(0,4).toString('hex'));\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         node -e \"const fs=require('fs'); const b=fs.readFileSync('/app/a.out'); console.log('length:', b.length); console.log(b.slice(0,16).toString('hex')); console.log(b.slice(0,4).toString('hex'));\"  59.4s [exit -1]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/  0.2s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/hi.c  0.9s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: sc ... [truncated]\nStderr:\nbash: line 1:  4056 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      4057 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-23T04:24:45.277379"
+    },
+    "started_at": "2026-04-23T04:09:04.639236Z",
+    "finished_at": "2026-04-23T04:24:54.606173Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T04:09:04.640477Z",
+        "finished_at": "2026-04-23T04:09:06.497650Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T04:09:06.497663Z",
+        "finished_at": "2026-04-23T04:10:17.533544Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-23T04:10:17.533690Z",
+        "finished_at": "2026-04-23T04:24:45.276446Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-23T04:24:46.009504Z",
+        "finished_at": "2026-04-23T04:24:53.992875Z"
+    }
+}

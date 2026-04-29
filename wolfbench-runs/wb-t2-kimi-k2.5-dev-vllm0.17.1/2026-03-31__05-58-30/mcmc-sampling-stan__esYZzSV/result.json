@@ -1,0 +1,135 @@
+{
+    "id": "90e5bc93-4e67-408e-86fa-422ee49cc1ac",
+    "task_name": "mcmc-sampling-stan",
+    "trial_name": "mcmc-sampling-stan__esYZzSV",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30/mcmc-sampling-stan__esYZzSV",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mcmc-sampling-stan"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a2c8524885b5ab2e9a3b8c6cd374001556f013e9009487963d3a04271130deed",
+    "config": {
+        "task": {
+            "path": "mcmc-sampling-stan",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mcmc-sampling-stan__esYZzSV",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b908f8ba-419c-4901-abd2-0e7eda73a057"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 358013,
+        "n_cache_tokens": 328992,
+        "n_output_tokens": 4753,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 20,
+            "api_request_times_msec": [
+                5168.207168579102,
+                4414.5495891571045,
+                7772.942066192627,
+                1293.271541595459,
+                1214.1258716583252,
+                1751.457929611206,
+                1318.5226917266846,
+                1252.8505325317383,
+                1199.0461349487305,
+                1357.3789596557617,
+                1814.0690326690674,
+                2433.3810806274414,
+                1535.8147621154785,
+                6553.58624458313,
+                4977.906942367554,
+                1884.74440574646,
+                1476.4199256896973,
+                3644.195079803467,
+                4064.788579940796,
+                6099.299907684326
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-31T07:04:50.731420Z",
+    "finished_at": "2026-03-31T07:22:19.106721Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T07:04:50.734752Z",
+        "finished_at": "2026-03-31T07:04:53.700047Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T07:04:53.700095Z",
+        "finished_at": "2026-03-31T07:05:09.336663Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T07:05:09.336876Z",
+        "finished_at": "2026-03-31T07:20:09.820523Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T07:20:12.163388Z",
+        "finished_at": "2026-03-31T07:22:17.319607Z"
+    }
+}

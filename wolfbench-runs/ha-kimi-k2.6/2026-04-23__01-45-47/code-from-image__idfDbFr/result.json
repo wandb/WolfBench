@@ -1,0 +1,91 @@
+{
+    "id": "cd1979be-64f6-4dbf-9d7c-767bd9f502b0",
+    "task_name": "code-from-image",
+    "trial_name": "code-from-image__idfDbFr",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__01-45-47/code-from-image__idfDbFr",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "code-from-image"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "179258dd4d90a45c225beff94152358b15906668f95bde3330a7d3c755dcf387",
+    "config": {
+        "task": {
+            "path": "code-from-image",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "code-from-image__idfDbFr",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__01-45-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "09a4d278-ed10-42c8-9734-19dbdb3faf4f"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": null,
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "RuntimeError",
+        "exception_message": "Agent setup failed with exit code 1. See logs in jobs/ha-kimi-k2.6/2026-04-23__01-45-47/code-from-image__idfDbFr/agent/setup",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 496, in run\n    await self._setup_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 249, in _setup_agent\n    await asyncio.wait_for(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 333, in setup\n    raise RuntimeError(\n    ...<2 lines>...\n    )\nRuntimeError: Agent setup failed with exit code 1. See logs in jobs/ha-kimi-k2.6/2026-04-23__01-45-47/code-from-image__idfDbFr/agent/setup\n",
+        "occurred_at": "2026-04-23T03:26:26.402516"
+    },
+    "started_at": "2026-04-23T03:25:46.927981Z",
+    "finished_at": "2026-04-23T03:26:26.697879Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T03:25:46.929066Z",
+        "finished_at": "2026-04-23T03:25:48.156080Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T03:25:48.156094Z",
+        "finished_at": "2026-04-23T03:26:26.208395Z"
+    },
+    "agent_execution": null,
+    "verifier": null
+}

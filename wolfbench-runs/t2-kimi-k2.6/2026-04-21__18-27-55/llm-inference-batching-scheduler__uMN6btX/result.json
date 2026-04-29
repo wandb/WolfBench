@@ -1,0 +1,115 @@
+{
+    "id": "5c21ab39-2be0-4927-a244-70703250097d",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__uMN6btX",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-kimi-k2.6/2026-04-21__18-27-55/llm-inference-batching-scheduler__uMN6btX",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__uMN6btX",
+        "trials_dir": "jobs/t2-kimi-k2.6/2026-04-21__18-27-55",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "cb33d517-eb45-45fe-95f8-38fc186473ed"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/kimi-k2.6",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 150840,
+        "n_cache_tokens": 123648,
+        "n_output_tokens": 21770,
+        "cost_usd": 0.1313691192,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                14546.765089035034,
+                5078.868627548218,
+                15593.15013885498,
+                19309.76128578186,
+                215924.88765716553,
+                78132.11131095886,
+                120705.43551445007,
+                28954.222917556763,
+                20954.745769500732,
+                13712.579250335693,
+                13271.158695220947
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-21T18:27:56.273551Z",
+    "finished_at": "2026-04-21T18:39:09.201197Z",
+    "environment_setup": {
+        "started_at": "2026-04-21T18:27:56.275583Z",
+        "finished_at": "2026-04-21T18:27:58.749701Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-21T18:27:58.749716Z",
+        "finished_at": "2026-04-21T18:28:07.711189Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-21T18:28:07.711243Z",
+        "finished_at": "2026-04-21T18:39:01.888028Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-21T18:39:03.058520Z",
+        "finished_at": "2026-04-21T18:39:08.934457Z"
+    }
+}

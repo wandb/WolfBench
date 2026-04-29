@@ -1,0 +1,124 @@
+{
+    "id": "6a104dba-5bb1-47d9-931a-64c8b5f5518f",
+    "task_name": "reshard-c4-data",
+    "trial_name": "reshard-c4-data__Jr7csr8",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06/reshard-c4-data__Jr7csr8",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "reshard-c4-data"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "19f99d7567f3e6e6ebe453523d76a69c2196bc34b0aa668abfb997d797cc6bd5",
+    "config": {
+        "task": {
+            "path": "reshard-c4-data",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "reshard-c4-data__Jr7csr8",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c67c2b61-2539-411e-9c5a-0292708eacf3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 561379,
+        "n_cache_tokens": 222720,
+        "n_output_tokens": 24715,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 20,
+            "api_request_times_msec": [
+                4079.8983573913574,
+                28842.931747436523,
+                9031.9664478302,
+                28909.711599349976,
+                36797.205209732056,
+                23227.83613204956,
+                22586.947679519653,
+                42000.582695007324,
+                10173.326969146729,
+                35266.178369522095,
+                28515.401363372803,
+                10787.131547927856,
+                31105.236291885376,
+                15472.346067428589,
+                70641.46900177002,
+                36342.57411956787,
+                32176.143884658813,
+                48943.429470062256,
+                9177.652835845947,
+                8467.46850013733
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T11:12:07.280250Z",
+    "finished_at": "2026-04-09T11:27:52.620874Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T11:12:07.281561Z",
+        "finished_at": "2026-04-09T11:12:08.849834Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T11:12:08.849851Z",
+        "finished_at": "2026-04-09T11:12:18.084994Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T11:12:18.085074Z",
+        "finished_at": "2026-04-09T11:27:00.070391Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T11:27:01.328249Z",
+        "finished_at": "2026-04-09T11:27:52.197962Z"
+    }
+}

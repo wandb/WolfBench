@@ -1,0 +1,167 @@
+{
+    "id": "886796f3-91d2-4c57-b2f2-a0eec60a94ca",
+    "task_name": "mailman",
+    "trial_name": "mailman__PAE6nQd",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06/mailman__PAE6nQd",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mailman"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "e9dc41ba89f17a0f2db146fc147c13e6ec85e80ea4f00ab460f50ac7fbacc0e9",
+    "config": {
+        "task": {
+            "path": "mailman",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mailman__PAE6nQd",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c67c2b61-2539-411e-9c5a-0292708eacf3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 3019238,
+        "n_cache_tokens": 1028032,
+        "n_output_tokens": 36639,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 62,
+            "api_request_times_msec": [
+                6338.582277297974,
+                6238.274097442627,
+                16806.432485580444,
+                19196.479320526123,
+                17827.669858932495,
+                16576.647520065308,
+                18366.81604385376,
+                12243.908405303955,
+                17893.535375595093,
+                17145.821809768677,
+                18121.41227722168,
+                24368.28875541687,
+                11469.414234161377,
+                16626.34587287903,
+                19014.158010482788,
+                13587.039470672607,
+                11959.333896636963,
+                12639.115571975708,
+                20708.643913269043,
+                18187.98327445984,
+                9131.692171096802,
+                19979.071140289307,
+                21418.978691101074,
+                22464.339017868042,
+                17803.39813232422,
+                29325.249910354614,
+                17794.51584815979,
+                16524.466514587402,
+                30701.41077041626,
+                18823.232650756836,
+                22201.582431793213,
+                20099.050760269165,
+                19742.85578727722,
+                15144.649744033813,
+                5781.702518463135,
+                34287.837743759155,
+                12274.244546890259,
+                12671.483516693115,
+                12557.430982589722,
+                22917.95039176941,
+                9474.299430847168,
+                13389.3883228302,
+                17498.369693756104,
+                15865.265130996704,
+                18355.95726966858,
+                5877.570629119873,
+                4815.710067749023,
+                47472.44358062744,
+                19726.19128227234,
+                18186.635494232178,
+                9510.0679397583,
+                35853.522300720215,
+                23862.541675567627,
+                15586.078405380249,
+                42956.995725631714,
+                53853.06167602539,
+                32705.13653755188,
+                25534.03353691101,
+                30204.325914382935,
+                25395.90811729431,
+                7268.452167510986,
+                17445.016622543335
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "VerifierTimeoutError",
+        "exception_message": "Verifier execution timed out after 1800.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/verifier/verifier.py\", line 124, in verify\n    await self._environment.exec(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 1058, in exec\n    return await self._strategy.exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 255, in exec\n    return await self._env._sandbox_exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 939, in _sandbox_exec\n    result = await self._poll_response(session_id, response.cmd_id)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 880, in _poll_response\n    await asyncio.sleep(1)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 300, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 505, in run\n    await self._run_verification()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 282, in _run_verification\n    await self._verify_with_retry()\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 189, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 111, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 153, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/_utils.py\", line 99, in inner\n    return call(*args, **kwargs)\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/__init__.py\", line 420, in exc_check\n    raise retry_exc.reraise()\n          ~~~~~~~~~~~~~~~~~^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/__init__.py\", line 187, in reraise\n    raise self.last_attempt.result()\n          ~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/tenacity/asyncio/__init__.py\", line 114, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 305, in _verify_with_retry\n    raise VerifierTimeoutError(\n    ...<3 lines>...\n    ) from e\nharbor.trial.trial.VerifierTimeoutError: Verifier execution timed out after 1800.0 seconds\n",
+        "occurred_at": "2026-04-09T12:53:28.334787"
+    },
+    "started_at": "2026-04-09T11:15:35.576335Z",
+    "finished_at": "2026-04-09T12:53:28.665686Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T11:15:35.576818Z",
+        "finished_at": "2026-04-09T11:15:37.486040Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T11:15:37.486054Z",
+        "finished_at": "2026-04-09T11:15:56.245282Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T11:15:56.245332Z",
+        "finished_at": "2026-04-09T11:53:25.790267Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T11:53:27.329544Z",
+        "finished_at": "2026-04-09T12:53:28.332936Z"
+    }
+}

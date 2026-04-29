@@ -130,6 +130,14 @@ def _resolve_thinking(r: dict) -> str:
     return _normalize_thinking(r.get("thinking"))
 
 
+def _resolve_version(r: dict) -> str:
+    """Return display version for grouping, falling back to the raw agent version."""
+    vd = r.get("version_display") or ""
+    if vd:
+        return vd
+    return r.get("agent_version") or "unknown"
+
+
 def is_run_uploaded(manifest: dict, key: str, timestamp: str) -> bool:
     """Check if a run was already uploaded."""
     eval_entry = manifest.get("evaluations", {}).get(key)
@@ -162,7 +170,7 @@ def group_runs(runs: list[dict]) -> dict[str, list[dict]]:
     """Group runs by (agent, version, model_display, timeout, thinking) manifest key."""
     groups: dict[str, list[dict]] = {}
     for r in runs:
-        ver = r.get("agent_version") or "unknown"
+        ver = _resolve_version(r)
         thinking = _resolve_thinking(r)
         key = manifest_key(r["agent"], ver, _resolve_display_name(r), r.get("timeout_sec"), thinking)
         groups.setdefault(key, []).append(r)

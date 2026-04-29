@@ -1,0 +1,118 @@
+{
+    "id": "5795a331-173b-4f17-97f9-79da9a950011",
+    "task_name": "protein-assembly",
+    "trial_name": "protein-assembly__aCd3WdF",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gpt-5.5-xhigh/2026-04-25__15-58-32/protein-assembly__aCd3WdF",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "protein-assembly"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b8df06c6c42605ec37afb3b9c6e2f4feb1be9663380bd7129fcbaa9559253a60",
+    "config": {
+        "task": {
+            "path": "protein-assembly",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "protein-assembly__aCd3WdF",
+        "trials_dir": "jobs/t2-gpt-5.5-xhigh/2026-04-25__15-58-32",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ac36abe5-3234-40f4-ac17-40bcd6eb3b46"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 255604,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 85624,
+        "cost_usd": 2.864084,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                18327.663898468018,
+                36885.96749305725,
+                259189.78214263916,
+                241720.49069404602,
+                49162.11724281311,
+                75104.60901260376,
+                165852.88286209106,
+                131057.97815322876,
+                168752.79927253723,
+                121531.11219406128,
+                139373.437166214
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-25T16:07:10.854916Z",
+    "finished_at": "2026-04-25T16:33:41.973098Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T16:07:10.855946Z",
+        "finished_at": "2026-04-25T16:07:32.038475Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T16:07:32.038489Z",
+        "finished_at": "2026-04-25T16:07:43.969386Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T16:07:43.969447Z",
+        "finished_at": "2026-04-25T16:33:35.140787Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T16:33:35.878234Z",
+        "finished_at": "2026-04-25T16:33:41.655604Z"
+    }
+}

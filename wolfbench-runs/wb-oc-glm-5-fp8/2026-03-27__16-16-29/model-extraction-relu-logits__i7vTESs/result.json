@@ -1,0 +1,109 @@
+{
+    "id": "fdd2fc24-71c3-4445-a93a-91d2013e0557",
+    "task_name": "model-extraction-relu-logits",
+    "trial_name": "model-extraction-relu-logits__i7vTESs",
+    "trial_uri": "file:///root/harbor/jobs/wb-oc-glm-5-fp8/2026-03-27__16-16-29/model-extraction-relu-logits__i7vTESs",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "model-extraction-relu-logits"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "d0dd8f420350bee97f2d47a2b0c74996be0146aa7bd6f8a1871d9629200dc359",
+    "config": {
+        "task": {
+            "path": "model-extraction-relu-logits",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "model-extraction-relu-logits__i7vTESs",
+        "trials_dir": "jobs/wb-oc-glm-5-fp8/2026-03-27__16-16-29",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 131072,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "dd38503b-5c8d-4cdd-a7a9-34e1a374c85d"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 100023,
+        "n_cache_tokens": 1056192,
+        "n_output_tokens": 20160,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T16:50:54.366431Z",
+    "finished_at": "2026-03-27T17:14:54.657444Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T16:50:54.370086Z",
+        "finished_at": "2026-03-27T16:50:57.462936Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T16:50:57.462958Z",
+        "finished_at": "2026-03-27T16:51:36.376814Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T16:51:36.377123Z",
+        "finished_at": "2026-03-27T17:14:35.555734Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T17:14:38.847415Z",
+        "finished_at": "2026-03-27T17:14:52.296672Z"
+    }
+}

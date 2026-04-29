@@ -365,7 +365,7 @@ def _(all_vms, hcr, mo, raw_results, scan_completed):
                 _dur = f"{_h}h{_m:02d}m"
 
             # Split model: provider/vendor/model or provider/model
-            _model_full = _run.get("model", "unknown")
+            _model_full = _run.get("model") or "unknown"
             _model_parts = _model_full.split("/")
             if len(_model_parts) >= 3:
                 _provider = _model_parts[0]
@@ -451,9 +451,7 @@ def _(all_vms, hcr, mo, raw_results, scan_completed):
                 "provider": _provider,
                 "vendor": _vendor,
                 "model": _model_name,
-                "model_display": _run.get("model_display") or "",
                 "thinking": _thinking,
-                "thinking_display": _run.get("thinking_display") or "",
                 "score": _score_str,
                 "pass": _run.get("n_passed", 0),
                 "fail": _run.get("n_failed", 0),
@@ -503,7 +501,7 @@ def _(all_table_rows, mo, scan_completed):
         )
         row_filter_apply = mo.ui.run_button(label="Apply")
         valid_condition = mo.ui.text(
-            value="agent!=cline-cli,score!=0.0%,tasks=89,timeout=*s,errors<10",
+            value="job!=*-dev*,agent!=cline-cli,score!=0.0%,tasks=89,timeout=*s,errors<10",
             label="Valid condition (col op val, comma-separated — same col = OR):",
             full_width=True,
         )
@@ -761,8 +759,11 @@ def _(OVERRIDES_FILE, json, mo):
 @app.cell
 def _(get_overrides, mo, selected_runs):
     # Build one row per unique (job, agent, version, model, thinking).
-    # Two editable fields: model display + thinking display.
-    display_name_inputs = {}
+    # Five editable fields: version, provider, vendor, model, thinking.
+    version_inputs = {}
+    provider_inputs = {}
+    vendor_inputs = {}
+    model_inputs = {}
     thinking_inputs = {}
 
     def _norm_thinking(t):
@@ -784,31 +785,56 @@ def _(get_overrides, mo, selected_runs):
             _key = f"{_job}|{_agent}|{_version}|{_model}|{_thinking}"
             if _key not in _seen:
                 _se = _stored.get(_key, {})
-                _existing_model = _se.get("model_display", "")
-                _existing_thinking = _se.get("thinking_display", "")
                 _short = _model.split("/")[-1] if "/" in _model else _model
                 _parts = _model.split("/")
-                _provider = _parts[0] if len(_parts) >= 2 else "-"
-                _vendor = _parts[1] if len(_parts) >= 3 else _provider
+                if len(_parts) >= 3:
+                    _provider = _parts[0]
+                    _vendor = _parts[1]
+                elif len(_parts) == 2:
+                    _provider = _parts[0]
+                    _vendor = _parts[0]
+                else:
+                    _provider = "-"
+                    _vendor = "-"
                 _seen[_key] = {
-                    "job": _job, "agent": _agent, "model": _short,
-                    "existing_model": _existing_model,
-                    "existing_thinking": _existing_thinking,
+                    "job": _job, "agent": _agent,
+                    "version": _version,
                     "provider": _provider, "vendor": _vendor,
-                    "version": _version, "thinking": _thinking,
+                    "model": _short, "thinking": _thinking,
+                    "existing_version": _se.get("version_display", ""),
+                    "existing_provider": _se.get("provider_display", ""),
+                    "existing_vendor": _se.get("vendor_display", ""),
+                    "existing_model": _se.get("model_display", ""),
+                    "existing_thinking": _se.get("thinking_display", ""),
                 }
         # Header row
+        _widths = [1.2, 1, 1, 1, 1, 2, 1]
         _header = mo.hstack([
             mo.md("**job**"),
             mo.md("**agent**"),
             mo.md("**version**"),
             mo.md("**provider**"),
             mo.md("**vendor**"),
-            mo.md("**model display**"),
+            mo.md("**model**"),
             mo.md("**thinking**"),
-        ], widths=[1.2, 1, 1, 1, 1, 2, 1], gap=0.5)
+        ], widths=_widths, gap=0.5)
         _rows = [_header]
         for _key, _info in sorted(_seen.items()):
+            _version_input = mo.ui.text(
+                value=_info["existing_version"],
+                placeholder=_info["version"],
+                full_width=True,
+            )
+            _provider_input = mo.ui.text(
+                value=_info["existing_provider"],
+                placeholder=_info["provider"],
+                full_width=True,
+            )
+            _vendor_input = mo.ui.text(
+                value=_info["existing_vendor"],
+                placeholder=_info["vendor"],
+                full_width=True,
+            )
             _model_input = mo.ui.text(
                 value=_info["existing_model"],
                 placeholder=_info["model"],
@@ -819,18 +845,21 @@ def _(get_overrides, mo, selected_runs):
                 placeholder=_info["thinking"],
                 full_width=True,
             )
-            display_name_inputs[_key] = _model_input
+            version_inputs[_key] = _version_input
+            provider_inputs[_key] = _provider_input
+            vendor_inputs[_key] = _vendor_input
+            model_inputs[_key] = _model_input
             thinking_inputs[_key] = _thinking_input
             _rows.append(
                 mo.hstack([
                     mo.md(_info["job"]),
                     mo.md(_info["agent"]),
-                    mo.md(_info["version"]),
-                    mo.md(_info["provider"]),
-                    mo.md(_info["vendor"]),
+                    _version_input,
+                    _provider_input,
+                    _vendor_input,
                     _model_input,
                     _thinking_input,
-                ], widths=[1.2, 1, 1, 1, 1, 2, 1], gap=0.5, align="center")
+                ], widths=_widths, gap=0.5, align="center")
             )
         _apply_btn = mo.ui.run_button(label="Apply Overrides")
         _output = mo.vstack([
@@ -842,14 +871,17 @@ def _(get_overrides, mo, selected_runs):
         apply_names_btn = _apply_btn
     else:
         apply_names_btn = None
-        thinking_inputs = {}
         _output = mo.md("")
     _output
-    return apply_names_btn, display_name_inputs, thinking_inputs
+    return (
+        apply_names_btn, model_inputs, provider_inputs,
+        thinking_inputs, vendor_inputs, version_inputs,
+    )
 
 
 @app.cell
-def _(OVERRIDES_FILE, apply_names_btn, display_name_inputs, json, set_overrides, thinking_inputs):
+def _(OVERRIDES_FILE, apply_names_btn, json, model_inputs, provider_inputs,
+      set_overrides, thinking_inputs, vendor_inputs, version_inputs):
     # Collect widget values on Apply and merge into persistent session store.
     # Also writes to overrides.json for cross-session persistence (survives reload).
     # Uses set_overrides (NOT get_overrides) to avoid reactive cycle;
@@ -857,17 +889,22 @@ def _(OVERRIDES_FILE, apply_names_btn, display_name_inputs, json, set_overrides,
     if (
         apply_names_btn is not None
         and apply_names_btn.value
-        and display_name_inputs
+        and model_inputs
     ):
         _new = {}
-        for _key in display_name_inputs:
-            _md = display_name_inputs[_key].value.strip()
-            _td = thinking_inputs[_key].value.strip() if _key in thinking_inputs else ""
+        _field_inputs = [
+            ("version_display", version_inputs),
+            ("provider_display", provider_inputs),
+            ("vendor_display", vendor_inputs),
+            ("model_display", model_inputs),
+            ("thinking_display", thinking_inputs),
+        ]
+        for _key in model_inputs:
             _entry = {}
-            if _md:
-                _entry["model_display"] = _md
-            if _td:
-                _entry["thinking_display"] = _td
+            for _field, _inputs in _field_inputs:
+                _v = _inputs[_key].value.strip() if _key in _inputs else ""
+                if _v:
+                    _entry[_field] = _v
             if _entry:
                 _new[_key] = _entry
         # Merge with existing file (reads file, not mo.state, to avoid cycle)
@@ -879,7 +916,7 @@ def _(OVERRIDES_FILE, apply_names_btn, display_name_inputs, json, set_overrides,
                 pass
         _merged = {**_existing, **_new}
         # Remove keys that were explicitly cleared (visible but empty)
-        for _key in display_name_inputs:
+        for _key in model_inputs:
             if _key not in _new and _key in _merged:
                 del _merged[_key]
         if _merged:
@@ -887,7 +924,7 @@ def _(OVERRIDES_FILE, apply_names_btn, display_name_inputs, json, set_overrides,
         elif OVERRIDES_FILE.exists():
             OVERRIDES_FILE.unlink()
         # Update session state
-        set_overrides(lambda _old: {**{k: v for k, v in _old.items() if k not in display_name_inputs}, **_new})
+        set_overrides(lambda _old: {**{k: v for k, v in _old.items() if k not in model_inputs}, **_new})
     return ()
 
 
@@ -904,6 +941,10 @@ def _(get_overrides, selected_runs):
 
     _stored = get_overrides()
     final_valid = []
+    _display_fields = (
+        "version_display", "provider_display", "vendor_display",
+        "model_display", "thinking_display",
+    )
     if selected_runs:
         for _r in selected_runs:
             _rd = _r.get("run_dir", "")
@@ -912,16 +953,9 @@ def _(get_overrides, selected_runs):
                 f"{_job}|{_r.get('agent', '?')}|{_r.get('agent_version') or '-'}"
                 f"|{_r.get('model', 'unknown')}|{_norm_thinking(_r.get('thinking'))}"
             )
-            if _key in _stored:
-                _s = _stored[_key]
-                _patch = {
-                    "model_display": _s.get("model_display", ""),
-                    "thinking_display": _s.get("thinking_display", ""),
-                }
-            else:
-                # No active override — clear any stale display values
-                # that were previously baked into config.json
-                _patch = {"model_display": "", "thinking_display": ""}
+            _s = _stored.get(_key, {})
+            # No active override -> clear any stale display value baked into config.json
+            _patch = {_f: _s.get(_f, "") for _f in _display_fields}
             final_valid.append({**_r, **_patch})
     return (final_valid,)
 
@@ -1290,11 +1324,13 @@ def _(Path, datetime, final_excluded, final_valid, json, mo, save_button):
         with open(_excluded_path, "w") as _f:
             json.dump(_excluded_data, _f, indent=2)
 
-        # Persist display overrides (model_display, thinking_display) to local config.json
+        # Persist display overrides to local config.json
+        _override_fields = (
+            "version_display", "provider_display", "vendor_display",
+            "model_display", "thinking_display",
+        )
         _n_overrides = 0
         for _r in final_valid:
-            _md = _r.get("model_display") or ""
-            _td = _r.get("thinking_display") or ""
             _rd = _r.get("run_dir", "")
             if not _rd:
                 continue
@@ -1304,7 +1340,8 @@ def _(Path, datetime, final_excluded, final_valid, json, mo, save_button):
             try:
                 _cfg = json.loads(_cfg_path.read_text())
                 _changed = False
-                for _field, _val in [("model_display", _md), ("thinking_display", _td)]:
+                for _field in _override_fields:
+                    _val = _r.get(_field) or ""
                     _old = _cfg.get(_field, "")
                     if _val != _old:
                         if _val:
@@ -1503,11 +1540,14 @@ def _(Path, chart_html, mo, subprocess, symlink_checkbox, upload_button, upload_
                             capture_output=True, text=True,
                         )
                         if _r2.returncode == 0:
-                            _parts.append(f"Symlinked `index.html` → `{_filename}`")
+                            _parts.append(f"Symlinked `index.html` → `{_filename}` — [wolfbench.ai](https://wolfbench.ai)")
                         else:
                             _parts.append(
                                 f"**Symlink failed:**\n```\n{(_r2.stdout + _r2.stderr).strip()}\n```"
                             )
+
+                # Add direct link to uploaded file
+                _parts.append(f"[https://wolfbench.ai/{_filename}](https://wolfbench.ai/{_filename})")
 
                 _upload_msg = mo.callout(
                     mo.md("\n\n".join(_parts)),

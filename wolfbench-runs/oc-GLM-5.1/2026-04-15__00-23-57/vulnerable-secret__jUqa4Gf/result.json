@@ -1,0 +1,103 @@
+{
+    "id": "a8490e8a-ec55-4c0c-98ee-418f161edc9e",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__jUqa4Gf",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-GLM-5.1/2026-04-15__00-23-57/vulnerable-secret__jUqa4Gf",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__jUqa4Gf",
+        "trials_dir": "jobs/oc-GLM-5.1/2026-04-15__00-23-57",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 202752,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3b2eea62-1c56-462e-b71e-05291541a1a7"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 22897,
+        "n_cache_tokens": 112192,
+        "n_output_tokens": 1553,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-15T00:49:21.405200Z",
+    "finished_at": "2026-04-15T00:52:37.755056Z",
+    "environment_setup": {
+        "started_at": "2026-04-15T00:49:21.406504Z",
+        "finished_at": "2026-04-15T00:49:23.141863Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-15T00:49:23.141879Z",
+        "finished_at": "2026-04-15T00:50:00.919048Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-15T00:50:00.919243Z",
+        "finished_at": "2026-04-15T00:52:27.532733Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-15T00:52:29.345369Z",
+        "finished_at": "2026-04-15T00:52:37.217928Z"
+    }
+}

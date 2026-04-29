@@ -1,0 +1,188 @@
+{
+    "id": "b8c3d624-e419-40c0-8cba-f37617e51345",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__e99fuFh",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.18.0-sd-trtllm/2026-03-31__22-13-30/train-fasttext__e99fuFh",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__e99fuFh",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.18.0-sd-trtllm/2026-03-31__22-13-30",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "6ce68f4d-5462-4319-a157-c3c929f44adc"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1428189,
+        "n_cache_tokens": 290880,
+        "n_output_tokens": 12164,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 68,
+            "api_request_times_msec": [
+                4661.338329315186,
+                5048.986911773682,
+                5777.016639709473,
+                4471.16494178772,
+                3362.0686531066895,
+                10432.395458221436,
+                7226.239204406738,
+                6968.525409698486,
+                4463.354587554932,
+                2283.292531967163,
+                6930.043935775757,
+                1940.9589767456055,
+                6980.015754699707,
+                3627.8393268585205,
+                10336.427211761475,
+                9935.37712097168,
+                8076.10297203064,
+                5096.917390823364,
+                7778.673887252808,
+                2535.1438522338867,
+                3147.3846435546875,
+                2485.8455657958984,
+                2926.8507957458496,
+                3710.8893394470215,
+                4539.070844650269,
+                4532.91916847229,
+                7167.251348495483,
+                10666.587352752686,
+                16888.26584815979,
+                21696.789741516113,
+                11865.325927734375,
+                2731.7018508911133,
+                2352.724313735962,
+                11799.139976501465,
+                10699.822902679443,
+                15391.002178192139,
+                30811.219930648804,
+                11921.623229980469,
+                24208.861589431763,
+                54239.644050598145,
+                25575.944185256958,
+                25499.561548233032,
+                27868.723392486572,
+                35591.17531776428,
+                17927.168130874634,
+                23072.863817214966,
+                32488.75069618225,
+                27020.25055885315,
+                26904.478073120117,
+                28333.58860015869,
+                21028.391122817993,
+                16725.94904899597,
+                8043.376684188843,
+                18418.03503036499,
+                8273.253440856934,
+                20862.595558166504,
+                31583.540439605713,
+                29649.7004032135,
+                19360.066413879395,
+                21101.53031349182,
+                11579.206466674805,
+                10563.988447189331,
+                9308.041095733643,
+                3970.264673233032,
+                5710.155487060547,
+                5563.226699829102,
+                3255.9773921966553,
+                4328.671216964722
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1597, in run\n    await self._run_agent_loop(\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1412, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1227, in _execute_commands\n    await session.send_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 646, in send_keys\n    await self._send_non_blocking_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 606, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 665, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 519, in wait_for\n    async with timeouts.timeout(timeout):\n  File \"/usr/lib/python3.12/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 277, in _execute_agent\n    raise AgentTimeoutError(\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-31T23:17:38.534957"
+    },
+    "started_at": "2026-03-31T22:17:24.922740Z",
+    "finished_at": "2026-03-31T23:18:00.157066Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T22:17:24.968913Z",
+        "finished_at": "2026-03-31T22:17:27.783094Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T22:17:27.783114Z",
+        "finished_at": "2026-03-31T22:17:38.516892Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T22:17:38.517133Z",
+        "finished_at": "2026-03-31T23:17:38.531375Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T23:17:40.887897Z",
+        "finished_at": "2026-03-31T23:17:58.407714Z"
+    }
+}

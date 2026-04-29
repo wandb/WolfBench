@@ -1,0 +1,170 @@
+{
+    "id": "565a813c-e2b1-4d26-89e6-0e35a171c245",
+    "task_name": "fix-ocaml-gc",
+    "trial_name": "fix-ocaml-gc__8Cy5vwJ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-fp8/2026-04-15__04-01-38/fix-ocaml-gc__8Cy5vwJ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-ocaml-gc"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "faa983dd79f63daa168b41c753bddb0621822820ba6f16661a9767b815e436e8",
+    "config": {
+        "task": {
+            "path": "fix-ocaml-gc",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-ocaml-gc__8Cy5vwJ",
+        "trials_dir": "jobs/t2-glm-5-fp8/2026-04-15__04-01-38",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "5de25085-6087-4004-9118-8f3c530645cd"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1535641,
+        "n_cache_tokens": 1360512,
+        "n_output_tokens": 63023,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 61,
+            "api_request_times_msec": [
+                11718.18995475769,
+                7491.3976192474365,
+                12157.307863235474,
+                6218.306541442871,
+                13741.100788116455,
+                13318.814516067505,
+                9788.26093673706,
+                9187.64853477478,
+                8698.02474975586,
+                9776.134252548218,
+                8095.199823379517,
+                6351.914644241333,
+                6823.741436004639,
+                5568.709135055542,
+                6213.0186557769775,
+                8344.711065292358,
+                7235.144376754761,
+                10742.130994796753,
+                13571.964740753174,
+                34044.71015930176,
+                84179.26692962646,
+                17407.593727111816,
+                58288.30146789551,
+                65715.66271781921,
+                68414.40677642822,
+                50947.283029556274,
+                59546.26822471619,
+                73039.77680206299,
+                14066.271781921387,
+                4006.124496459961,
+                54158.69879722595,
+                41566.57958030701,
+                41483.773946762085,
+                4981.396675109863,
+                7786.746025085449,
+                719999.2454051971,
+                28005.64932823181,
+                7422.41096496582,
+                48605.077028274536,
+                5832.7202796936035,
+                14725.53277015686,
+                43549.74174499512,
+                281870.15652656555,
+                76148.90694618225,
+                82772.47214317322,
+                75540.96913337708,
+                90840.62480926514,
+                11056.828737258911,
+                115150.30312538147,
+                44559.87334251404,
+                85062.70337104797,
+                78776.80897712708,
+                42287.25552558899,
+                46568.4928894043,
+                46765.61260223389,
+                87713.01460266113,
+                33056.13946914673,
+                61116.16110801697,
+                31475.965976715088,
+                31684.09824371338,
+                5329.8585414886475
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1504, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1325, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1142, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 563, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 523, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 718, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 259, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 506, in wait_for\n    async with timeouts.timeout(timeout):\n               ~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/timeouts.py\", line 116, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 483, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    raise AgentTimeoutError(\n        f\"Agent execution timed out after {self._agent_timeout_sec} seconds\"\n    ) from e\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-04-15T05:34:00.869984"
+    },
+    "started_at": "2026-04-15T04:33:46.584514Z",
+    "finished_at": "2026-04-15T05:36:53.240065Z",
+    "environment_setup": {
+        "started_at": "2026-04-15T04:33:46.585571Z",
+        "finished_at": "2026-04-15T04:33:47.847504Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-15T04:33:47.847519Z",
+        "finished_at": "2026-04-15T04:34:00.856948Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-15T04:34:00.857001Z",
+        "finished_at": "2026-04-15T05:34:00.866558Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-15T05:34:01.800217Z",
+        "finished_at": "2026-04-15T05:36:52.923015Z"
+    }
+}

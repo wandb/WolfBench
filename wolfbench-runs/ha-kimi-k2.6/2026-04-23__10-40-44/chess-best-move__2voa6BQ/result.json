@@ -1,0 +1,108 @@
+{
+    "id": "4758479f-984d-4356-a3cd-bb8176105c6a",
+    "task_name": "chess-best-move",
+    "trial_name": "chess-best-move__2voa6BQ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__10-40-44/chess-best-move__2voa6BQ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "chess-best-move"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a31d482d846322d57f0e3ee3c56d4ff2171fe39908dadd8092d036f17114fbef",
+    "config": {
+        "task": {
+            "path": "chess-best-move",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "chess-best-move__2voa6BQ",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__10-40-44",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ea6032d7-1191-4ed7-8f42-51dc942e4cb0"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 👁️ preparing vision_analyze…\r\n  ┊ 👁️  vision    What is the current chess position? Identify all pieces and their squares. It is white to move.  0.1s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/chess_board.png  0.8s\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python3 -c \"import cv2; print('cv2 ok')\" 2>/dev/null || echo \"no cv2\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         python3 -c \"import cv2; print('cv2 ok')\" 2>/dev/null || echo \"no cv2\"  60.0s [exit -1]\r\n  ┊ 🌐 preparing browser_navigate…\r\n  ┊ 🌐 navigate  file:  0.0s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         which infsh 2>/dev/null || echo \"no infsh\"  0.3s\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      which python3 2>/dev/null && python3 -c \"from PIL import Image; img = Image.open('/app/chess_board.png'); print(img.size)\" 2> ... [truncated]\nStderr:\nbash: line 1:  4523 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      4524 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 👁️ preparing vision_analyze…\r\n  ┊ 👁️  vision    What is the current chess position? Identify all pieces and their squares. It is white to move.  0.1s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         ls -la /app/chess_board.png  0.8s\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python3 -c \"import cv2; print('cv2 ok')\" 2>/dev/null || echo \"no cv2\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         python3 -c \"import cv2; print('cv2 ok')\" 2>/dev/null || echo \"no cv2\"  60.0s [exit -1]\r\n  ┊ 🌐 preparing browser_navigate…\r\n  ┊ 🌐 navigate  file:  0.0s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         which infsh 2>/dev/null || echo \"no infsh\"  0.3s\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      which python3 2>/dev/null && python3 -c \"from PIL import Image; img = Image.open('/app/chess_board.png'); print(img.size)\" 2> ... [truncated]\nStderr:\nbash: line 1:  4523 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      4524 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-23T13:18:34.159878"
+    },
+    "started_at": "2026-04-23T12:44:54.918342Z",
+    "finished_at": "2026-04-23T13:18:46.197046Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T12:44:54.919757Z",
+        "finished_at": "2026-04-23T12:44:56.653253Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T12:44:56.653284Z",
+        "finished_at": "2026-04-23T12:46:20.915528Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-23T12:46:20.915622Z",
+        "finished_at": "2026-04-23T13:18:34.158675Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-23T13:18:35.729980Z",
+        "finished_at": "2026-04-23T13:18:45.695002Z"
+    }
+}

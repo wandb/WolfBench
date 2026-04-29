@@ -1,0 +1,168 @@
+{
+    "id": "5be05803-b56b-46b6-b5e5-b4f4377563d3",
+    "task_name": "mteb-leaderboard",
+    "trial_name": "mteb-leaderboard__myHJgm4",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/t2-GLM-5.1/2026-04-14__03-58-17/mteb-leaderboard__myHJgm4",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mteb-leaderboard"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "8c2f8d63470a11b27a25e2630e407a5eb9e9fbeda599d3df7f9bc5f2f7aeff20",
+    "config": {
+        "task": {
+            "path": "mteb-leaderboard",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mteb-leaderboard__myHJgm4",
+        "trials_dir": "jobs/t2-GLM-5.1/2026-04-14__03-58-17",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "deb0f2e4-efd3-4a5e-8089-962e72244120"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 2008856,
+        "n_cache_tokens": 1788480,
+        "n_output_tokens": 28250,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 66,
+            "api_request_times_msec": [
+                10489.665985107422,
+                5018.762588500977,
+                10926.765441894531,
+                11008.391857147217,
+                10180.121421813965,
+                7091.2275314331055,
+                7834.638833999634,
+                9449.438333511353,
+                18844.948768615723,
+                21895.671129226685,
+                25905.718088150024,
+                9771.087169647217,
+                9163.69342803955,
+                8814.428567886353,
+                25970.659017562866,
+                41185.08696556091,
+                3897.7572917938232,
+                3295.3357696533203,
+                3166.8701171875,
+                3159.318685531616,
+                33073.8468170166,
+                12178.181648254395,
+                21573.731660842896,
+                12439.793586730957,
+                8798.685550689697,
+                15577.285766601562,
+                11293.88165473938,
+                14922.061443328857,
+                2843.2059288024902,
+                19462.131023406982,
+                4114.366769790649,
+                44585.115909576416,
+                3277.958393096924,
+                4018.2759761810303,
+                4176.253318786621,
+                3847.3880290985107,
+                4779.545783996582,
+                47849.36213493347,
+                39734.09605026245,
+                22770.955324172974,
+                8286.803722381592,
+                21231.16898536682,
+                17443.581104278564,
+                13036.716938018799,
+                8994.440793991089,
+                10335.60848236084,
+                10884.199142456055,
+                12401.041507720947,
+                12961.382627487183,
+                12985.780477523804,
+                41953.18150520325,
+                41647.15838432312,
+                3547.5051403045654,
+                9124.695777893066,
+                3551.5642166137695,
+                3302.9935359954834,
+                3479.04372215271,
+                3538.36727142334,
+                3643.2411670684814,
+                28891.0915851593,
+                13542.638540267944,
+                11030.680179595947,
+                23623.89826774597,
+                9410.7506275177,
+                25908.976554870605,
+                45192.68012046814
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "DaytonaError",
+        "exception_message": "Failed to create session: Cannot connect to host proxy.app.daytona.io:443 ssl:default [Name or service not known]",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 1562, in _create_direct_connection\n    hosts = await self._resolve_host(host, port, traces=traces)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 1178, in _resolve_host\n    return await asyncio.shield(resolved_host_task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 1209, in _resolve_host_with_throttle\n    addrs = await self._resolver.resolve(host, port, family=self._family)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/resolver.py\", line 40, in resolve\n    infos = await self._loop.getaddrinfo(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<5 lines>...\n    )\n    ^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/base_events.py\", line 939, in getaddrinfo\n    return await self.run_in_executor(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        None, getaddr_func, host, port, family, type, proto, flags)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/concurrent/futures/thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/socket.py\", line 977, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\n               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsocket.gaierror: [Errno -2] Name or service not known\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_utils/errors.py\", line 88, in async_wrapper\n    return await func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_async/process.py\", line 259, in create_session\n    await self._api_client.create_session(request=request)\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/pydantic/_internal/_validate_call.py\", line 34, in wrapper_function\n    return await wrapper(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona_toolbox_api_client_async/api/process_api.py\", line 635, in create_session\n    response_data = await self.api_client.call_api(\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/internal/toolbox_api_client_proxy.py\", line 63, in call_api\n    return await self._api_client.call_api(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona_toolbox_api_client_async/api_client.py\", line 276, in call_api\n    response_data = await self.rest_client.request(\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona_toolbox_api_client_async/rest.py\", line 211, in request\n    r = await pool_manager.request(**args)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/client.py\", line 779, in _request\n    resp = await handler(req)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/client.py\", line 734, in _connect_and_send_request\n    conn = await self._connector.connect(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        req, traces=traces, timeout=real_timeout\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 672, in connect\n    proto = await self._create_connection(req, traces, timeout)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 1239, in _create_connection\n    _, proto = await self._create_direct_connection(req, traces, timeout)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/aiohttp/connector.py\", line 1568, in _create_direct_connection\n    raise ClientConnectorDNSError(req.connection_key, exc) from exc\naiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host proxy.app.daytona.io:443 ssl:default [Name or service not known]\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 483, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 259, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1504, in run\n    await self._run_agent_loop(\n    ...<4 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1325, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1142, in _execute_commands\n    await session.send_keys(\n    ...<3 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 563, in send_keys\n    await self._send_non_blocking_keys(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 518, in _send_non_blocking_keys\n    await self.environment.exec(self._tmux_send_keys(keys))\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 1058, in exec\n    return await self._strategy.exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 255, in exec\n    return await self._env._sandbox_exec(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        command, cwd=cwd, env=env, timeout_sec=timeout_sec\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/home/exedev/harbor/src/harbor/environments/daytona.py\", line 913, in _sandbox_exec\n    await self._sandbox.process.create_session(session_id)\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_utils/errors.py\", line 90, in async_wrapper\n    process_n_raise_exception(e)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/home/exedev/harbor/.venv/lib/python3.13/site-packages/daytona/_utils/errors.py\", line 81, in process_n_raise_exception\n    raise DaytonaError(msg)  # pylint: disable=raise-missing-from\n    ^^^^^^^^^^^^^^^^^^^^^^^\ndaytona.common.errors.DaytonaError: Failed to create session: Cannot connect to host proxy.app.daytona.io:443 ssl:default [Name or service not known]\n",
+        "occurred_at": "2026-04-14T06:58:27.755239"
+    },
+    "started_at": "2026-04-14T06:07:32.445644Z",
+    "finished_at": "2026-04-14T06:58:28.109899Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T06:07:32.446463Z",
+        "finished_at": "2026-04-14T06:07:33.900549Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T06:07:33.900563Z",
+        "finished_at": "2026-04-14T06:07:36.923536Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T06:07:36.923590Z",
+        "finished_at": "2026-04-14T06:58:26.754068Z"
+    },
+    "verifier": null
+}

@@ -1,0 +1,108 @@
+{
+    "id": "98fab15c-e57d-47af-9c98-0dba373aa966",
+    "task_name": "mteb-leaderboard",
+    "trial_name": "mteb-leaderboard__2fg5kji",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__10-40-44/mteb-leaderboard__2fg5kji",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mteb-leaderboard"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "8c2f8d63470a11b27a25e2630e407a5eb9e9fbeda599d3df7f9bc5f2f7aeff20",
+    "config": {
+        "task": {
+            "path": "mteb-leaderboard",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mteb-leaderboard__2fg5kji",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__10-40-44",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ea6032d7-1191-4ed7-8f42-51dc942e4cb0"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 🔀 preparing delegate_task…\r\n  [tool] (◔_◔) processing...\n  ┊ 🔀 delegate  Find the best embedding model for Scandinavian texts according to the Scandinavian MTEB leaderboard as of August 2025. I need the model with the highest Mean (Task) score, and I need the answer in the format \"organization/model_name\" (e.g. BAAI/bge-small-en-v1.5). Search the web for the Scandinavian MTEB leaderboard, look for results dated around August 2025 or the latest available, and identify the top model by Mean (Task). Return ONLY the model name in the exact format requested, or \"NOT_FOUND\" if you cannot determine it.  5.0s\r\n  ┊ 🌐 preparing browser_navigate…\r\n  ┊ 🌐 navigate  www.google.com  0.7s [error]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, re, json, sys  4.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, json, re  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, json, re  3.4s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import reques ... [truncated]\nStderr:\nbash: line 1:  3650 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3651 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 🔀 preparing delegate_task…\r\n  [tool] (◔_◔) processing...\n  ┊ 🔀 delegate  Find the best embedding model for Scandinavian texts according to the Scandinavian MTEB leaderboard as of August 2025. I need the model with the highest Mean (Task) score, and I need the answer in the format \"organization/model_name\" (e.g. BAAI/bge-small-en-v1.5). Search the web for the Scandinavian MTEB leaderboard, look for results dated around August 2025 or the latest available, and identify the top model by Mean (Task). Return ONLY the model name in the exact format requested, or \"NOT_FOUND\" if you cannot determine it.  5.0s\r\n  ┊ 🌐 preparing browser_navigate…\r\n  ┊ 🌐 navigate  www.google.com  0.7s [error]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, re, json, sys  4.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, json, re  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import requests, json, re  3.4s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import reques ... [truncated]\nStderr:\nbash: line 1:  3650 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3651 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-23T14:31:01.788532"
+    },
+    "started_at": "2026-04-23T13:36:07.653648Z",
+    "finished_at": "2026-04-23T14:31:10.084590Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T13:36:07.656535Z",
+        "finished_at": "2026-04-23T13:36:08.984161Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T13:36:08.984196Z",
+        "finished_at": "2026-04-23T13:37:04.873430Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-23T13:37:04.873658Z",
+        "finished_at": "2026-04-23T14:31:01.786536Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-23T14:31:02.660563Z",
+        "finished_at": "2026-04-23T14:31:09.772738Z"
+    }
+}

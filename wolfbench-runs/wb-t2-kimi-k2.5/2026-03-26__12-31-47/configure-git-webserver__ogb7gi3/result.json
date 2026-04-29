@@ -1,0 +1,119 @@
+{
+    "id": "9a87561f-29bc-4d39-beb4-5ea8f9613839",
+    "task_name": "configure-git-webserver",
+    "trial_name": "configure-git-webserver__ogb7gi3",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47/configure-git-webserver__ogb7gi3",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "configure-git-webserver"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3ebefab7ff093813f99af237de90b1ed73363a4eb42ea8a17096939922a16bcf",
+    "config": {
+        "task": {
+            "path": "configure-git-webserver",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "configure-git-webserver__ogb7gi3",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/moonshotai/Kimi-K2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "87e4c500-d294-4673-a978-2f23063be339"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 56199,
+        "n_cache_tokens": 18144,
+        "n_output_tokens": 3635,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                3873.598098754883,
+                1885.4193687438965,
+                3679.492950439453,
+                4715.801000595093,
+                4106.795310974121,
+                5084.958553314209,
+                4252.2406578063965,
+                3302.3910522460938,
+                3850.2490520477295
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T12:32:08.587778Z",
+    "finished_at": "2026-03-26T12:34:48.332074Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T12:32:08.589724Z",
+        "finished_at": "2026-03-26T12:32:14.490590Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T12:32:14.490607Z",
+        "finished_at": "2026-03-26T12:32:32.518907Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T12:32:32.519102Z",
+        "finished_at": "2026-03-26T12:33:59.638971Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T12:34:01.750861Z",
+        "finished_at": "2026-03-26T12:34:45.850131Z"
+    }
+}

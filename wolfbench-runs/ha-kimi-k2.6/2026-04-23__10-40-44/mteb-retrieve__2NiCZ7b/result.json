@@ -1,0 +1,108 @@
+{
+    "id": "f1441b26-11a6-4fc4-855e-92406b0d2ab8",
+    "task_name": "mteb-retrieve",
+    "trial_name": "mteb-retrieve__2NiCZ7b",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__10-40-44/mteb-retrieve__2NiCZ7b",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mteb-retrieve"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c9b88a67c599defd76f11c87dc596dbfd16e2e3ea1e40d1abec4033db888473f",
+    "config": {
+        "task": {
+            "path": "mteb-retrieve",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mteb-retrieve__2NiCZ7b",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__10-40-44",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ea6032d7-1191-4ed7-8f42-51dc942e4cb0"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/data.txt  0.9s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  60.9s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  121.3s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  0.4s\r\n  ┊ ✍️ preparing write_file…\r\n  ┊ ✍️  write     /app/run_embedding.py  0.6s\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         python3 /app/run_embedding.py  7.1s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/result.txt  0.9s\r\n\r\n╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮\r\nDone. I loaded `BAAI/bge-small-zh-v1.5` at revision `7999e1d3359715c523056ef9478215996d62a620`, computed embeddings for the query \"terminal-bench\" and all 30 documents, ranked them by cosine similarity, and wrote the 5th-highest match to `/app/result.txt`:\r\n\r\nDone. I loaded `BAAI/bge-small-zh-v1.5` at revision `7999e1d3359715c523056ef9478215996d62a620`, comp ... [truncated]\nStderr:\nbash: line 1:  3956 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3957 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/data.txt  0.9s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  60.9s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  121.3s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      from hermes_tools import terminal  0.4s\r\n  ┊ ✍️ preparing write_file…\r\n  ┊ ✍️  write     /app/run_embedding.py  0.6s\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         python3 /app/run_embedding.py  7.1s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/result.txt  0.9s\r\n\r\n╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮\r\nDone. I loaded `BAAI/bge-small-zh-v1.5` at revision `7999e1d3359715c523056ef9478215996d62a620`, computed embeddings for the query \"terminal-bench\" and all 30 documents, ranked them by cosine similarity, and wrote the 5th-highest match to `/app/result.txt`:\r\n\r\nDone. I loaded `BAAI/bge-small-zh-v1.5` at revision `7999e1d3359715c523056ef9478215996d62a620`, comp ... [truncated]\nStderr:\nbash: line 1:  3956 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3957 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-23T11:12:10.564571"
+    },
+    "started_at": "2026-04-23T11:06:35.148821Z",
+    "finished_at": "2026-04-23T11:12:33.831689Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T11:06:35.149823Z",
+        "finished_at": "2026-04-23T11:06:36.353157Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T11:06:36.353169Z",
+        "finished_at": "2026-04-23T11:07:35.336443Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-23T11:07:35.336617Z",
+        "finished_at": "2026-04-23T11:12:10.562749Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-23T11:12:11.262219Z",
+        "finished_at": "2026-04-23T11:12:33.522890Z"
+    }
+}

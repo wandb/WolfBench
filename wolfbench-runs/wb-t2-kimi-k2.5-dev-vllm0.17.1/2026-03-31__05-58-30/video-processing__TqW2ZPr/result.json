@@ -1,0 +1,131 @@
+{
+    "id": "329edfb7-ded8-4ac1-a31c-0d1bb30f9a1d",
+    "task_name": "video-processing",
+    "trial_name": "video-processing__TqW2ZPr",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30/video-processing__TqW2ZPr",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "video-processing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b62eef3fb5c016796ec8b1eda72f2be68fcb44844d2dbe12776412e1580a33b3",
+    "config": {
+        "task": {
+            "path": "video-processing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "video-processing__TqW2ZPr",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b908f8ba-419c-4901-abd2-0e7eda73a057"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 149278,
+        "n_cache_tokens": 134144,
+        "n_output_tokens": 8173,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 16,
+            "api_request_times_msec": [
+                7131.558656692505,
+                9436.87391281128,
+                9700.777769088745,
+                15590.294599533081,
+                17368.607997894287,
+                14708.955764770508,
+                16019.049644470215,
+                15090.45958518982,
+                25092.642307281494,
+                3150.7656574249268,
+                21609.56382751465,
+                3131.671667098999,
+                2941.5383338928223,
+                3904.170274734497,
+                9727.826833724976,
+                8456.587314605713
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-31T06:03:19.410728Z",
+    "finished_at": "2026-03-31T06:07:35.653059Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T06:03:19.417678Z",
+        "finished_at": "2026-03-31T06:03:22.539855Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T06:03:22.539886Z",
+        "finished_at": "2026-03-31T06:03:33.355685Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T06:03:33.355870Z",
+        "finished_at": "2026-03-31T06:07:20.338326Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T06:07:22.250886Z",
+        "finished_at": "2026-03-31T06:07:33.847055Z"
+    }
+}

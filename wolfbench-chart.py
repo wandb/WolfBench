@@ -19,6 +19,11 @@ from html import escape as _html_escape
 from pathlib import Path
 
 TOTAL_TASKS = 89
+DEFAULT_RUNS = 5       # Baseline run count — hidden on bars; only deviations shown
+DEFAULT_TIMEOUT_H = 1  # Baseline timeout in hours — hidden on bars; only deviations shown
+DEFAULT_VERSIONS = {   # Baseline agent versions — hidden on bars; only deviations shown
+    "terminus-2": "2.0.0",
+}
 
 AGENT_CONFIG = {
     "terminus-2": {
@@ -49,6 +54,20 @@ AGENT_CONFIG = {
                         "0 0 8px rgba(253,235,208,0.2)"),
         },
     },
+    "hermes": {
+        "label": "HA",
+        "name": "Hermes Agent",
+        "gradient": {
+            "solid":   ("linear-gradient(135deg, #5a4d00 0%, #7d6b00 40%, #b39700 70%, #f1c40f 100%)",
+                        "0 0 12px rgba(241,196,15,0.3)"),
+            "average": ("linear-gradient(135deg, #7d6b00 0%, #f1c40f 40%, #f4d03f 70%, #f7dc6f 100%)",
+                        "0 0 12px rgba(244,208,63,0.3)"),
+            "best":    ("linear-gradient(135deg, #f1c40f 0%, #f7dc6f 40%, #f9e79f 70%, #fcf3cf 100%)",
+                        "0 0 12px rgba(247,220,111,0.3)"),
+            "ceiling": ("linear-gradient(135deg, #f7dc6f 0%, #fcf3cf 40%, #fef9e7 70%, #fffdf2 100%)",
+                        "0 0 8px rgba(252,243,207,0.2)"),
+        },
+    },
     "openclaw": {
         "label": "OC",
         "name": "OpenClaw",
@@ -75,6 +94,34 @@ AGENT_CONFIG = {
                         "0 0 12px rgba(210,180,222,0.3)"),
             "ceiling": ("linear-gradient(135deg, #bb8fce 0%, #e8daef 40%, #f4ecf7 70%, #faf5fc 100%)",
                         "0 0 8px rgba(232,218,239,0.2)"),
+        },
+    },
+    "cursor-cli": {
+        "label": "CA",
+        "name": "Cursor",
+        "gradient": {
+            "solid":   ("linear-gradient(135deg, #0e3855 0%, #1a5276 40%, #2874a6 70%, #3498db 100%)",
+                        "0 0 12px rgba(52,152,219,0.3)"),
+            "average": ("linear-gradient(135deg, #1a5276 0%, #3498db 40%, #5dade2 70%, #85c1e9 100%)",
+                        "0 0 12px rgba(93,173,226,0.3)"),
+            "best":    ("linear-gradient(135deg, #3498db 0%, #85c1e9 40%, #aed6f1 70%, #d6eaf8 100%)",
+                        "0 0 12px rgba(133,193,233,0.3)"),
+            "ceiling": ("linear-gradient(135deg, #85c1e9 0%, #d6eaf8 40%, #eaf5fb 70%, #f4fafd 100%)",
+                        "0 0 8px rgba(214,234,248,0.2)"),
+        },
+    },
+    "codex": {
+        "label": "CX",
+        "name": "Codex",
+        "gradient": {
+            "solid":   ("linear-gradient(135deg, #1e1b4b 0%, #3730a3 40%, #4f46e5 70%, #6366f1 100%)",
+                        "0 0 12px rgba(99,102,241,0.3)"),
+            "average": ("linear-gradient(135deg, #3730a3 0%, #6366f1 40%, #818cf8 70%, #a5b4fc 100%)",
+                        "0 0 12px rgba(129,140,248,0.3)"),
+            "best":    ("linear-gradient(135deg, #6366f1 0%, #a5b4fc 40%, #c7d2fe 70%, #e0e7ff 100%)",
+                        "0 0 12px rgba(165,180,252,0.3)"),
+            "ceiling": ("linear-gradient(135deg, #a5b4fc 0%, #e0e7ff 40%, #eef2ff 70%, #f5f7ff 100%)",
+                        "0 0 8px rgba(224,231,255,0.2)"),
         },
     },
 }
@@ -121,12 +168,38 @@ def _resolve_thinking(r: dict) -> str:
     return _normalize_thinking(r.get("thinking"))
 
 
+def _resolve_version(r: dict) -> str:
+    """Return agent version: version_display override if set, else agent_version."""
+    vd = r.get("version_display") or ""
+    if vd:
+        return vd
+    return r.get("agent_version") or "-"
+
+
+def _resolve_provider_vendor(r: dict) -> tuple[str, str]:
+    """Return (provider, vendor): overrides if set, else split from model path."""
+    model_full = r.get("model", "unknown")
+    parts = model_full.split("/")
+    if len(parts) >= 3:
+        provider = parts[0]
+        vendor = parts[1]
+    elif len(parts) == 2:
+        provider = parts[0]
+        vendor = parts[0]
+    else:
+        provider = "-"
+        vendor = "-"
+    pd = r.get("provider_display") or ""
+    vd = r.get("vendor_display") or ""
+    return (pd or provider, vd or vendor)
+
+
 METRIC_LABELS = {
+    "ceiling": ("★", "Ceiling",  "ever solved"),
+    "best":    ("▲", "Best-of",  "peak run"),
+    "average": ("∅", "Average",  "mean score"),
     "worst":   ("▼", "Worst-of", "lowest run"),
     "solid":   ("■", "Solid",    "always solved"),
-    "average": ("∅", "Average",  "mean score"),
-    "best":    ("▲", "Best-of",  "peak run"),
-    "ceiling": ("★", "Ceiling",  "ever solved"),
 }
 
 
@@ -148,18 +221,26 @@ def compute_metrics(runs: list[dict]) -> dict | None:
     timeouts = [r.get("timeout_sec") for r in runs if r.get("timeout_sec") is not None]
     timeout_sec = max(set(timeouts), key=timeouts.count) if timeouts else None
 
+    avg_score = sum(scores) / len(scores)
     return {
         "n_runs": n_runs,
         "min": round(min(scores) * 100),
         "solid": round(solid / TOTAL_TASKS * 100),
-        "average": round(sum(scores) / len(scores) * 100),
+        "average": round(avg_score * 100),
         "best": round(max(scores) * 100),
         "ceiling": round(ceiling / TOTAL_TASKS * 100),
         "min_abs": round(min(scores) * TOTAL_TASKS),
         "solid_abs": solid,
-        "avg_abs": round(sum(scores) / len(scores) * TOTAL_TASKS),
+        "avg_abs": round(avg_score * TOTAL_TASKS),
         "best_abs": round(max(scores) * TOTAL_TASKS),
         "ceiling_abs": ceiling,
+        # Raw unrounded values (0-TOTAL_TASKS range) for tiebreak comparisons —
+        # avoid rounding artifacts like 63 vs 64 both displaying as 71%.
+        "min_raw": min(scores) * TOTAL_TASKS,
+        "solid_raw": float(solid),
+        "avg_raw": avg_score * TOTAL_TASKS,
+        "best_raw": max(scores) * TOTAL_TASKS,
+        "ceiling_raw": float(ceiling),
         "timeout_sec": timeout_sec,
     }
 
@@ -352,21 +433,11 @@ def _build_runs_table_html(runs: list[dict]) -> str:
         # Agent (full name) + version in brackets: "OpenClaw (v2026.2.17)"
         agent = r.get("agent", "?")
         agent_name = AGENT_CONFIG.get(agent, {}).get("name", agent)
-        ver = r.get("agent_version") or "-"
+        ver = _resolve_version(r)
         agent_ver = f"{agent_name} ({ver})" if ver != "-" else agent_name
 
-        # Provider / Vendor from full model path
-        model_full = r.get("model", "unknown")
-        model_parts = model_full.split("/")
-        if len(model_parts) >= 3:
-            provider = model_parts[0]
-            vendor = model_parts[1]
-        elif len(model_parts) == 2:
-            provider = model_parts[0]
-            vendor = model_parts[0]
-        else:
-            provider = "-"
-            vendor = "-"
+        # Provider / Vendor (override if set, else split from full model path)
+        provider, vendor = _resolve_provider_vendor(r)
 
         model = _resolve_display_name(r)
 
@@ -403,23 +474,24 @@ def _build_runs_table_html(runs: list[dict]) -> str:
         # cost = r.get("cost_usd")
         # cost_str = f"${cost:.2f}" if cost else "-"
 
+        _passed_json = json.dumps(r.get("passed_tasks", []), separators=(",", ":"))
         rows.append(
-            f"<tr>"
+            f"<tr data-agent=\"{_html_escape(agent)}\" data-model=\"{_html_escape(model)}\" data-passed='{_passed_json}'>"
             f"<td>{_html_escape(date_time)}</td>"
             f"<td>{_html_escape(agent_ver)}</td>"
             f"<td>{_html_escape(provider)}</td>"
             f"<td>{_html_escape(vendor)}</td>"
             f"<td>{_html_escape(model)}</td>"
             f"<td>{think}</td>"
-            f"<td class='n'>{score}</td>"
-            f"<td class='n'>{n_p}</td>"
-            f"<td class='n'>{n_f}</td>"
+            f"<td>{score}</td>"
+            f"<td>{n_p}</td>"
+            f"<td>{n_f}</td>"
             f"<td>{to_str}</td>"
-            f"<td class='n'>{ato}</td>"
-            f"<td class='n'>{lost}</td>"
+            f"<td>{ato}</td>"
+            f"<td>{lost}</td>"
             f"<td>{dur}</td>"
-            f"<td class='n'>{tok_in}</td>"
-            f"<td class='n'>{tok_out}</td>"
+            f"<td>{tok_in}</td>"
+            f"<td>{tok_out}</td>"
             # f"<td class='n'>{cost_str}</td>"
             f"</tr>"
         )
@@ -435,7 +507,7 @@ def _build_runs_table_html(runs: list[dict]) -> str:
     _never_solved = TOTAL_TASKS - _solved_once
     _pct = lambda x: round(x / TOTAL_TASKS * 100)
     _task_stats_html = (
-        f'<p class="task-stats">Across these runs, '
+        f'<p class="task-stats" id="taskStats" data-total-tasks="{TOTAL_TASKS}">Across these runs, '
         f'{_solved_once} ({_pct(_solved_once)}%) of the {TOTAL_TASKS} tasks were solved at least once, '
         f'{_solved_always} ({_pct(_solved_always)}%) were solved every time, '
         f'and {_never_solved} ({_pct(_never_solved)}%) were never solved.</p>'
@@ -451,7 +523,7 @@ def _build_runs_table_html(runs: list[dict]) -> str:
         f'<th data-sort="desc">Date</th><th>Agent</th>'
         f'<th>Provider</th><th>Vendor</th><th>Model</th><th>Think</th>'
         f'<th>Score</th><th>Pass</th><th>Fail</th>'
-        f'<th>Timeout</th><th>T/O</th><th>Err</th>'
+        f'<th>Timeout</th><th>Timeouts</th><th>Err</th>'
         f'<th>Duration</th>'
         f'<th>In</th><th>Out</th>'
         # f'<th>Cost</th>'
@@ -487,11 +559,23 @@ def generate_html(
     for (agent, ver, model, timeout, thinking), metrics in groups.items():
         models_with_data[model][(agent, ver, timeout, thinking)] = metrics
 
-    model_order = sorted(
-        models_with_data.keys(),
-        key=lambda m: max(v["average"] for v in models_with_data[m].values()),
-        reverse=True,
-    )
+    # Tiebreaker cascade within each agent: primary metric (avg) first,
+    # then others in legend-display order. Missing agent ranks last.
+    # Uses RAW (unrounded) values to avoid rounding artifacts in ties.
+    _TIEBREAK_METRICS = ("avg_raw", "ceiling_raw", "best_raw", "min_raw", "solid_raw")
+
+    def _model_sort_key(m: str) -> tuple[float, ...]:
+        key: list[float] = []
+        for a in AGENT_CONFIG:
+            agent_data = [v for (ag, *_), v in models_with_data[m].items() if ag == a]
+            for data_key in _TIEBREAK_METRICS:
+                if agent_data:
+                    key.append(-max(v[data_key] for v in agent_data))
+                else:
+                    key.append(1)  # missing agent ranks after any real score (negated: -N..0)
+        return tuple(key)
+
+    model_order = sorted(models_with_data.keys(), key=_model_sort_key)
 
     # Ordered (agent, version, timeout, thinking) quads: AGENT_CONFIG order, then version/timeout/thinking asc
     _seen_quads: set[tuple[str, str, float | None, str]] = set()
@@ -517,38 +601,78 @@ def generate_html(
         group_bar_widths = []
         # Per-agent per-metric scores for JS re-sorting on agent/metric filter
         _scores: dict[str, dict[str, float]] = {}
+        _raw_key = {"solid": "solid_raw", "average": "avg_raw", "best": "best_raw",
+                    "ceiling": "ceiling_raw", "worst": "min_raw"}
         for _a in agent_order:
             _am: dict[str, float] = {}
             for (ag, ver_, to_, th_), v in models_with_data[model].items():
                 if ag == _a:
                     for _mk in ("solid", "average", "best", "ceiling"):
                         _am[_mk] = max(_am.get(_mk, 0.0), v[_mk])
+                        _rk = _raw_key[_mk]
+                        _am[_mk + "_raw"] = max(_am.get(_mk + "_raw", 0.0), v[_rk])
                     _am["worst"] = max(_am.get("worst", 0.0), v["min"])
+                    _am["worst_raw"] = max(_am.get("worst_raw", 0.0), v["min_raw"])
             if _am:
-                _scores[_a] = {k: round(v, 1) for k, v in _am.items()}
+                _scores[_a] = {k: (round(v, 4) if k.endswith("_raw") else round(v, 1))
+                               for k, v in _am.items()}
         _scores_json = json.dumps(_scores, separators=(",", ":"))
-        for agent, ver, timeout, thinking in agent_ver_order:
-            if (agent, ver, timeout, thinking) not in models_with_data[model]:
-                continue
+        # Within each agent, sort variants by score cascade (avg → ceiling → best → worst → solid).
+        # Uses raw values to avoid rounding ties. Matches JS within-agent tiebreaker.
+        _ordered_quads: list[tuple[str, str, float | None, str]] = []
+        for _a in AGENT_CONFIG:
+            _variants = [
+                (ag, ver, to, th)
+                for (ag, ver, to, th) in models_with_data[model]
+                if ag == _a
+            ]
+            _variants.sort(key=lambda q: (
+                -models_with_data[model][q]["avg_raw"],
+                -models_with_data[model][q]["ceiling_raw"],
+                -models_with_data[model][q]["best_raw"],
+                -models_with_data[model][q]["min_raw"],
+                -models_with_data[model][q]["solid_raw"],
+            ))
+            _ordered_quads.extend(_variants)
+        for agent, ver, timeout, thinking in _ordered_quads:
             m = models_with_data[model][(agent, ver, timeout, thinking)]
             cfg = AGENT_CONFIG[agent]
             segments = _bar_segments_html(m, cfg)
             n_runs = m["n_runs"]
-            bar_w = max(28, round(68 / 5 * min(n_runs, 10)))
+            bar_w = 32 if n_runs == 1 else 56 + 8 * max(0, min(n_runs, 10) - 5)
             group_bar_widths.append(bar_w)
-            timeout_str = f"@{_fmt_timeout_h(m.get('timeout_sec'))}" if m.get("timeout_sec") else ""
-            ver_display = ver if ver != "unknown" else "-"
+            _to_sec = m.get("timeout_sec")
+            _to_h = _to_sec / 3600 if _to_sec else None
+            _runs_diff = n_runs != DEFAULT_RUNS
+            _to_diff = _to_h is not None and _to_h != DEFAULT_TIMEOUT_H
+            _run_label = ""
+            if _runs_diff and _to_diff:
+                _run_label = f"{n_runs}R@{_fmt_timeout_h(_to_sec)}"
+            elif _runs_diff:
+                _run_label = f"{n_runs}R"
+            elif _to_diff:
+                _run_label = _fmt_timeout_h(_to_sec)
+            _ver_is_default = ver == "unknown" or ver == DEFAULT_VERSIONS.get(agent)
+            ver_line = "" if _ver_is_default else f'<br><span class="version-label">{ver}</span>'
             thinking_line = f'<br><span class="thinking-label">\U0001f9e0 {thinking}</span>' if thinking != "-" else ""
             _wurl = (weave_urls or {}).get((agent, ver, model, m.get("timeout_sec"), thinking))
             _wopen = f'<a href="{_html_escape(_wurl)}" target="_blank" class="bar-link" title="View on W&amp;B Weave">' if _wurl else ""
             _wclose = "</a>" if _wurl else ""
+            _bar_scores = {k: round(m[k], 1) for k in ("solid", "average", "best", "ceiling")}
+            _bar_scores["worst"] = round(m["min"], 1)
+            _bar_scores["solid_raw"] = round(m["solid_raw"], 4)
+            _bar_scores["average_raw"] = round(m["avg_raw"], 4)
+            _bar_scores["best_raw"] = round(m["best_raw"], 4)
+            _bar_scores["ceiling_raw"] = round(m["ceiling_raw"], 4)
+            _bar_scores["worst_raw"] = round(m["min_raw"], 4)
+            _bar_scores_json = json.dumps(_bar_scores, separators=(",", ":"))
             bars_html.append(f'''
-                <div class="bar-wrapper" data-agent="{agent}" data-runs="{n_runs}">
-                    <div class="bar-top-label">{cfg["label"]}<br><span class="version-label">{ver_display}</span>{thinking_line}</div>
+                <div class="bar-wrapper" data-agent="{agent}" data-runs="{n_runs}" data-bar-scores='{_bar_scores_json}' draggable="true">
+                    <div class="bar-top-label"><span class="agent-label">{cfg["label"]}</span>{ver_line}{thinking_line}</div>
                     {_wopen}<div class="bar" data-agent="{agent}" style="width: {bar_w}px;">
                         {segments}
                     </div>{_wclose}
-                    <div class="bar-bottom-label"><span class="run-count">{n_runs}R{timeout_str}</span></div>
+                    <div class="bar-bottom-label">{f'<span class="run-count">{_run_label}</span>' if _run_label else ''}</div>
                 </div>''')
 
         group_w = (sum(group_bar_widths) + max(0, len(group_bar_widths) - 1) * 8) if group_bar_widths else 0
@@ -568,7 +692,7 @@ def generate_html(
     # Minimum chart width based on actual bar content
     n_groups = len(model_group_widths)
     chart_min_w = (
-        sum(model_group_widths) + max(0, n_groups - 1) * 68 + 2 * 48
+        sum(model_group_widths) + max(0, n_groups - 1) * 64 + 2 * 24
     ) if n_groups else 400
 
     # Legend
@@ -576,7 +700,7 @@ def generate_html(
     for agent in agent_order:
         cfg = AGENT_CONFIG[agent]
         legend_agents.append(
-            f'<span class="legend-agent legend-agent-{agent}">'
+            f'<span class="legend-agent legend-agent-{agent}" data-agent="{agent}" draggable="true">'
             f'{cfg["label"]} = {cfg["name"]}</span>'
         )
 
@@ -751,8 +875,7 @@ def generate_html(
     color: #c9d1d9;
     border-bottom: 1px solid rgba(46,51,56,0.6);
 }
-.runs-table td.n {
-    text-align: right;
+.runs-table td {
     font-variant-numeric: tabular-nums;
 }
 .runs-table tbody tr:nth-child(even) {
@@ -790,6 +913,28 @@ def generate_html(
         + "\n    };"
     )
 
+    longpress_js = """(function() {
+    // Long-press detection for touch AND mouse (acts as Shift/Ctrl+Click)
+    var LP_MS = 400;
+    window._longPressed = false;
+    function addLongPress(el) {
+        var timer = null;
+        function start() { window._longPressed = false; timer = setTimeout(function() { window._longPressed = true; }, LP_MS); }
+        function cancel() { clearTimeout(timer); window._longPressed = false; }
+        function stop() { clearTimeout(timer); }
+        // Touch
+        el.addEventListener('touchstart', start, {passive: true});
+        el.addEventListener('touchend', stop);
+        el.addEventListener('touchmove', cancel, {passive: true});
+        el.addEventListener('touchcancel', cancel);
+        // Mouse
+        el.addEventListener('mousedown', start);
+        el.addEventListener('mouseup', stop);
+        el.addEventListener('mouseleave', cancel);
+    }
+    document.querySelectorAll('.legend-agent, .model-btn').forEach(addLongPress);
+})();"""
+
     agent_toggle_js = """(function() {
 AGENT_VERSIONS_PLACEHOLDER
     var agentLegends = document.querySelectorAll('.legend-agent');
@@ -800,7 +945,7 @@ AGENT_VERSIONS_PLACEHOLDER
     var versionLine = document.getElementById('agentVersionLine');
     var versionLineDefault = versionLine ? versionLine.innerHTML : '';
 
-    // Shared filter state
+    // Shared filter state (agents initialized after allAgentIds is built)
     window._filterAgents = {};
     window._filterMetric = null;
 
@@ -818,40 +963,44 @@ AGENT_VERSIONS_PLACEHOLDER
     // Apply on initial load
     highlightSortMetric(null);
 
-    // Reorder models by score based on active agent/metric filters
+    // Check if only one agent exists at load time
+    var initAgents = {};
+    barWrappers.forEach(function(b) { initAgents[b.getAttribute('data-agent')] = true; });
+    var chartAreaInit = document.querySelector('.chart-area');
+    if (chartAreaInit) chartAreaInit.classList.toggle('single-agent', Object.keys(initAgents).length <= 1);
+
+    // Reorder models by cascading agent priority (agent-bar order = sort priority).
+    // Within each agent, cascade through metrics before moving to the next agent:
+    // primary metric (filter or 'average') first, then remaining metrics in legend order.
     window.reorderModels = function() {
         if (!modelsRow) return;
-        var agentKeys = Object.keys(window._filterAgents);
-        var agent = agentKeys.length === 1 ? agentKeys[0] : null;
-        var metric = window._filterMetric;
+        var agentBarEl = document.querySelector('.agent-bar');
+        var agentOrder = agentBarEl
+            ? Array.from(agentBarEl.querySelectorAll('.legend-agent:not(.dimmed)')).map(function(b) { return b.getAttribute('data-agent'); })
+            : [];
+        var primary = window._filterMetric || 'average';
+        var legendOrder = ['ceiling', 'best', 'average', 'worst', 'solid'];
+        var metricOrder = [primary].concat(legendOrder.filter(function(k) { return k !== primary; }));
+        // Use raw (unrounded) values to avoid rounding ties (e.g. 63 vs 64 both showing as 71%).
+        var rawKey = {ceiling: 'ceiling_raw', best: 'best_raw', average: 'average_raw',
+                      worst: 'worst_raw', solid: 'solid_raw'};
         var groups = Array.from(modelsRow.querySelectorAll('.model-group'));
-        if (agentKeys.length > 0 || metric) {
-            var m = metric || 'average';
-            groups.sort(function(a, b) {
-                var sa = -1, sb = -1;
-                try {
-                    var ja = JSON.parse(a.getAttribute('data-scores') || '{}');
-                    var jb = JSON.parse(b.getAttribute('data-scores') || '{}');
-                    if (agent) {
-                        sa = (ja[agent] && ja[agent][m]) || -1;
-                        sb = (jb[agent] && jb[agent][m]) || -1;
-                    } else if (agentKeys.length > 1) {
-                        agentKeys.forEach(function(ak) {
-                            if (ja[ak] && ja[ak][m] > sa) sa = ja[ak][m];
-                            if (jb[ak] && jb[ak][m] > sb) sb = jb[ak][m];
-                        });
-                    } else {
-                        for (var k in ja) { if (ja[k][m] > sa) sa = ja[k][m]; }
-                        for (var k in jb) { if (jb[k][m] > sb) sb = jb[k][m]; }
+        groups.sort(function(a, b) {
+            try {
+                var ja = JSON.parse(a.getAttribute('data-scores') || '{}');
+                var jb = JSON.parse(b.getAttribute('data-scores') || '{}');
+                for (var i = 0; i < agentOrder.length; i++) {
+                    var ag = agentOrder[i];
+                    for (var j = 0; j < metricOrder.length; j++) {
+                        var mk = rawKey[metricOrder[j]];
+                        var sa = (ja[ag] && ja[ag][mk] != null) ? ja[ag][mk] : -1;
+                        var sb = (jb[ag] && jb[ag][mk] != null) ? jb[ag][mk] : -1;
+                        if (sa !== sb) return sb - sa;
                     }
-                } catch(e) {}
-                return sb - sa;
-            });
-        } else {
-            groups.sort(function(a, b) {
-                return parseInt(a.getAttribute('data-orig-order')) - parseInt(b.getAttribute('data-orig-order'));
-            });
-        }
+                }
+            } catch(e) {}
+            return 0;
+        });
         groups.forEach(function(g) { modelsRow.appendChild(g); });
         if (modelBar) {
             var btnMap = {};
@@ -866,14 +1015,16 @@ AGENT_VERSIONS_PLACEHOLDER
         highlightSortMetric(window._filterMetric);
     };
 
-    // Hidden agents (Ctrl/Shift+click toggle, like model buttons)
-    var hiddenAgents = {};
+    // Collect all agent IDs and init filter with all active
+    var allAgentIds = [];
+    agentLegends.forEach(function(l) { var a = l.getAttribute('data-agent'); if (a) allAgentIds.push(a); });
+    allAgentIds.forEach(function(a) { window._filterAgents[a] = true; });
 
     // Apply current agent filter state to DOM
     function applyAgentFilter() {
         var sel = window._filterAgents;
         var nSel = Object.keys(sel).length;
-        var nHid = Object.keys(hiddenAgents).length;
+        var allActive = nSel === allAgentIds.length;
 
         // Reset
         agentLegends.forEach(function(l) { l.classList.remove('dimmed'); });
@@ -881,16 +1032,11 @@ AGENT_VERSIONS_PLACEHOLDER
         modelGroups.forEach(function(g) { g.classList.remove('model-hidden'); });
         if (modelsRow) modelsRow.classList.remove('agent-filtered');
 
-        if (nSel > 0) {
-            // Exclusive select mode: show only selected agents
+        if (!allActive && nSel > 0) {
+            // Subset selected: show only those
             agentLegends.forEach(function(l) {
-                var match = false;
-                l.classList.forEach(function(cls) {
-                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
-                        if (sel[cls.replace('legend-agent-', '')]) match = true;
-                    }
-                });
-                l.classList.toggle('dimmed', !match);
+                var a = l.getAttribute('data-agent');
+                l.classList.toggle('dimmed', !sel[a]);
             });
             barWrappers.forEach(function(b) {
                 b.classList.toggle('agent-hidden', !sel[b.getAttribute('data-agent')]);
@@ -911,78 +1057,124 @@ AGENT_VERSIONS_PLACEHOLDER
             } else if (versionLine) {
                 versionLine.innerHTML = versionLineDefault;
             }
-        } else if (nHid > 0) {
-            // Hide-toggle mode: hide individually toggled agents
-            agentLegends.forEach(function(l) {
-                l.classList.forEach(function(cls) {
-                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
-                        if (hiddenAgents[cls.replace('legend-agent-', '')]) l.classList.add('dimmed');
-                    }
-                });
-            });
-            barWrappers.forEach(function(b) {
-                b.classList.toggle('agent-hidden', !!hiddenAgents[b.getAttribute('data-agent')]);
-            });
-            modelGroups.forEach(function(g) {
-                var allHidden = true;
-                g.querySelectorAll('.bar-wrapper').forEach(function(w) {
-                    if (!hiddenAgents[w.getAttribute('data-agent')]) allHidden = false;
-                });
-                g.classList.toggle('model-hidden', allHidden);
-            });
-            if (modelsRow) modelsRow.classList.add('agent-filtered');
-            if (versionLine) versionLine.innerHTML = versionLineDefault;
         } else {
-            // No filter
+            // All active — no filter
             if (versionLine) versionLine.innerHTML = versionLineDefault;
         }
+        // Count visible agents — hide top labels when only one is shown
+        var visibleAgents = {};
+        barWrappers.forEach(function(b) {
+            if (!b.classList.contains('agent-hidden')) visibleAgents[b.getAttribute('data-agent')] = true;
+        });
+        var chartArea = document.querySelector('.chart-area');
+        if (chartArea) chartArea.classList.toggle('single-agent', Object.keys(visibleAgents).length <= 1);
+
         window.reorderModels();
         if (window.updateChartWidth) window.updateChartWidth();
+        if (window.filterRunsTable) window.filterRunsTable();
     }
+
+    // Drag to reorder agents (reorders bar-wrappers inside each model group)
+    var agentBar = document.querySelector('.agent-bar');
+    var agentDragSrc = null;
+
+    function reorderBarsToMatchAgentButtons() {
+        var order = Array.prototype.slice.call(agentBar.querySelectorAll('.legend-agent')).map(function(b) {
+            return b.getAttribute('data-agent');
+        });
+        // Within-agent tiebreaker: score cascade using raw values
+        var primary = window._filterMetric || 'average';
+        var legendOrder = ['ceiling', 'best', 'average', 'worst', 'solid'];
+        var metricOrder = [primary].concat(legendOrder.filter(function(k) { return k !== primary; }));
+        var rawKey = {ceiling: 'ceiling_raw', best: 'best_raw', average: 'average_raw',
+                      worst: 'worst_raw', solid: 'solid_raw'};
+        document.querySelectorAll('.bars-row').forEach(function(row) {
+            var wrappers = Array.prototype.slice.call(row.querySelectorAll('.bar-wrapper'));
+            wrappers.sort(function(a, b) {
+                var ai = order.indexOf(a.getAttribute('data-agent'));
+                var bi = order.indexOf(b.getAttribute('data-agent'));
+                if (ai !== bi) return ai - bi;
+                // Same agent: cascade metrics (primary first, then legend order)
+                try {
+                    var sa = JSON.parse(a.getAttribute('data-bar-scores') || '{}');
+                    var sb = JSON.parse(b.getAttribute('data-bar-scores') || '{}');
+                    for (var j = 0; j < metricOrder.length; j++) {
+                        var mk = rawKey[metricOrder[j]];
+                        var va = sa[mk] != null ? sa[mk] : -1;
+                        var vb = sb[mk] != null ? sb[mk] : -1;
+                        if (va !== vb) return vb - va;
+                    }
+                } catch(e) {}
+                return 0;
+            });
+            wrappers.forEach(function(w) { row.appendChild(w); });
+        });
+    }
+
+    agentLegends.forEach(function(btn) {
+        btn.addEventListener('dragstart', function(e) {
+            agentDragSrc = btn;
+            btn.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', btn.getAttribute('data-agent'));
+        });
+        btn.addEventListener('dragend', function() {
+            btn.classList.remove('dragging');
+            btn.setAttribute('data-just-dragged', 'true');
+            setTimeout(function() { btn.removeAttribute('data-just-dragged'); }, 50);
+            agentLegends.forEach(function(b) { b.classList.remove('drag-over'); });
+            agentDragSrc = null;
+        });
+        btn.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            if (btn !== agentDragSrc) btn.classList.add('drag-over');
+        });
+        btn.addEventListener('dragleave', function() { btn.classList.remove('drag-over'); });
+        btn.addEventListener('drop', function(e) {
+            e.preventDefault();
+            btn.classList.remove('drag-over');
+            if (!agentDragSrc || agentDragSrc === btn) return;
+            var allBtns = Array.prototype.slice.call(agentBar.querySelectorAll('.legend-agent'));
+            var srcIdx = allBtns.indexOf(agentDragSrc);
+            var tgtIdx = allBtns.indexOf(btn);
+            if (srcIdx < tgtIdx) {
+                agentBar.insertBefore(agentDragSrc, btn.nextSibling);
+            } else {
+                agentBar.insertBefore(agentDragSrc, btn);
+            }
+            reorderBarsToMatchAgentButtons();
+            window.reorderModels();
+        });
+    });
 
     agentLegends.forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.stopPropagation();
-            var agent = null;
-            el.classList.forEach(function(cls) {
-                if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
-                    agent = cls.replace('legend-agent-', '');
-                }
-            });
+            if (el.getAttribute('data-just-dragged') === 'true') {
+                el.removeAttribute('data-just-dragged');
+                return;
+            }
+            var agent = el.getAttribute('data-agent');
             if (!agent) return;
 
-            if (e.ctrlKey || e.metaKey || e.shiftKey) {
-                var nSel = Object.keys(window._filterAgents).length;
-                if (nSel > 0) {
-                    // Have exclusive selection: add/remove from it
-                    if (window._filterAgents[agent]) {
-                        delete window._filterAgents[agent];
-                        // Last one removed: convert to hide-toggle with all hidden
-                        if (Object.keys(window._filterAgents).length === 0) {
-                            agentLegends.forEach(function(l) {
-                                l.classList.forEach(function(cls) {
-                                    if (cls.indexOf('legend-agent-') === 0 && cls !== 'legend-agent') {
-                                        hiddenAgents[cls.replace('legend-agent-', '')] = true;
-                                    }
-                                });
-                            });
-                        }
-                    } else {
-                        window._filterAgents[agent] = true;
-                    }
+            var _lp = window._longPressed; window._longPressed = false;
+            if (e.ctrlKey || e.metaKey || e.shiftKey || _lp) {
+                // Toggle this agent
+                if (window._filterAgents[agent]) {
+                    delete window._filterAgents[agent];
                 } else {
-                    // No selection: hide-toggle (like model buttons)
-                    if (hiddenAgents[agent]) {
-                        delete hiddenAgents[agent];
-                    } else {
-                        hiddenAgents[agent] = true;
-                    }
+                    window._filterAgents[agent] = true;
+                }
+                // None active → all active
+                if (Object.keys(window._filterAgents).length === 0) {
+                    allAgentIds.forEach(function(a) { window._filterAgents[a] = true; });
                 }
             } else {
-                // Normal click: exclusive single-select (or deselect)
-                hiddenAgents = {};
+                // Exclusive select (or deselect if only active)
                 if (Object.keys(window._filterAgents).length === 1 && window._filterAgents[agent]) {
                     window._filterAgents = {};
+                    allAgentIds.forEach(function(a) { window._filterAgents[a] = true; });
                 } else {
                     window._filterAgents = {};
                     window._filterAgents[agent] = true;
@@ -991,6 +1183,191 @@ AGENT_VERSIONS_PLACEHOLDER
             applyAgentFilter();
         });
     });
+
+    // Bar sort toggle: 3-mode cycle
+    //   0 = bars by agent order, models by agent-priority cascade (default)
+    //   1 = bars by score within model, models by agent-priority cascade
+    //   2 = bars by score within model, models by max score across visible agents
+    var barSortMode = 0;
+    var barSortToggle = document.getElementById('barSortToggle');
+
+    function reorderBarsByScore() {
+        // Use raw (absolute count) keys so ties on rounded % break correctly.
+        var m = (window._filterMetric || 'average') + '_raw';
+        document.querySelectorAll('.bars-row').forEach(function(row) {
+            var wrappers = Array.prototype.slice.call(row.querySelectorAll('.bar-wrapper'));
+            wrappers.sort(function(a, b) {
+                try {
+                    var sa = JSON.parse(a.getAttribute('data-bar-scores') || '{}');
+                    var sb = JSON.parse(b.getAttribute('data-bar-scores') || '{}');
+                    return (sb[m] || 0) - (sa[m] || 0);
+                } catch(e) {}
+                return 0;
+            });
+            wrappers.forEach(function(w) { row.appendChild(w); });
+        });
+    }
+
+    function reorderModelsByMaxScore() {
+        if (!modelsRow) return;
+        var primary = window._filterMetric || 'average';
+        var legendOrder = ['ceiling', 'best', 'average', 'worst', 'solid'];
+        var metricOrder = [primary].concat(legendOrder.filter(function(k) { return k !== primary; }));
+        var rawKey = {ceiling: 'ceiling_raw', best: 'best_raw', average: 'average_raw',
+                      worst: 'worst_raw', solid: 'solid_raw'};
+        var agentBarEl = document.querySelector('.agent-bar');
+        var visibleAgents = agentBarEl
+            ? Array.from(agentBarEl.querySelectorAll('.legend-agent:not(.dimmed)')).map(function(b) { return b.getAttribute('data-agent'); })
+            : [];
+        function maxFor(scores, metricKey) {
+            var best = -1;
+            for (var i = 0; i < visibleAgents.length; i++) {
+                var ag = visibleAgents[i];
+                var v = (scores[ag] && scores[ag][metricKey] != null) ? scores[ag][metricKey] : -1;
+                if (v > best) best = v;
+            }
+            return best;
+        }
+        var groups = Array.from(modelsRow.querySelectorAll('.model-group'));
+        groups.sort(function(a, b) {
+            try {
+                var ja = JSON.parse(a.getAttribute('data-scores') || '{}');
+                var jb = JSON.parse(b.getAttribute('data-scores') || '{}');
+                for (var j = 0; j < metricOrder.length; j++) {
+                    var mk = rawKey[metricOrder[j]];
+                    var sa = maxFor(ja, mk);
+                    var sb = maxFor(jb, mk);
+                    if (sa !== sb) return sb - sa;
+                }
+            } catch(e) {}
+            return 0;
+        });
+        groups.forEach(function(g) { modelsRow.appendChild(g); });
+        if (modelBar) {
+            var btnMap = {};
+            Array.from(modelBar.querySelectorAll('.model-btn')).forEach(function(b) {
+                btnMap[b.getAttribute('data-model')] = b;
+            });
+            groups.forEach(function(g) {
+                var btn = btnMap[g.getAttribute('data-model')];
+                if (btn) modelBar.appendChild(btn);
+            });
+        }
+        highlightSortMetric(window._filterMetric);
+    }
+
+    // Reorder agent buttons by their max score across all models (current metric cascade).
+    function reorderAgentsByMaxScore() {
+        var agentBarEl = document.querySelector('.agent-bar');
+        if (!agentBarEl) return;
+        var primary = window._filterMetric || 'average';
+        var legendOrder = ['ceiling', 'best', 'average', 'worst', 'solid'];
+        var metricOrder = [primary].concat(legendOrder.filter(function(k) { return k !== primary; }));
+        var rawKey = {ceiling: 'ceiling_raw', best: 'best_raw', average: 'average_raw',
+                      worst: 'worst_raw', solid: 'solid_raw'};
+        var agentScores = {};
+        document.querySelectorAll('.model-group').forEach(function(g) {
+            try {
+                var scores = JSON.parse(g.getAttribute('data-scores') || '{}');
+                for (var ag in scores) {
+                    if (!agentScores[ag]) agentScores[ag] = {};
+                    for (var j = 0; j < metricOrder.length; j++) {
+                        var mk = rawKey[metricOrder[j]];
+                        var v = scores[ag][mk] != null ? scores[ag][mk] : -1;
+                        if (agentScores[ag][mk] == null || v > agentScores[ag][mk]) {
+                            agentScores[ag][mk] = v;
+                        }
+                    }
+                }
+            } catch(e) {}
+        });
+        var btns = Array.prototype.slice.call(agentBarEl.querySelectorAll('.legend-agent'));
+        btns.sort(function(a, b) {
+            var sa = agentScores[a.getAttribute('data-agent')] || {};
+            var sb = agentScores[b.getAttribute('data-agent')] || {};
+            for (var j = 0; j < metricOrder.length; j++) {
+                var mk = rawKey[metricOrder[j]];
+                var va = sa[mk] != null ? sa[mk] : -1;
+                var vb = sb[mk] != null ? sb[mk] : -1;
+                if (va !== vb) return vb - va;
+            }
+            return 0;
+        });
+        btns.forEach(function(btn) { agentBarEl.appendChild(btn); });
+    }
+
+    // Snapshot/restore the user-controlled agent order around Mode 2.
+    var savedAgentOrder = null;
+    function snapshotAgentOrder() {
+        var agentBarEl = document.querySelector('.agent-bar');
+        if (!agentBarEl) return;
+        savedAgentOrder = Array.prototype.slice.call(agentBarEl.querySelectorAll('.legend-agent'))
+            .map(function(b) { return b.getAttribute('data-agent'); });
+    }
+    function restoreAgentOrder() {
+        if (!savedAgentOrder) return;
+        var agentBarEl = document.querySelector('.agent-bar');
+        if (agentBarEl) {
+            var btnMap = {};
+            Array.prototype.slice.call(agentBarEl.querySelectorAll('.legend-agent')).forEach(function(b) {
+                btnMap[b.getAttribute('data-agent')] = b;
+            });
+            savedAgentOrder.forEach(function(a) {
+                if (btnMap[a]) agentBarEl.appendChild(btnMap[a]);
+            });
+        }
+        savedAgentOrder = null;
+    }
+
+    // Mode 2: agent button drag is meaningless (bars/models don't use agent order).
+    // Disable native drag + apply a CSS hook to swap the cursor.
+    function setAgentDragEnabled(enabled) {
+        document.querySelectorAll('.legend-agent').forEach(function(b) {
+            if (enabled) {
+                b.setAttribute('draggable', 'true');
+            } else {
+                b.setAttribute('draggable', 'false');
+            }
+        });
+    }
+
+    window._barSortMode = 0;
+    if (barSortToggle) {
+        barSortToggle.addEventListener('click', function() {
+            var prev = barSortMode;
+            barSortMode = (barSortMode + 1) % 3;
+            window._barSortMode = barSortMode;
+            barSortToggle.setAttribute('data-sort-mode', String(barSortMode));
+            barSortToggle.classList.toggle('active', barSortMode > 0);
+            if (barSortMode === 2 && prev !== 2) {
+                snapshotAgentOrder();
+                reorderAgentsByMaxScore();
+                setAgentDragEnabled(false);
+            } else if (prev === 2 && barSortMode !== 2) {
+                restoreAgentOrder();
+                setAgentDragEnabled(true);
+            }
+            window.reorderModels();
+        });
+    }
+
+    // Hook into metric filter / agent filter changes to re-sort.
+    // Mode 0: agent-priority cascade for models, agent-button order for bars.
+    // Mode 1: agent-priority cascade for models, score order for bars.
+    // Mode 2: max-score cascade for models, score order for bars.
+    var origReorderModels = window.reorderModels;
+    window.reorderModels = function() {
+        if (window._barSortMode === 2) {
+            reorderModelsByMaxScore();
+        } else {
+            origReorderModels();
+        }
+        if (window._barSortMode > 0) {
+            reorderBarsByScore();
+        } else {
+            reorderBarsToMatchAgentButtons();
+        }
+    };
 })();""".replace("AGENT_VERSIONS_PLACEHOLDER", _agent_versions_js)
 
     metric_filter_js = """(function() {
@@ -1026,7 +1403,7 @@ AGENT_VERSIONS_PLACEHOLDER
             if (metric) {
                 var ceilH = parseFloat(barInner.getAttribute('data-h-ceiling'));
                 var metricH = parseFloat(barInner.getAttribute('data-h-' + metric));
-                topLabel.style.transform = 'translateY(' + (ceilH - metricH) + 'px)';
+                topLabel.style.transform = 'translateX(-50%) translateY(' + (ceilH - metricH) + 'px)';
             } else {
                 topLabel.style.transform = '';
             }
@@ -1064,6 +1441,7 @@ AGENT_VERSIONS_PLACEHOLDER
                 window._filterMetric = null;
                 window.reorderModels();
                 if (window.updateChartWidth) window.updateChartWidth();
+                if (window.filterRunsTable) window.filterRunsTable();
             } else {
                 activeMetric = metric;
                 chartArea.className = chartArea.className.replace(/metric-filter-\\w+/g, '').trim();
@@ -1079,6 +1457,7 @@ AGENT_VERSIONS_PLACEHOLDER
                 window._filterMetric = metric;
                 window.reorderModels();
                 if (window.updateChartWidth) window.updateChartWidth();
+                if (window.filterRunsTable) window.filterRunsTable();
             }
         });
     });
@@ -1190,13 +1569,17 @@ AGENT_VERSIONS_PLACEHOLDER
 })();"""
 
     model_toggle_js = """(function() {
-    var hiddenModels = {};
+    var activeModels = {};
     var modelBtns = document.querySelectorAll('.model-btn');
     var modelGroups = document.querySelectorAll('.model-group');
     var modelsRow = document.querySelector('.models-row');
     var modelBar = document.querySelector('.model-bar');
     var chartArea = document.querySelector('.chart-area');
     var dragSrc = null;
+
+    // Collect all model IDs and init with all active
+    var allModelIds = [];
+    modelBtns.forEach(function(b) { var m = b.getAttribute('data-model'); if (m) { allModelIds.push(m); activeModels[m] = true; } });
 
     // Recalculate chart min-width based on visible model groups
     window.updateChartWidth = function() {
@@ -1226,29 +1609,58 @@ AGENT_VERSIONS_PLACEHOLDER
             totalW += (n - 1) * gap + 2 * 48;
         }
         chartArea.style.minWidth = (n > 0 ? totalW : 0) + 'px';
+        if (window.adjustLabelPadding) window.adjustLabelPadding();
     };
+
+    // Apply model filter state to DOM
+    function applyModelFilter() {
+        var nActive = Object.keys(activeModels).length;
+        var allActive = nActive === allModelIds.length;
+        modelBtns.forEach(function(btn) {
+            var m = btn.getAttribute('data-model');
+            btn.classList.toggle('dimmed', !allActive && !activeModels[m]);
+        });
+        modelGroups.forEach(function(g) {
+            g.classList.toggle('model-hidden-user', !allActive && !activeModels[g.getAttribute('data-model')]);
+        });
+        syncVisToggle();
+        window.updateChartWidth();
+        if (window.filterRunsTable) window.filterRunsTable();
+    }
 
     // Toggle visibility
     modelBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
             if (btn.getAttribute('data-just-dragged') === 'true') {
                 btn.removeAttribute('data-just-dragged');
                 return;
             }
             var model = btn.getAttribute('data-model');
             if (!model) return;
-            if (hiddenModels[model]) {
-                delete hiddenModels[model];
-                btn.classList.remove('dimmed');
+
+            var _lp = window._longPressed; window._longPressed = false;
+            if (e.ctrlKey || e.metaKey || e.shiftKey || _lp) {
+                // Long-press / modifier: exclusive select (or deselect if only active)
+                if (Object.keys(activeModels).length === 1 && activeModels[model]) {
+                    activeModels = {};
+                    allModelIds.forEach(function(m) { activeModels[m] = true; });
+                } else {
+                    activeModels = {};
+                    activeModels[model] = true;
+                }
             } else {
-                hiddenModels[model] = true;
-                btn.classList.add('dimmed');
+                // Normal click: toggle this model
+                if (activeModels[model]) {
+                    delete activeModels[model];
+                } else {
+                    activeModels[model] = true;
+                }
+                // None active → all active
+                if (Object.keys(activeModels).length === 0) {
+                    allModelIds.forEach(function(m) { activeModels[m] = true; });
+                }
             }
-            modelGroups.forEach(function(g) {
-                g.classList.toggle('model-hidden-user', !!hiddenModels[g.getAttribute('data-model')]);
-            });
-            syncVisToggle();
-            window.updateChartWidth();
+            applyModelFilter();
         });
     });
 
@@ -1293,37 +1705,215 @@ AGENT_VERSIONS_PLACEHOLDER
         });
     });
 
-    // Show/hide all toggle
+    // Show/hide all toggle (eye icon)
     var visToggle = document.getElementById('modelVisToggle');
     function syncVisToggle() {
-        if (visToggle) visToggle.classList.toggle('dimmed', Object.keys(hiddenModels).length > 0);
+        if (visToggle) visToggle.classList.toggle('dimmed', Object.keys(activeModels).length < allModelIds.length);
     }
     if (visToggle) {
         visToggle.addEventListener('click', function() {
-            var allVisible = Object.keys(hiddenModels).length === 0;
-            if (allVisible) {
-                // Hide all
-                modelBtns.forEach(function(btn) {
-                    var model = btn.getAttribute('data-model');
-                    hiddenModels[model] = true;
-                    btn.classList.add('dimmed');
-                });
+            var allActive = Object.keys(activeModels).length === allModelIds.length;
+            if (allActive) {
+                // Hide all — special case: do NOT auto-reactivate
+                activeModels = {};
             } else {
                 // Show all
-                hiddenModels = {};
-                modelBtns.forEach(function(btn) { btn.classList.remove('dimmed'); });
+                activeModels = {};
+                allModelIds.forEach(function(m) { activeModels[m] = true; });
             }
-            modelGroups.forEach(function(g) {
-                g.classList.toggle('model-hidden-user', !!hiddenModels[g.getAttribute('data-model')]);
-            });
-            syncVisToggle();
-            window.updateChartWidth();
+            applyModelFilter();
         });
     }
 })();"""
 
-    all_js = (agent_toggle_js + "\n" + metric_filter_js + "\n"
-              + unit_toggle_js + "\n" + model_toggle_js + "\n" + table_sort_js)
+    bar_drag_js = """(function() {
+    var barDragSrc = null;
+    var barDragRow = null;
+    var barDropped = false;
+
+    document.querySelectorAll('.bar-wrapper').forEach(function(wrapper) {
+        wrapper.addEventListener('dragstart', function(e) {
+            barDragSrc = wrapper;
+            barDragRow = wrapper.parentElement;
+            barDropped = false;
+            wrapper.classList.add('bar-dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', 'bar');
+        });
+        wrapper.addEventListener('dragend', function() {
+            wrapper.classList.remove('bar-dragging');
+            if (barDragRow) {
+                barDragRow.querySelectorAll('.bar-wrapper').forEach(function(w) {
+                    w.classList.remove('bar-drag-over');
+                });
+            }
+            // Dropped outside chart → hide this bar
+            if (!barDropped && barDragSrc) {
+                barDragSrc.classList.add('bar-dismissed');
+                barDragSrc.style.display = 'none';
+                // Hide model group if all bars dismissed/hidden
+                var group = barDragSrc.closest('.model-group');
+                if (group) {
+                    var anyVisible = group.querySelector('.bar-wrapper:not(.bar-dismissed):not(.agent-hidden)');
+                    if (!anyVisible) group.classList.add('model-hidden');
+                }
+                if (window.updateChartWidth) window.updateChartWidth();
+                if (window.filterRunsTable) window.filterRunsTable();
+            }
+            barDragSrc = null;
+            barDragRow = null;
+        });
+        wrapper.addEventListener('dragover', function(e) {
+            if (!barDragSrc || wrapper.parentElement !== barDragRow) return;
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = 'move';
+            if (wrapper !== barDragSrc) wrapper.classList.add('bar-drag-over');
+        });
+        wrapper.addEventListener('dragleave', function() {
+            wrapper.classList.remove('bar-drag-over');
+        });
+        wrapper.addEventListener('drop', function(e) {
+            if (!barDragSrc || wrapper.parentElement !== barDragRow) return;
+            e.preventDefault();
+            e.stopPropagation();
+            barDropped = true;
+            wrapper.classList.remove('bar-drag-over');
+            if (barDragSrc === wrapper) return;
+            var siblings = Array.prototype.slice.call(barDragRow.querySelectorAll('.bar-wrapper'));
+            var srcIdx = siblings.indexOf(barDragSrc);
+            var tgtIdx = siblings.indexOf(wrapper);
+            if (srcIdx < tgtIdx) {
+                barDragRow.insertBefore(barDragSrc, wrapper.nextSibling);
+            } else {
+                barDragRow.insertBefore(barDragSrc, wrapper);
+            }
+        });
+    });
+
+    // Chart area is a valid drop zone (prevents accidental dismiss when dragging within chart)
+    var chartScroll = document.querySelector('.chart-scroll');
+    if (chartScroll) {
+        chartScroll.addEventListener('dragover', function(e) {
+            if (!barDragSrc) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+        chartScroll.addEventListener('drop', function(e) {
+            if (!barDragSrc) return;
+            e.preventDefault();
+            barDropped = true;
+        });
+    }
+
+    // Restore all dismissed bars via sort toggle button
+    var sortToggle = document.getElementById('barSortToggle');
+    if (sortToggle) {
+        sortToggle.addEventListener('click', function() {
+            document.querySelectorAll('.bar-wrapper.bar-dismissed').forEach(function(w) {
+                w.classList.remove('bar-dismissed');
+                if (!w.classList.contains('agent-hidden')) w.style.display = '';
+            });
+            document.querySelectorAll('.model-group').forEach(function(g) {
+                var anyVisible = g.querySelector('.bar-wrapper:not(.bar-dismissed):not(.agent-hidden)');
+                if (anyVisible) g.classList.remove('model-hidden');
+            });
+            if (window.updateChartWidth) window.updateChartWidth();
+            if (window.filterRunsTable) window.filterRunsTable();
+        });
+    }
+})();"""
+
+    runs_filter_js = """(function() {
+    var tbody = document.querySelector('.runs-table tbody');
+    var summary = document.querySelector('.runs-details summary');
+    var defaultSummary = summary ? summary.textContent : '';
+    if (!tbody) return;
+
+    window.filterRunsTable = function() {
+        // Collect visible (agent, model) pairs from chart
+        var visible = {};
+        document.querySelectorAll('.model-group').forEach(function(g) {
+            if (g.classList.contains('model-hidden') || g.classList.contains('model-hidden-user') || g.classList.contains('metric-hidden')) return;
+            var model = g.getAttribute('data-model');
+            g.querySelectorAll('.bar-wrapper').forEach(function(w) {
+                if (w.classList.contains('agent-hidden')) return;
+                if (w.style.display === 'none') return;
+                visible[w.getAttribute('data-agent') + '|' + model] = true;
+            });
+        });
+
+        var total = 0, shown = 0;
+        var taskCounts = {};
+        var nVisibleRuns = 0;
+        Array.prototype.slice.call(tbody.rows).forEach(function(row) {
+            total++;
+            var key = row.getAttribute('data-agent') + '|' + row.getAttribute('data-model');
+            var vis = !!visible[key];
+            row.style.display = vis ? '' : 'none';
+            if (vis) {
+                shown++;
+                nVisibleRuns++;
+                try {
+                    var passed = JSON.parse(row.getAttribute('data-passed') || '[]');
+                    passed.forEach(function(t) { taskCounts[t] = (taskCounts[t] || 0) + 1; });
+                } catch(e) {}
+            }
+        });
+
+        if (summary) {
+            if (shown < total) {
+                summary.textContent = 'Run Details (' + shown + ' of ' + total + ' runs)';
+            } else {
+                summary.textContent = defaultSummary;
+            }
+        }
+
+        // Update task stats
+        var statsEl = document.getElementById('taskStats');
+        if (statsEl && nVisibleRuns > 0) {
+            var totalTasks = parseInt(statsEl.getAttribute('data-total-tasks')) || 89;
+            var solvedOnce = Object.keys(taskCounts).length;
+            var solvedAlways = 0;
+            for (var t in taskCounts) { if (taskCounts[t] === nVisibleRuns) solvedAlways++; }
+            var neverSolved = totalTasks - solvedOnce;
+            var pct = function(x) { return Math.round(x / totalTasks * 100); };
+            statsEl.textContent = 'Across these ' + nVisibleRuns + ' runs, '
+                + solvedOnce + ' (' + pct(solvedOnce) + '%) of the ' + totalTasks + ' tasks were solved at least once, '
+                + solvedAlways + ' (' + pct(solvedAlways) + '%) were solved every time, '
+                + 'and ' + neverSolved + ' (' + pct(neverSolved) + '%) were never solved.';
+        }
+    };
+})();"""
+
+    label_padding_js = """(function() {
+    var chartScroll = document.querySelector('.chart-scroll');
+    if (!chartScroll) return;
+    var basePad = 24; // space between tallest label and scrollbar
+
+    window.adjustLabelPadding = function() {
+        var maxH = 0;
+        document.querySelectorAll('.model-group').forEach(function(g) {
+            if (g.classList.contains('model-hidden') || g.classList.contains('model-hidden-user') || g.classList.contains('metric-hidden')) return;
+            var lbl = g.querySelector('.model-label');
+            if (lbl) {
+                var h = lbl.offsetHeight;
+                if (h > maxH) maxH = h;
+            }
+        });
+        // margin-top on .model-label (6px) + label height + base padding
+        chartScroll.style.paddingBottom = (6 + maxH + basePad) + 'px';
+    };
+
+    window.adjustLabelPadding();
+    window.addEventListener('resize', function() { window.adjustLabelPadding(); });
+    document.fonts.ready.then(function() { window.adjustLabelPadding(); });
+})();"""
+
+    all_js = (longpress_js + "\n" + agent_toggle_js + "\n" + metric_filter_js + "\n"
+              + unit_toggle_js + "\n" + model_toggle_js + "\n"
+              + bar_drag_js + "\n" + runs_filter_js + "\n"
+              + label_padding_js + "\n" + table_sort_js)
 
     ch = CHART_HEIGHT  # alias
     ppx = PX_PER_PCT
@@ -1334,7 +1924,6 @@ AGENT_VERSIONS_PLACEHOLDER
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WolfBench</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,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" />
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700;800&display=swap');
 
@@ -1444,16 +2033,24 @@ h1 {{
     font-weight: 600;
     font-size: 0.95rem;
     line-height: 1;
-    cursor: pointer;
+    cursor: grab;
     user-select: none;
     transition: opacity 0.25s ease, transform 0.15s ease;
 }}
 .legend-agent:hover {{ transform: translateY(-1px); }}
+.legend-agent:active {{ cursor: grabbing; }}
+.legend-agent[draggable="false"] {{ cursor: pointer; }}
+.legend-agent[draggable="false"]:active {{ cursor: pointer; }}
 .legend-agent.dimmed {{ opacity: 0.3; }}
-.legend-agent-terminus-2  {{ background: rgba(39,174,96,0.2); color: #58d68d; border: 1px solid rgba(39,174,96,0.3); }}
-.legend-agent-openclaw    {{ background: rgba(231,76,60,0.2);  color: #f1948a; border: 1px solid rgba(231,76,60,0.3); }}
-.legend-agent-claude-code {{ background: rgba(230,126,34,0.2); color: #f0b27a; border: 1px solid rgba(230,126,34,0.3); }}
-.legend-agent-cline-cli  {{ background: rgba(142,68,173,0.2); color: #bb8fce; border: 1px solid rgba(142,68,173,0.3); }}
+.legend-agent.dragging {{ opacity: 0.5; transform: scale(0.95); }}
+.legend-agent.drag-over {{ filter: brightness(1.4); }}
+.legend-agent-terminus-2   {{ background: rgba(39,174,96,0.2);  color: #58d68d; border: 1px solid rgba(39,174,96,0.3); }}
+.legend-agent-claude-code  {{ background: rgba(230,126,34,0.2); color: #f0b27a; border: 1px solid rgba(230,126,34,0.3); }}
+.legend-agent-hermes {{ background: rgba(241,196,15,0.2); color: #f4d03f; border: 1px solid rgba(241,196,15,0.3); }}
+.legend-agent-openclaw     {{ background: rgba(231,76,60,0.2);  color: #f1948a; border: 1px solid rgba(231,76,60,0.3); }}
+.legend-agent-cline-cli    {{ background: rgba(142,68,173,0.2); color: #bb8fce; border: 1px solid rgba(142,68,173,0.3); }}
+.legend-agent-cursor-cli   {{ background: rgba(52,152,219,0.2); color: #85c1e9; border: 1px solid rgba(52,152,219,0.3); }}
+.legend-agent-codex        {{ background: rgba(99,102,241,0.2); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }}
 
 .legend-toggle {{
     display: inline-flex;
@@ -1473,6 +2070,8 @@ h1 {{
     transition: opacity 0.25s ease, transform 0.15s ease, border-color 0.2s ease;
 }}
 .legend-toggle:hover {{ transform: translateY(-1px); border-color: #FFCC33; background: rgba(255,204,51,0.1); }}
+.legend-toggle.active {{ border-color: #FFCC33; background: rgba(255,204,51,0.1); }}
+.legend-toggle[data-sort-mode="2"] {{ background: rgba(255,204,51,0.28); color: #FFE680; }}
 
 .legend-sep {{
     width: 1px;
@@ -1506,7 +2105,22 @@ h1 {{
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: 8px;
+    padding: 14px 28px;
+    background: rgba(26,28,31,0.8);
+    border: 1px solid #2E3338;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+}}
+
+/* Agent bar — directly above chart for clear color association */
+.agent-bar {{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
     padding: 14px 28px;
     background: rgba(26,28,31,0.8);
     border: 1px solid #2E3338;
@@ -1543,7 +2157,7 @@ h1 {{
 .chart-wrapper {{
     display: flex;
     align-items: flex-start;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }}
 .y-axis {{
     width: 60px;
@@ -1558,7 +2172,26 @@ h1 {{
     overflow-y: hidden;
     min-width: 0;
     padding-top: 54px;
-    padding-bottom: 30px;
+    padding-bottom: 0; /* set dynamically by JS */
+    scrollbar-color: rgba(255,255,255,0.3) rgba(255,255,255,0.06);
+}}
+.chart-scroll::-webkit-scrollbar {{
+    height: 28px;
+}}
+.chart-scroll::-webkit-scrollbar-track {{
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    border: 8px solid transparent;
+    background-clip: content-box;
+}}
+.chart-scroll::-webkit-scrollbar-thumb {{
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+    border: 8px solid transparent;
+    background-clip: content-box;
+}}
+.chart-scroll::-webkit-scrollbar-thumb:hover {{
+    background: rgba(255,255,255,0.45);
 }}
 .chart-area {{
     position: relative;
@@ -1597,11 +2230,11 @@ h1 {{
     height: {ch}px;
     display: flex;
     justify-content: flex-start;
-    gap: 68px;
-    padding: 0 48px;
+    gap: 64px;
+    padding: 0 24px;
 }}
 .models-row.agent-filtered {{
-    gap: 68px;
+    gap: 64px;
 }}
 
 .model-group {{
@@ -1627,7 +2260,8 @@ h1 {{
 
 .model-label {{
     position: absolute;
-    top: -44px;
+    top: 100%;
+    margin-top: 6px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.1rem;
@@ -1648,20 +2282,38 @@ h1 {{
     align-items: center;
     position: relative;
     transition: opacity 0.3s ease;
+    cursor: grab;
 }}
+.bar-wrapper:active {{ cursor: grabbing; }}
+.bar-wrapper.bar-dragging {{ opacity: 0.4; }}
+.bar-wrapper.bar-drag-over {{ outline: 2px dashed rgba(255,204,51,0.6); outline-offset: 2px; border-radius: 6px; }}
 .bar-wrapper.agent-hidden {{
     display: none;
 }}
 
 .bar-top-label {{
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 1.05rem;
     font-weight: 700;
     color: #e6edf3;
     text-align: center;
-    margin-bottom: 14px;
     line-height: 1.2;
+    white-space: nowrap;
     transition: transform 0.3s ease;
 }}
+.chart-area.single-agent .agent-label {{
+    display: none;
+}}
+.bar-wrapper[data-agent="terminus-2"] .bar-top-label {{ color: #58d68d; }}
+.bar-wrapper[data-agent="claude-code"] .bar-top-label {{ color: #f0b27a; }}
+.bar-wrapper[data-agent="hermes"] .bar-top-label {{ color: #f4d03f; }}
+.bar-wrapper[data-agent="openclaw"] .bar-top-label {{ color: #f1948a; }}
+.bar-wrapper[data-agent="cline-cli"] .bar-top-label {{ color: #bb8fce; }}
+.bar-wrapper[data-agent="cursor-cli"] .bar-top-label {{ color: #85c1e9; }}
+.bar-wrapper[data-agent="codex"] .bar-top-label {{ color: #a5b4fc; }}
 .version-label {{
     font-size: 0.75rem;
     font-weight: 500;
@@ -1674,16 +2326,23 @@ h1 {{
 }}
 .bar-bottom-label {{
     position: absolute;
-    bottom: -22px;
+    bottom: 3px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     white-space: nowrap;
+    z-index: 2;
 }}
 .run-count {{
     font-size: 0.7rem;
-    font-weight: 500;
-    color: #6B7280;
+    font-weight: 700;
+    color: rgba(255,255,255,0.65);
+    text-shadow:
+        -1px -1px 0 rgba(0,0,0,0.8),
+         1px -1px 0 rgba(0,0,0,0.8),
+        -1px  1px 0 rgba(0,0,0,0.8),
+         1px  1px 0 rgba(0,0,0,0.8),
+         0 0 4px rgba(0,0,0,0.5);
 }}
 .bar-link {{
     text-decoration: none;
@@ -1786,6 +2445,21 @@ h1 {{
     color: #FFCC33 !important;
 }}
 
+/* Best-of / worst-of: hidden by default, visible on hover or metric filter */
+.seg-label[data-metric="best"],
+.seg-label[data-metric="worst"] {{
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}}
+.bar-wrapper:hover .seg-label[data-metric="best"],
+.bar-wrapper:hover .seg-label[data-metric="worst"] {{
+    opacity: 1;
+}}
+.chart-area.metric-filter-best .seg-label[data-metric="best"],
+.chart-area.metric-filter-worst .seg-label[data-metric="worst"] {{
+    opacity: 1;
+}}
+
 /* Worst-of spacer (visible only during worst metric filter) */
 .worst-spacer {{
     display: none;
@@ -1797,15 +2471,15 @@ h1 {{
     left: 0;
     right: 0;
     height: 0;
-    border-top: 1.5px dashed rgba(255, 255, 255, 0.45);
-    z-index: 3;
+    border-top: 1.5px dashed rgba(255, 255, 255, 0.5);
+    z-index: 1;
     pointer-events: none;
 }}
 
 /* Footer */
 .footer {{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 16px;
     color: #4B5563;
     font-size: 0.8rem;
 }}
@@ -1942,8 +2616,6 @@ h1 {{
     <div class="legend">
         <span class="legend-toggle" id="unitToggle" data-mode="pct">%</span>
         <div class="legend-sep"></div>
-        {"".join(legend_agents)}
-        <div class="legend-sep"></div>
         {"".join(legend_metrics)}
     </div>
 
@@ -1951,6 +2623,12 @@ h1 {{
         <span class="legend-toggle" id="modelVisToggle" title="Show/hide all models">&#x1F441;</span>
         <div class="legend-sep"></div>
         {"".join(model_bar_buttons)}
+    </div>
+
+    <div class="agent-bar">
+        <span class="legend-toggle" id="barSortToggle" data-sort-mode="0" title="Sort: by agent &rarr; by score &rarr; by best score (cross-agent)">&#x21C5;</span>
+        <div class="legend-sep"></div>
+        {"".join(legend_agents)}
     </div>
 
     <div class="chart-wrapper">
@@ -1968,7 +2646,7 @@ h1 {{
         </div>
     </div>
 
-    <p class="footer">Terminal-Bench 2.0 &middot; 4 CPUs, 8 GB RAM, 10 GB Storage per task<br><span id="agentVersionLine">{agent_version_line}</span></p>
+    <p class="footer">Terminal-Bench 2.0 &middot; {DEFAULT_RUNS} runs @ {DEFAULT_TIMEOUT_H}h timeout &middot; 4 CPUs, 8 GB RAM, 10 GB Storage per task<br><span id="agentVersionLine">{agent_version_line}</span></p>
 
     {runs_table_html}
 
@@ -2102,7 +2780,9 @@ def main():
     run_groups: dict[tuple[str, str, str, float | None, str], list[dict]] = defaultdict(list)
     agent_versions: dict[str, set[str]] = defaultdict(set)
     for r in data["runs"]:
-        ver = r.get("agent_version") or "unknown"
+        ver = _resolve_version(r)
+        if ver == "-":
+            ver = "unknown"
         thinking = _resolve_thinking(r)
         run_groups[(r["agent"], ver, _resolve_display_name(r), r.get("timeout_sec"), thinking)].append(r)
         if ver != "unknown":

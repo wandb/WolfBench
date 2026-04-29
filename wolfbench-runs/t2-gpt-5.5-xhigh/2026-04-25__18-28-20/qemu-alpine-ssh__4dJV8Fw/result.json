@@ -1,0 +1,118 @@
+{
+    "id": "e6e7fa34-462a-4875-9bcc-045e6935a9ba",
+    "task_name": "qemu-alpine-ssh",
+    "trial_name": "qemu-alpine-ssh__4dJV8Fw",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gpt-5.5-xhigh/2026-04-25__18-28-20/qemu-alpine-ssh__4dJV8Fw",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-alpine-ssh"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a6cd0bf0752902f3e284a6a9672d801de83fb9d0cf769c95f09fed2fd213548c",
+    "config": {
+        "task": {
+            "path": "qemu-alpine-ssh",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-alpine-ssh__4dJV8Fw",
+        "trials_dir": "jobs/t2-gpt-5.5-xhigh/2026-04-25__18-28-20",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ea681d47-e37d-4170-8b13-b55a4d936e39"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 54404,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 25039,
+        "cost_usd": 0.8665180000000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                11657.444477081299,
+                8037.146806716919,
+                21475.027799606323,
+                32506.008863449097,
+                33775.866985321045,
+                23023.273944854736,
+                18612.99729347229,
+                168004.1241645813,
+                40587.15629577637,
+                2905.951738357544,
+                3116.8253421783447
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-25T18:31:43.727996Z",
+    "finished_at": "2026-04-25T18:41:59.493756Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T18:31:43.728602Z",
+        "finished_at": "2026-04-25T18:31:44.923098Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T18:31:44.923110Z",
+        "finished_at": "2026-04-25T18:31:47.668505Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T18:31:47.668560Z",
+        "finished_at": "2026-04-25T18:41:50.148070Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T18:41:50.918638Z",
+        "finished_at": "2026-04-25T18:41:59.176820Z"
+    }
+}

@@ -1,0 +1,104 @@
+{
+    "id": "46160c03-40a0-4844-8b55-65ef0c5d2521",
+    "task_name": "hf-model-inference",
+    "trial_name": "hf-model-inference__5DxCdV7",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-wb-kimi-k2.6/2026-04-25__01-50-48/hf-model-inference__5DxCdV7",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "hf-model-inference"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b96307ee0e1a454b667fb19da4b08116252525a2897250a9d7f8825fa0b86088",
+    "config": {
+        "task": {
+            "path": "hf-model-inference",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "hf-model-inference__5DxCdV7",
+        "trials_dir": "jobs/ha-wb-kimi-k2.6/2026-04-25__01-50-48",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "wandbqa/moonshotai/Kimi-K2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "base_url": "https://api.qa.inference.wandb.ai/v1",
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b17b0194-4d02-406a-b6f7-701cba8de690"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.6",
+            "provider": "wandbqa"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-25T01:58:37.734351Z",
+    "finished_at": "2026-04-25T02:02:32.952981Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T01:58:37.735634Z",
+        "finished_at": "2026-04-25T01:58:40.113000Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T01:58:40.113016Z",
+        "finished_at": "2026-04-25T01:59:44.230441Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T01:59:44.230527Z",
+        "finished_at": "2026-04-25T02:02:23.667220Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T02:02:24.370682Z",
+        "finished_at": "2026-04-25T02:02:32.628648Z"
+    }
+}

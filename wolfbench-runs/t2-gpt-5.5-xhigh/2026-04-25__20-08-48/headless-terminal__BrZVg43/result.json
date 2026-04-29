@@ -1,0 +1,114 @@
+{
+    "id": "7c560cfd-51d1-4071-92a9-8ff4138c004e",
+    "task_name": "headless-terminal",
+    "trial_name": "headless-terminal__BrZVg43",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gpt-5.5-xhigh/2026-04-25__20-08-48/headless-terminal__BrZVg43",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "headless-terminal"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0f08b1ccc560ac08b8420b4a493a3b4c5354e2ace9f0cbe63a44e861e46c780d",
+    "config": {
+        "task": {
+            "path": "headless-terminal",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "headless-terminal__BrZVg43",
+        "trials_dir": "jobs/t2-gpt-5.5-xhigh/2026-04-25__20-08-48",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "93b9a06c-731b-4910-a33f-51eb540473f0"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 36218,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 11819,
+        "cost_usd": 0.433132,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                3777.272939682007,
+                3425.723075866699,
+                92283.41603279114,
+                10943.906545639038,
+                29428.84397506714,
+                10150.745630264282,
+                19503.16858291626
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-25T20:10:08.909319Z",
+    "finished_at": "2026-04-25T20:13:48.293407Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T20:10:08.910134Z",
+        "finished_at": "2026-04-25T20:10:09.867662Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T20:10:09.867675Z",
+        "finished_at": "2026-04-25T20:10:19.453623Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T20:10:19.453686Z",
+        "finished_at": "2026-04-25T20:13:25.830407Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T20:13:26.554604Z",
+        "finished_at": "2026-04-25T20:13:47.951782Z"
+    }
+}

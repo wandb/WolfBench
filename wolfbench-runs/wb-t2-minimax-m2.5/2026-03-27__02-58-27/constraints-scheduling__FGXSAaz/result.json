@@ -1,0 +1,116 @@
+{
+    "id": "f2e5b6e9-2b62-4f75-bf4c-ce931e83e5c0",
+    "task_name": "constraints-scheduling",
+    "trial_name": "constraints-scheduling__FGXSAaz",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-27__02-58-27/constraints-scheduling__FGXSAaz",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "constraints-scheduling"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c69027b9099bb7ac63a753b310e31cfef9cc20dce2d1c6c88956c8a854d7ac16",
+    "config": {
+        "task": {
+            "path": "constraints-scheduling",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "constraints-scheduling__FGXSAaz",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-27__02-58-27",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8d27dffc-32e4-4175-a1a2-0559efa4385a"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 19802,
+        "n_cache_tokens": 11712,
+        "n_output_tokens": 3486,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 6,
+            "api_request_times_msec": [
+                4124.843120574951,
+                4536.666631698608,
+                46026.15737915039,
+                2828.817129135132,
+                22148.125886917114,
+                19839.531183242798
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T02:58:45.209510Z",
+    "finished_at": "2026-03-27T03:01:10.729799Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T02:58:45.211427Z",
+        "finished_at": "2026-03-27T02:58:55.656056Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T02:58:55.656065Z",
+        "finished_at": "2026-03-27T02:59:06.826169Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T02:59:06.826350Z",
+        "finished_at": "2026-03-27T03:00:55.222735Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T03:00:57.349455Z",
+        "finished_at": "2026-03-27T03:01:08.391527Z"
+    }
+}

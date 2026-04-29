@@ -1,0 +1,108 @@
+{
+    "id": "71210705-84e8-488c-9c32-f4705ee941ff",
+    "task_name": "sam-cell-seg",
+    "trial_name": "sam-cell-seg__3jya5M9",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-kimi-k2.6/2026-04-23__06-22-48/sam-cell-seg__3jya5M9",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sam-cell-seg"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1bc7f69e2e775b9ceac4b65975556b8c838b2d77cc0f50b01162adfea1630eb5",
+    "config": {
+        "task": {
+            "path": "sam-cell-seg",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sam-cell-seg__3jya5M9",
+        "trials_dir": "jobs/ha-kimi-k2.6/2026-04-23__06-22-48",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ce045733-b6a1-4532-aef3-177daf0520f3"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "kimi-k2.6",
+            "provider": "moonshotai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 📋 preparing todo…\r\n  ┊ 📋 plan      4 task(s)  0.0s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/demo_metadata.csv  0.8s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python -c \"import mobile_sam; print(mobile_sam.__file__)\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         python -c \"import mobile_sam; print(mobile_sam.__file__)\"  60.4s [exit -1]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import importlib.util  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  6.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import mobile_sam  3.2s [error]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import sys  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  4.6s\r\n  ┊ 🐍 p ... [truncated]\nStderr:\nbash: line 1:  3887 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3888 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 📋 preparing todo…\r\n  ┊ 📋 plan      4 task(s)  0.0s\r\n  ┊ 📖 preparing read_file…\r\n  ┊ 📖 read      /app/demo_metadata.csv  0.8s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python -c \"import mobile_sam; print(mobile_sam.__file__)\"\n\n      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny\n\n      Choice [o/s/a/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         python -c \"import mobile_sam; print(mobile_sam.__file__)\"  60.4s [exit -1]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import importlib.util  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  6.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import mobile_sam  3.2s [error]\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import sys  3.2s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import subprocess  4.6s\r\n  ┊ 🐍 p ... [truncated]\nStderr:\nbash: line 1:  3887 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/kimi-k2.6 2>&1\n      3888 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-23T09:20:55.090720"
+    },
+    "started_at": "2026-04-23T09:00:59.807643Z",
+    "finished_at": "2026-04-23T09:21:15.261781Z",
+    "environment_setup": {
+        "started_at": "2026-04-23T09:00:59.810176Z",
+        "finished_at": "2026-04-23T09:01:00.977921Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-23T09:01:00.977936Z",
+        "finished_at": "2026-04-23T09:01:48.269090Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-23T09:01:48.269177Z",
+        "finished_at": "2026-04-23T09:20:55.088580Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-23T09:20:55.965144Z",
+        "finished_at": "2026-04-23T09:21:14.779341Z"
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "id": "258f2237-3d4f-4416-a50c-41688070393d",
+    "task_name": "qemu-alpine-ssh",
+    "trial_name": "qemu-alpine-ssh__WQyac7h",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/oc-GLM-5.1/2026-04-13__20-26-11/qemu-alpine-ssh__WQyac7h",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-alpine-ssh"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a6cd0bf0752902f3e284a6a9672d801de83fb9d0cf769c95f09fed2fd213548c",
+    "config": {
+        "task": {
+            "path": "qemu-alpine-ssh",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-alpine-ssh__WQyac7h",
+        "trials_dir": "jobs/oc-GLM-5.1/2026-04-13__20-26-11",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 202752,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b50bccbf-2b4f-47e3-8428-9cae5117cac7"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 82839,
+        "n_cache_tokens": 410560,
+        "n_output_tokens": 1930,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-13T20:32:43.976125Z",
+    "finished_at": "2026-04-13T20:53:24.077737Z",
+    "environment_setup": {
+        "started_at": "2026-04-13T20:32:43.977381Z",
+        "finished_at": "2026-04-13T20:32:45.226255Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-13T20:32:45.226269Z",
+        "finished_at": "2026-04-13T20:33:35.617110Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-13T20:33:35.617173Z",
+        "finished_at": "2026-04-13T20:53:11.100614Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-13T20:53:16.415770Z",
+        "finished_at": "2026-04-13T20:53:23.794358Z"
+    }
+}

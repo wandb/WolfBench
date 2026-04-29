@@ -1,0 +1,153 @@
+{
+    "id": "64af9019-bcac-46f8-9bd1-2caadf9fbb22",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__cTiL3F5",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47/llm-inference-batching-scheduler__cTiL3F5",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__cTiL3F5",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/moonshotai/Kimi-K2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "87e4c500-d294-4673-a978-2f23063be339"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1933925,
+        "n_cache_tokens": 1382432,
+        "n_output_tokens": 54636,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 42,
+            "api_request_times_msec": [
+                4421.311616897583,
+                2902.3847579956055,
+                2151.1473655700684,
+                2373.6324310302734,
+                4668.936729431152,
+                6666.925430297852,
+                20980.99374771118,
+                8182.634592056274,
+                20307.279109954834,
+                17984.747886657715,
+                14875.141859054565,
+                16664.591789245605,
+                14002.512216567993,
+                14321.219682693481,
+                15472.673654556274,
+                4711.386442184448,
+                13867.892026901245,
+                14360.375165939331,
+                18386.574506759644,
+                14746.845483779907,
+                21646.354913711548,
+                14860.070705413818,
+                19101.648330688477,
+                13617.138624191284,
+                13454.46753501892,
+                12179.871559143066,
+                5956.762075424194,
+                16032.483577728271,
+                16833.638191223145,
+                18688.026428222656,
+                17943.196535110474,
+                25858.482122421265,
+                20413.005352020264,
+                19459.95593070984,
+                2453.4237384796143,
+                20465.484142303467,
+                18811.09666824341,
+                6230.616807937622,
+                2423.487663269043,
+                3824.971914291382,
+                8379.897356033325,
+                6070.098161697388
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "AddTestsDirError",
+        "exception_message": "Failed to add tests directory to environment.",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3090, in _write_file_async\n    response = await self._stub.AddFile(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 327, in __await__\n    raise _create_rpc_error(\ngrpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"file contents is required\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer ipv4:166.19.70.5:443 {grpc_status:3, grpc_message:\"file contents is required\"}\"\n>\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 83, in verify\n    await self._environment.upload_dir(\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 287, in upload_dir\n    await self.upload_file(path, remote_path)\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 270, in upload_file\n    await sandbox.write_file(target_path, source.read_bytes())\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3094, in _write_file_async\n    raise _translate_rpc_error(\ncwsandbox.exceptions.SandboxError: Write file failed: file contents is required\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 520, in run\n    await self._run_verification()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 289, in _run_verification\n    await self._verify_with_retry()\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 307, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 88, in verify\n    raise AddTestsDirError(\nharbor.verifier.verifier.AddTestsDirError: Failed to add tests directory to environment.\n",
+        "occurred_at": "2026-03-26T13:30:15.267065"
+    },
+    "started_at": "2026-03-26T13:18:19.851894Z",
+    "finished_at": "2026-03-26T13:30:17.554459Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T13:18:19.858914Z",
+        "finished_at": "2026-03-26T13:18:22.902154Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T13:18:22.902203Z",
+        "finished_at": "2026-03-26T13:18:34.011715Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T13:18:34.011945Z",
+        "finished_at": "2026-03-26T13:30:12.109934Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T13:30:14.153663Z",
+        "finished_at": "2026-03-26T13:30:15.263665Z"
+    }
+}

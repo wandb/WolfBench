@@ -1,0 +1,103 @@
+{
+    "id": "f49feb22-9b85-4689-89a1-42104ea3b845",
+    "task_name": "make-doom-for-mips",
+    "trial_name": "make-doom-for-mips__NemANTW",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/oc-GLM-5.1/2026-04-13__23-48-23/make-doom-for-mips__NemANTW",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "make-doom-for-mips"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "48c24358a58435a97de86cc88255b6faf1cd3cb28bd27ff6a918e01655095981",
+    "config": {
+        "task": {
+            "path": "make-doom-for-mips",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "make-doom-for-mips__NemANTW",
+        "trials_dir": "jobs/oc-GLM-5.1/2026-04-13__23-48-23",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 202752,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "5b5aef62-8d81-43c9-b34a-fc7a0a92bf0e"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 177475,
+        "n_cache_tokens": 148032,
+        "n_output_tokens": 5720,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-13T23:57:22.709619Z",
+    "finished_at": "2026-04-14T00:09:15.540362Z",
+    "environment_setup": {
+        "started_at": "2026-04-13T23:57:22.716257Z",
+        "finished_at": "2026-04-13T23:57:23.981457Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-13T23:57:23.981470Z",
+        "finished_at": "2026-04-13T23:58:05.763235Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-13T23:58:05.763325Z",
+        "finished_at": "2026-04-14T00:08:32.611179Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T00:08:33.925687Z",
+        "finished_at": "2026-04-14T00:09:15.277891Z"
+    }
+}

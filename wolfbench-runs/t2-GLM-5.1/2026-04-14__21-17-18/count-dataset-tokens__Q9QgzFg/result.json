@@ -1,0 +1,118 @@
+{
+    "id": "04b473e9-3686-4e4c-91f0-50166ed0aa60",
+    "task_name": "count-dataset-tokens",
+    "trial_name": "count-dataset-tokens__Q9QgzFg",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/t2-GLM-5.1/2026-04-14__21-17-18/count-dataset-tokens__Q9QgzFg",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "count-dataset-tokens"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1fa5f3961f0ad1c1748ebdaa39f27fd2bfd0f654cb728089365af6162b6d0ec7",
+    "config": {
+        "task": {
+            "path": "count-dataset-tokens",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "count-dataset-tokens__Q9QgzFg",
+        "trials_dir": "jobs/t2-GLM-5.1/2026-04-14__21-17-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "bc7265b2-348b-449b-bf50-fbd580675b5a"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 86937,
+        "n_cache_tokens": 42880,
+        "n_output_tokens": 5655,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 14,
+            "api_request_times_msec": [
+                11399.229288101196,
+                11163.881778717041,
+                8700.63042640686,
+                13661.33451461792,
+                14270.254135131836,
+                18461.843729019165,
+                5831.786870956421,
+                51425.46319961548,
+                28818.331241607666,
+                14762.120723724365,
+                16403.85937690735,
+                40083.988904953,
+                9836.652517318726,
+                20128.286600112915
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-14T21:35:08.083424Z",
+    "finished_at": "2026-04-14T21:43:48.018404Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T21:35:08.085231Z",
+        "finished_at": "2026-04-14T21:35:08.994805Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T21:35:08.994829Z",
+        "finished_at": "2026-04-14T21:35:18.582316Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T21:35:18.582377Z",
+        "finished_at": "2026-04-14T21:43:42.372823Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T21:43:43.000815Z",
+        "finished_at": "2026-04-14T21:43:47.686398Z"
+    }
+}

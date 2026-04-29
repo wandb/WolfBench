@@ -1,0 +1,170 @@
+{
+    "id": "f2cff557-0e16-4a7e-8f7e-1feee65852a8",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__YQ2F8jc",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30/llm-inference-batching-scheduler__YQ2F8jc",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__YQ2F8jc",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__05-58-30",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b908f8ba-419c-4901-abd2-0e7eda73a057"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 3135237,
+        "n_cache_tokens": 1932064,
+        "n_output_tokens": 68186,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 54,
+            "api_request_times_msec": [
+                8099.02811050415,
+                5578.49645614624,
+                4455.787658691406,
+                21072.49927520752,
+                47870.95856666565,
+                24956.376791000366,
+                26473.556995391846,
+                38907.8950881958,
+                25986.702919006348,
+                3170.8829402923584,
+                47011.080741882324,
+                32948.51875305176,
+                31704.371213912964,
+                3733.6180210113525,
+                7709.977149963379,
+                27586.827039718628,
+                39657.204151153564,
+                37125.75554847717,
+                4859.142541885376,
+                4449.271202087402,
+                5389.608144760132,
+                70576.02739334106,
+                64890.60378074646,
+                70130.6676864624,
+                95465.97790718079,
+                55375.7643699646,
+                105661.6621017456,
+                132335.49094200134,
+                94214.68830108643,
+                45989.52579498291,
+                52106.04286193848,
+                66244.52877044678,
+                50853.984355926514,
+                48606.807708740234,
+                59247.095823287964,
+                94094.74778175354,
+                68827.94070243835,
+                105105.40723800659,
+                63971.47798538208,
+                111664.45922851562,
+                51077.35633850098,
+                37399.16634559631,
+                44677.61206626892,
+                39096.123695373535,
+                38141.865730285645,
+                27112.991333007812,
+                29464.953184127808,
+                25193.91369819641,
+                19879.913568496704,
+                15921.367883682251,
+                14917.253971099854,
+                18237.273931503296,
+                17641.255140304565,
+                16427.528858184814
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1597, in run\n    await self._run_agent_loop(\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1412, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1227, in _execute_commands\n    await session.send_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 646, in send_keys\n    await self._send_non_blocking_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 606, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 665, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 519, in wait_for\n    async with timeouts.timeout(timeout):\n  File \"/usr/lib/python3.12/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 277, in _execute_agent\n    raise AgentTimeoutError(\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-31T07:12:32.285098"
+    },
+    "started_at": "2026-03-31T06:12:18.313614Z",
+    "finished_at": "2026-03-31T07:12:37.075484Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T06:12:18.317739Z",
+        "finished_at": "2026-03-31T06:12:21.159672Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T06:12:21.159733Z",
+        "finished_at": "2026-03-31T06:12:32.254544Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T06:12:32.254708Z",
+        "finished_at": "2026-03-31T07:12:32.281590Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T07:12:34.254542Z",
+        "finished_at": "2026-03-31T07:12:35.300227Z"
+    }
+}

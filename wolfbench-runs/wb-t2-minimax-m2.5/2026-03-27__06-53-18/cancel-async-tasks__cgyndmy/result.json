@@ -1,0 +1,118 @@
+{
+    "id": "2b620b63-fa39-4749-bdef-830cb181a86d",
+    "task_name": "cancel-async-tasks",
+    "trial_name": "cancel-async-tasks__cgyndmy",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-27__06-53-18/cancel-async-tasks__cgyndmy",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "cancel-async-tasks"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "283c70ca90688dc09a969d24e3ed137ba0f00d23018df68771bdf86526b82047",
+    "config": {
+        "task": {
+            "path": "cancel-async-tasks",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "cancel-async-tasks__cgyndmy",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-27__06-53-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b585bf38-440e-44ad-8ed7-1afe7e70c89b"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 18677,
+        "n_cache_tokens": 11168,
+        "n_output_tokens": 1940,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                8400.98762512207,
+                19067.50464439392,
+                3387.1960639953613,
+                3888.240098953247,
+                3643.0726051330566,
+                20400.971174240112,
+                7197.210311889648,
+                9057.785034179688
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T06:53:38.998213Z",
+    "finished_at": "2026-03-27T06:55:58.498631Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T06:53:38.999431Z",
+        "finished_at": "2026-03-27T06:53:50.901137Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T06:53:50.901158Z",
+        "finished_at": "2026-03-27T06:54:03.454948Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T06:54:03.455017Z",
+        "finished_at": "2026-03-27T06:55:30.976115Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T06:55:32.914710Z",
+        "finished_at": "2026-03-27T06:55:56.228991Z"
+    }
+}

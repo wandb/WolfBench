@@ -1,0 +1,109 @@
+{
+    "id": "44c1f2bc-5baa-4062-865f-89d7414d1a4b",
+    "task_name": "pytorch-model-recovery",
+    "trial_name": "pytorch-model-recovery__X4kThUY",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-wb-kimi-k2.6/2026-04-24__21-17-54/pytorch-model-recovery__X4kThUY",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "pytorch-model-recovery"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "9def2a29a9f98ee4ae428cc23e473a889f9f4fd87a62ea685a04192a6aefe20f",
+    "config": {
+        "task": {
+            "path": "pytorch-model-recovery",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "pytorch-model-recovery__X4kThUY",
+        "trials_dir": "jobs/ha-wb-kimi-k2.6/2026-04-24__21-17-54",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "wandbqa/moonshotai/Kimi-K2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "base_url": "https://api.qa.inference.wandb.ai/v1",
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f62496a4-efa7-4f06-837c-f307831ea090"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.6",
+            "provider": "wandbqa"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import torch  3.2s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         pip install torch --no-cache-dir -q  1.6s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import torch  3.2s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         which python && python --version && pip list | grep -i torch  0.2s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python -c \"\nimport torch\nweights = torch.load('/app/weights.pt', map_location='cpu')\nprint('Keys in weights.pt:')\nfor k, v in weights.items():\n    print(f'  {k}: {v.shape}  dtype={v.dtype}')\n\nprint('\\\\n' + '='*50)\n\ndataset = torch.load('/app/dataset.pt', map_location='cpu')\nprint(f'Type: {type(dataset)}')\nif hasattr(dataset, 'shape'):\n    print(f'Shape: {dataset.shape}')\nif isinstance(dataset, dict):\n    for k, v in dataset.items():\n        if isinstance(v, torch.Tensor):\n            print(f'  {k}: {v.shape}  dtype={v.dtype}')\n        else:\n            pri ... [truncated]\nStderr:\nbash: line 1:  4754 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1\n      4755 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import torch  3.2s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         pip install torch --no-cache-dir -q  1.6s\r\n  ┊ 🐍 preparing execute_code…\r\n  ┊ 🐍 exec      import torch  3.2s [error]\r\n  ┊ 💻 preparing terminal…\r\n  ┊ 💻 $         which python && python --version && pip list | grep -i torch  0.2s\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: script execution via -e/-c flag\n      python -c \"\nimport torch\nweights = torch.load('/app/weights.pt', map_location='cpu')\nprint('Keys in weights.pt:')\nfor k, v in weights.items():\n    print(f'  {k}: {v.shape}  dtype={v.dtype}')\n\nprint('\\\\n' + '='*50)\n\ndataset = torch.load('/app/dataset.pt', map_location='cpu')\nprint(f'Type: {type(dataset)}')\nif hasattr(dataset, 'shape'):\n    print(f'Shape: {dataset.shape}')\nif isinstance(dataset, dict):\n    for k, v in dataset.items():\n        if isinstance(v, torch.Tensor):\n            print(f'  {k}: {v.shape}  dtype={v.dtype}')\n        else:\n            pri ... [truncated]\nStderr:\nbash: line 1:  4754 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1\n      4755 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-25T00:33:39.965033"
+    },
+    "started_at": "2026-04-25T00:23:14.360543Z",
+    "finished_at": "2026-04-25T00:33:54.772577Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T00:23:14.397525Z",
+        "finished_at": "2026-04-25T00:23:15.499525Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T00:23:15.499538Z",
+        "finished_at": "2026-04-25T00:24:18.868009Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T00:24:18.868120Z",
+        "finished_at": "2026-04-25T00:33:39.963008Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T00:33:40.654020Z",
+        "finished_at": "2026-04-25T00:33:54.464750Z"
+    }
+}

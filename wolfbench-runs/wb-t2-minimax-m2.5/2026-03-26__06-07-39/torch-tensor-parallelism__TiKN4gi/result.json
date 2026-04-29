@@ -1,0 +1,116 @@
+{
+    "id": "5bb6590c-f2de-4552-abc0-4db7d3756e03",
+    "task_name": "torch-tensor-parallelism",
+    "trial_name": "torch-tensor-parallelism__TiKN4gi",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39/torch-tensor-parallelism__TiKN4gi",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "torch-tensor-parallelism"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2637b586b22a779d1a4f01508f5f2caeea21d0b126b53d938e06ae8e717b8d19",
+    "config": {
+        "task": {
+            "path": "torch-tensor-parallelism",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "torch-tensor-parallelism__TiKN4gi",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b97a7251-f3d2-4468-9873-627f04688048"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 20189,
+        "n_cache_tokens": 11872,
+        "n_output_tokens": 3553,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 6,
+            "api_request_times_msec": [
+                7937.103033065796,
+                58177.799701690674,
+                3705.611228942871,
+                10667.371988296509,
+                12179.010391235352,
+                16820.926427841187
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T06:07:57.988751Z",
+    "finished_at": "2026-03-26T06:11:18.069528Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T06:07:57.991246Z",
+        "finished_at": "2026-03-26T06:08:04.669205Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T06:08:04.669229Z",
+        "finished_at": "2026-03-26T06:08:21.560430Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T06:08:21.560636Z",
+        "finished_at": "2026-03-26T06:10:19.271638Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T06:10:21.426426Z",
+        "finished_at": "2026-03-26T06:11:16.165104Z"
+    }
+}

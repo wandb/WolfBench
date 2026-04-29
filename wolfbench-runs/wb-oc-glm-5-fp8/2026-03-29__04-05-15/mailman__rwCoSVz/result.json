@@ -1,0 +1,107 @@
+{
+    "id": "57f459c7-4868-4e52-b6b0-b83e870eb82c",
+    "task_name": "mailman",
+    "trial_name": "mailman__rwCoSVz",
+    "trial_uri": "file:///root/harbor/jobs/wb-oc-glm-5-fp8/2026-03-29__04-05-15/mailman__rwCoSVz",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mailman"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "e9dc41ba89f17a0f2db146fc147c13e6ec85e80ea4f00ab460f50ac7fbacc0e9",
+    "config": {
+        "task": {
+            "path": "mailman",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mailman__rwCoSVz",
+        "trials_dir": "jobs/wb-oc-glm-5-fp8/2026-03-29__04-05-15",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 131072,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "64ea218e-2a98-4ac5-b1f5-bfffeeb07ff7"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 20462,
+        "n_cache_tokens": 1300288,
+        "n_output_tokens": 7319,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "AioRpcError",
+        "exception_message": "<AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNKNOWN\n\tdetails = \"error receiving from peer: rpc error: code = Canceled desc = context canceled\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer ipv4:166.19.70.5:443 {grpc_message:\"error receiving from peer: rpc error: code = Canceled desc = context canceled\", grpc_status:2}\"\n>",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/installed/base.py\", line 376, in run\n    result = await environment.exec(\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 251, in exec\n    result = await self._exec_process_result(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 239, in _exec_process_result\n    return await sandbox.exec(\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_types.py\", line 709, in _await_and_record\n    result = await asyncio.wrap_future(self._future)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_types.py\", line 689, in _on_future_done\n    result = future.result()\n             ^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 2712, in _exec_streaming_async\n    raise item\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 2685, in collect_responses\n    async for response in call:\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 364, in _fetch_stream_responses\n    await self._raise_for_status()\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 272, in _raise_for_status\n    raise _create_rpc_error(\ngrpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNKNOWN\n\tdetails = \"error receiving from peer: rpc error: code = Canceled desc = context canceled\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer ipv4:166.19.70.5:443 {grpc_message:\"error receiving from peer: rpc error: code = Canceled desc = context canceled\", grpc_status:2}\"\n>\n",
+        "occurred_at": "2026-03-29T07:00:54.491552"
+    },
+    "started_at": "2026-03-29T06:23:42.926839Z",
+    "finished_at": "2026-03-29T07:00:56.314937Z",
+    "environment_setup": {
+        "started_at": "2026-03-29T06:23:42.929983Z",
+        "finished_at": "2026-03-29T06:23:45.973564Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-29T06:23:45.973584Z",
+        "finished_at": "2026-03-29T06:24:51.077664Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-29T06:24:51.078253Z",
+        "finished_at": "2026-03-29T07:00:51.916763Z"
+    },
+    "verifier": null
+}

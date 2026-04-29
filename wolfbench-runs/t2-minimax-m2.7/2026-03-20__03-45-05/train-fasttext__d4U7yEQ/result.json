@@ -1,0 +1,157 @@
+{
+    "id": "783007a1-61e2-4717-a9f4-f7277ae0bea3",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__d4U7yEQ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-20__03-45-05/train-fasttext__d4U7yEQ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__d4U7yEQ",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-20__03-45-05",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "5d5ca0e8-f71b-4e80-91dc-86fb2505a392"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 684315,
+        "n_cache_tokens": 639609,
+        "n_output_tokens": 7174,
+        "cost_usd": 0.06039713999999999,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 48,
+            "api_request_times_msec": [
+                10244.229078292847,
+                6820.86706161499,
+                4259.938478469849,
+                4507.387638092041,
+                4563.165187835693,
+                3090.283155441284,
+                5573.986291885376,
+                11405.459880828857,
+                9291.527509689331,
+                3152.3892879486084,
+                2170.2332496643066,
+                2474.9550819396973,
+                2224.06268119812,
+                2620.2564239501953,
+                2266.0439014434814,
+                2445.9145069122314,
+                10904.94441986084,
+                2356.550693511963,
+                2972.22638130188,
+                4950.162887573242,
+                15558.222532272339,
+                2613.2612228393555,
+                2021.5528011322021,
+                2862.5147342681885,
+                2378.8414001464844,
+                2262.2406482696533,
+                1851.0737419128418,
+                2210.5135917663574,
+                1914.4032001495361,
+                1582.92818069458,
+                1960.719108581543,
+                2229.003429412842,
+                3723.884344100952,
+                5306.522607803345,
+                2428.8532733917236,
+                2600.416421890259,
+                2113.631010055542,
+                2241.6787147521973,
+                2132.6630115509033,
+                2286.5355014801025,
+                2118.603229522705,
+                2829.9343585968018,
+                2479.158401489258,
+                1887.4330520629883,
+                2642.103433609009,
+                4235.391616821289,
+                7931.367874145508,
+                7021.077871322632
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-20T03:48:52.915583Z",
+    "finished_at": "2026-03-20T04:33:59.421899Z",
+    "environment_setup": {
+        "started_at": "2026-03-20T03:48:52.970533Z",
+        "finished_at": "2026-03-20T03:48:54.905289Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-20T03:48:54.905302Z",
+        "finished_at": "2026-03-20T03:49:09.589353Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-20T03:49:09.589410Z",
+        "finished_at": "2026-03-20T04:33:39.729823Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-20T04:33:41.640568Z",
+        "finished_at": "2026-03-20T04:33:57.744343Z"
+    }
+}

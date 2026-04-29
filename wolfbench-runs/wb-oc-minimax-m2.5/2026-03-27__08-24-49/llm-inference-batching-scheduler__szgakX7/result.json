@@ -1,0 +1,110 @@
+{
+    "id": "e688d6b8-bc89-4769-83b6-51ebe21340cc",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__szgakX7",
+    "trial_uri": "file:///root/harbor/jobs/wb-oc-minimax-m2.5/2026-03-27__08-24-49/llm-inference-batching-scheduler__szgakX7",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__szgakX7",
+        "trials_dir": "jobs/wb-oc-minimax-m2.5/2026-03-27__08-24-49",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c14e49fb-5f03-43c6-ae5e-1a81ebe6756e"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 98357,
+        "n_cache_tokens": 1564096,
+        "n_output_tokens": 36580,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "AddTestsDirError",
+        "exception_message": "Failed to add tests directory to environment.",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3090, in _write_file_async\n    response = await self._stub.AddFile(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 327, in __await__\n    raise _create_rpc_error(\ngrpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"file contents is required\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer ipv4:166.19.70.5:443 {grpc_status:3, grpc_message:\"file contents is required\"}\"\n>\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 83, in verify\n    await self._environment.upload_dir(\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 287, in upload_dir\n    await self.upload_file(path, remote_path)\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 270, in upload_file\n    await sandbox.write_file(target_path, source.read_bytes())\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3094, in _write_file_async\n    raise _translate_rpc_error(\ncwsandbox.exceptions.SandboxError: Write file failed: file contents is required\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 520, in run\n    await self._run_verification()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 289, in _run_verification\n    await self._verify_with_retry()\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 307, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 88, in verify\n    raise AddTestsDirError(\nharbor.verifier.verifier.AddTestsDirError: Failed to add tests directory to environment.\n",
+        "occurred_at": "2026-03-27T09:42:35.406169"
+    },
+    "started_at": "2026-03-27T09:31:00.767718Z",
+    "finished_at": "2026-03-27T09:42:40.500355Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T09:31:00.771545Z",
+        "finished_at": "2026-03-27T09:31:08.007342Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T09:31:08.007359Z",
+        "finished_at": "2026-03-27T09:34:03.438677Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T09:34:03.438772Z",
+        "finished_at": "2026-03-27T09:42:26.802869Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T09:42:32.532817Z",
+        "finished_at": "2026-03-27T09:42:35.397719Z"
+    }
+}

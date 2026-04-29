@@ -1,0 +1,129 @@
+{
+    "id": "0ca71f86-fe06-45a4-a021-ddf1eb8ac60b",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__PStTqqF",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-27__04-47-20/vulnerable-secret__PStTqqF",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__PStTqqF",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-27__04-47-20",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "937ce4d7-d959-4545-a055-089a6e776a89"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 86127,
+        "n_cache_tokens": 43840,
+        "n_output_tokens": 3766,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 19,
+            "api_request_times_msec": [
+                9466.317653656006,
+                3655.6262969970703,
+                10883.779048919678,
+                3503.4267902374268,
+                10543.193340301514,
+                14523.66852760315,
+                17723.370790481567,
+                4660.743474960327,
+                4426.841497421265,
+                8595.51739692688,
+                4166.055679321289,
+                5461.798906326294,
+                8223.722219467163,
+                14133.427143096924,
+                33645.777463912964,
+                6858.248949050903,
+                8642.176389694214,
+                19064.480543136597,
+                12471.347093582153
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T04:47:39.339625Z",
+    "finished_at": "2026-03-27T04:52:00.465995Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T04:47:39.341026Z",
+        "finished_at": "2026-03-27T04:47:50.290935Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T04:47:50.290955Z",
+        "finished_at": "2026-03-27T04:48:01.653575Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T04:48:01.653681Z",
+        "finished_at": "2026-03-27T04:51:47.861225Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T04:51:50.013208Z",
+        "finished_at": "2026-03-27T04:51:58.525163Z"
+    }
+}

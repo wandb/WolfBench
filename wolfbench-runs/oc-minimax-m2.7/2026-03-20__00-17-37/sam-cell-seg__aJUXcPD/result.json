@@ -1,0 +1,103 @@
+{
+    "id": "e769284a-6d81-4773-9a06-d339dc71c6d1",
+    "task_name": "sam-cell-seg",
+    "trial_name": "sam-cell-seg__aJUXcPD",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-minimax-m2.7/2026-03-20__00-17-37/sam-cell-seg__aJUXcPD",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sam-cell-seg"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1bc7f69e2e775b9ceac4b65975556b8c838b2d77cc0f50b01162adfea1630eb5",
+    "config": {
+        "task": {
+            "path": "sam-cell-seg",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sam-cell-seg__aJUXcPD",
+        "trials_dir": "jobs/oc-minimax-m2.7/2026-03-20__00-17-37",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c41a06c3-88e3-4882-a87c-3ff23bebb1cc"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 74447,
+        "n_cache_tokens": 2406997,
+        "n_output_tokens": 16402,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-20T00:39:33.972134Z",
+    "finished_at": "2026-03-20T00:48:40.944013Z",
+    "environment_setup": {
+        "started_at": "2026-03-20T00:39:33.977466Z",
+        "finished_at": "2026-03-20T00:39:35.026373Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-20T00:39:35.026385Z",
+        "finished_at": "2026-03-20T00:40:06.177252Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-20T00:40:06.177337Z",
+        "finished_at": "2026-03-20T00:48:14.493831Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-20T00:48:15.621170Z",
+        "finished_at": "2026-03-20T00:48:39.505987Z"
+    }
+}

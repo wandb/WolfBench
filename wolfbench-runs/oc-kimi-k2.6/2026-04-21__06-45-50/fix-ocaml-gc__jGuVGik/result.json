@@ -1,0 +1,103 @@
+{
+    "id": "d60118fb-6c5d-42d7-8a38-050bc06452c5",
+    "task_name": "fix-ocaml-gc",
+    "trial_name": "fix-ocaml-gc__jGuVGik",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-kimi-k2.6/2026-04-21__06-45-50/fix-ocaml-gc__jGuVGik",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-ocaml-gc"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "faa983dd79f63daa168b41c753bddb0621822820ba6f16661a9767b815e436e8",
+    "config": {
+        "task": {
+            "path": "fix-ocaml-gc",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-ocaml-gc__jGuVGik",
+        "trials_dir": "jobs/oc-kimi-k2.6/2026-04-21__06-45-50",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 262144,
+                "max_tokens": 32000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "1ec48762-11fa-4d1b-9218-9f016c7b6114"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "moonshotai/kimi-k2.6",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 56108,
+        "n_cache_tokens": 1391104,
+        "n_output_tokens": 21851,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-21T07:17:14.207649Z",
+    "finished_at": "2026-04-21T07:30:06.172217Z",
+    "environment_setup": {
+        "started_at": "2026-04-21T07:17:14.208165Z",
+        "finished_at": "2026-04-21T07:17:15.847985Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-21T07:17:15.848001Z",
+        "finished_at": "2026-04-21T07:18:24.719120Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-21T07:18:24.719173Z",
+        "finished_at": "2026-04-21T07:26:51.934435Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-21T07:26:53.191667Z",
+        "finished_at": "2026-04-21T07:30:05.892184Z"
+    }
+}

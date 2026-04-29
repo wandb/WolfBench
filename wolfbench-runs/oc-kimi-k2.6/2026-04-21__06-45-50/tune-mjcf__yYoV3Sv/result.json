@@ -1,0 +1,103 @@
+{
+    "id": "046d426e-2c57-40b4-acab-47f03cb3fb0d",
+    "task_name": "tune-mjcf",
+    "trial_name": "tune-mjcf__yYoV3Sv",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-kimi-k2.6/2026-04-21__06-45-50/tune-mjcf__yYoV3Sv",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "tune-mjcf"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0014600ed83c316bbc3b495879f147f234d06578281af02817c9955794d4ebef",
+    "config": {
+        "task": {
+            "path": "tune-mjcf",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "tune-mjcf__yYoV3Sv",
+        "trials_dir": "jobs/oc-kimi-k2.6/2026-04-21__06-45-50",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 262144,
+                "max_tokens": 32000
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "1ec48762-11fa-4d1b-9218-9f016c7b6114"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "moonshotai/kimi-k2.6",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 97907,
+        "n_cache_tokens": 3323648,
+        "n_output_tokens": 58508,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-21T06:56:29.952152Z",
+    "finished_at": "2026-04-21T07:36:55.411931Z",
+    "environment_setup": {
+        "started_at": "2026-04-21T06:56:29.952688Z",
+        "finished_at": "2026-04-21T06:56:31.184879Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-21T06:56:31.184897Z",
+        "finished_at": "2026-04-21T06:57:10.562951Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-21T06:57:10.563007Z",
+        "finished_at": "2026-04-21T07:36:36.647796Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-21T07:36:37.679377Z",
+        "finished_at": "2026-04-21T07:36:55.129692Z"
+    }
+}

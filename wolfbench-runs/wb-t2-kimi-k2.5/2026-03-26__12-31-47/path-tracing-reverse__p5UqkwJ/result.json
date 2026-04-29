@@ -1,0 +1,174 @@
+{
+    "id": "ca11dbec-f80d-4f4b-9c66-d250adb4c622",
+    "task_name": "path-tracing-reverse",
+    "trial_name": "path-tracing-reverse__p5UqkwJ",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47/path-tracing-reverse__p5UqkwJ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "path-tracing-reverse"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "93852df3e66fe6e3b04e1f1039b06b03d5b1a36787e876a094d6c9011653ffae",
+    "config": {
+        "task": {
+            "path": "path-tracing-reverse",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "path-tracing-reverse__p5UqkwJ",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5/2026-03-26__12-31-47",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/moonshotai/Kimi-K2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "87e4c500-d294-4673-a978-2f23063be339"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 3606905,
+        "n_cache_tokens": 3430400,
+        "n_output_tokens": 33037,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 63,
+            "api_request_times_msec": [
+                3317.286491394043,
+                2571.1023807525635,
+                3298.5126972198486,
+                3714.9710655212402,
+                3454.6291828155518,
+                3121.6745376586914,
+                8187.855958938599,
+                4934.547424316406,
+                4810.615301132202,
+                4955.449819564819,
+                5631.398439407349,
+                5074.956893920898,
+                5371.684789657593,
+                3478.0352115631104,
+                8437.337636947632,
+                4117.108106613159,
+                4483.023405075073,
+                12350.270986557007,
+                6893.667459487915,
+                12839.558362960815,
+                6678.990840911865,
+                4348.3946323394775,
+                1884.9823474884033,
+                1792.574405670166,
+                4948.373079299927,
+                1610.9552383422852,
+                8222.439527511597,
+                8462.666749954224,
+                8443.469047546387,
+                9113.417148590088,
+                9733.492374420166,
+                10296.629428863525,
+                4358.343124389648,
+                9372.578144073486,
+                11072.389602661133,
+                3488.4002208709717,
+                1915.2216911315918,
+                1358.6974143981934,
+                2113.158941268921,
+                2438.9543533325195,
+                1902.1711349487305,
+                5588.066339492798,
+                5157.674789428711,
+                10464.084148406982,
+                15393.945693969727,
+                3701.338529586792,
+                6371.220350265503,
+                6759.356498718262,
+                4850.576162338257,
+                3937.1910095214844,
+                10977.249145507812,
+                2277.5137424468994,
+                2338.21177482605,
+                8368.834495544434,
+                6707.0512771606445,
+                2347.891092300415,
+                2277.0144939422607,
+                5109.411716461182,
+                4455.728769302368,
+                3197.8671550750732,
+                2666.463613510132,
+                5193.082809448242,
+                2937.648296356201
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "DownloadVerifierDirError",
+        "exception_message": "Failed to download verifier directory from environment",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3017, in _read_file_async\n    response = await self._stub.RetrieveFile(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 327, in __await__\n    raise _create_rpc_error(\ngrpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.RESOURCE_EXHAUSTED\n\tdetails = \"CLIENT: Received message larger than max (5388888 vs. 4194304)\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer  {grpc_message:\"CLIENT: Received message larger than max (5388888 vs. 4194304)\", grpc_status:8}\"\n>\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 131, in verify\n    await self._environment.download_dir(\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 336, in download_dir\n    data = await sandbox.read_file(sandbox_path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3021, in _read_file_async\n    raise _translate_rpc_error(e, sandbox_id=self._sandbox_id, operation=\"Read file\") from e\ncwsandbox.exceptions.SandboxError: Read file failed: CLIENT: Received message larger than max (5388888 vs. 4194304)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 520, in run\n    await self._run_verification()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 289, in _run_verification\n    await self._verify_with_retry()\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 307, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 136, in verify\n    raise DownloadVerifierDirError(\nharbor.verifier.verifier.DownloadVerifierDirError: Failed to download verifier directory from environment\n",
+        "occurred_at": "2026-03-26T14:18:59.899648"
+    },
+    "started_at": "2026-03-26T14:07:41.646658Z",
+    "finished_at": "2026-03-26T14:19:02.193058Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T14:07:41.648468Z",
+        "finished_at": "2026-03-26T14:07:48.669073Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T14:07:48.669122Z",
+        "finished_at": "2026-03-26T14:08:34.702632Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T14:08:34.702901Z",
+        "finished_at": "2026-03-26T14:18:11.564613Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T14:18:14.618862Z",
+        "finished_at": "2026-03-26T14:18:59.896029Z"
+    }
+}

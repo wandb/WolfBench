@@ -1,0 +1,119 @@
+{
+    "id": "3274c0e2-6efc-49b0-a9d4-f9eb3d1738fd",
+    "task_name": "build-pmars",
+    "trial_name": "build-pmars__d4BmRuv",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-fp8/2026-04-15__06-01-22/build-pmars__d4BmRuv",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "build-pmars"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "55f554b8d07c2ec69aa88e385675925e684eb09c256610e0abca10375efc3876",
+    "config": {
+        "task": {
+            "path": "build-pmars",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "build-pmars__d4BmRuv",
+        "trials_dir": "jobs/t2-glm-5-fp8/2026-04-15__06-01-22",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "9f9a7aa7-235e-44bc-85b6-a91296793348"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 138254,
+        "n_cache_tokens": 94080,
+        "n_output_tokens": 3955,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 15,
+            "api_request_times_msec": [
+                20486.701488494873,
+                13468.720436096191,
+                7726.577520370483,
+                46049.55220222473,
+                6182.372093200684,
+                20108.266353607178,
+                12857.877969741821,
+                18357.82027244568,
+                25242.730379104614,
+                6606.017827987671,
+                9841.609477996826,
+                8060.452222824097,
+                15895.199060440063,
+                19971.163749694824,
+                14620.885610580444
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-15T06:51:18.009168Z",
+    "finished_at": "2026-04-15T06:56:50.146898Z",
+    "environment_setup": {
+        "started_at": "2026-04-15T06:51:18.011228Z",
+        "finished_at": "2026-04-15T06:51:19.130912Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-15T06:51:19.130938Z",
+        "finished_at": "2026-04-15T06:51:22.725401Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-15T06:51:22.725464Z",
+        "finished_at": "2026-04-15T06:56:41.812614Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-15T06:56:42.529272Z",
+        "finished_at": "2026-04-15T06:56:49.827564Z"
+    }
+}

@@ -1,0 +1,109 @@
+{
+    "id": "43defb44-044e-4979-bce8-8b94a3f4a429",
+    "task_name": "install-windows-3.11",
+    "trial_name": "install-windows-3.11__rsagFnJ",
+    "trial_uri": "file:///root/harbor/jobs/wb-oc-glm-5-fp8/2026-03-29__01-00-32/install-windows-3.11__rsagFnJ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "install-windows-3.11"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "917afbb6fd42db76b132a41359c8511be11faed2a8b74f17b802b4928f52313e",
+    "config": {
+        "task": {
+            "path": "install-windows-3.11",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "install-windows-3.11__rsagFnJ",
+        "trials_dir": "jobs/wb-oc-glm-5-fp8/2026-03-29__01-00-32",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 131072,
+                "max_tokens": 8192
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "4aae234a-35b7-4075-a755-7a6378d7cd58"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 99300,
+        "n_cache_tokens": 361152,
+        "n_output_tokens": 4389,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-29T01:00:51.197471Z",
+    "finished_at": "2026-03-29T01:18:17.141067Z",
+    "environment_setup": {
+        "started_at": "2026-03-29T01:00:51.200298Z",
+        "finished_at": "2026-03-29T01:01:02.179679Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-29T01:01:02.179734Z",
+        "finished_at": "2026-03-29T01:02:09.903090Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-29T01:02:09.903228Z",
+        "finished_at": "2026-03-29T01:17:43.791735Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-29T01:17:46.652566Z",
+        "finished_at": "2026-03-29T01:18:15.184242Z"
+    }
+}

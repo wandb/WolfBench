@@ -1,0 +1,141 @@
+{
+    "id": "0441987e-0d2f-4c85-bed6-835d7a6865c1",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__9xBECh7",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__07-30-12/llm-inference-batching-scheduler__9xBECh7",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__9xBECh7",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__07-30-12",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c260cf40-ad4e-4b26-b69b-d89270e5e4e4"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 773848,
+        "n_cache_tokens": 717216,
+        "n_output_tokens": 28490,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 25,
+            "api_request_times_msec": [
+                12718.7340259552,
+                4559.699058532715,
+                6744.3530559539795,
+                8733.990907669067,
+                20046.040058135986,
+                13040.312767028809,
+                7032.520055770874,
+                18621.142864227295,
+                31942.591667175293,
+                2028.982162475586,
+                18330.516815185547,
+                13379.42886352539,
+                16584.702491760254,
+                16180.355548858643,
+                16345.559358596802,
+                21107.37919807434,
+                19315.080881118774,
+                21123.322010040283,
+                17685.94765663147,
+                2755.0809383392334,
+                2764.6098136901855,
+                3860.87703704834,
+                1504.8198699951172,
+                5342.601776123047,
+                3019.8512077331543
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "AddTestsDirError",
+        "exception_message": "Failed to add tests directory to environment.",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3090, in _write_file_async\n    response = await self._stub.AddFile(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/grpc/aio/_call.py\", line 327, in __await__\n    raise _create_rpc_error(\ngrpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"file contents is required\"\n\tdebug_error_string = \"UNKNOWN:Error received from peer ipv4:166.19.70.5:443 {grpc_status:3, grpc_message:\"file contents is required\"}\"\n>\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 83, in verify\n    await self._environment.upload_dir(\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 287, in upload_dir\n    await self.upload_file(path, remote_path)\n  File \"/root/harbor/src/harbor/environments/wandb.py\", line 270, in upload_file\n    await sandbox.write_file(target_path, source.read_bytes())\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/cwsandbox/_sandbox.py\", line 3094, in _write_file_async\n    raise _translate_rpc_error(\ncwsandbox.exceptions.SandboxError: Write file failed: file contents is required\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 520, in run\n    await self._run_verification()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 289, in _run_verification\n    await self._verify_with_retry()\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 193, in async_wrapped\n    return await copy(fn, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 112, in __call__\n    do = await self.iter(retry_state=retry_state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 157, in iter\n    result = await action(retry_state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/_utils.py\", line 111, in inner\n    return call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/__init__.py\", line 393, in <lambda>\n    self._add_action_func(lambda rs: rs.outcome.result())\n                                     ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/root/harbor/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py\", line 116, in __call__\n    result = await fn(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 307, in _verify_with_retry\n    self.result.verifier_result = await asyncio.wait_for(\n                                  ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/verifier/verifier.py\", line 88, in verify\n    raise AddTestsDirError(\nharbor.verifier.verifier.AddTestsDirError: Failed to add tests directory to environment.\n",
+        "occurred_at": "2026-03-31T08:39:48.003812"
+    },
+    "started_at": "2026-03-31T08:29:39.595900Z",
+    "finished_at": "2026-03-31T08:39:49.806817Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T08:29:39.602062Z",
+        "finished_at": "2026-03-31T08:29:42.500961Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T08:29:42.501016Z",
+        "finished_at": "2026-03-31T08:29:53.255406Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T08:29:53.255544Z",
+        "finished_at": "2026-03-31T08:39:44.863636Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T08:39:46.844977Z",
+        "finished_at": "2026-03-31T08:39:47.999066Z"
+    }
+}

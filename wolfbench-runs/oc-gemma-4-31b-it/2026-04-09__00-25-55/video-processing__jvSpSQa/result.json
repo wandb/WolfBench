@@ -1,0 +1,104 @@
+{
+    "id": "417f6e43-dcd0-4302-b2a1-af7d8ffedfd3",
+    "task_name": "video-processing",
+    "trial_name": "video-processing__jvSpSQa",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-gemma-4-31b-it/2026-04-09__00-25-55/video-processing__jvSpSQa",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "video-processing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b62eef3fb5c016796ec8b1eda72f2be68fcb44844d2dbe12776412e1580a33b3",
+    "config": {
+        "task": {
+            "path": "video-processing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "video-processing__jvSpSQa",
+        "trials_dir": "jobs/oc-gemma-4-31b-it/2026-04-09__00-25-55",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 262144,
+                "max_tokens": 131072,
+                "temperature": 1.0
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b9d6bdd6-87f2-4ad2-94ea-e8c579d33472"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 570326,
+        "n_cache_tokens": 2504384,
+        "n_output_tokens": 60750,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T00:27:49.834031Z",
+    "finished_at": "2026-04-09T00:56:11.759297Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T00:27:49.842513Z",
+        "finished_at": "2026-04-09T00:27:51.005784Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T00:27:51.005806Z",
+        "finished_at": "2026-04-09T00:28:25.943486Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T00:28:25.943526Z",
+        "finished_at": "2026-04-09T00:56:04.846457Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T00:56:06.072194Z",
+        "finished_at": "2026-04-09T00:56:11.491813Z"
+    }
+}

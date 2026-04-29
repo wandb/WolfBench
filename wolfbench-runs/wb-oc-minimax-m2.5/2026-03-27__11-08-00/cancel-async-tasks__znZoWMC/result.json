@@ -1,0 +1,109 @@
+{
+    "id": "44215a4c-9a58-4519-b0dc-6d5bb0644f55",
+    "task_name": "cancel-async-tasks",
+    "trial_name": "cancel-async-tasks__znZoWMC",
+    "trial_uri": "file:///root/harbor/jobs/wb-oc-minimax-m2.5/2026-03-27__11-08-00/cancel-async-tasks__znZoWMC",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "cancel-async-tasks"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "283c70ca90688dc09a969d24e3ed137ba0f00d23018df68771bdf86526b82047",
+    "config": {
+        "task": {
+            "path": "cancel-async-tasks",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "cancel-async-tasks__znZoWMC",
+        "trials_dir": "jobs/wb-oc-minimax-m2.5/2026-03-27__11-08-00",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "acb5562a-8f11-41b3-b2e2-87892d90b645"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 68763,
+        "n_cache_tokens": 39200,
+        "n_output_tokens": 2798,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T11:10:24.085074Z",
+    "finished_at": "2026-03-27T11:15:51.986926Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T11:10:24.086410Z",
+        "finished_at": "2026-03-27T11:10:26.980310Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T11:10:26.980331Z",
+        "finished_at": "2026-03-27T11:11:02.101120Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T11:11:02.101322Z",
+        "finished_at": "2026-03-27T11:15:24.778087Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T11:15:27.843596Z",
+        "finished_at": "2026-03-27T11:15:49.825745Z"
+    }
+}

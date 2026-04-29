@@ -1,0 +1,108 @@
+{
+    "id": "b25a2195-5b2b-4161-986a-ec207768b1aa",
+    "task_name": "torch-tensor-parallelism",
+    "trial_name": "torch-tensor-parallelism__6fezmr2",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-fp8/2026-04-15__13-59-10/torch-tensor-parallelism__6fezmr2",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "torch-tensor-parallelism"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "2637b586b22a779d1a4f01508f5f2caeea21d0b126b53d938e06ae8e717b8d19",
+    "config": {
+        "task": {
+            "path": "torch-tensor-parallelism",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "torch-tensor-parallelism__6fezmr2",
+        "trials_dir": "jobs/t2-glm-5-fp8/2026-04-15__13-59-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "229c7585-1928-46d0-b397-dd1fc05f081e"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 12273,
+        "n_cache_tokens": 6080,
+        "n_output_tokens": 4176,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 4,
+            "api_request_times_msec": [
+                732007.5309276581,
+                13094.90942955017,
+                19547.167778015137,
+                26743.384838104248
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-15T13:59:11.913797Z",
+    "finished_at": "2026-04-15T14:13:35.861764Z",
+    "environment_setup": {
+        "started_at": "2026-04-15T13:59:11.915017Z",
+        "finished_at": "2026-04-15T13:59:13.816660Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-15T13:59:13.816671Z",
+        "finished_at": "2026-04-15T13:59:29.590814Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-15T13:59:29.590866Z",
+        "finished_at": "2026-04-15T14:12:45.784618Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-15T14:12:46.364822Z",
+        "finished_at": "2026-04-15T14:13:35.520689Z"
+    }
+}

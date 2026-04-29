@@ -1,0 +1,113 @@
+{
+    "id": "9dbf193a-9961-4865-8ec7-692c57b50a5e",
+    "task_name": "qemu-alpine-ssh",
+    "trial_name": "qemu-alpine-ssh__2iH3UcT",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__09-31-39/qemu-alpine-ssh__2iH3UcT",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-alpine-ssh"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a6cd0bf0752902f3e284a6a9672d801de83fb9d0cf769c95f09fed2fd213548c",
+    "config": {
+        "task": {
+            "path": "qemu-alpine-ssh",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-alpine-ssh__2iH3UcT",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__09-31-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "bd7f61b2-c43e-4cd4-8b65-17938ae0b76e"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 21002,
+        "n_cache_tokens": 12384,
+        "n_output_tokens": 1990,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                5987.08963394165,
+                3584.9997997283936,
+                2620.959758758545,
+                2957.080602645874,
+                2607.455253601074,
+                6390.491724014282,
+                5953.348636627197,
+                3044.4023609161377,
+                3124.669313430786
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T09:33:58.671267Z",
+    "finished_at": "2026-04-09T09:37:17.092531Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T09:33:58.672077Z",
+        "finished_at": "2026-04-09T09:33:59.945711Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T09:33:59.945723Z",
+        "finished_at": "2026-04-09T09:34:02.695996Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T09:34:02.696047Z",
+        "finished_at": "2026-04-09T09:35:52.222002Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T09:35:52.907943Z",
+        "finished_at": "2026-04-09T09:37:16.694366Z"
+    }
+}

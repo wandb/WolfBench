@@ -1,0 +1,112 @@
+{
+    "id": "31056aaf-5abe-4ebb-bf20-2e6d6ab371c5",
+    "task_name": "large-scale-text-editing",
+    "trial_name": "large-scale-text-editing__xRyL6CN",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/t2-GLM-5.1/2026-04-14__01-20-00/large-scale-text-editing__xRyL6CN",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "large-scale-text-editing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c7e5e082f251c7c83d53f7b645d97ab3152cc5fffe42d88ff9cce5c62c35ce16",
+    "config": {
+        "task": {
+            "path": "large-scale-text-editing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "large-scale-text-editing__xRyL6CN",
+        "trials_dir": "jobs/t2-GLM-5.1/2026-04-14__01-20-00",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "180b372e-b83c-4a1d-b104-1fbf19fd7b2c"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 23162,
+        "n_cache_tokens": 8320,
+        "n_output_tokens": 5664,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                15841.469526290894,
+                793615.80991745,
+                22558.78973007202,
+                9018.00799369812,
+                31488.52825164795,
+                5122.944116592407,
+                11312.478303909302,
+                12123.77119064331
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-14T02:28:29.605731Z",
+    "finished_at": "2026-04-14T02:46:12.486512Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T02:28:29.607729Z",
+        "finished_at": "2026-04-14T02:28:30.691069Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T02:28:30.691088Z",
+        "finished_at": "2026-04-14T02:28:40.027383Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T02:28:40.027483Z",
+        "finished_at": "2026-04-14T02:45:24.490866Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T02:45:25.103554Z",
+        "finished_at": "2026-04-14T02:46:12.177277Z"
+    }
+}

@@ -1,0 +1,134 @@
+{
+    "id": "b223183e-3d60-4631-bf50-4462fbea5675",
+    "task_name": "qemu-alpine-ssh",
+    "trial_name": "qemu-alpine-ssh__8TZU7So",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-20__03-45-05/qemu-alpine-ssh__8TZU7So",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-alpine-ssh"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "a6cd0bf0752902f3e284a6a9672d801de83fb9d0cf769c95f09fed2fd213548c",
+    "config": {
+        "task": {
+            "path": "qemu-alpine-ssh",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-alpine-ssh__8TZU7So",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-20__03-45-05",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "5d5ca0e8-f71b-4e80-91dc-86fb2505a392"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 148934,
+        "n_cache_tokens": 135349,
+        "n_output_tokens": 5271,
+        "cost_usd": 0.01852164,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 25,
+            "api_request_times_msec": [
+                6629.63604927063,
+                6449.6941566467285,
+                6948.700428009033,
+                5330.914497375488,
+                6810.925483703613,
+                5086.560010910034,
+                3913.527011871338,
+                3879.3234825134277,
+                4683.980941772461,
+                4750.633478164673,
+                4835.4175090789795,
+                4220.604419708252,
+                6390.857934951782,
+                4138.859033584595,
+                5639.850378036499,
+                6053.273677825928,
+                3413.680076599121,
+                5567.348480224609,
+                3962.2976779937744,
+                3444.1897869110107,
+                3994.3888187408447,
+                3363.516092300415,
+                3045.4795360565186,
+                4877.129554748535,
+                7266.0558223724365
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-20T03:54:05.266341Z",
+    "finished_at": "2026-03-20T03:59:09.326396Z",
+    "environment_setup": {
+        "started_at": "2026-03-20T03:54:05.267676Z",
+        "finished_at": "2026-03-20T03:54:06.345163Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-20T03:54:06.345196Z",
+        "finished_at": "2026-03-20T03:54:09.138220Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-20T03:54:09.138273Z",
+        "finished_at": "2026-03-20T03:59:00.167284Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-20T03:59:00.852804Z",
+        "finished_at": "2026-03-20T03:59:07.878219Z"
+    }
+}

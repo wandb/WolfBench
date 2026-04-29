@@ -1,0 +1,117 @@
+{
+    "id": "8225fed4-3e25-4f85-b537-f39fd8240cef",
+    "task_name": "prove-plus-comm",
+    "trial_name": "prove-plus-comm__hG6nS6E",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39/prove-plus-comm__hG6nS6E",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "prove-plus-comm"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c2e6faf1396913cf529854f75a27939b6f05ac811f1415150312aa6d22248a1c",
+    "config": {
+        "task": {
+            "path": "prove-plus-comm",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "prove-plus-comm__hG6nS6E",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b97a7251-f3d2-4468-9873-627f04688048"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 12686,
+        "n_cache_tokens": 8768,
+        "n_output_tokens": 2031,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                5879.68897819519,
+                3266.62278175354,
+                24017.188549041748,
+                3970.4086780548096,
+                3734.6622943878174,
+                11965.134382247925,
+                10595.398664474487
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T06:07:58.008985Z",
+    "finished_at": "2026-03-26T06:10:52.695359Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T06:07:58.010668Z",
+        "finished_at": "2026-03-26T06:08:08.731502Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T06:08:08.731528Z",
+        "finished_at": "2026-03-26T06:08:44.114431Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T06:08:44.114583Z",
+        "finished_at": "2026-03-26T06:10:03.474812Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T06:10:05.961982Z",
+        "finished_at": "2026-03-26T06:10:50.311556Z"
+    }
+}

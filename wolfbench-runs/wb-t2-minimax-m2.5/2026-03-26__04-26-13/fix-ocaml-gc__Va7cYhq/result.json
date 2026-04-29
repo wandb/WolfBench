@@ -1,0 +1,181 @@
+{
+    "id": "bc2e0b25-b0e4-4230-8934-bd7eade90ccc",
+    "task_name": "fix-ocaml-gc",
+    "trial_name": "fix-ocaml-gc__Va7cYhq",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__04-26-13/fix-ocaml-gc__Va7cYhq",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-ocaml-gc"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "faa983dd79f63daa168b41c753bddb0621822820ba6f16661a9767b815e436e8",
+    "config": {
+        "task": {
+            "path": "fix-ocaml-gc",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-ocaml-gc__Va7cYhq",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__04-26-13",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "177f59dc-1ba0-42a3-9307-2f53fa4116a9"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1046615,
+        "n_cache_tokens": 98464,
+        "n_output_tokens": 10117,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 66,
+            "api_request_times_msec": [
+                7697.941780090332,
+                3999.044179916382,
+                5250.451564788818,
+                4750.213384628296,
+                4015.39945602417,
+                3483.975648880005,
+                4588.507175445557,
+                3915.221691131592,
+                9632.302045822144,
+                6269.272089004517,
+                6136.235475540161,
+                5117.148876190186,
+                5197.110176086426,
+                6516.857862472534,
+                19183.051347732544,
+                5756.019353866577,
+                11256.638526916504,
+                15970.213651657104,
+                42815.80638885498,
+                26849.193811416626,
+                10319.590091705322,
+                13427.739381790161,
+                10489.416360855103,
+                13368.299961090088,
+                14047.708988189697,
+                18699.18942451477,
+                13900.966882705688,
+                32386.126041412354,
+                28454.26630973816,
+                39344.03896331787,
+                53539.435625076294,
+                27866.46294593811,
+                38179.3167591095,
+                90390.8212184906,
+                22564.449071884155,
+                14942.484617233276,
+                37832.80563354492,
+                80585.49690246582,
+                47943.926095962524,
+                25660.71891784668,
+                49105.87573051453,
+                6282.5727462768555,
+                25865.464210510254,
+                18770.888805389404,
+                47739.251136779785,
+                19361.711502075195,
+                38302.37150192261,
+                49540.06600379944,
+                4087.371826171875,
+                10790.110349655151,
+                20226.165533065796,
+                25439.411640167236,
+                31478.657007217407,
+                27263.73052597046,
+                23009.07254219055,
+                21963.247537612915,
+                54851.68719291687,
+                49076.25460624695,
+                30206.079959869385,
+                52590.51609039307,
+                50991.785526275635,
+                62113.67750167847,
+                67054.34918403625,
+                8775.160074234009,
+                97042.41228103638,
+                449031.11720085144
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1597, in run\n    await self._run_agent_loop(\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1412, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1227, in _execute_commands\n    await session.send_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 646, in send_keys\n    await self._send_non_blocking_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 606, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 665, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 519, in wait_for\n    async with timeouts.timeout(timeout):\n  File \"/usr/lib/python3.12/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 277, in _execute_agent\n    raise AgentTimeoutError(\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-26T05:27:34.077108"
+    },
+    "started_at": "2026-03-26T04:26:32.687547Z",
+    "finished_at": "2026-03-26T05:28:33.442855Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T04:26:32.689940Z",
+        "finished_at": "2026-03-26T04:26:47.204763Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T04:26:47.204778Z",
+        "finished_at": "2026-03-26T04:27:34.021889Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T04:27:34.021994Z",
+        "finished_at": "2026-03-26T05:27:34.048486Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T05:27:36.098503Z",
+        "finished_at": "2026-03-26T05:28:31.551560Z"
+    }
+}

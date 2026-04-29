@@ -1,0 +1,115 @@
+{
+    "id": "77613dfe-9f1f-4af3-8056-39aca447a332",
+    "task_name": "count-dataset-tokens",
+    "trial_name": "count-dataset-tokens__HE5wMS9",
+    "trial_uri": "file:///home/exedev/harbor/jobs/jobs/t2-GLM-5.1/2026-04-14__07-52-59/count-dataset-tokens__HE5wMS9",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "count-dataset-tokens"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "1fa5f3961f0ad1c1748ebdaa39f27fd2bfd0f654cb728089365af6162b6d0ec7",
+    "config": {
+        "task": {
+            "path": "count-dataset-tokens",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "count-dataset-tokens__HE5wMS9",
+        "trials_dir": "jobs/t2-GLM-5.1/2026-04-14__07-52-59",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5.1",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "3590eb9e-a55c-41dd-9276-37c78448ae2e"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5.1",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 79527,
+        "n_cache_tokens": 11776,
+        "n_output_tokens": 4399,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 11,
+            "api_request_times_msec": [
+                481021.52371406555,
+                40031.68034553528,
+                257857.5029373169,
+                9815.439224243164,
+                16634.73343849182,
+                48972.17655181885,
+                31658.212661743164,
+                1205479.6106815338,
+                112447.84903526306,
+                58582.29446411133,
+                57678.9436340332
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-14T08:53:17.501021Z",
+    "finished_at": "2026-04-14T09:34:32.082403Z",
+    "environment_setup": {
+        "started_at": "2026-04-14T08:53:17.502278Z",
+        "finished_at": "2026-04-14T08:53:18.580867Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-14T08:53:18.580879Z",
+        "finished_at": "2026-04-14T08:53:27.278884Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-14T08:53:27.278946Z",
+        "finished_at": "2026-04-14T09:34:26.354992Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-14T09:34:27.115394Z",
+        "finished_at": "2026-04-14T09:34:31.771406Z"
+    }
+}

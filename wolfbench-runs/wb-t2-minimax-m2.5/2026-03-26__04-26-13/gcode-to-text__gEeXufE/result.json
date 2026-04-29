@@ -1,0 +1,118 @@
+{
+    "id": "7c4233f8-e4dd-42c7-92ae-8cfe7d668e45",
+    "task_name": "gcode-to-text",
+    "trial_name": "gcode-to-text__gEeXufE",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__04-26-13/gcode-to-text__gEeXufE",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "gcode-to-text"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5531de29b9b445e4cd67b66231d34cb9e7bddcf15f4c2574b7376a19f0e4c339",
+    "config": {
+        "task": {
+            "path": "gcode-to-text",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "gcode-to-text__gEeXufE",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__04-26-13",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "177f59dc-1ba0-42a3-9307-2f53fa4116a9"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 16059,
+        "n_cache_tokens": 11392,
+        "n_output_tokens": 1628,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                5520.533561706543,
+                5660.807371139526,
+                5619.029998779297,
+                7515.101194381714,
+                8243.411540985107,
+                3934.0009689331055,
+                5255.046129226685,
+                7286.310911178589
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T04:26:32.398502Z",
+    "finished_at": "2026-03-26T04:28:15.594676Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T04:26:32.402687Z",
+        "finished_at": "2026-03-26T04:26:46.518600Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T04:26:46.518622Z",
+        "finished_at": "2026-03-26T04:27:00.510845Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T04:27:00.510964Z",
+        "finished_at": "2026-03-26T04:28:00.552469Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T04:28:03.867840Z",
+        "finished_at": "2026-03-26T04:28:13.152063Z"
+    }
+}

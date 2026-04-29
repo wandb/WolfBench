@@ -1,0 +1,123 @@
+{
+    "id": "c7fe8da5-d825-4861-be01-0c837e01da09",
+    "task_name": "torch-pipeline-parallelism",
+    "trial_name": "torch-pipeline-parallelism__o4UvRnE",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-glm-5-fp8/2026-04-15__07-56-18/torch-pipeline-parallelism__o4UvRnE",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "torch-pipeline-parallelism"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3d4bac3d36d63a48403936af61510e24cce92d6650ab4e4b9b21e1192b183646",
+    "config": {
+        "task": {
+            "path": "torch-pipeline-parallelism",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "torch-pipeline-parallelism__o4UvRnE",
+        "trials_dir": "jobs/t2-glm-5-fp8/2026-04-15__07-56-18",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/zai-org/GLM-5-FP8",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "e4ed0f9b-4acd-4117-bc98-6e1d3e877f24"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "zai-org/GLM-5-FP8",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 173296,
+        "n_cache_tokens": 118912,
+        "n_output_tokens": 20584,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 19,
+            "api_request_times_msec": [
+                16405.891180038452,
+                11682.826280593872,
+                8109.5921993255615,
+                7320.90950012207,
+                6556.445837020874,
+                5764.11509513855,
+                9163.206815719604,
+                17233.729362487793,
+                5156.149864196777,
+                253397.87936210632,
+                65673.4299659729,
+                86606.23121261597,
+                108208.77122879028,
+                26241.767644882202,
+                87635.7274055481,
+                271833.77480506897,
+                11739.748001098633,
+                19823.811531066895,
+                39775.50148963928
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-15T08:08:14.339870Z",
+    "finished_at": "2026-04-15T08:34:04.163745Z",
+    "environment_setup": {
+        "started_at": "2026-04-15T08:08:14.341040Z",
+        "finished_at": "2026-04-15T08:08:15.562085Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-15T08:08:15.562101Z",
+        "finished_at": "2026-04-15T08:08:31.194531Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-15T08:08:31.194586Z",
+        "finished_at": "2026-04-15T08:33:14.401372Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-15T08:33:15.101827Z",
+        "finished_at": "2026-04-15T08:34:03.850073Z"
+    }
+}

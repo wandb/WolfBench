@@ -1,0 +1,109 @@
+{
+    "id": "3005a74a-f2ed-42e0-b8ba-e8d11ab53a87",
+    "task_name": "mteb-leaderboard",
+    "trial_name": "mteb-leaderboard__ZGDCcSR",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-gpt-5.4/2026-04-01__14-44-55/mteb-leaderboard__ZGDCcSR",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "mteb-leaderboard"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "8c2f8d63470a11b27a25e2630e407a5eb9e9fbeda599d3df7f9bc5f2f7aeff20",
+    "config": {
+        "task": {
+            "path": "mteb-leaderboard",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "mteb-leaderboard__ZGDCcSR",
+        "trials_dir": "jobs/ha-gpt-5.4/2026-04-01__14-44-55",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "openai/gpt-5.4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "base_url": "https://api.openai.com/v1",
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "90d47e73-bd82-4afd-a149-6ab5c3750e6d"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 141429,
+        "n_cache_tokens": 7907072,
+        "n_output_tokens": 35714,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model gpt-5.4 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  \u250a \ud83d\udcda skill     duckduckgo-search  0.0s\r\n  \u250a \ud83d\udcbb $         command -v ddgs >/dev/null && echo installed || echo missing  1.6s\r\n  \u250a \ud83c\udf10 navigate  duckduckgo.com  0.7s [error]\r\n  \u250a \ud83d\udcbb $         python - <<'PY'\r\nimport urllib.parse, urllib.request\r\nq='Scandinavian MTEB leaderboard August 2025 Mean Task'\r\nurl='https://html.duckduckgo.com/html/?q='+urllib.parse.quote(q)\r\nprint(urllib.request.urlopen(url, timeout=20).read().decode('utf-8')[:12000])\r\nPY  0.5s\r\n  \u250a \ud83d\udcbb $         python - <<'PY'\r\nimport urllib.parse, urllib.request, re\r\nq='Scandinavian MTEB leaderboard'\r\nurl='https://www.bing.com/search?q='+urllib.parse.quote(q)\r\nhtml=urllib.request.urlopen(url, timeout=20).read().decode('utf-8', 'ignore')\r\nprint(html[:15000])\r\nPY  0.5s\r\n  \u250a \ud83d\udc0d exec      import re, urllib.parse, urllib.request  3.4s\r\n  \u250a \ud83d\udc0d exec      import re, urllib.parse, urllib.request  3.4s\r\n  \u250a \ud83d\udc0d exec      import urllib.parse, urllib.request  3.2s\r\n  \u250a \ud83d\udc0d exec      import urllib.parse, urllib.request, xml.etree.ElementTree as ET  3 ... [truncated]\nStderr:\nbash: line 1:  3730 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model gpt-5.4 2>&1\n      3731 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model gpt-5.4 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  \u250a \ud83d\udcda skill     duckduckgo-search  0.0s\r\n  \u250a \ud83d\udcbb $         command -v ddgs >/dev/null && echo installed || echo missing  1.6s\r\n  \u250a \ud83c\udf10 navigate  duckduckgo.com  0.7s [error]\r\n  \u250a \ud83d\udcbb $         python - <<'PY'\r\nimport urllib.parse, urllib.request\r\nq='Scandinavian MTEB leaderboard August 2025 Mean Task'\r\nurl='https://html.duckduckgo.com/html/?q='+urllib.parse.quote(q)\r\nprint(urllib.request.urlopen(url, timeout=20).read().decode('utf-8')[:12000])\r\nPY  0.5s\r\n  \u250a \ud83d\udcbb $         python - <<'PY'\r\nimport urllib.parse, urllib.request, re\r\nq='Scandinavian MTEB leaderboard'\r\nurl='https://www.bing.com/search?q='+urllib.parse.quote(q)\r\nhtml=urllib.request.urlopen(url, timeout=20).read().decode('utf-8', 'ignore')\r\nprint(html[:15000])\r\nPY  0.5s\r\n  \u250a \ud83d\udc0d exec      import re, urllib.parse, urllib.request  3.4s\r\n  \u250a \ud83d\udc0d exec      import re, urllib.parse, urllib.request  3.4s\r\n  \u250a \ud83d\udc0d exec      import urllib.parse, urllib.request  3.2s\r\n  \u250a \ud83d\udc0d exec      import urllib.parse, urllib.request, xml.etree.ElementTree as ET  3 ... [truncated]\nStderr:\nbash: line 1:  3730 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model gpt-5.4 2>&1\n      3731 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-01T17:07:05.210680"
+    },
+    "started_at": "2026-04-01T16:44:47.452025Z",
+    "finished_at": "2026-04-01T17:07:14.857765Z",
+    "environment_setup": {
+        "started_at": "2026-04-01T16:44:47.452691Z",
+        "finished_at": "2026-04-01T16:44:48.927429Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-01T16:44:48.927444Z",
+        "finished_at": "2026-04-01T16:45:56.494078Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-01T16:45:56.494427Z",
+        "finished_at": "2026-04-01T17:07:05.208981Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-01T17:07:06.474318Z",
+        "finished_at": "2026-04-01T17:07:14.462445Z"
+    }
+}

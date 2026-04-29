@@ -1,0 +1,103 @@
+{
+    "id": "717ecc01-25c6-468c-b7d7-83ee9094bc2b",
+    "task_name": "video-processing",
+    "trial_name": "video-processing__qYGuyjJ",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-minimax-m2.7/2026-03-20__02-30-46/video-processing__qYGuyjJ",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "video-processing"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b62eef3fb5c016796ec8b1eda72f2be68fcb44844d2dbe12776412e1580a33b3",
+    "config": {
+        "task": {
+            "path": "video-processing",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "video-processing__qYGuyjJ",
+        "trials_dir": "jobs/oc-minimax-m2.7/2026-03-20__02-30-46",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 204800,
+                "max_tokens": 131072
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "137c685c-1d1c-4664-98c9-0bb7861df268"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 107754,
+        "n_cache_tokens": 1935216,
+        "n_output_tokens": 48800,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-20T02:35:52.835247Z",
+    "finished_at": "2026-03-20T02:51:51.775910Z",
+    "environment_setup": {
+        "started_at": "2026-03-20T02:35:52.851851Z",
+        "finished_at": "2026-03-20T02:35:54.035793Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-20T02:35:54.035818Z",
+        "finished_at": "2026-03-20T02:36:30.851825Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-20T02:36:30.851907Z",
+        "finished_at": "2026-03-20T02:51:40.797486Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-20T02:51:41.825181Z",
+        "finished_at": "2026-03-20T02:51:50.443305Z"
+    }
+}

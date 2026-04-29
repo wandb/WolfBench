@@ -1,0 +1,119 @@
+{
+    "id": "e6ef7dbb-9b9b-4b98-a1dc-e876a96e914a",
+    "task_name": "fix-git",
+    "trial_name": "fix-git__4vyiC4A",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39/fix-git__4vyiC4A",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-git"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7fa0a681f751d73f290d862522a82a5e448fa529834987ee1b80e5665c51aa7e",
+    "config": {
+        "task": {
+            "path": "fix-git",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-git__4vyiC4A",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b97a7251-f3d2-4468-9873-627f04688048"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 22590,
+        "n_cache_tokens": 17600,
+        "n_output_tokens": 2479,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 9,
+            "api_request_times_msec": [
+                5511.912107467651,
+                8412.989854812622,
+                11602.272272109985,
+                6549.452543258667,
+                3879.9946308135986,
+                11803.685665130615,
+                4726.672649383545,
+                10272.510766983032,
+                11741.231918334961
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T06:07:58.173302Z",
+    "finished_at": "2026-03-26T06:10:00.173554Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T06:07:58.174616Z",
+        "finished_at": "2026-03-26T06:08:07.953047Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T06:08:07.953063Z",
+        "finished_at": "2026-03-26T06:08:18.958377Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T06:08:18.958492Z",
+        "finished_at": "2026-03-26T06:09:47.416002Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T06:09:49.842632Z",
+        "finished_at": "2026-03-26T06:09:58.106599Z"
+    }
+}

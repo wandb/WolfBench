@@ -204,6 +204,9 @@ def extract_metrics(vm: str, run_dir: str, result: dict, config: dict,
     # User-defined display overrides (empty = use auto-derived values)
     model_display = config.get("model_display", "")
     thinking_display = config.get("thinking_display", "")
+    version_display = config.get("version_display", "")
+    provider_display = config.get("provider_display", "")
+    vendor_display = config.get("vendor_display", "")
 
     # Orchestrator config
     orch = config.get("orchestrator", {})
@@ -283,7 +286,10 @@ def extract_metrics(vm: str, run_dir: str, result: dict, config: dict,
         "agent": agent_name,
         "model": model_name,
         "model_display": model_display,
+        "provider_display": provider_display,
+        "vendor_display": vendor_display,
         "agent_version": agent_version,
+        "version_display": version_display,
         # Config
         "concurrency": concurrency,
         "env_type": env_type,

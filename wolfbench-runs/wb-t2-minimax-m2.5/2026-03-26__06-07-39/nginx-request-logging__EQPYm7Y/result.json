@@ -1,0 +1,118 @@
+{
+    "id": "a80fce2e-ef8a-4f3b-865b-44960b0927c1",
+    "task_name": "nginx-request-logging",
+    "trial_name": "nginx-request-logging__EQPYm7Y",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39/nginx-request-logging__EQPYm7Y",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "nginx-request-logging"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "86a8bd681301002456da831adfae62fa7a538e8187d654e11335e92b81b0c2b3",
+    "config": {
+        "task": {
+            "path": "nginx-request-logging",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "nginx-request-logging__EQPYm7Y",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-26__06-07-39",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b97a7251-f3d2-4468-9873-627f04688048"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 44952,
+        "n_cache_tokens": 8608,
+        "n_output_tokens": 3729,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 8,
+            "api_request_times_msec": [
+                13735.270977020264,
+                33159.2972278595,
+                5646.065473556519,
+                25629.873275756836,
+                8593.18995475769,
+                4924.036741256714,
+                25892.420291900635,
+                22846.275091171265
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-26T06:07:58.811497Z",
+    "finished_at": "2026-03-26T06:12:15.992105Z",
+    "environment_setup": {
+        "started_at": "2026-03-26T06:07:58.812332Z",
+        "finished_at": "2026-03-26T06:08:11.606311Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-26T06:08:11.606338Z",
+        "finished_at": "2026-03-26T06:08:24.399605Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-26T06:08:24.399688Z",
+        "finished_at": "2026-03-26T06:12:00.820558Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-26T06:12:03.018569Z",
+        "finished_at": "2026-03-26T06:12:13.995708Z"
+    }
+}

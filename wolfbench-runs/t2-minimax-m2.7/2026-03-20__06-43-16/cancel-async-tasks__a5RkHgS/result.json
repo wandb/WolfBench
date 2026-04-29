@@ -1,0 +1,114 @@
+{
+    "id": "40bd5f19-f704-4c4f-82a8-5cc16a695c37",
+    "task_name": "cancel-async-tasks",
+    "trial_name": "cancel-async-tasks__a5RkHgS",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-minimax-m2.7/2026-03-20__06-43-16/cancel-async-tasks__a5RkHgS",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "cancel-async-tasks"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "283c70ca90688dc09a969d24e3ed137ba0f00d23018df68771bdf86526b82047",
+    "config": {
+        "task": {
+            "path": "cancel-async-tasks",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "cancel-async-tasks__a5RkHgS",
+        "trials_dir": "jobs/t2-minimax-m2.7/2026-03-20__06-43-16",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/minimax/minimax-m2.7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "model_info": {
+                    "max_input_tokens": 204800,
+                    "max_output_tokens": 131072
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "03206d2c-cdc6-412a-a243-6bd9d5db0422"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "minimax/minimax-m2.7",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 12554,
+        "n_cache_tokens": 7671,
+        "n_output_tokens": 2712,
+        "cost_usd": 0.005179560000000001,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 5,
+            "api_request_times_msec": [
+                32416.24402999878,
+                10147.233963012695,
+                11181.050062179565,
+                7179.205417633057,
+                9634.10472869873
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-20T07:08:52.243581Z",
+    "finished_at": "2026-03-20T07:10:44.359211Z",
+    "environment_setup": {
+        "started_at": "2026-03-20T07:08:52.245303Z",
+        "finished_at": "2026-03-20T07:08:53.103869Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-20T07:08:53.103887Z",
+        "finished_at": "2026-03-20T07:09:01.787780Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-20T07:09:01.787848Z",
+        "finished_at": "2026-03-20T07:10:23.749257Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-20T07:10:24.686138Z",
+        "finished_at": "2026-03-20T07:10:42.910752Z"
+    }
+}

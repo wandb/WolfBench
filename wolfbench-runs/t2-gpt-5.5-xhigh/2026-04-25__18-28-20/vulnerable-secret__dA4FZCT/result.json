@@ -1,0 +1,114 @@
+{
+    "id": "58e0b2b3-743d-4ee5-91e6-5f0b15e1be98",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__dA4FZCT",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gpt-5.5-xhigh/2026-04-25__18-28-20/vulnerable-secret__dA4FZCT",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__dA4FZCT",
+        "trials_dir": "jobs/t2-gpt-5.5-xhigh/2026-04-25__18-28-20",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "reasoning_effort": "xhigh",
+                "use_responses_api": true
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "ea681d47-e37d-4170-8b13-b55a4d936e39"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 40839,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 2699,
+        "cost_usd": 0.168813,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 7,
+            "api_request_times_msec": [
+                3631.8328380584717,
+                4957.98921585083,
+                6505.195140838623,
+                19294.390439987183,
+                2742.92254447937,
+                1704.6220302581787,
+                2409.442901611328
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-25T18:47:06.021610Z",
+    "finished_at": "2026-04-25T18:48:12.943718Z",
+    "environment_setup": {
+        "started_at": "2026-04-25T18:47:06.022436Z",
+        "finished_at": "2026-04-25T18:47:07.585628Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-25T18:47:07.585639Z",
+        "finished_at": "2026-04-25T18:47:16.337201Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-25T18:47:16.337255Z",
+        "finished_at": "2026-04-25T18:48:06.361199Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-25T18:48:07.021285Z",
+        "finished_at": "2026-04-25T18:48:12.642910Z"
+    }
+}

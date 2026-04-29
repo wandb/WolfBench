@@ -1,0 +1,104 @@
+{
+    "id": "67e6ed90-0c03-4e54-8caa-1a42bbac1866",
+    "task_name": "protein-assembly",
+    "trial_name": "protein-assembly__Jcm3Hf5",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-wandb-kimi-k2.5/2026-04-02__07-39-06/protein-assembly__Jcm3Hf5",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "protein-assembly"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "b8df06c6c42605ec37afb3b9c6e2f4feb1be9663380bd7129fcbaa9559253a60",
+    "config": {
+        "task": {
+            "path": "protein-assembly",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "protein-assembly__Jcm3Hf5",
+        "trials_dir": "jobs/ha-wandb-kimi-k2.5/2026-04-02__07-39-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "wandb/moonshotai/Kimi-K2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "base_url": "https://api.inference.wandb.ai/v1",
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "d4d78dbb-1c2e-48dd-9b62-0eabc55f1c6d"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 621114,
+        "n_cache_tokens": 2542016,
+        "n_output_tokens": 70968,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-02T08:58:52.972401Z",
+    "finished_at": "2026-04-02T09:14:08.480062Z",
+    "environment_setup": {
+        "started_at": "2026-04-02T08:58:52.974273Z",
+        "finished_at": "2026-04-02T08:58:54.003008Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-02T08:58:54.003021Z",
+        "finished_at": "2026-04-02T08:59:48.278339Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-02T08:59:48.278417Z",
+        "finished_at": "2026-04-02T09:14:02.850445Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-02T09:14:03.602902Z",
+        "finished_at": "2026-04-02T09:14:08.182144Z"
+    }
+}

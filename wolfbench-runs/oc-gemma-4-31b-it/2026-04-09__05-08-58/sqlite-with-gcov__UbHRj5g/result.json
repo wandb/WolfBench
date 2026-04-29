@@ -1,0 +1,104 @@
+{
+    "id": "58887b82-c5ba-4a38-b62f-a1fdddd24301",
+    "task_name": "sqlite-with-gcov",
+    "trial_name": "sqlite-with-gcov__UbHRj5g",
+    "trial_uri": "file:///home/exedev/harbor/jobs/oc-gemma-4-31b-it/2026-04-09__05-08-58/sqlite-with-gcov__UbHRj5g",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "sqlite-with-gcov"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "5901f1d2fc3b9b97ab1b215461175a59f0568e224b67caa6f4cbbc38f6f33a04",
+    "config": {
+        "task": {
+            "path": "sqlite-with-gcov",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "sqlite-with-gcov__UbHRj5g",
+        "trials_dir": "jobs/oc-gemma-4-31b-it/2026-04-09__05-08-58",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "openclaw",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2026.3.11",
+                "context_window": 262144,
+                "max_tokens": 131072,
+                "temperature": 1.0
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "633ff221-bf9a-42dc-b636-fc395b3f0e3c"
+    },
+    "agent_info": {
+        "name": "openclaw",
+        "version": "2026.3.11",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 91038,
+        "n_cache_tokens": 197728,
+        "n_output_tokens": 657,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T05:31:05.141265Z",
+    "finished_at": "2026-04-09T05:33:02.177388Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T05:31:05.149772Z",
+        "finished_at": "2026-04-09T05:31:07.198061Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T05:31:07.198074Z",
+        "finished_at": "2026-04-09T05:31:47.979195Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T05:31:47.979251Z",
+        "finished_at": "2026-04-09T05:32:51.791370Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T05:32:53.103568Z",
+        "finished_at": "2026-04-09T05:33:01.620876Z"
+    }
+}

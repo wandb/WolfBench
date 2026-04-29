@@ -1,0 +1,116 @@
+{
+    "id": "c825d2dc-9805-4b32-9c1d-1003f925f512",
+    "task_name": "llm-inference-batching-scheduler",
+    "trial_name": "llm-inference-batching-scheduler__97Rqh4k",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-kimi-k2.6/2026-04-21__14-07-53/llm-inference-batching-scheduler__97Rqh4k",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "llm-inference-batching-scheduler"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "3a08e63e0643ea5914eedeecb08cb93a1f0a10b9dc7d19d1f570004af84531c8",
+    "config": {
+        "task": {
+            "path": "llm-inference-batching-scheduler",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "llm-inference-batching-scheduler__97Rqh4k",
+        "trials_dir": "jobs/t2-kimi-k2.6/2026-04-21__14-07-53",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openrouter/moonshotai/kimi-k2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "1949b489-4778-4823-b0b6-4bb80a5e60b0"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "moonshotai/kimi-k2.6",
+            "provider": "openrouter"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 174065,
+        "n_cache_tokens": 146176,
+        "n_output_tokens": 17255,
+        "cost_usd": 0.1177136829,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 12,
+            "api_request_times_msec": [
+                14772.278308868408,
+                7350.806951522827,
+                30817.52586364746,
+                46789.9603843689,
+                52553.038358688354,
+                61876.00302696228,
+                132988.2800579071,
+                65219.112157821655,
+                24867.71297454834,
+                21351.29714012146,
+                10835.256576538086,
+                7821.178436279297
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-21T14:07:53.828060Z",
+    "finished_at": "2026-04-21T14:18:07.619261Z",
+    "environment_setup": {
+        "started_at": "2026-04-21T14:07:53.829130Z",
+        "finished_at": "2026-04-21T14:07:56.327471Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-21T14:07:56.327484Z",
+        "finished_at": "2026-04-21T14:08:07.265196Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-21T14:08:07.265256Z",
+        "finished_at": "2026-04-21T14:18:01.013781Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-21T14:18:01.675816Z",
+        "finished_at": "2026-04-21T14:18:07.367923Z"
+    }
+}

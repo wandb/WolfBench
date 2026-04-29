@@ -1,0 +1,89 @@
+{
+    "id": "2f1420f2-84b6-4d9f-82de-1ac522d0730a",
+    "task_name": "constraints-scheduling",
+    "trial_name": "constraints-scheduling__G2Ckiuf",
+    "trial_uri": "file:///home/exedev/harbor/jobs/cc-claude-opus-4-7/2026-04-17__05-31-27/constraints-scheduling__G2Ckiuf",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "constraints-scheduling"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "c69027b9099bb7ac63a753b310e31cfef9cc20dce2d1c6c88956c8a854d7ac16",
+    "config": {
+        "task": {
+            "path": "constraints-scheduling",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "constraints-scheduling__G2Ckiuf",
+        "trials_dir": "jobs/cc-claude-opus-4-7/2026-04-17__05-31-27",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "claude-code",
+            "import_path": null,
+            "model_name": "anthropic/claude-opus-4-7",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "version": "2.1.112"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "b234a817-16cc-432a-b1be-f50c1e571377"
+    },
+    "agent_info": {
+        "name": "claude-code",
+        "version": "2.1.112",
+        "model_info": {
+            "name": "claude-opus-4-7",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": null,
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "RuntimeError",
+        "exception_message": "Agent setup failed with exit code 100. See logs in jobs/cc-claude-opus-4-7/2026-04-17__05-31-27/constraints-scheduling__G2Ckiuf/agent/setup",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 482, in run\n    await self._setup_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 242, in _setup_agent\n    await asyncio.wait_for(\n    ...<2 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 124, in setup\n    raise RuntimeError(\n    ...<2 lines>...\n    )\nRuntimeError: Agent setup failed with exit code 100. See logs in jobs/cc-claude-opus-4-7/2026-04-17__05-31-27/constraints-scheduling__G2Ckiuf/agent/setup\n",
+        "occurred_at": "2026-04-17T06:21:04.760125"
+    },
+    "started_at": "2026-04-17T06:16:25.146802Z",
+    "finished_at": "2026-04-17T06:21:05.164899Z",
+    "environment_setup": {
+        "started_at": "2026-04-17T06:16:25.147749Z",
+        "finished_at": "2026-04-17T06:16:26.276657Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-17T06:16:26.276696Z",
+        "finished_at": "2026-04-17T06:21:04.475233Z"
+    },
+    "agent_execution": null,
+    "verifier": null
+}

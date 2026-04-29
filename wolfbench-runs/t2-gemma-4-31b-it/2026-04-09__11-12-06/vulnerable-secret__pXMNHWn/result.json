@@ -1,0 +1,114 @@
+{
+    "id": "08a93299-907e-4892-bf45-d35770b35497",
+    "task_name": "vulnerable-secret",
+    "trial_name": "vulnerable-secret__pXMNHWn",
+    "trial_uri": "file:///home/exedev/harbor/jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06/vulnerable-secret__pXMNHWn",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "vulnerable-secret"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "568760a9b221bd2efc27dc592833c1d2d99949b20995ba1321a3aa1567e6ba20",
+    "config": {
+        "task": {
+            "path": "vulnerable-secret",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "vulnerable-secret__pXMNHWn",
+        "trials_dir": "jobs/t2-gemma-4-31b-it/2026-04-09__11-12-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/google/gemma-4-31B-it",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "c67c2b61-2539-411e-9c5a-0292708eacf3"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "google/gemma-4-31B-it",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 38773,
+        "n_cache_tokens": 12576,
+        "n_output_tokens": 2486,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 10,
+            "api_request_times_msec": [
+                3656.7351818084717,
+                3316.9467449188232,
+                8421.9331741333,
+                6936.6490840911865,
+                9752.437114715576,
+                5295.592308044434,
+                6666.541814804077,
+                9637.244939804077,
+                8349.652528762817,
+                3345.19624710083
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-09T11:25:01.960196Z",
+    "finished_at": "2026-04-09T11:27:03.797307Z",
+    "environment_setup": {
+        "started_at": "2026-04-09T11:25:01.960565Z",
+        "finished_at": "2026-04-09T11:25:03.921020Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-09T11:25:03.921029Z",
+        "finished_at": "2026-04-09T11:25:19.463979Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-09T11:25:19.464052Z",
+        "finished_at": "2026-04-09T11:26:55.200857Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-09T11:26:56.114967Z",
+        "finished_at": "2026-04-09T11:27:03.478078Z"
+    }
+}

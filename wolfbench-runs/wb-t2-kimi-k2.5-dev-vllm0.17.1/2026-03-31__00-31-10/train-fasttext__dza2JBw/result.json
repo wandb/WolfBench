@@ -1,0 +1,211 @@
+{
+    "id": "4d7919d5-f356-4d07-a51e-3bd03eb504d2",
+    "task_name": "train-fasttext",
+    "trial_name": "train-fasttext__dza2JBw",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__00-31-10/train-fasttext__dza2JBw",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "train-fasttext"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "fe83ab1fc447e909ed3f48d61ff42abfd29b3168c63c3efcdea9c5014c27b2f7",
+    "config": {
+        "task": {
+            "path": "train-fasttext",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "train-fasttext__dza2JBw",
+        "trials_dir": "jobs/wb-t2-kimi-k2.5-dev-vllm0.17.1/2026-03-31__00-31-10",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/nvidia/Kimi-K2.5-NVFP4",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "llm_kwargs": {
+                    "api_key": "REDACTED",
+                    "base_url": "http://infr.cw4637-dev-us-e-01a.coreweave.app/v1"
+                }
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f00baea0-eacc-48f9-9f48-3bd545e62cab"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "nvidia/Kimi-K2.5-NVFP4",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 2324402,
+        "n_cache_tokens": 1606528,
+        "n_output_tokens": 11146,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 91,
+            "api_request_times_msec": [
+                4847.453594207764,
+                6533.622741699219,
+                5821.288347244263,
+                5440.605401992798,
+                6175.50253868103,
+                11727.411985397339,
+                2636.2390518188477,
+                9214.442729949951,
+                1867.3593997955322,
+                2215.078592300415,
+                2933.4867000579834,
+                2670.4790592193604,
+                1714.3864631652832,
+                3081.61997795105,
+                3757.0176124572754,
+                5687.58487701416,
+                6761.176586151123,
+                2979.0360927581787,
+                2722.9912281036377,
+                3881.4260959625244,
+                8248.188972473145,
+                2629.710912704468,
+                2344.2533016204834,
+                2247.8694915771484,
+                3030.6408405303955,
+                4176.810503005981,
+                2265.461206436157,
+                2006.0007572174072,
+                1826.6146183013916,
+                3193.5653686523438,
+                7340.734958648682,
+                2821.1498260498047,
+                2038.733720779419,
+                4019.5910930633545,
+                4174.535274505615,
+                4855.602741241455,
+                8303.33662033081,
+                3111.7539405822754,
+                9176.447629928589,
+                3912.425756454468,
+                4456.723928451538,
+                7335.91628074646,
+                3751.795530319214,
+                7015.498876571655,
+                6999.347686767578,
+                10828.741312026978,
+                5287.476062774658,
+                3528.1803607940674,
+                3602.160692214966,
+                3417.009115219116,
+                22777.387142181396,
+                3677.5174140930176,
+                11083.117485046387,
+                5550.809144973755,
+                2699.922800064087,
+                3611.3882064819336,
+                3300.262451171875,
+                2341.57657623291,
+                2662.764072418213,
+                4884.336709976196,
+                2345.0701236724854,
+                2390.9268379211426,
+                2260.288953781128,
+                2319.891929626465,
+                2166.933536529541,
+                4514.123916625977,
+                3388.7243270874023,
+                3431.7526817321777,
+                4352.329969406128,
+                3137.387990951538,
+                2878.3164024353027,
+                1872.2264766693115,
+                3655.031442642212,
+                3868.8316345214844,
+                1935.3229999542236,
+                3373.7895488739014,
+                4527.959823608398,
+                2052.396774291992,
+                1897.8471755981445,
+                1753.3206939697266,
+                1493.1738376617432,
+                2011.1711025238037,
+                2792.7539348602295,
+                1328.0506134033203,
+                1394.9389457702637,
+                1564.7485256195068,
+                1334.040641784668,
+                1606.569528579712,
+                1632.7385902404785,
+                2307.4042797088623,
+                1328.1903266906738
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 3600.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1597, in run\n    await self._run_agent_loop(\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1412, in _run_agent_loop\n    timeout_occurred, terminal_output = await self._execute_commands(\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/harbor/src/harbor/agents/terminus_2/terminus_2.py\", line 1227, in _execute_commands\n    await session.send_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 646, in send_keys\n    await self._send_non_blocking_keys(\n  File \"/root/harbor/src/harbor/agents/terminus_2/tmux_session.py\", line 606, in _send_non_blocking_keys\n    await asyncio.sleep(min_timeout_sec - elapsed_time_sec)\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 665, in sleep\n    return await future\n           ^^^^^^^^^^^^\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n  File \"/usr/lib/python3.12/asyncio/tasks.py\", line 519, in wait_for\n    async with timeouts.timeout(timeout):\n  File \"/usr/lib/python3.12/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/root/harbor/src/harbor/trial/trial.py\", line 277, in _execute_agent\n    raise AgentTimeoutError(\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 3600.0 seconds\n",
+        "occurred_at": "2026-03-31T01:36:05.019162"
+    },
+    "started_at": "2026-03-31T00:35:49.697502Z",
+    "finished_at": "2026-03-31T01:37:02.557324Z",
+    "environment_setup": {
+        "started_at": "2026-03-31T00:35:49.795465Z",
+        "finished_at": "2026-03-31T00:35:53.645528Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-31T00:35:53.645567Z",
+        "finished_at": "2026-03-31T00:36:04.996103Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-31T00:36:04.996244Z",
+        "finished_at": "2026-03-31T01:36:05.015743Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-31T01:36:08.353504Z",
+        "finished_at": "2026-03-31T01:36:59.984613Z"
+    }
+}

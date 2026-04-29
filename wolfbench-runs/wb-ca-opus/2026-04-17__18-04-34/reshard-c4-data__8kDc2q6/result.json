@@ -1,0 +1,105 @@
+{
+    "id": "fa823c0e-5d54-4a18-834d-d0d58ce19da7",
+    "task_name": "reshard-c4-data",
+    "trial_name": "reshard-c4-data__8kDc2q6",
+    "trial_uri": "file:///root/harbor/jobs/wb-ca-opus/2026-04-17__18-04-34/reshard-c4-data__8kDc2q6",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "reshard-c4-data"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "19f99d7567f3e6e6ebe453523d76a69c2196bc34b0aa668abfb997d797cc6bd5",
+    "config": {
+        "task": {
+            "path": "reshard-c4-data",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "reshard-c4-data__8kDc2q6",
+        "trials_dir": "jobs/wb-ca-opus/2026-04-17__18-04-34",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "cursor-cli",
+            "import_path": null,
+            "model_name": "cursor/claude-4.6-opus-high-thinking",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": 10240,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f92af4fb-c22f-453f-8630-860a53ef164a"
+    },
+    "agent_info": {
+        "name": "cursor-cli",
+        "version": "2026.04.16-2d20146",
+        "model_info": {
+            "name": "claude-4.6-opus-high-thinking",
+            "provider": "cursor"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 730401,
+        "n_cache_tokens": 696942,
+        "n_output_tokens": 27190,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-17T18:04:44.813604Z",
+    "finished_at": "2026-04-17T18:16:13.837649Z",
+    "environment_setup": {
+        "started_at": "2026-04-17T18:04:44.821674Z",
+        "finished_at": "2026-04-17T18:04:52.163973Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-17T18:04:52.163985Z",
+        "finished_at": "2026-04-17T18:05:25.599543Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-17T18:05:25.599633Z",
+        "finished_at": "2026-04-17T18:13:39.105003Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-17T18:13:40.903578Z",
+        "finished_at": "2026-04-17T18:16:12.000340Z"
+    }
+}

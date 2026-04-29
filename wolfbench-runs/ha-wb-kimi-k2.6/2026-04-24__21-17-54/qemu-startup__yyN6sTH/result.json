@@ -1,0 +1,109 @@
+{
+    "id": "50d03b3e-409e-42a4-be5d-211476f6f9b1",
+    "task_name": "qemu-startup",
+    "trial_name": "qemu-startup__yyN6sTH",
+    "trial_uri": "file:///home/exedev/harbor/jobs/ha-wb-kimi-k2.6/2026-04-24__21-17-54/qemu-startup__yyN6sTH",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "qemu-startup"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "0f33bbc23fc771ea1ee1cadd076a439733e19bf3ef15bbf2d728bfe948ea44dd",
+    "config": {
+        "task": {
+            "path": "qemu-startup",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "qemu-startup__yyN6sTH",
+        "trials_dir": "jobs/ha-wb-kimi-k2.6/2026-04-24__21-17-54",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "hermes",
+            "import_path": null,
+            "model_name": "wandbqa/moonshotai/Kimi-K2.6",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "base_url": "https://api.qa.inference.wandb.ai/v1",
+                "version": "v2026.3.30"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "daytona",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "f62496a4-efa7-4f06-837c-f307831ea090"
+    },
+    "agent_info": {
+        "name": "hermes",
+        "version": "v2026.3.30",
+        "model_info": {
+            "name": "moonshotai/Kimi-K2.6",
+            "provider": "wandbqa"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": null,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "NonZeroAgentExitCodeError",
+        "exception_message": "Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: Security scan: security issue detected\n      ls -la /app/alpine.iso && which qemu-system-x86_64 || which qemu-system-i386\n\n      [o]nce  |  [s]ession  |  [d]eny\n\n      Choice [o/s/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         ls -la /app/alpine.iso && which qemu-system-x86_64 || which qemu-system-i386  60.6s [exit -1]\r\n\r\n╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮\r\n It seems the terminal command was blocked on your end. You might have denied it or there's a confirmation pending. I'll retry since I need to verify the ISO exists and QEMU is available before launching.\r\n╰──────────────────────────────────────────────────────────────────────────────╯\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: Security scan: security issue detected\n      ls -la /app/alpine.iso\n\n      [o]nce  |  [s]ession  |  [d]eny\n\n      Choice [o/s/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         ls -la /a ... [truncated]\nStderr:\nbash: line 1:  2058 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1\n      2059 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 500, in run\n    await self._execute_agent()\n  File \"/home/exedev/harbor/src/harbor/trial/trial.py\", line 268, in _execute_agent\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/home/exedev/.local/share/uv/python/cpython-3.13.12-linux-x86_64-gnu/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/exedev/harbor/src/harbor/agents/installed/base.py\", line 394, in run\n    raise NonZeroAgentExitCodeError(\n    ...<4 lines>...\n    )\nharbor.agents.installed.base.NonZeroAgentExitCodeError: Agent command failed (exit code 134)\nCommand: export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt\nStdout:\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: Security scan: security issue detected\n      ls -la /app/alpine.iso && which qemu-system-x86_64 || which qemu-system-i386\n\n      [o]nce  |  [s]ession  |  [d]eny\n\n      Choice [o/s/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         ls -la /app/alpine.iso && which qemu-system-x86_64 || which qemu-system-i386  60.6s [exit -1]\r\n\r\n╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮\r\n It seems the terminal command was blocked on your end. You might have denied it or there's a confirmation pending. I'll retry since I need to verify the ISO exists and QEMU is available before launching.\r\n╰──────────────────────────────────────────────────────────────────────────────╯\r\n  ┊ 💻 preparing terminal…\r\n\n  ⚠️  DANGEROUS COMMAND: Security scan: security issue detected\n      ls -la /app/alpine.iso\n\n      [o]nce  |  [s]ession  |  [d]eny\n\n      Choice [o/s/D]: \n      ⏱ Timeout - denying command\n\n  ┊ 💻 $         ls -la /a ... [truncated]\nStderr:\nbash: line 1:  2058 Aborted                 (core dumped) hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model moonshotai/Kimi-K2.6 2>&1\n      2059 Done                    | stdbuf -oL tee /logs/agent/hermes.txt\n\n\n",
+        "occurred_at": "2026-04-24T22:51:24.760002"
+    },
+    "started_at": "2026-04-24T22:45:18.397538Z",
+    "finished_at": "2026-04-24T22:51:33.546919Z",
+    "environment_setup": {
+        "started_at": "2026-04-24T22:45:18.398840Z",
+        "finished_at": "2026-04-24T22:45:19.740559Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-24T22:45:19.740589Z",
+        "finished_at": "2026-04-24T22:45:58.465490Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-24T22:45:58.465628Z",
+        "finished_at": "2026-04-24T22:51:24.756854Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-24T22:51:25.315472Z",
+        "finished_at": "2026-04-24T22:51:33.230716Z"
+    }
+}

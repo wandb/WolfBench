@@ -1,0 +1,120 @@
+{
+    "id": "5c96e8df-ef56-48fb-98b6-d9cd68acf9d1",
+    "task_name": "fix-git",
+    "trial_name": "fix-git__TRvASDP",
+    "trial_uri": "file:///root/harbor/jobs/wb-t2-minimax-m2.5/2026-03-27__02-58-27/fix-git__TRvASDP",
+    "task_id": {
+        "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+        "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+        "path": "fix-git"
+    },
+    "source": "terminal-bench",
+    "task_checksum": "7fa0a681f751d73f290d862522a82a5e448fa529834987ee1b80e5665c51aa7e",
+    "config": {
+        "task": {
+            "path": "fix-git",
+            "git_url": "https://github.com/laude-institute/terminal-bench-2.git",
+            "git_commit_id": "69671fbaac6d67a7ef0dfec016cc38a64ef7a77c",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "terminal-bench"
+        },
+        "trial_name": "fix-git__TRvASDP",
+        "trials_dir": "jobs/wb-t2-minimax-m2.5/2026-03-27__02-58-27",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "wandb/MiniMaxAI/MiniMax-M2.5",
+            "override_timeout_sec": 3600.0,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "wandb",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 8192,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": true,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {
+                "max_lifetime_seconds": 7200,
+                "max_timeout_seconds": 7200,
+                "request_timeout_seconds": 3700
+            }
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8d27dffc-32e4-4175-a1a2-0559efa4385a"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "MiniMaxAI/MiniMax-M2.5",
+            "provider": "wandb"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 26409,
+        "n_cache_tokens": 19680,
+        "n_output_tokens": 2561,
+        "cost_usd": null,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 10,
+            "api_request_times_msec": [
+                4278.8591384887695,
+                4901.871204376221,
+                11562.647581100464,
+                6187.166929244995,
+                4032.0518016815186,
+                10044.69895362854,
+                4852.355718612671,
+                5261.031150817871,
+                8503.414630889893,
+                9054.327964782715
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-27T02:58:44.448064Z",
+    "finished_at": "2026-03-27T03:00:39.296181Z",
+    "environment_setup": {
+        "started_at": "2026-03-27T02:58:44.449874Z",
+        "finished_at": "2026-03-27T02:58:49.732915Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-27T02:58:49.733013Z",
+        "finished_at": "2026-03-27T02:59:01.381624Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-27T02:59:01.381713Z",
+        "finished_at": "2026-03-27T03:00:26.293608Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-27T03:00:28.328539Z",
+        "finished_at": "2026-03-27T03:00:36.928195Z"
+    }
+}
